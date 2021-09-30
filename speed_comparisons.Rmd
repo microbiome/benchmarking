@@ -1,6 +1,6 @@
 # Speed comparisons between `tse` and `pseq`containers
 
-Tree summarized experiment objects (tse) and phyloseq (pseq) objects can be viewed as two distinct containers with the same content organized in two different ways. Consequently, these two classes of objects do not perform equally when subject to analogous computational tasks. While the time execution might not diverge significantly in the case of smaller data sets, it could be of matter for larger data sets.
+## Introduction
 
 To estimate the time efficiency of homologous tasks but with different targets (`tse` or `pseq`), the following working routines are performed on data sets of various size and compared in terms of the targeted object class:
 
@@ -20,6 +20,10 @@ The analyzed data sets include:
 * SprockettTHData
 * GrieneisenTSData
 
+## Experiments
+
+First, the needed packages are loaded and the names of the sample data sets are listed in `data_sets`. This script can potentially be adjusted to a larger number of data sets.
+
 ```{r}
 # call packages to load data sets
 library(dplyr)
@@ -36,6 +40,8 @@ data_sets <- c("AsnicarF_2017.relative_abundance", "GlobalPatterns", "VincentC_2
 # GrieneisenTSData will be added when conversion to pseq is fixed
 ```
 
+ Working variables are assigned with a placeholder to work with them inside the next for loop.
+
 ```{r}
 # define variables to work with
 cur_it <- 0
@@ -46,6 +52,8 @@ diff_tse <- matrix(nrow = length(data_sets), ncol = 5)
 diff_pseq <- matrix(nrow = length(data_sets), ncol = 5)
 assay_values <- ""
 ```
+
+Execution times for different experiments, data sets and containers are evaluated with a recursive approach. Results are then stored into the matrices `diff_tse` and `diff_pseq`, which contains the execution times of tse-based and pseq-based experiments, respectively.
 
 ```{r}
 # compare execution times
@@ -176,6 +184,8 @@ for (data_set in data_sets) {
 }
 ```
 
+Experimental results look as follows. Next, they are reshaped into a data frame to plot them.
+
 ```{r}
 # view results
 dimensions
@@ -204,6 +214,8 @@ beta_command <- c(rep("runMDS", length(data_sets)), rep("ordinate", length(data_
 # create data frame
 execution_times <- as.data.frame(raw_matrix) %>% rename(Features = V1, Samples = V2, Melt = V3, Transform = V4, Agglomerate = V5, AlphaEstimation = V6, BetaEstimation = V7) %>% mutate(ObjectType = object_types, MeltCommand = melt_command, TransformCommand = transform_command, AgglomerateCommand = agglomerate_command, AlphaCommand = alpha_command, BetaCommand = beta_command)
 ```
+
+## Results
 
 ### Execution time of melting
 
