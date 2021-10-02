@@ -32,8 +32,7 @@ library(scater)
 
 ```{r}
 # list names of data sets
-data_sets <- c("AsnicarF_2017.relative_abundance", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData", "SongQAData", "SprockettTHData")
-# GrieneisenTSData will be added when conversion to pseq is fixed
+data_sets <- c("AsnicarF_2017.relative_abundance", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData", "SprockettTHData")
 ```
 
 ```{r}
@@ -48,6 +47,7 @@ assay_values <- ""
 ```
 
 ```{r}
+i_time <- Sys.time()
 # compare execution times
 for (data_set in data_sets) {
   
@@ -174,6 +174,8 @@ for (data_set in data_sets) {
   }
   
 }
+f_time <- Sys.time()
+f_time - i_time
 ```
 
 ```{r}
