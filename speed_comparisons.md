@@ -31,147 +31,11 @@ to a larger number of data sets.
 
     # call packages to load data sets
     library(dplyr)
-
-    ##
-    ## Присоединяю пакет: 'dplyr'
-
-    ## Следующие объекты скрыты от 'package:stats':
-    ##
-    ##     filter, lag
-
-    ## Следующие объекты скрыты от 'package:base':
-    ##
-    ##     intersect, setdiff, setequal, union
-
     library(mia)
-
-    ## Загрузка требуемого пакета: SummarizedExperiment
-
-    ## Загрузка требуемого пакета: MatrixGenerics
-
-    ## Загрузка требуемого пакета: matrixStats
-
-    ##
-    ## Присоединяю пакет: 'matrixStats'
-
-    ## Следующий объект скрыт от 'package:dplyr':
-    ##
-    ##     count
-
-    ##
-    ## Присоединяю пакет: 'MatrixGenerics'
-
-    ## Следующие объекты скрыты от 'package:matrixStats':
-    ##
-    ##     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
-    ##     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
-    ##     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
-    ##     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
-    ##     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
-    ##     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
-    ##     colWeightedMeans, colWeightedMedians, colWeightedSds,
-    ##     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
-    ##     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
-    ##     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
-    ##     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
-    ##     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
-    ##     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
-    ##     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
-    ##     rowWeightedSds, rowWeightedVars
-
-    ## Загрузка требуемого пакета: GenomicRanges
-
-    ## Загрузка требуемого пакета: stats4
-
-    ## Загрузка требуемого пакета: BiocGenerics
-
-    ##
-    ## Присоединяю пакет: 'BiocGenerics'
-
-    ## Следующие объекты скрыты от 'package:dplyr':
-    ##
-    ##     combine, intersect, setdiff, union
-
-    ## Следующие объекты скрыты от 'package:stats':
-    ##
-    ##     IQR, mad, sd, var, xtabs
-
-    ## Следующие объекты скрыты от 'package:base':
-    ##
-    ##     Filter, Find, Map, Position, Reduce, anyDuplicated, append,
-    ##     as.data.frame, basename, cbind, colnames, dirname, do.call,
-    ##     duplicated, eval, evalq, get, grep, grepl, intersect, is.unsorted,
-    ##     lapply, mapply, match, mget, order, paste, pmax, pmax.int, pmin,
-    ##     pmin.int, rank, rbind, rownames, sapply, setdiff, sort, table,
-    ##     tapply, union, unique, unsplit, which.max, which.min
-
-    ## Загрузка требуемого пакета: S4Vectors
-
-    ##
-    ## Присоединяю пакет: 'S4Vectors'
-
-    ## Следующие объекты скрыты от 'package:dplyr':
-    ##
-    ##     first, rename
-
-    ## Следующие объекты скрыты от 'package:base':
-    ##
-    ##     I, expand.grid, unname
-
-    ## Загрузка требуемого пакета: IRanges
-
-    ##
-    ## Присоединяю пакет: 'IRanges'
-
-    ## Следующие объекты скрыты от 'package:dplyr':
-    ##
-    ##     collapse, desc, slice
-
-    ## Загрузка требуемого пакета: GenomeInfoDb
-
-    ## Загрузка требуемого пакета: Biobase
-
-    ## Welcome to Bioconductor
-    ##
-    ##     Vignettes contain introductory material; view with
-    ##     'browseVignettes()'. To cite Bioconductor, see
-    ##     'citation("Biobase")', and for packages 'citation("pkgname")'.
-
-    ##
-    ## Присоединяю пакет: 'Biobase'
-
-    ## Следующий объект скрыт от 'package:MatrixGenerics':
-    ##
-    ##     rowMedians
-
-    ## Следующие объекты скрыты от 'package:matrixStats':
-    ##
-    ##     anyMissing, rowMedians
-
-    ## Загрузка требуемого пакета: SingleCellExperiment
-
-    ## Загрузка требуемого пакета: TreeSummarizedExperiment
-
-    ## Загрузка требуемого пакета: Biostrings
-
-    ## Загрузка требуемого пакета: XVector
-
-    ##
-    ## Присоединяю пакет: 'Biostrings'
-
-    ## Следующий объект скрыт от 'package:base':
-    ##
-    ##     strsplit
-
     library(microbiomeDataSets)
-
-    ## Загрузка требуемого пакета: MultiAssayExperiment
-
     library(curatedMetagenomicData)
     library(ggplot2)
     library(scater)
-
-    ## Загрузка требуемого пакета: scuttle
 
     # list names of data sets
     data_sets <- c("AsnicarF_2017.relative_abundance", "GlobalPatterns", "SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
@@ -179,8 +43,7 @@ to a larger number of data sets.
     tse <- TreeSummarizedExperiment()
     tmp <- list()
 
-Working variables are assigned with a placeholder to work with them
-inside the next for loop.
+An empty data frame is created to store the execution times throughout the following for loop.
 
     object_types <- c(rep("tse", len_set), rep("pseq", len_set))
 
@@ -271,9 +134,7 @@ inside the next for loop.
     ## GrieneisenTSData.1                    ordinate             counts
 
 Execution times for different experiments, data sets and containers are
-evaluated with a recursive approach. Results are then stored into the
-matrices `diff_tse` and `diff_pseq`, which contains the execution times
-of tse-based and pseq-based experiments, respectively.
+evaluated with a recursive approach. Results are stored into `df`.
 
     condition_1 <- data_sets == "GlobalPatterns"
     condition_2 <- data_sets %in% c("SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
@@ -404,163 +265,6 @@ of tse-based and pseq-based experiments, respectively.
       }
 
     }
-
-    ## snapshotDate(): 2021-09-24
-
-    ##
-    ## $`2021-03-31.AsnicarF_2017.relative_abundance`
-    ## dropping rows without rowTree matches:
-    ##   k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae|g__Collinsella|s__Collinsella_stercoris
-    ##   k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae|g__Enorma|s__[Collinsella]_massiliensis
-    ##   k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Carnobacteriaceae|g__Granulicatella|s__Granulicatella_elegans
-    ##   k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Ruminococcus|s__Ruminococcus_champanellensis
-    ##   k__Bacteria|p__Proteobacteria|c__Betaproteobacteria|o__Burkholderiales|f__Sutterellaceae|g__Sutterella|s__Sutterella_parvirubra
-    ##   k__Bacteria|p__Synergistetes|c__Synergistia|o__Synergistales|f__Synergistaceae|g__Cloacibacillus|s__Cloacibacillus_evryensis
-
-    ## Warning in .get_x_with_pruned_tree(x): rowTree is pruned to match rownames.
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## snapshotDate(): 2021-09-24
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## Warning: 'x' contains a column 'SampleID' in its colData(), which will be renamed to 'SampleID_col'
-
-    ## Warning: log10p transformation is not typically
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## snapshotDate(): 2021-09-24
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## downloading 1 resources
-
-    ## retrieving 1 resource
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## downloading 1 resources
-
-    ## retrieving 1 resource
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## downloading 1 resources
-
-    ## retrieving 1 resource
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## downloading 1 resources
-
-    ## retrieving 1 resource
-
-    ## loading from cache
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## Warning in (function (x, method = "bray", binary = FALSE, diag = FALSE, : you
-    ## have empty rows: their dissimilarities may be meaningless in method "bray"
-
-    ## snapshotDate(): 2021-09-24
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## downloading 1 resources
-
-    ## retrieving 1 resource
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## downloading 1 resources
-
-    ## retrieving 1 resource
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## downloading 1 resources
-
-    ## retrieving 1 resource
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## downloading 1 resources
-
-    ## retrieving 1 resource
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## downloading 1 resources
-
-    ## retrieving 1 resource
-
-    ## loading from cache
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## snapshotDate(): 2021-09-24
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically
-    ##         used and not recommended for samples. Consider using target = OTU.
 
     rm("condition_1", "condition_2", "condition_3", "condition_4", "condition_5", "condition_6")
 
