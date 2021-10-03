@@ -36,7 +36,7 @@ library(scater)
 
 ```{r}
 # list names of data sets
-data_sets <- c("AsnicarF_2017.relative_abundance", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData", "SprockettTHData")
+data_sets <- c("AsnicarF_2017.relative_abundance", "GlobalPatterns", "SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
 len_set <- length(data_sets)
 tse <- TreeSummarizedExperiment()
 tmp <- list()
@@ -57,11 +57,14 @@ alpha_command <- c(rep("mia_estimateDiversity", len_set), rep("microbiome_divers
 
 beta_command <- c(rep("runMDS", len_set), rep("ordinate", len_set))
 
-assay_values <- rep(c("relative_abundance", "counts", "relative_abundance", "counts", "counts"), 2)
+assay_values <- rep(c("relative_abundance", "counts", "counts", "counts", "counts", "counts"), 2)
 
 df <- data.frame(Features = rep(0, len_set), Samples = rep(0, len_set), Melt = rep(0, len_set), Transform = rep(0, len_set), Agglomerate = rep(0, len_set), AlphaEstimation = rep(0, len_set), BetaEstimation = rep(0, len_set), row.names = data_sets)
 
 df <- rbind(df[rep(1:len_set, 2), ]) %>% mutate(ObjectType = object_types, MeltCommand = melt_command, TransformCommand = transform_command, AgglomerateCommand = agglomerate_command, AlphaCommand = alpha_command, BetaCommand = beta_command, AssayValues = assay_values)
+
+rm("object_types", "melt_command", "transform_command", "agglomerate_command", "alpha_command", "beta_command", "assay_values")
+
 df
 ```
 
@@ -73,9 +76,8 @@ condition_2 <- data_sets %in% c("SilvermanAGutData", "SongQAData", "SprockettTHD
 condition_3 <- data_sets == "GrieneisenTSData"
 condition_4 <- data_sets %in% c("AsnicarF_2017.relative_abundance", "VincentC_2016")
 condition_5 <- data_sets == "AsnicarF_2017.relative_abundance"
-condition_6 <- data_set != "SilvermanAGutData"
+condition_6 <- !(data_sets %in% c("SilvermanAGutData", "GrieneisenTSData"))
 ```
-
 
 ```{r}
 # compare execution times
@@ -102,9 +104,9 @@ for (data_set in data_sets) {
 
   } else if (condition_4[cur_set]) {
 
-    tse <- curatedMetagenomicData(data_set, dryrun = FALSE, counts = TRUE)
+    tmp <- curatedMetagenomicData(data_set, dryrun = FALSE, counts = TRUE)
 
-    tse <- ifelse((condition_5[cur_set]), tmp[[1]], tmp[[6]])
+    tse <- tmp[[length(tmp)]]
 
     pseq <- makePhyloseqFromTreeSummarizedExperiment(tse,
                                                      abund_values = df$AssayValues[cur_set])
@@ -200,6 +202,8 @@ for (data_set in data_sets) {
   }
 
 }
+
+rm("condition_1", "condition_2", "condition_3", "condition_4", "condition_5", "condition_6")
 ```
 
 ### Execution time of melting
