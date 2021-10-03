@@ -24,7 +24,15 @@ The analyzed data sets include:
 
 First, the needed packages are loaded and the names of the sample data sets are listed in `data_sets`. This script can potentially be adjusted to a larger number of data sets.
 
-```{r}
+Load:
+* dplyr
+* mia
+* microbiomeDataSets
+* curatedMetagenomicData
+* ggplot2
+* scater
+
+```{r, include = FALSE}
 # call packages to load data sets
 library(dplyr)
 library(mia)
@@ -34,7 +42,9 @@ library(ggplot2)
 library(scater)
 ```
 
-```{r}
+Working variables are assigned with a placeholder to work with them inside the next for loop.
+
+```{r placeholders}
 # list names of data sets
 data_sets <- c("AsnicarF_2017.relative_abundance", "GlobalPatterns", "SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
 len_set <- length(data_sets)
@@ -42,9 +52,9 @@ tse <- TreeSummarizedExperiment()
 tmp <- list()
 ```
 
- Working variables are assigned with a placeholder to work with them inside the next for loop.
+An empty data frame `df` is created to store the execution times throughout the following for loop.
 
-```{r}
+```{r dataframe}
 object_types <- c(rep("tse", len_set), rep("pseq", len_set))
 
 melt_command <- c(rep("mia_meltAssay", len_set), rep("phyloseq_psMelt", len_set))
@@ -64,13 +74,11 @@ df <- data.frame(Features = rep(0, len_set), Samples = rep(0, len_set), Melt = r
 df <- rbind(df[rep(1:len_set, 2), ]) %>% mutate(ObjectType = object_types, MeltCommand = melt_command, TransformCommand = transform_command, AgglomerateCommand = agglomerate_command, AlphaCommand = alpha_command, BetaCommand = beta_command, AssayValues = assay_values)
 
 rm("object_types", "melt_command", "transform_command", "agglomerate_command", "alpha_command", "beta_command", "assay_values")
-
-df
 ```
 
-Execution times for different experiments, data sets and containers are evaluated with a recursive approach. Results are then stored into the matrices `diff_tse` and `diff_pseq`, which contains the execution times of tse-based and pseq-based experiments, respectively.
+Execution times for different experiments, data sets and containers are evaluated with a recursive approach. Results are stored into `df`.
 
-```{r}
+```{r conditions}
 condition_1 <- data_sets == "GlobalPatterns"
 condition_2 <- data_sets %in% c("SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
 condition_3 <- data_sets == "GrieneisenTSData"
@@ -79,7 +87,7 @@ condition_5 <- data_sets == "AsnicarF_2017.relative_abundance"
 condition_6 <- !(data_sets %in% c("SilvermanAGutData", "GrieneisenTSData"))
 ```
 
-```{r}
+```{r iteration}
 # compare execution times
 for (data_set in data_sets) {
 
@@ -208,7 +216,7 @@ rm("condition_1", "condition_2", "condition_3", "condition_4", "condition_5", "c
 
 ### Execution time of melting
 
-```{r}
+```{r plot1}
 # compare melting in terms of samples
 ggplot(df, aes(x = Samples, y = Melt, color = MeltCommand, shape = as.factor(Features))) +
   geom_point() +
@@ -217,7 +225,7 @@ ggplot(df, aes(x = Samples, y = Melt, color = MeltCommand, shape = as.factor(Fea
   theme(legend.position = "bottom")
 ```
 
-```{r}
+```{r plot2}
 # compare melting in terms of features
 ggplot(df, aes(x = Features, y = Melt, color = MeltCommand, shape = as.factor(Samples))) +
   geom_point() +
@@ -228,7 +236,7 @@ ggplot(df, aes(x = Features, y = Melt, color = MeltCommand, shape = as.factor(Sa
 
 ### Execution time of transformation
 
-```{r}
+```{r plot3}
 # compare transformation in terms of samples
 ggplot(df, aes(x = Samples, y = Transform, color = TransformCommand, shape = as.factor(Features))) +
   geom_point() +
@@ -237,7 +245,7 @@ ggplot(df, aes(x = Samples, y = Transform, color = TransformCommand, shape = as.
   theme(legend.position = "bottom")
 ```
 
-```{r}
+```{r plot4}
 # compare transformation in terms of features
 ggplot(df, aes(x = Features, y = Transform, color = TransformCommand, shape = as.factor(Samples))) +
   geom_point() +
@@ -248,7 +256,7 @@ ggplot(df, aes(x = Features, y = Transform, color = TransformCommand, shape = as
 
 ### Execution time of agglomeration
 
-```{r}
+```{r plot5}
 # compare agglomeration in terms of samples
 ggplot(df, aes(x = Samples, y = Agglomerate, color = AgglomerateCommand, shape = as.factor(Features))) +
   geom_point() +
@@ -257,7 +265,7 @@ ggplot(df, aes(x = Samples, y = Agglomerate, color = AgglomerateCommand, shape =
   theme(legend.position = "bottom")
 ```
 
-```{r}
+```{r plot6}
 # compare agglomeration in terms of features
 ggplot(df, aes(x = Features, y = Agglomerate, color = AgglomerateCommand, shape = as.factor(Samples))) +
   geom_point() +
@@ -268,7 +276,7 @@ ggplot(df, aes(x = Features, y = Agglomerate, color = AgglomerateCommand, shape 
 
 ### Execution time of alpha diversity estimation
 
-```{r}
+```{r plot7}
 # compare estimation of alpha diversity in terms of samples
 ggplot(df, aes(x = Samples, y = AlphaEstimation, color = AlphaCommand, shape = as.factor(Features))) +
   geom_point() +
@@ -277,7 +285,7 @@ ggplot(df, aes(x = Samples, y = AlphaEstimation, color = AlphaCommand, shape = a
   theme(legend.position = "bottom")
 ```
 
-```{r}
+```{r plot8}
 # compare estimation of alpha diversity in terms of features
 ggplot(df, aes(x = Features, y = AlphaEstimation, color = AlphaCommand, shape = as.factor(Samples))) +
   geom_point() +
@@ -288,7 +296,7 @@ ggplot(df, aes(x = Features, y = AlphaEstimation, color = AlphaCommand, shape = 
 
 ### Execution time of beta diversity estimation
 
-```{r}
+```{r plot9}
 # compare estimation of beta diversity in terms of samples
 ggplot(df, aes(x = Samples, y = BetaEstimation, color = BetaCommand, shape = as.factor(Features))) +
   geom_point() +
@@ -297,7 +305,7 @@ ggplot(df, aes(x = Samples, y = BetaEstimation, color = BetaCommand, shape = as.
   theme(legend.position = "bottom")
 ```
 
-```{r}
+```{r plot10}
 # compare estimation of beta diversity in terms of features
 ggplot(df, aes(x = Features, y = BetaEstimation, color = BetaCommand, shape = as.factor(Samples))) +
   geom_point() +
@@ -306,7 +314,7 @@ ggplot(df, aes(x = Features, y = BetaEstimation, color = BetaCommand, shape = as
   theme(legend.position = "bottom")
 ```
 
-```{r}
+```{r meantime}
 # summarize mean difference in time
 mean_time <- df %>% group_by(ObjectType) %>% summarize(mean_melt = mean(Melt), mean_transform = mean(Transform), mean_agglomerate = mean(Agglomerate), mean_alpha = mean(AlphaEstimation), mean_beta = mean(BetaEstimation, na.rm = TRUE))
 mean_time
