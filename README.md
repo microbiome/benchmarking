@@ -1,5 +1,34 @@
-# Benchmarking
+# Computational efficiency of some microbiome data science techniques in R
 
-## Miaverse Performance
 
-Tree summarized experiment objects (tse) and phyloseq (pseq) objects can be viewed as two distinct containers with the same content organized in two different ways. Consequently, these two classes of objects do not perform equally when subject to analogous computational tasks. While the time execution might not diverge significantly in the case of smaller data sets, it could be of matter for larger data sets.
+## Overview
+
+TreeSummarizedExperiment (tse) and phyloseq (pseq) objects are
+alternative containers for microbiome data. It is informative to
+evaluate their computational efficiency in terms of varying sample and
+feature set sizes.
+
+
+## Results
+
+See [speed comparisons](speed_comparisons.md) for benchmarking results
+
+
+
+## Source code for the experiment
+
+Reproduce the analyses by running the following in R:
+
+```
+rmarkdown::render("speed_comparisons.Rmd", output_format="md_document")
+```
+
+
+The code and results in this repository are open source with [Artistic
+License 2.0](LICENSE.md).
+
+
+
+
+
+
