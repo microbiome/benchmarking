@@ -1,179 +1,37 @@
-Computational efficiency of TreeSE methods
-==========================================
+# Computational efficiency of TreeSE methods
 
 This document provides some benchmarking results comparing the
 computational efficiency in standard operations between
 `TreeSummarizedExperiment` (tse) and `phyloseq` (pseq) containers for
 microbiome data.
 
-Introduction
-------------
+## Introduction
 
 To estimate the time efficiency of homologous tasks but with different
 data structures (`tse` or `pseq`), we have benchmarked a set of standard
 data manipulation routines on data sets of varying numbers of samples
 and features, as reported below.
 
-Data sets
----------
+## Data sets
 
 The comparisons are based on publicly available data sets from the
 curatedMetagenomicData project. See the homepage for the details and
 references.
 
     # Working variables are assigned with a placeholder to work with them inside the next for loop.
-    data_sets <- c("AsnicarF_2017.relative_abundance", "GlobalPatterns", "SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
+    data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "BackhedF_2015", "SilvermanAGutData", "ZeeviD_2015", "SongQAData", "SprockettTHData", "GrieneisenTSData")
+
+    set.seed(3)
+    sample_size <- 10
+
     len_set <- length(data_sets)
     tse <- TreeSummarizedExperiment()
     tmp <- list()
 
-    ## Warning in rm("object_types", "melt_command", "transform_command",
-    ## "agglomerate_command", : object 'object_types' not found
-
-    ## Warning in rm("object_types", "melt_command", "transform_command",
-    ## "agglomerate_command", : object 'melt_command' not found
-
-    ## Warning in rm("object_types", "melt_command", "transform_command",
-    ## "agglomerate_command", : object 'transform_command' not found
-
-    ## Warning in rm("object_types", "melt_command", "transform_command",
-    ## "agglomerate_command", : object 'agglomerate_command' not found
-
-    ## Warning in rm("object_types", "melt_command", "transform_command",
-    ## "agglomerate_command", : object 'alpha_command' not found
-
-    ## Warning in rm("object_types", "melt_command", "transform_command",
-    ## "agglomerate_command", : object 'beta_command' not found
-
-    ## Warning in rm("object_types", "melt_command", "transform_command",
-    ## "agglomerate_command", : object 'assay_values' not found
-
 Execution times for different experiments, data sets and containers are
 evaluated with a recursive approach. Results are stored into `df`.
 
-Compare execution times
-=======================
-
-    ## snapshotDate(): 2021-09-24
-
-    ## 
-    ## $`2021-03-31.AsnicarF_2017.relative_abundance`
-    ## dropping rows without rowTree matches:
-    ##   k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae|g__Collinsella|s__Collinsella_stercoris
-    ##   k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae|g__Enorma|s__[Collinsella]_massiliensis
-    ##   k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Carnobacteriaceae|g__Granulicatella|s__Granulicatella_elegans
-    ##   k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Ruminococcus|s__Ruminococcus_champanellensis
-    ##   k__Bacteria|p__Proteobacteria|c__Betaproteobacteria|o__Burkholderiales|f__Sutterellaceae|g__Sutterella|s__Sutterella_parvirubra
-    ##   k__Bacteria|p__Synergistetes|c__Synergistia|o__Synergistales|f__Synergistaceae|g__Cloacibacillus|s__Cloacibacillus_evryensis
-
-    ## Warning in .get_x_with_pruned_tree(x): rowTree is pruned to match rownames.
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically 
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically 
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## snapshotDate(): 2021-09-24
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## Warning: 'x' contains a column 'SampleID' in its colData(), which will be renamed to 'SampleID_col'
-
-    ## Warning: log10p transformation is not typically 
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## snapshotDate(): 2021-09-24
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically 
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## Warning in (function (x, method = "bray", binary = FALSE, diag = FALSE, : you
-    ## have empty rows: their dissimilarities may be meaningless in method "bray"
-
-    ## snapshotDate(): 2021-09-24
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically 
-    ##         used and not recommended for samples. Consider using target = OTU.
-
-    ## snapshotDate(): 2021-09-24
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## see ?microbiomeDataSets and browseVignettes('microbiomeDataSets') for documentation
-
-    ## loading from cache
-
-    ## Warning in microbiome::transform(pseq, transform = "log10p", target = "sample"): log10p transformation is not typically 
-    ##         used and not recommended for samples. Consider using target = OTU.
+# Compare execution times
 
 ### Melting
 
@@ -316,8 +174,7 @@ Beta diversity versus feature size.
 
 ![](speed_comparisons_files/figure-markdown_strict/beta_features-1.png)
 
-Mean difference in execution time
-=================================
+# Mean difference in execution time
 
     mean_time <- df %>% group_by(ObjectType) %>%
                         summarize(mean_melt = mean(Melt),
@@ -330,5 +187,5 @@ Mean difference in execution time
     ## # A tibble: 2 × 6
     ##   ObjectType mean_melt mean_transform mean_agglomerate mean_alpha mean_beta
     ##   <chr>          <dbl>          <dbl>            <dbl>      <dbl>     <dbl>
-    ## 1 pseq            7.03          0.195             2.75      0.112      8.87
-    ## 2 tse             1.08          0.562             1.05      0.321      2.65
+    ## 1 pseq           5.42           4.52              6.87      0.985     2.56 
+    ## 2 tse            0.301          0.675             4.54      0.638     0.527
