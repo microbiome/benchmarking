@@ -12,7 +12,7 @@ date: "`r Sys.Date()`"
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 library(ggplot2)                # plotting
-theme_set(theme_bw(20))
+theme_set(theme_bw())
 
 library(dplyr)                  # pipe operator
 library(mia)                    # data sets and analysis
@@ -45,7 +45,7 @@ references.
 
 ```{r placeholders}
 # define data sets
-data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "BackhedF_2015", "SilvermanAGutData", "ZeeviD_2015", "SongQAData", "SprockettTHData", "GrieneisenTSData")
+data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
 
 # set seed and define sample size
 set.seed(3)
@@ -252,7 +252,6 @@ ggplot(df, aes(x = Features, y = Melt, color = MeltCommand, shape = as.factor(Sa
        y = "Execution time in s",
        color = "method:", shape = "number of samples:",
        caption = "Execution time of melting as a function of number of features") +
-  theme_classic() +
   theme(legend.position = "bottom")
 ```
 

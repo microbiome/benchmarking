@@ -1,0 +1,107 @@
+---
+title: "Benchmarking computational efficiency of TreeSE methods"
+author: "Giulio Benedetti and Leo Lahti"
+date: "`r Sys.Date()`"
+---
+
+```{r include = FALSE}
+source("data.R", local = knitr::knit_global())
+```
+
+```{r dataframe, echo = FALSE}
+# create NA data frame to store the execution times throughout the for loop
+df <- data.frame(Features = rep(NA, len_set),
+                 Samples = rep(NA, len_set),
+		 Transform = rep(NA, len_set),
+		 row.names = data_sets)
+
+df <- rbind(df[rep(1:len_set, 2), ]) %>%
+        mutate(ObjectType = c(rep("tse", len_set), rep("pseq", len_set)),
+	       TransformCommand = c(rep("mia_transformSamples", len_set), rep("microbiome_transform", len_set)),
+	       AssayValues = rep(c("relative_abundance", "counts", "relative_abundance", "counts", "counts", "counts", "counts"), 2))
+```
+
+```{r iteration, echo = FALSE}
+for (data_set in data_sets) {
+
+  # define index of current data set
+  cur_set <- which(data_sets == data_set)
+
+  # load mia
+  if (condition_1[cur_set]) {
+
+    mapply(data, list = data_set, package = "mia")
+    tse <- eval(parse(text = data_set))
+    mapply(data, list = data_set, package = "phyloseq")
+    pseq <- eval(parse(text = data_set))
+
+    # load microbiomeDataSets
+  } else if (condition_2[cur_set]) {
+
+    tse <- eval((parse(text = paste0(data_set, "()"))))
+
+    if (condition_3[cur_set]) {
+      rowData(tse) <- DataFrame(lapply(rowData(tse), unfactor))
+    }
+
+    pseq <- makePhyloseqFromTreeSummarizedExperiment(tse)
+
+    # load curatedMetagenomicData
+  } else if (condition_4[cur_set]) {
+
+    tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
+
+    tse <- tmp[[1]]
+
+    pseq <- makePhyloseqFromTreeSummarizedExperiment(tse,
+                                                     abund_values = df$AssayValues[cur_set])
+
+  }
+  
+  # select big data sets at least as large as sample_size
+  if (dim(tse)[2] >= sample_size) {
+  
+    # random subsetting
+    subset_names <- sample(colnames(tse), sample_size)
+    tse <- tse[ , colData(tse)@rownames %in% subset_names]
+
+    # store dimensions
+    df$Features[cur_set] <- dim(tse)[1]
+    df$Features[cur_set + len_set] <- dim(tse)[1]
+    df$Samples[cur_set] <- dim(tse)[2]
+    df$Samples[cur_set + len_set] <- dim(tse)[2]
+
+    # test transformation for tse
+    start.time1 <- Sys.time()
+    trans_tse <- mia::transformSamples(tse,
+                                  method = "log10",
+                                  pseudocount = 1,
+                                  abund_values = df$AssayValues[cur_set])
+    end.time1 <- Sys.time()
+    df$Transform[cur_set] <- end.time1 - start.time1
+
+    # test transformation for pseq
+    start.time2 <- Sys.time()
+    trans_pseq <- microbiome::transform(pseq,
+                                    transform = "log10p",
+                                    target = "sample")
+    end.time2 <- Sys.time()
+    df$Transform[cur_set + len_set] <- end.time2 - start.time2
+  
+  }
+  
+}
+
+rm("condition_1", "condition_2", "condition_3", "condition_4", "condition_5")
+```
+
+```{r transformation_features}
+ggplot(df, aes(x = Features, y = Transform, color = TransformCommand, shape = as.factor(Samples))) +
+  geom_point() +
+  labs(title = "Transformation comparison",
+       x = "Number of features",
+       y = "Execution time in s",
+       color = "method:", shape = "number of samples:",
+       caption = "Execution time of transformation as a function of number of features") +
+  theme(legend.position = "bottom")
+```
