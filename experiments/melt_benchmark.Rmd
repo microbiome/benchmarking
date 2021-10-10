@@ -32,7 +32,7 @@ for (data_set in data_sets) {
   pseq <- containers[[cur_set]][[2]]
   
   # select big data sets at least as large as sample_size
-  if (dim(tse)[2] >= sample_size) {
+  if (ncol(tse) >= sample_size) {
   
     # random subsetting
     subset_names <- sample(colnames(tse), sample_size)
@@ -43,10 +43,10 @@ for (data_set in data_sets) {
     df$AssayValues[cur_set + len_set] <- assayNames(tse)
 
     # store dimensions
-    df$Features[cur_set] <- dim(tse)[1]
-    df$Features[cur_set + len_set] <- dim(tse)[1]
-    df$Samples[cur_set] <- dim(tse)[2]
-    df$Samples[cur_set + len_set] <- dim(tse)[2]
+    df$Features[cur_set] <- nrow(tse)
+    df$Features[cur_set + len_set] <- nrow(tse)
+    df$Samples[cur_set] <- ncol(tse)
+    df$Samples[cur_set + len_set] <- ncol(tse)
 
     # test melting for tse
     start.time1 <- Sys.time()
