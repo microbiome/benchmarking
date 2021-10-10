@@ -4,7 +4,7 @@ author: "Giulio Benedetti and Leo Lahti"
 date: "`r Sys.Date()`"
 ---
 
-```{r include = FALSE}
+```{r source, include = FALSE}
 source("data.R", local = knitr::knit_global())
 ```
 

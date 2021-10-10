@@ -4,7 +4,7 @@ author: "Giulio Benedetti and Leo Lahti"
 date: "`r Sys.Date()`"
 ---
 
-```{r include = FALSE}
+```{r source, include = FALSE}
 source("data.R", local = knitr::knit_global())
 ```
 
@@ -37,6 +37,10 @@ for (data_set in data_sets) {
     # random subsetting
     subset_names <- sample(colnames(tse), sample_size)
     tse <- tse[ , colData(tse)@rownames %in% subset_names]
+    
+    # store assay name
+    df$AssayValues[cur_set] <- assayNames(tse)
+    df$AssayValues[cur_set + len_set] <- assayNames(tse)
 
     # store dimensions
     df$Features[cur_set] <- dim(tse)[1]
