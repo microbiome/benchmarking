@@ -11,6 +11,8 @@ library(mia)                    # data sets and analysis
 library(microbiomeDataSets)     # data sets
 library(curatedMetagenomicData) # data sets
 library(scater)                 # beta diversity
+library(iterators)              # parallel computing
+library(doParallel)             # parallel computing
 
 # define data sets
 data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
@@ -30,3 +32,48 @@ condition_2 <- data_sets %in% c("SilvermanAGutData", "SongQAData", "SprockettTHD
 condition_3 <- data_sets == "GrieneisenTSData"
 condition_4 <- data_sets %in% c("AsnicarF_2017", "VincentC_2016", "BackhedF_2015", "ZeeviD_2015")
 condition_5 <- !(data_sets %in% c("SilvermanAGutData", "GrieneisenTSData"))
+
+numCores <- detectCores() - 1
+cl <- makeCluster(numCores)
+
+containers <- foreach (data_set = data_sets) %dopar% {
+  
+  # define index of current data set
+  cur_set <- which(data_sets == data_set)
+  
+  # load mia
+  if (condition_1[cur_set]) {
+    
+    mapply(data, list = data_set, package = "mia")
+    tse <- eval(parse(text = data_set))
+    mapply(data, list = data_set, package = "phyloseq")
+    pseq <- eval(parse(text = data_set))
+    
+    # load microbiomeDataSets
+  } else if (condition_2[cur_set]) {
+    
+    tse <- eval((parse(text = paste0(data_set, "()"))))
+    
+    if (condition_3[cur_set]) {
+      rowData(tse) <- DataFrame(lapply(rowData(tse), unfactor))
+    }
+    
+    pseq <- makePhyloseqFromTreeSummarizedExperiment(tse)
+    
+    # load curatedMetagenomicData
+  } else if (condition_4[cur_set]) {
+    
+    tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
+    
+    tse <- tmp[[1]]
+    
+    pseq <- makePhyloseqFromTreeSummarizedExperiment(tse,
+                                                     abund_values = "relative_abundance")
+    
+  }
+  
+  list(tse, pseq)
+  
+}
+
+stopCluster(cl)

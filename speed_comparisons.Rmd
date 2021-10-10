@@ -75,7 +75,7 @@ df <- rbind(df[rep(1:len_set, 2), ]) %>%
 	       AgglomerateCommand = c(rep("mia_agglomerateByRank", len_set), rep("phyloseq_tax_glom", len_set)),
 	       AlphaCommand = c(rep("mia_estimateDiversity", len_set), rep("microbiome_diversity", len_set)),
 	       BetaCommand = c(rep("runMDS", len_set), rep("ordinate", len_set)),
-	       AssayValues = rep(c("relative_abundance", "counts", "relative_abundance", "relative_abundance", "counts", "relative_abundance", "counts", "counts", "counts"), 2))
+	       AssayValues = rep("", 2 * len_set))
 ```
 
 Execution times for different experiments, data sets and containers are evaluated with a recursive approach. Results are stored into `df`.
@@ -124,9 +124,13 @@ for (data_set in data_sets) {
     tse <- tmp[[1]]
 
     pseq <- makePhyloseqFromTreeSummarizedExperiment(tse,
-                                                     abund_values = df$AssayValues[cur_set])
+                                                     abund_values = "relative_abundance")
 
   }
+  
+  # store assay name
+  df$AssayValues[cur_set] <- assayNames(tse)
+  df$AssayValues[cur_set + len_set] <- assayNames(tse)
   
   # select big data sets at least as large as sample_size
   if (dim(tse)[2] >= sample_size) {
@@ -238,7 +242,6 @@ Melting versus samples.
 ggplot(df, aes(x = Samples, y = Melt, color = MeltCommand, shape = as.factor(Features))) +
   geom_point() +
   labs(title = "Melting comparison", x = "Number of samples", y = "Execution time in s", color = "method:", shape = "number of features:", caption = "Execution time of melting as a function of number of samples") +
-  theme_classic() +
   theme(legend.position = "bottom")
 ```
 
