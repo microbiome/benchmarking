@@ -13,13 +13,15 @@ library(curatedMetagenomicData) # data sets
 library(scater)                 # beta diversity
 library(iterators)              # parallel computing
 library(doParallel)             # parallel computing
+library(tidyr)                  # pivot_wider function
 
 # define data sets
-data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
+data_sets <- c("GlobalPatterns", "SilvermanAGutData", "SprockettTHData")
 
 # set seed and define sample size
 set.seed(3)
-sample_size <- 100
+sample_sizes <- c(10, 100)
+len_N <- length(sample_sizes)
 
 # assign working variables with a placeholder to work with them inside the for loop.
 len_set <- length(data_sets)
@@ -46,8 +48,6 @@ containers <- foreach (data_set = data_sets) %dopar% {
     
     mapply(data, list = data_set, package = "mia")
     tse <- eval(parse(text = data_set))
-    mapply(data, list = data_set, package = "phyloseq")
-    pseq <- eval(parse(text = data_set))
     
     # load microbiomeDataSets
   } else if (condition_2[cur_set]) {
@@ -67,13 +67,18 @@ containers <- foreach (data_set = data_sets) %dopar% {
     
     tse <- tmp[[1]]
     
-    pseq <- makePhyloseqFromTreeSummarizedExperiment(tse,
-                                                     abund_values = "relative_abundance")
-    
   }
   
-  list(tse, pseq)
+  tse
   
 }
 
 stopCluster(cl)
+
+df <- data.frame(Dataset = rep(data_sets, 2 * len_N),
+                 ObjectType = c(rep("tse", len_set * len_N), rep("pseq", len_set * len_N)),
+                 Features = rep(NA, 2 * len_set * len_N),
+                 Samples = rep(NA, 2 * len_set * len_N),
+                 AssayValues = rep("", 2 * len_set * len_N))
+df$Dataset <- df$Dataset %>% stringr::str_replace("\\.1$", "") %>% # Ensure UNIQUE data set name
+              factor() # Treat data set as a factor
