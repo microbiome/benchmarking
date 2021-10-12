@@ -7,4 +7,4 @@
            caption = "Execution time of melting as a function of number of features") +
       theme(legend.position = "bottom")
 
-![](benchmark_files/figure-markdown_strict/melting_features-1.png)
+![](melt_benchmark_files/figure-markdown_strict/melting_features-1.png)
