@@ -1,0 +1,119 @@
+---
+title: "Benchmarking computational efficiency of TreeSE methods"
+author: "Giulio Benedetti and Leo Lahti"
+date: "`r Sys.Date()`"
+---
+
+```{r source, include = FALSE}
+source("data.R", local = knitr::knit_global())
+```
+
+```{r dataframe, echo = FALSE}
+# create NA data frame to store the execution times throughout the for loop
+df <- df %>% mutate(Agglomerate = rep(NA, 2 * len_set * len_N),
+                    AgglomerateCommand = c(rep("mia_agglomerateByRank", len_set * len_N), rep("phyloseq_tax_glom", len_set * len_N)))
+```
+
+```{r}
+# test agglomeration for tse
+agg_tse_exec_time <- function(tse) {
+  
+    start.time1 <- Sys.time()
+    tse_phylum <- agglomerateByRank(tse,
+                               rank = "Phylum",
+                               na.rm = TRUE)
+    end.time1 <- Sys.time()
+    
+    return(end.time1 - start.time1)
+  
+}
+
+# test agglomeration for pseq
+agg_pseq_exec_time <- function(pseq) {
+      
+    start.time2 <- Sys.time()
+    pseq_phylum <- phyloseq::tax_glom(pseq,
+                                  taxrank = "Phylum")
+    # na.rm = TRUE by default in tax_glom
+    end.time2 <- Sys.time()
+    
+    return(end.time2 - start.time2)
+      
+}
+```
+
+```{r iteration, echo = FALSE}
+for (data_set in data_sets) {
+
+  # define index of current data set
+  cur_set <- which(data_sets == data_set)
+  
+  # extract tse and pseq from list of containers
+  tse <- containers[[cur_set]]
+  
+  # store assay name
+  if (condition_4[cur_set]) {
+    
+    assayNames(tse) <- "counts"
+        
+  }
+  
+  for (N in sample_sizes) {
+    
+    # select data sets at least as large as sample_size
+    if (ncol(tse) >= N) {
+      
+      # define index of current sample size
+      cur_N <- which(N == sample_sizes)
+      
+      # define df index to store results
+      tse_ind <- cur_set + len_set * (cur_N - 1)
+      pseq_ind <- cur_set + len_set * (cur_N + len_N - 1)
+  
+      # random subsetting
+      subset_names <- sample(colnames(tse), N)
+      sub_tse <- tse[ , colnames(tse) %in% subset_names]
+      sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
+
+      # store dimensions
+      df$Features[tse_ind] <- nrow(sub_tse)
+      df$Features[pseq_ind] <- nrow(sub_tse)
+      df$Samples[tse_ind] <- ncol(sub_tse)
+      df$Samples[pseq_ind] <- ncol(sub_tse)
+
+      # test melting for tse
+      df$Agglomerate[tse_ind] <- agg_tse_exec_time(sub_tse)
+
+      # test melting for pseq
+      df$Agglomerate[pseq_ind] <- agg_pseq_exec_time(sub_pseq)
+    
+    }
+  
+  }
+  
+}
+
+rm("condition_1", "condition_2", "condition_3", "condition_4", "condition_5")
+```
+
+```{r agglomeration_features}
+# Set breaks for log X scale
+#m <- max(df$Features, na.rm=TRUE); r <- round(m, -(nchar(m)-1))
+#v <- 10^seq(2, log10(r), by=1)
+#v <- c(500, 1000, 2000, 5000, 10000)
+v <- unique(na.omit(df$Features))
+
+p1 <- ggplot(filter(df, Samples == 10), aes(x = Features, y = Agglomerate, color = AgglomerateCommand)) +
+  geom_point() + 
+  geom_line() +
+  labs(title = paste("Melting comparison (N=", paste(unique(df$Samples), collapse=","), ")"),
+       x = "Features (D)",
+       y = "Execution time (s)",
+       color = "Method:",
+       caption = "Execution time of agglomeration as a function of number of features") +
+  scale_x_log10(breaks=v, labels=v) + # Log is often useful with sample size
+  # scale_y_log10() + # Log is often useful with sample size  
+  theme(legend.position = "bottom")
+
+print(p1)
+```
