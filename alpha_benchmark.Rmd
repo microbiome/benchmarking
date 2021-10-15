@@ -10,35 +10,15 @@ source("data.R", local = knitr::knit_global())
 
 ```{r dataframe, echo = FALSE}
 # create NA data frame to store the execution times throughout the for loop
-df <- df %>% mutate(AlphaEstimation = rep(NA, 2 * len_set * len_N),
-                    AlphaCommand = c(rep("mia_estimateDiversity", len_set * len_N), rep("microbiome_diversity", len_set * len_N)))
-```
+df <- data.frame(Features = rep(NA, len_set),
+                 Samples = rep(NA, len_set),
+		 AlphaEstimation = rep(NA, len_set),
+		 row.names = data_sets)
 
-```{r experiment_functions, echo = FALSE}
-# test alpha diversity estimation for tse
-alpha_tse_exec_time <- function(tse) {
-  
-  start.time1 <- Sys.time()
-  alpha_tse <- mia::estimateDiversity(tse,
-                             index = "shannon",
-                             name = "shannon")
-  end.time1 <- Sys.time()
-
-  return(end.time1 - start.time1)
-  
-}
-
-# test alpha diversity estimation for pseq
-alpha_pseq_exec_time <- function(pseq) {
-  
-  start.time2 <- Sys.time()
-  alpha_pseq <- microbiome::diversity(pseq,
-                     index = "shannon")
-  end.time2 <- Sys.time()
-    
-  return(end.time2 - start.time2)
-      
-}
+df <- rbind(df[rep(1:len_set, 2), ]) %>%
+        mutate(ObjectType = c(rep("tse", len_set), rep("pseq", len_set)),
+	       AlphaCommand = c(rep("mia_estimateDiversity", len_set), rep("microbiome_diversity", len_set)),
+	       AssayValues = rep("", 2 * len_set))
 ```
 
 ```{r iteration, echo = FALSE}
@@ -48,45 +28,41 @@ for (data_set in data_sets) {
   cur_set <- which(data_sets == data_set)
   
   # extract tse and pseq from list of containers
-  tse <- containers[[cur_set]]
+  tse <- containers[[cur_set]][[1]]
+  pseq <- containers[[cur_set]][[2]]
   
-  # store assay name
-  if (condition_4[cur_set]) {
-        
-    assayNames(tse) <- "counts"
-        
-  }
+  # select big data sets at least as large as sample_size
+  if (dim(tse)[2] >= sample_size) {
   
-  for (N in sample_sizes) {
+    # random subsetting
+    subset_names <- sample(colnames(tse), sample_size)
+    tse <- tse[ , colData(tse)@rownames %in% subset_names]
     
-    # select data sets at least as large as sample_size
-    if (ncol(tse) >= N) {
-      
-      # define index of current sample size
-      cur_N <- which(N == sample_sizes)
-      
-      # define df index to store results
-      tse_ind <- cur_set + len_set * (cur_N - 1)
-      pseq_ind <- cur_set + len_set * (cur_N + len_N - 1)
-  
-      # random subsetting
-      subset_names <- sample(colnames(tse), N)
-      sub_tse <- tse[ , colnames(tse) %in% subset_names]
-      sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
+    # store assay name
+    df$AssayValues[cur_set] <- assayNames(tse)
+    df$AssayValues[cur_set + len_set] <- assayNames(tse)
 
-      # store dimensions
-      df$Features[tse_ind] <- nrow(sub_tse)
-      df$Features[pseq_ind] <- nrow(sub_tse)
-      df$Samples[tse_ind] <- ncol(sub_tse)
-      df$Samples[pseq_ind] <- ncol(sub_tse)
+    # store dimensions
+    df$Features[cur_set] <- dim(tse)[1]
+    df$Features[cur_set + len_set] <- dim(tse)[1]
+    df$Samples[cur_set] <- dim(tse)[2]
+    df$Samples[cur_set + len_set] <- dim(tse)[2]
 
-      # test melting for tse
-      df$AlphaEstimation[tse_ind] <- alpha_tse_exec_time(sub_tse)
+    # test alpha diversity estimation for tse
+    start.time1 <- Sys.time()
+    alpha_tse <- mia::estimateDiversity(tse,
+                             abund_values = df$AssayValues[cur_set],
+                             index = "shannon",
+                             name = "shannon")
+    end.time1 <- Sys.time()
+    df$AlphaEstimation[cur_set] <- end.time1 - start.time1
 
-      # test melting for pseq
-      df$AlphaEstimation[pseq_ind] <- alpha_pseq_exec_time(sub_pseq)
-    
-    }
+    # test alpha diversity estimation for pseq
+    start.time2 <- Sys.time()
+    alpha_pseq <- microbiome::diversity(pseq,
+                     index = "shannon")
+    end.time2 <- Sys.time()
+    df$AlphaEstimation[cur_set + len_set] <- end.time2 - start.time2
   
   }
   
@@ -95,43 +71,14 @@ for (data_set in data_sets) {
 rm("condition_1", "condition_2", "condition_3", "condition_4", "condition_5")
 ```
 
-```{r beta_features}
-# Set breaks for log X scale
-#m <- max(df$Features, na.rm=TRUE); r <- round(m, -(nchar(m)-1))
-#v <- 10^seq(2, log10(r), by=1)
-#v <- c(500, 1000, 2000, 5000, 10000)
-v <- unique(na.omit(df$Features))
-
-p1 <- ggplot(filter(df, Samples == 10), aes(x = Features, y = AlphaEstimation, color = AlphaCommand)) +
-  geom_point() + 
-  geom_line() +
-  labs(title = paste("Alpha estimation comparison (N=", paste(unique(df$Samples), collapse=","), ")"),
-       x = "Features (D)",
-       y = "Execution time (s)",
-       color = "Method:",
-       caption = "Execution time of alpha diversity estimation as a function of number of features") +
-  scale_x_log10(breaks=v, labels=v) + # Log is often useful with sample size
-  # scale_y_log10() + # Log is often useful with sample size  
+```{r alpha_features}
+ggplot(df, aes(x = Features, y = AlphaEstimation, color = AlphaCommand, shape = as.factor(Samples))) +
+  geom_point() +
+  labs(title = "Alpha Diversity Estimation comparison",
+       x = "Number of features",
+       y = "Execution time in s",
+       color = "method:",
+       shape = "number of samples:",
+       caption = "Execution time of estimating alpha diversity as a function of number of features") +
   theme(legend.position = "bottom")
-
-print(p1)
-```
-
-# Compare execution time ratios
-
-```{r beta_features_ratio}
-df2 <- pivot_wider(filter(df, Samples == 10)[ , c("Dataset", "Alpha Estimation", "Features", "ObjectType")] %>%
-         filter(!is.na(AlphaEstimation)), names_from=c(ObjectType),
-	        values_from=AlphaEstimation, Features) %>%
-         mutate(Ratio=tse/pseq)
-
-p2 <- ggplot(df2, aes(x=Features, y=Ratio)) +
-        geom_point() +
-        geom_line() +	
-	scale_y_continuous(labels=scales::percent) + 
-	labs(title="Execution time ratio",
-	     x="Features (N)",
-	     y="Ratio (tse/pseq)")
-
-print(p2)
 ```

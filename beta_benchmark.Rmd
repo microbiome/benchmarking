@@ -14,7 +14,7 @@ df <- df %>% mutate(BetaEstimation = rep(NA, 2 * len_set * len_N),
                     BetaCommand = c(rep("runMDS", len_set * len_N), rep("ordinate", len_set * len_N)))
 ```
 
-```{r experiment_functions, echo = FALSE}
+```{r}
 # test beta diversity estimation for tse
 beta_tse_exec_time <- function(tse) {
   
