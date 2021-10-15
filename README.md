@@ -20,6 +20,7 @@ See [speed comparisons](speed_comparisons.md) for benchmarking results
 Reproduce the analyses by running the following in R:
 
 ```
+rmarkdown::render("melt_benchmark.Rmd", output_format="md_document")
 rmarkdown::render("speed_comparisons.Rmd", output_format="md_document")
 ```
 
