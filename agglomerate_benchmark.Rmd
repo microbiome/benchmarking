@@ -14,30 +14,30 @@ df <- df %>% mutate(Agglomerate = rep(NA, 2 * len_set * len_N),
                     AgglomerateCommand = c(rep("mia_agglomerateByRank", len_set * len_N), rep("phyloseq_tax_glom", len_set * len_N)))
 ```
 
-```{r}
+```{r experiment_functions, echo = FALSE}
 # test agglomeration for tse
 agg_tse_exec_time <- function(tse) {
   
-    start.time1 <- Sys.time()
-    tse_phylum <- agglomerateByRank(tse,
-                               rank = "Phylum",
-                               na.rm = TRUE)
-    end.time1 <- Sys.time()
+  start.time1 <- Sys.time()
+  tse_phylum <- agglomerateByRank(tse,
+                              rank = "Phylum",
+                              na.rm = TRUE)
+  end.time1 <- Sys.time()
     
-    return(end.time1 - start.time1)
+  return(end.time1 - start.time1)
   
 }
 
 # test agglomeration for pseq
 agg_pseq_exec_time <- function(pseq) {
       
-    start.time2 <- Sys.time()
-    pseq_phylum <- phyloseq::tax_glom(pseq,
-                                  taxrank = "Phylum")
-    # na.rm = TRUE by default in tax_glom
-    end.time2 <- Sys.time()
+  start.time2 <- Sys.time()
+  pseq_phylum <- phyloseq::tax_glom(pseq,
+                                taxrank = "Phylum")
+  # na.rm = TRUE by default in tax_glom
+  end.time2 <- Sys.time()
     
-    return(end.time2 - start.time2)
+  return(end.time2 - start.time2)
       
 }
 ```
@@ -106,7 +106,7 @@ v <- unique(na.omit(df$Features))
 p1 <- ggplot(filter(df, Samples == 10), aes(x = Features, y = Agglomerate, color = AgglomerateCommand)) +
   geom_point() + 
   geom_line() +
-  labs(title = paste("Melting comparison (N=", paste(unique(df$Samples), collapse=","), ")"),
+  labs(title = paste("Agglomeration comparison (N=", paste(unique(df$Samples), collapse=","), ")"),
        x = "Features (D)",
        y = "Execution time (s)",
        color = "Method:",

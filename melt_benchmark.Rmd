@@ -14,7 +14,7 @@ df <- df %>% mutate(Melt = rep(NA, 2 * len_set * len_N),
                     MeltCommand = c(rep("mia_meltAssay", len_set * len_N), rep("phyloseq_psMelt", len_set * len_N)))
 ```
 
-```{r}
+```{r experiment_functions, echo = FALSE}
 # test melting for tse
 melt_tse_exec_time <- function(tse) {
   
