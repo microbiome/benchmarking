@@ -11,8 +11,12 @@ feature set sizes.
 
 ## Results
 
-See [speed comparisons](speed_comparisons.md) for benchmarking results
-
+See the following experiments for benchmarking results:
+* [Melting](experiments/melt_benchmark.Rmd)
+* [Transforming](experiments/transform_benchmark.Rmd)
+* [Agglomerating](experiments/agglomerate_benchmark.Rmd)
+* [Estimating alpha diversity](experiments/alpha_benchmark.Rmd)
+* [Estimating beta diversity](experiments/beta_benchmark.Rmd)
 
 
 ## Source code for the experiment
