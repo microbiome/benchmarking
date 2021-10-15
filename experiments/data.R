@@ -16,7 +16,7 @@ library(doParallel)             # parallel computing
 library(tidyr)                  # pivot_wider function
 
 # define data sets
-data_sets <- c("GlobalPatterns", "SilvermanAGutData", "SprockettTHData")
+data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData")
 
 # set seed and define sample size
 set.seed(3)

@@ -62,8 +62,11 @@ for (data_set in data_sets) {
       pseq_ind <- cur_set + len_set * (cur_N + len_N - 1)
       
       # store assay name
-      df$AssayValues[tse_ind] <- assayNames(sub_tse)
-      df$AssayValues[pseq_ind] <- assayNames(sub_tse)
+      if (condition_4[cur_set]) {
+        
+        assayNames(tse) <- "counts"
+        
+      }
   
       # random subsetting
       subset_names <- sample(colnames(tse), N)
@@ -128,7 +131,7 @@ print(p1)
 # Compare execution time ratios
 
 ```{r melting_features_ratio}
-df2 <- pivot_wider(filter(df, Samples == 100)[ , c("Dataset", "Melt", "Features", "ObjectType")] %>%
+df2 <- pivot_wider(filter(df, Samples == 10)[ , c("Dataset", "Melt", "Features", "ObjectType")] %>%
          filter(!is.na(Melt)), names_from=c(ObjectType),
 	        values_from=Melt, Features) %>%
          mutate(Ratio=tse/pseq)
