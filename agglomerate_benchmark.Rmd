@@ -117,3 +117,22 @@ p1 <- ggplot(filter(df, Samples == 10), aes(x = Features, y = Agglomerate, color
 
 print(p1)
 ```
+
+# Compare execution time ratios
+
+```{r beta_features_ratio}
+df2 <- pivot_wider(filter(df, Samples == 10)[ , c("Dataset", "Agglomeration", "Features", "ObjectType")] %>%
+         filter(!is.na(Agglomerate)), names_from=c(ObjectType),
+	        values_from=Agglomerate, Features) %>%
+         mutate(Ratio=tse/pseq)
+
+p2 <- ggplot(df2, aes(x=Features, y=Ratio)) +
+        geom_point() +
+        geom_line() +	
+	scale_y_continuous(labels=scales::percent) + 
+	labs(title="Execution time ratio",
+	     x="Features (N)",
+	     y="Ratio (tse/pseq)")
+
+print(p2)
+```

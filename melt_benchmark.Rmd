@@ -18,24 +18,24 @@ df <- df %>% mutate(Melt = rep(NA, 2 * len_set * len_N),
 # test melting for tse
 melt_tse_exec_time <- function(tse) {
   
-    start.time1 <- Sys.time()
-    molten_tse <- mia::meltAssay(tse,
+  start.time1 <- Sys.time()
+  molten_tse <- mia::meltAssay(tse,
                        add_row_data = TRUE,
                        add_col_data = TRUE)
-    end.time1 <- Sys.time()
+  end.time1 <- Sys.time()
     
-    return(end.time1 - start.time1)
+  return(end.time1 - start.time1)
   
 }
 
 # test melting for pseq
 melt_pseq_exec_time <- function(pseq) {
       
-    start.time2 <- Sys.time()
-    molten_pseq <- phyloseq::psmelt(pseq)
-    end.time2 <- Sys.time()
+  start.time2 <- Sys.time()
+  molten_pseq <- phyloseq::psmelt(pseq)
+  end.time2 <- Sys.time()
     
-    return(end.time2 - start.time2)
+  return(end.time2 - start.time2)
       
 }
 ```
@@ -49,6 +49,13 @@ for (data_set in data_sets) {
   # extract tse and pseq from list of containers
   tse <- containers[[cur_set]]
   
+  # store assay name
+  if (condition_4[cur_set]) {
+        
+    assayNames(tse) <- "counts"
+        
+  }
+  
   for (N in sample_sizes) {
     
     # select data sets at least as large as sample_size
@@ -60,13 +67,6 @@ for (data_set in data_sets) {
       # define df index to store results
       tse_ind <- cur_set + len_set * (cur_N - 1)
       pseq_ind <- cur_set + len_set * (cur_N + len_N - 1)
-      
-      # store assay name
-      if (condition_4[cur_set]) {
-        
-        assayNames(tse) <- "counts"
-        
-      }
   
       # random subsetting
       subset_names <- sample(colnames(tse), N)
