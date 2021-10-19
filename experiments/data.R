@@ -16,7 +16,7 @@ library(doParallel)             # parallel computing
 library(tidyr)                  # pivot_wider function
 
 # define data sets
-data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData")
+data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData") %>% sort()
 
 # set seed and define sample size
 set.seed(3)
@@ -36,7 +36,8 @@ condition_4 <- data_sets %in% c("AsnicarF_2017", "VincentC_2016", "BackhedF_2015
 condition_5 <- !(data_sets %in% c("SilvermanAGutData", "GrieneisenTSData"))
 
 numCores <- detectCores() - 1
-cl <- makeCluster(numCores)
+cl <- makeCluster(numCores, type = "PSOCK")
+registerDoParallel(cl, cores = numCores)
 
 containers <- foreach (data_set = data_sets) %dopar% {
   
@@ -52,25 +53,25 @@ containers <- foreach (data_set = data_sets) %dopar% {
     # load microbiomeDataSets
   } else if (condition_2[cur_set]) {
     
-    tse <- eval((parse(text = paste0(data_set, "()"))))
+    tse <- eval((parse(text = paste0("microbiomeDataSets::", data_set, "()"))))
     
     if (condition_3[cur_set]) {
       rowData(tse) <- DataFrame(lapply(rowData(tse), unfactor))
     }
     
-    pseq <- makePhyloseqFromTreeSummarizedExperiment(tse)
-    
     # load curatedMetagenomicData
   } else if (condition_4[cur_set]) {
     
-    tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
+    tmp <- curatedMetagenomicData::curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
     
     tse <- tmp[[1]]
     
+    SummarizedExperiment::assayNames(tse) <- "counts"
+    
   }
   
-  tse
-  
+  mia::splitByRanks(tse)
+
 }
 
 stopCluster(cl)
@@ -78,7 +79,16 @@ stopCluster(cl)
 df <- data.frame(Dataset = rep(data_sets, 2 * len_N),
                  ObjectType = c(rep("tse", len_set * len_N), rep("pseq", len_set * len_N)),
                  Features = rep(NA, 2 * len_set * len_N),
-                 Samples = rep(NA, 2 * len_set * len_N),
-                 AssayValues = rep("", 2 * len_set * len_N))
+                 Samples = rep(NA, 2 * len_set * len_N))
+
+df <- rbind(df, df, df, df, df, df, df) %>% 
+      mutate(Rank = c(rep("Kingdom", 2 * len_set * len_N),
+                      rep("Phylum", 2 * len_set * len_N),
+                      rep("Class", 2 * len_set * len_N),
+                      rep("Order", 2 * len_set * len_N),
+                      rep("Family", 2 * len_set * len_N),
+                      rep("Genus", 2 * len_set * len_N),
+                      rep("Species", 2 * len_set * len_N)))
+
 df$Dataset <- df$Dataset %>% stringr::str_replace("\\.1$", "") %>% # Ensure UNIQUE data set name
               factor() # Treat data set as a factor
