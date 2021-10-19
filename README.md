@@ -21,11 +21,10 @@ See the following experiments for benchmarking results:
 
 ## Source code for the experiment
 
-Reproduce the analyses by running the following in R:
+Reproduce the analyses by running the following in R (`experiments/` working directory)
 
 ```
-rmarkdown::render("melt_benchmark.Rmd", output_format="md_document")
-rmarkdown::render("speed_comparisons.Rmd", output_format="md_document")
+source("main.R")
 ```
 
 
