@@ -96,3 +96,10 @@ df <- rbind(df, df, df, df, df, df, df) %>%
 
 df$Dataset <- df$Dataset %>% stringr::str_replace("\\.1$", "") %>% # Ensure UNIQUE data set name
               factor() # Treat data set as a factor
+
+
+
+
+
+# Order the ranks from smallest to largest feature set size
+df <- df %>% arrange(Features) %>% mutate(Rank=factor(Rank, levels=unique(Rank)))
