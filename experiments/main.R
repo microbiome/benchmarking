@@ -1,8 +1,11 @@
 # Load the data
-source("data.R", local = knitr::knit_global())
+source("data.R")
 
-# Run the first benchmark
-rmarkdown::render("melt_benchmark.Rmd", output_format="md_document")
+# Melting results
+rmarkdown::render("melt_benchmark.Rmd", output_format="md_document")  # browse in github
+rmarkdown::render("melt_benchmark.Rmd", output_format="pdf_document") # easy view locally
 
-# Run the second benchmark
-rmarkdown::render("second.Rmd", output_format="md_document")
+
+# Other stuff
+# rmarkdown::render("speed_comparisons.Rmd", output_format="md_document")
+

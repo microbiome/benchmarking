@@ -20,7 +20,7 @@ data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "SilvermanAGu
 
 # set seed and define sample size
 set.seed(3)
-sample_sizes <- c(10, 100)
+sample_sizes <- c(10, 100, 1000)
 len_N <- length(sample_sizes)
 
 # assign working variables with a placeholder to work with them inside the for loop.
@@ -81,6 +81,10 @@ df <- data.frame(Dataset = rep(data_sets, 2 * len_N),
                  Features = rep(NA, 2 * len_set * len_N),
                  Samples = rep(NA, 2 * len_set * len_N))
 
+# FIXME: We should avoid the need to create these things manually;
+# you can use rbind to add new results to existing data.frame on the fly
+# in the for loop when collecting the results. This way you could avoid the need
+# to initialize the dataframes here. This would simplify code management
 df <- rbind(df, df, df, df, df, df, df) %>% 
       mutate(Rank = c(rep("Kingdom", 2 * len_set * len_N),
                       rep("Phylum", 2 * len_set * len_N),
