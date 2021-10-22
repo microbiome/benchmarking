@@ -10,8 +10,8 @@ source("data.R", local = knitr::knit_global())
 
 ```{r dataframe, echo = FALSE}
 # create NA data frame to store the execution times throughout the for loop
-df <- df %>% mutate(Melt = rep(NA, 14 * len_set * len_N),
-                    MeltCommand = rep(c(rep("mia::meltAssay", len_set * len_N), rep("phyloseq::psMelt", len_set * len_N)), 7))
+df <- df %>% mutate(MeltTime = rep(NA, 2 * len_R * len_set * len_N),
+                    MeltCommand = rep(c(rep("mia::meltAssay", len_set * len_N), rep("phyloseq::psMelt", len_set * len_N)), len_R))
 ```
 
 ```{r, echo = FALSE}
@@ -47,10 +47,10 @@ for (data_set in data_sets) {
   cur_set <- which(data_sets == data_set)
   
   # repeat experiment for each taxonomic rank
-  for (rank in 1:7) {
+  for (rank in 1:len_R) {
     
     # extract tse and pseq from list of containers
-    tse <- containers[[cur_set]][[rank]]
+    tse <- eval(parse(text = paste0("altExps(containers[[", cur_set, "]])$", custom_ranks[[rank]])))
     
     # repeat experiment for each sample size
     for (N in sample_sizes) {
@@ -77,10 +77,10 @@ for (data_set in data_sets) {
         df$Samples[pseq_ind] <- ncol(sub_tse)
 
         # test melting for tse
-        df$Melt[tse_ind] <- melt_tse_exec_time(sub_tse)
+        df$MeltTime[tse_ind] <- melt_tse_exec_time(sub_tse)
 
         # test melting for pseq
-        df$Melt[pseq_ind] <- melt_pseq_exec_time(sub_pseq)
+        df$MeltTime[pseq_ind] <- melt_pseq_exec_time(sub_pseq)
     
       }
     
@@ -104,7 +104,7 @@ for (data_set in data_sets) {
 v <- unique(na.omit(df$Features))
 
 dfsub <- filter(df, Samples == 10, Rank == "Order")
-p1 <- ggplot(dfsub, aes(x = Features, y = Melt, color = MeltCommand)) +
+p1 <- ggplot(dfsub, aes(x = Features, y = MeltTime, color = MeltCommand)) +
   geom_point() + 
   geom_line() +
   labs(title = paste("Melting comparison (N=", paste(unique(dfsub$Samples), collapse=","), ")", sep =""),
@@ -123,9 +123,9 @@ print(p1)
 # Compare execution time ratios
 
 ```{r melting_features_ratio, echo=FALSE, fig.width=10, fig.height=6}
-df2 <- pivot_wider(dfsub[ , c("Dataset", "Melt", "Features", "ObjectType")] %>%
-         filter(!is.na(Melt)), names_from=c(ObjectType),
-	        values_from=Melt, Features) %>%
+df2 <- pivot_wider(dfsub[ , c("Dataset", "MeltTime", "Features", "ObjectType")] %>%
+         filter(!is.na(MeltTime)), names_from=c(ObjectType),
+	        values_from=MeltTime, Features) %>%
          mutate(Ratio=tse/pseq)
 
 p2 <- ggplot(df2, aes(x=Features, y=Ratio)) +

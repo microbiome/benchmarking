@@ -16,11 +16,15 @@ library(doParallel)             # parallel computing
 library(tidyr)                  # pivot_wider function
 
 # define data sets
-data_sets <- c("AsnicarF_2017", "GlobalPatterns", "VincentC_2016", "SilvermanAGutData") %>% sort()
+data_sets <- c("AsnicarF_2017", "GrieneisenTSData") %>% sort()
+
+# define ranks to analyse
+custom_ranks <- c("Phylum", "Class", "Order", "Family", "Genus")
+len_R <- length(custom_ranks)
 
 # set seed and define sample size
 set.seed(3)
-sample_sizes <- c(10, 100)
+sample_sizes <- c(10, 100, 1000)
 len_N <- length(sample_sizes)
 
 # assign working variables with a placeholder to work with them inside the for loop.
@@ -70,7 +74,9 @@ containers <- foreach (data_set = data_sets) %dopar% {
     
   }
   
-  mia::splitByRanks(tse)
+  SingleCellExperiment::altExps(tse) <- mia::splitByRanks(tse)
+  
+  tse
 
 }
 
@@ -81,14 +87,12 @@ df <- data.frame(Dataset = rep(data_sets, 2 * len_N),
                  Features = rep(NA, 2 * len_set * len_N),
                  Samples = rep(NA, 2 * len_set * len_N))
 
-df <- rbind(df, df, df, df, df, df, df) %>% 
-      mutate(Rank = c(rep("Kingdom", 2 * len_set * len_N),
-                      rep("Phylum", 2 * len_set * len_N),
-                      rep("Class", 2 * len_set * len_N),
-                      rep("Order", 2 * len_set * len_N),
-                      rep("Family", 2 * len_set * len_N),
-                      rep("Genus", 2 * len_set * len_N),
-                      rep("Species", 2 * len_set * len_N)))
+df <- rbind(df, df, df, df, df) %>% 
+      mutate(Rank = c(rep(custom_ranks[[1]], 2 * len_set * len_N),
+                      rep(custom_ranks[[2]], 2 * len_set * len_N),
+                      rep(custom_ranks[[3]], 2 * len_set * len_N),
+                      rep(custom_ranks[[4]], 2 * len_set * len_N),
+                      rep(custom_ranks[[5]], 2 * len_set * len_N)))
 
 df$Dataset <- df$Dataset %>% stringr::str_replace("\\.1$", "") %>% # Ensure UNIQUE data set name
               factor() # Treat data set as a factor
