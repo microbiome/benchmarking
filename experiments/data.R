@@ -17,9 +17,7 @@ library(SingleCellExperiment)   # manipulate tse objects
 library(reshape)                # merge_all command
 
 # define experimental setup
-data_sets <- c("AsnicarF_2017", "GlobalPatterns", "SongQAData", "GrieneisenTSData") %>% sort()
 set.seed(3)
-sample_sizes <- c(10, 100, 1000)
 len_N <- length(sample_sizes)
 numCores <- detectCores() - 1
 

@@ -6,7 +6,7 @@ date: "`r Sys.Date()`"
 
 ```{r, include = FALSE}
 # list data sets to run benchmark on
-data_sets <- c("AsnicarF_2017", "GlobalPatterns", "SongQAData", "GrieneisenTSData") %>% sort()
+data_sets <- c("AsnicarF_2017", "GlobalPatterns", "SongQAData", "GrieneisenTSData", "SprockettTHData", "VincentC_2016", "BackhedF_2015", "ZeeviD_2015", "SilvermanAGutData")
 
 # list sample sizes for random subsetting
 sample_sizes <- c(10, 100, 1000)

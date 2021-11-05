@@ -1,76 +1,21 @@
-    # test melting for tse
-    melt_tse_exec_time <- function(tse) {
-      
-        start.time1 <- Sys.time()
-        molten_tse <- mia::meltAssay(tse,
-                           add_row_data = TRUE,
-                           add_col_data = TRUE)
-        end.time1 <- Sys.time()
-        
-        return(end.time1 - start.time1)
-      
-    }
+    source("melt_benchmark.R", local = knitr::knit_global())
 
-    # test melting for pseq
-    melt_pseq_exec_time <- function(pseq) {
-          
-        start.time2 <- Sys.time()
-        molten_pseq <- phyloseq::psmelt(pseq)
-        end.time2 <- Sys.time()
-        
-        return(end.time2 - start.time2)
-          
-    }
+    # run benchmark on melting of tse and pseq with custom sample sizes
+    df_melt <- experiment_benchmark(containers, df, melt_tse_exec_time, melt_pseq_exec_time, sample_sizes)
 
-    # 1) Let us first debug this fast with smaller sample sizes and only add larger data in the end when everything is clear?
-    # 2) Note the changes in the data chunk -> move these changes to data.R and apply everywhere
-    # 3) Question: why some entries in df$Samples have the value NA?
-    # 4) Can we next have the results from multiple sample sizes in df?
-    #    -> Then we can have line plots that show the same for varying sample sizes
-    # 5) There is now lot of variation and no systematic trend; this may depend on data specifics;
-    #    could we get a similar table of running times within each data set? For instance, by
-    #    running melt for different taxonomic levels? Each taxonomic level has a different number
-    #    of features; the splitByRanks function gives abundance tables for all ranks
-    # 6) Include only cases where AssayValues=="counts"; complicates too
-    #    much otherwise and no real added value
+    # merge results from each data set into one data frame
+    df_melt <- merge_all(df_melt)
 
-    # Set breaks for log X scale
-    #m <- max(df$Features, na.rm=TRUE); r <- round(m, -(nchar(m)-1))
-    #v <- 10^seq(2, log10(r), by=1)
-    #v <- c(500, 1000, 2000, 5000, 10000)
-    v <- unique(na.omit(df$Features))
+    # plot execution time for melting subsets from
+    # the taxonomic rank "Order" and with 100 samples 
+    p1_melt <- plot_exec_time(df_melt, 100, "Order")
+    p1_melt
 
-    p1 <- ggplot(filter(df, Samples == 10), aes(x = Features, y = Melt, color = MeltCommand)) +
-      geom_point() + 
-      geom_line() +
-      labs(title = paste("Melting comparison (N=", paste(unique(df$Samples), collapse=","), ")"),
-           x = "Features (D)",
-           y = "Execution time (s)",
-           color = "Method:",
-           caption = "Execution time of melting as a function of number of features") +
-      scale_x_log10(breaks=v, labels=v) + # Log is often useful with sample size
-      # scale_y_log10() + # Log is often useful with sample size  
-      theme(legend.position = "bottom")
+![](benchmark_files/figure-markdown_strict/melt_ex_time.png)
 
-    print(p1)
+    # plot execution time ratio for melting subsets from
+    # the taxonomic rank "Order" and with 1000 samples
+    p2_melt <- plot_ratio(df_melt, 1000, "Order")
+    p2_melt
 
-![](melt_benchmark_files/figure-markdown_strict/melting_features-1.png)
-
-# Compare execution time ratios
-
-    df2 <- pivot_wider(filter(df, Samples == 10)[ , c("Dataset", "Melt", "Features", "ObjectType")] %>%
-             filter(!is.na(Melt)), names_from=c(ObjectType),
-                values_from=Melt, Features) %>%
-             mutate(Ratio=tse/pseq)
-
-    p2 <- ggplot(df2, aes(x=Features, y=Ratio)) +
-            geom_point() +
-            geom_line() +   
-        scale_y_continuous(labels=scales::percent) + 
-        labs(title="Execution time ratio",
-             x="Features (N)",
-             y="Ratio (tse/pseq)")
-
-    print(p2)
-
-![](benchmark_files/figure-markdown_strict/melting_features_ratio-1.png)
+![](benchmark_files/figure-markdown_strict/melt_ratio.png)
