@@ -11,8 +11,8 @@ data_sets <- c("AsnicarF_2017", "GlobalPatterns", "SongQAData", "GrieneisenTSDat
 # list sample sizes for random subsetting
 sample_sizes <- c(10, 100, 1000)
 
-source("data.R", local = knitr::knit_global())
-source("experiment.R", local = knitr::knit_global())
+source("experiments/data.R", local = knitr::knit_global())
+source("experiments/experiment.R", local = knitr::knit_global())
 ```
 
 ```{r, include = FALSE}
@@ -26,7 +26,7 @@ df <- lapply(containers, make_data_frame)
 ```
 
 ```{r, warning = FALSE}
-source("melt_benchmark.R", local = knitr::knit_global())
+source("experiments/melt_benchmark.R", local = knitr::knit_global())
 
 # run benchmark on melting of tse and pseq with custom sample sizes
 df_melt <- experiment_benchmark(containers, df, melt_tse_exec_time, melt_pseq_exec_time, sample_sizes)
