@@ -8,12 +8,6 @@ date: "`r Sys.Date()`"
 source("data.R", local = knitr::knit_global())
 ```
 
-```{r dataframe, echo = FALSE}
-# create NA data frame to store the execution times throughout the for loop
-df <- df %>% mutate(MeltTime = rep(NA, 2 * len_R * len_set * len_N),
-                    MeltCommand = rep(c(rep("mia::meltAssay", len_set * len_N), rep("phyloseq::psMelt", len_set * len_N)), len_R))
-```
-
 ```{r, echo = FALSE}
 # test melting for tse
 melt_tse_exec_time <- function(tse) {
@@ -41,46 +35,47 @@ melt_pseq_exec_time <- function(pseq) {
 ```
 
 ```{r iteration, echo = FALSE, warning = FALSE}
-for (data_set in data_sets) {
+for (tse in containers) {
 
-  # define index of current data set
-  cur_set <- which(data_sets == data_set)
+  # define index and ranks of current data set
+  cur_set <- which(lapply(containers, mainExpName) == mainExpName(tse))
+  len_exp <- length(altExps(tse))
   
   # repeat experiment for each taxonomic rank
-  for (rank in 1:len_R) {
+  for (rank in 1:len_exp) {
     
-    # extract tse and pseq from list of containers
-    tse <- eval(parse(text = paste0("altExps(containers[[", cur_set, "]])$", custom_ranks[[rank]])))
+    # extract tse from list of containers
+    alt_tse <- altExps(tse)[[rank]]
     
     # repeat experiment for each sample size
     for (N in sample_sizes) {
     
       # select data sets at least as large as sample_size
-      if (ncol(tse) >= N) {
+      if (ncol(alt_tse) >= N) {
       
         # define index of current sample size
         cur_N <- which(N == sample_sizes)
       
         # define df index to store results
-        tse_ind <- cur_set + len_set * (cur_N - 1) + 2 * len_set * len_N * (rank - 1)
-        pseq_ind <- cur_set + len_set * (cur_N + len_N - 1) + 2 * len_set * len_N * (rank - 1)
+        tse_ind <- cur_N + 2 * len_N * (rank - 1)
+        pseq_ind <- cur_N + len_N + 2 * len_N * (rank - 1)
   
         # random subsetting
-        subset_names <- sample(colnames(tse), N)
-        sub_tse <- tse[ , colnames(tse) %in% subset_names]
+        subset_names <- sample(colnames(alt_tse), N)
+        sub_tse <- alt_tse[ , colnames(alt_tse) %in% subset_names]
         sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
 
         # store dimensions
-        df$Features[tse_ind] <- nrow(sub_tse)
-        df$Features[pseq_ind] <- nrow(sub_tse)
-        df$Samples[tse_ind] <- ncol(sub_tse)
-        df$Samples[pseq_ind] <- ncol(sub_tse)
+        df[[cur_set]]$Features[tse_ind] <- nrow(sub_tse)
+        df[[cur_set]]$Features[pseq_ind] <- nrow(sub_tse)
+        df[[cur_set]]$Samples[tse_ind] <- ncol(sub_tse)
+        df[[cur_set]]$Samples[pseq_ind] <- ncol(sub_tse)
 
         # test melting for tse
-        df$MeltTime[tse_ind] <- melt_tse_exec_time(sub_tse)
+        df[[cur_set]]$MeltTime[tse_ind] <- melt_tse_exec_time(sub_tse)
 
         # test melting for pseq
-        df$MeltTime[pseq_ind] <- melt_pseq_exec_time(sub_pseq)
+        df[[cur_set]]$MeltTime[pseq_ind] <- melt_pseq_exec_time(sub_pseq)
     
       }
     
@@ -91,12 +86,11 @@ for (data_set in data_sets) {
 }
 ```
 
-```{r melting_features, echo = FALSE}
-# 5) There is now lot of variation and no systematic trend; this may depend on data specifics;
-#    could we get a similar table of running times within each data set? For instance, by
-#    running melt for different taxonomic levels? Each taxonomic level has a different number
-#    of features; the splitByRanks function gives abundance tables for all ranks
+```{r}
+df <- merge_all(df)
+```
 
+```{r melting_features, echo = FALSE}
 # Set breaks for log X scale
 #m <- max(df$Features, na.rm=TRUE); r <- round(m, -(nchar(m)-1))
 #v <- 10^seq(2, log10(r), by=1)

@@ -11,88 +11,99 @@ library(mia)                    # data sets and analysis
 library(microbiomeDataSets)     # data sets
 library(curatedMetagenomicData) # data sets
 library(scater)                 # beta diversity
-library(iterators)              # parallel computing
-library(doParallel)             # parallel computing
+library(parallel)               # parallel computing
 library(tidyr)                  # pivot_wider function
+library(SingleCellExperiment)   # manipulate tse objects
+library(reshape)                # merge_all command
 
-# define data sets
-data_sets <- c("AsnicarF_2017", "GrieneisenTSData") %>% sort()
-
-# define ranks to analyse
-custom_ranks <- c("Phylum", "Class", "Order", "Family", "Genus")
-len_R <- length(custom_ranks)
-
-# set seed and define sample size
+# define experimental setup
+data_sets <- c("AsnicarF_2017", "GlobalPatterns", "SongQAData", "GrieneisenTSData") %>% sort()
 set.seed(3)
 sample_sizes <- c(10, 100, 1000)
 len_N <- length(sample_sizes)
-
-# assign working variables with a placeholder to work with them inside the for loop.
-len_set <- length(data_sets)
-tse <- TreeSummarizedExperiment()
-tmp <- list()
-
-# conditions for the for loop (calculating conditions outside of the for loop improves efficiency)
-condition_1 <- data_sets == "GlobalPatterns"
-condition_2 <- data_sets %in% c("SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")
-condition_3 <- data_sets == "GrieneisenTSData"
-condition_4 <- data_sets %in% c("AsnicarF_2017", "VincentC_2016", "BackhedF_2015", "ZeeviD_2015")
-condition_5 <- !(data_sets %in% c("SilvermanAGutData", "GrieneisenTSData"))
-
 numCores <- detectCores() - 1
-cl <- makeCluster(numCores, type = "PSOCK")
-registerDoParallel(cl, cores = numCores)
 
-containers <- foreach (data_set = data_sets) %dopar% {
+
+
+### FUNCTION TO LOAD DATASETS ###
+load_dataset <- function(data_set) {
   
-  # define index of current data set
-  cur_set <- which(data_sets == data_set)
+  # create placeholders for working variables
+  tse <- TreeSummarizedExperiment()
+  tmp <- list()
+  
+  # define minimal number of features an altExp should contain
+  min_features <- 10
   
   # load mia
-  if (condition_1[cur_set]) {
+  if (data_set == "GlobalPatterns") {
     
     mapply(data, list = data_set, package = "mia")
     tse <- eval(parse(text = data_set))
     
     # load microbiomeDataSets
-  } else if (condition_2[cur_set]) {
+  } else if (data_set %in% c("SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")) {
     
     tse <- eval((parse(text = paste0("microbiomeDataSets::", data_set, "()"))))
     
-    if (condition_3[cur_set]) {
+    if (data_set == "GrieneisenTSData") {
+      
       rowData(tse) <- DataFrame(lapply(rowData(tse), unfactor))
+      
     }
     
     # load curatedMetagenomicData
-  } else if (condition_4[cur_set]) {
+  } else if (data_set %in% c("AsnicarF_2017", "VincentC_2016", "BackhedF_2015", "ZeeviD_2015")) {
     
-    tmp <- curatedMetagenomicData::curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
+    tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
     
     tse <- tmp[[1]]
     
-    SummarizedExperiment::assayNames(tse) <- "counts"
+    assayNames(tse) <- "counts"
     
   }
   
-  SingleCellExperiment::altExps(tse) <- mia::splitByRanks(tse)
+  altExps(tse) <- splitByRanks(tse)
   
-  tse
-
+  # select elements of altExps(tse) with at least min_features 
+  for (rank in taxonomyRanks(tse)) {
+    
+    if (nrow(altExps(tse)[names(altExps(tse)) == rank][[1]]) < min_features) {
+      
+      altExps(tse)[names(altExps(tse)) == rank] <- NULL
+      
+    }
+    
+  }
+  
+  mainExpName(tse) <- data_set
+  
+  return(tse)
+  
 }
 
-stopCluster(cl)
 
-df <- data.frame(Dataset = rep(data_sets, 2 * len_N),
-                 ObjectType = c(rep("tse", len_set * len_N), rep("pseq", len_set * len_N)),
-                 Features = rep(NA, 2 * len_set * len_N),
-                 Samples = rep(NA, 2 * len_set * len_N))
-
-df <- rbind(df, df, df, df, df) %>% 
-      mutate(Rank = c(rep(custom_ranks[[1]], 2 * len_set * len_N),
-                      rep(custom_ranks[[2]], 2 * len_set * len_N),
-                      rep(custom_ranks[[3]], 2 * len_set * len_N),
-                      rep(custom_ranks[[4]], 2 * len_set * len_N),
-                      rep(custom_ranks[[5]], 2 * len_set * len_N)))
-
-df$Dataset <- df$Dataset %>% stringr::str_replace("\\.1$", "") %>% # Ensure UNIQUE data set name
-              factor() # Treat data set as a factor
+### FUNCTION TO MAKE DATA FRAME ###
+make_data_frame <- function(tse) {
+  
+  data_set <- mainExpName(tse)
+  
+  len_exp <- length(altExps(tse))
+  
+  df <- data.frame(Dataset = rep(data_set, 2 * len_N * len_exp),
+                   ObjectType = rep(c("tse", "pseq"), len_exp, each = len_N),
+                   Rank = rep(altExpNames(tse), each = 2 * len_N),
+                   Features = NA,
+                   Samples = NA,
+                   Time = NA,
+                   Command = NA)
+  
+  df$Command[df$ObjectType == "tse"] <- "mia::meltAssay"
+  df$Command[df$ObjectType == "pseq"] <- "phyloseq::psMelt"
+  
+  df$Dataset <- df$Dataset %>% stringr::str_replace("\\.1$", "") %>% # Ensure UNIQUE data set name
+    factor() # Treat data set as a factor
+  
+  return(df)
+  
+}
