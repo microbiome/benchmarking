@@ -1,4 +1,4 @@
-# test melting for tse
+### FUNCTION TO TEST MELTING FOR TSE OBJECT ###
 melt_tse_exec_time <- function(tse) {
   
   start.time1 <- Sys.time()
@@ -11,7 +11,7 @@ melt_tse_exec_time <- function(tse) {
   
 }
 
-# test melting for pseq
+### FUNCTION TO TEST MELTING FOR TSE OBJECT ###
 melt_pseq_exec_time <- function(pseq) {
   
   start.time2 <- Sys.time()
@@ -21,3 +21,29 @@ melt_pseq_exec_time <- function(pseq) {
   return(end.time2 - start.time2)
   
 }
+
+# run benchmark on melting of tse and pseq with custom sample sizes
+df_melt <- experiment_benchmark(containers, df, melt_tse_exec_time, melt_pseq_exec_time, sample_sizes)
+
+# merge results from each data set into one data frame
+df_melt <- df_melt %>% merge_all() %>% filter(!is.na(Time))
+
+# define sample size N and rank R for the plots
+N <- 10
+R <- "Order"
+
+# plot execution time for melting subsets from
+# the taxonomic rank "Order" and with 1000 samples 
+p1_melt <- plot_exec_time(df_melt, N, R)
+print(p1_melt)
+
+# make data frame with Time Ratio of tse to pseq execution time of experiment
+dfsub <- pivot_wider(filter(df_melt, Samples == N, Rank == R)[ , c("Dataset", "Time", "Features", "ObjectType")], 
+                     names_from = c(ObjectType),
+                     values_from = Time, Features) %>%
+  mutate(Ratio = tse / pseq)
+
+# plot execution time ratio for melting subsets from
+# the taxonomic rank "Order" and with 1000 samples
+p2_melt <- plot_ratio(dfsub)
+print(p2_melt)

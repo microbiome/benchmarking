@@ -16,12 +16,16 @@ library(tidyr)                  # pivot_wider function
 library(SingleCellExperiment)   # manipulate tse objects
 library(reshape)                # merge_all command
 
+# list data sets to run benchmark on
+data_sets <- c("AsnicarF_2017", "GlobalPatterns")
+
+# list sample sizes for random subsetting
+sample_sizes <- c(10, 100)
+
 # define experimental setup
 set.seed(3)
 len_N <- length(sample_sizes)
 numCores <- detectCores() - 1
-
-
 
 ### FUNCTION TO LOAD DATASETS ###
 load_dataset <- function(data_set) {
@@ -80,7 +84,6 @@ load_dataset <- function(data_set) {
   
 }
 
-
 ### FUNCTION TO MAKE DATA FRAME ###
 make_data_frame <- function(tse) {
   
@@ -105,3 +108,12 @@ make_data_frame <- function(tse) {
   return(df)
   
 }
+
+# load tse objects and store them into
+# a list of containers
+# containers <- mclapply(data_sets, load_dataset, mc.cores = numCores)
+containers <- lapply(data_sets, load_dataset)
+
+# make a data frame for each tse object
+# and store them into a list of data frames
+df <- lapply(containers, make_data_frame)

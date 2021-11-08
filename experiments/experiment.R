@@ -56,8 +56,6 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
   
 }
 
-
-
 ### FUNCTION TO PLOT EXECUTION TIME VS FEATURES ###
 plot_exec_time <- function(df, sample_size, rank) {
   # Set breaks for log X scale
@@ -89,16 +87,8 @@ plot_exec_time <- function(df, sample_size, rank) {
   
 }
 
-
-
 ### FUNCTION TO PLOT EXECUTION TIME VS FEATURES ###
-plot_ratio <- function(df, sample_size, rank) {
-  
-  dfsub <- filter(df, Samples %in% sample_size, Rank %in% rank)
-  
-  dfsub <- pivot_wider(dfsub[ , c("Dataset", "Time", "Features", "ObjectType")] %>% 
-                         filter(!is.na(Time)), names_from = c(ObjectType), values_from = Time, Features) %>% 
-    mutate(Ratio = tse / pseq)
+plot_ratio <- function(dfsub) {
   
   p <- ggplot(dfsub, aes(x = Features, y = Ratio)) + 
     geom_point() + 
