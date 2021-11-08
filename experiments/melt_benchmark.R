@@ -1,3 +1,7 @@
+# define sample size N and rank R for the plots
+N <- 10
+R <- "Order"
+
 ### FUNCTION TO TEST MELTING FOR TSE OBJECT ###
 melt_tse_exec_time <- function(tse) {
   
@@ -27,10 +31,6 @@ df_melt <- experiment_benchmark(containers, df, melt_tse_exec_time, melt_pseq_ex
 
 # merge results from each data set into one data frame
 df_melt <- df_melt %>% merge_all() %>% filter(!is.na(Time))
-
-# define sample size N and rank R for the plots
-N <- 10
-R <- "Order"
 
 # plot execution time for melting subsets from
 # the taxonomic rank "Order" and with 1000 samples 
