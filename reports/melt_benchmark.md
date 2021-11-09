@@ -1,9 +1,12 @@
-# Melting Experiment
+Melting Experiment
+==================
 
-## Plot of execution times vs number of features with fixed number of samples
+Plot of execution times vs number of features with fixed number of samples
+--------------------------------------------------------------------------
 
-![](benchmark_files/figure-markdown_strict/melt_exec_time.png)
+![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_ex_time-1.png)
 
-## Plot of tse-to-pseq ratio of vs number of features
+Plot of tse-to-pseq ratio of vs number of features
+--------------------------------------------------
 
-![](benchmark_files/figure-markdown_strict/melt_ratio.png)
+![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_ratio-1.png)
