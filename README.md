@@ -34,7 +34,7 @@ Reports with the results of the benchmarking experiments are listed below:
 To reproduce this analysis, start R from within your local copy of this repository and run:
 
 ```
-rmarkdown::render("main.R", output_format = "md_document")
+source("main.R")
 ```
 
 This command will generate 5 md documents - one for each experiment - inside the directory [Reports](https://github.com/microbiome/benchmarking/tree/RiboRings/reports).
@@ -44,10 +44,10 @@ If you want to benchmark only some of the experiments, do:
 ```
 # load data sets and store them into the list "containers"
 # prepare a list of data frames "df" for the data on execution times
-source("experiments/data.R", local = knitr::knit_global())
+source("experiments/data.R")
 
 # load functions to run experiments and plot results
-source("experiments/experiment.R", local = knitr::knit_global())
+source("experiments/experiment.R")
 
 # render output of "EXPERIMENT_NAME" as an md document
 rmarkdown::render("experiments/EXPERIMENT_NAME", output_format = "md_document", output_dir = "reports")
