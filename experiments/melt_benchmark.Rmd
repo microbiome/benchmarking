@@ -69,3 +69,11 @@ dfsub <- pivot_wider(filter(df_melt, Samples == N, Rank == R)[ , c("Dataset", "T
 p2_melt <- plot_ratio(dfsub)
 print(p2_melt)
 ```
+
+## Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
+
+```{r melt_multi_ex_time, echo = FALSE}
+p3_melt <- plot_multi_exec_time(df_melt)
+print(p3_melt)
+```
+

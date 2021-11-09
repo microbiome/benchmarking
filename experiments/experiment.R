@@ -102,3 +102,25 @@ plot_ratio <- function(dfsub) {
   return(p)
   
 }
+
+### FUNCTION TO PLOT EXECUTION TIME BY RANK AND SAMPLE SIZE ###
+plot_multi_exec_time <- function(df) {
+  
+  # Set breaks for log X scale
+  # m <- max(df$Features, na.rm=TRUE); r <- round(m, -(nchar(m)-1))
+  # v <- 10^seq(2, log10(r), by=1)
+  # v <- c(500, 1000, 2000, 5000, 10000)
+  
+  v <- unique(na.omit(df$Features))
+  
+  p <- ggplot(df, aes(x = Features, y = Time * 1000, color = Command)) + 
+    geom_point() + 
+    geom_line() +
+    labs(title = "Melting comparison",
+         x = "Features (D)",
+         y = "Execution time (ms)") +
+    facet_wrap(~ Samples + Rank, strip.position = "right")
+  
+  return(p)
+  
+}
