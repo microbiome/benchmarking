@@ -1,7 +1,18 @@
+---
+title: "Benchmarking computational efficiency of TreeSE methods"
+author: "Giulio Benedetti and Leo Lahti"
+date: "`r Sys.Date()`"
+---
+
+# Melting Experiment
+
+```{r parameters, echo = FALSE}
 # define sample size N and rank R for the plots
 N <- 10
 R <- "Order"
+```
 
+```{r melting functions, echo = FALSE}
 ### FUNCTION TO TEST MELTING FOR TSE OBJECT ###
 melt_tse_exec_time <- function(tse) {
   
@@ -25,18 +36,28 @@ melt_pseq_exec_time <- function(pseq) {
   return(end.time2 - start.time2)
   
 }
+```
 
+```{r experiment, echo = FALSE, warning = FALSE}
 # run benchmark on melting of tse and pseq with custom sample sizes
 df_melt <- experiment_benchmark(containers, df, melt_tse_exec_time, melt_pseq_exec_time, sample_sizes)
 
 # merge results from each data set into one data frame
 df_melt <- df_melt %>% merge_all() %>% filter(!is.na(Time))
+```
 
+## Plot of execution times vs number of features with fixed number of samples
+
+```{r melt_ex_time, echo = FALSE}
 # plot execution time for melting subsets from
 # the taxonomic rank "Order" and with 1000 samples 
 p1_melt <- plot_exec_time(df_melt, N, R)
 print(p1_melt)
+```
 
+## Plot of tse-to-pseq ratio of vs number of features
+
+```{r melt_ratio, echo = FALSE, fig.width = 10, fig.height = 6}
 # make data frame with Time Ratio of tse to pseq execution time of experiment
 dfsub <- pivot_wider(filter(df_melt, Samples == N, Rank == R)[ , c("Dataset", "Time", "Features", "ObjectType")], 
                      names_from = c(ObjectType),
@@ -47,3 +68,4 @@ dfsub <- pivot_wider(filter(df_melt, Samples == N, Rank == R)[ , c("Dataset", "T
 # the taxonomic rank "Order" and with 1000 samples
 p2_melt <- plot_ratio(dfsub)
 print(p2_melt)
+```

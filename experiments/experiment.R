@@ -71,9 +71,9 @@ plot_exec_time <- function(df, sample_size, rank) {
     geom_point() + 
     geom_line() +
     labs(title = paste("Melting comparison (N =", paste(unique(dfsub$Samples), 
-                        collapse = ","),
+                                                        collapse = ","),
                        "and R =", paste(unique(dfsub$Rank,
-                        collapse = ","), ")", sep = "")),
+                                               collapse = ","), ")", sep = "")),
          x = "Features (D)",
          y = "Execution time (ms)",
          color = "Method:",

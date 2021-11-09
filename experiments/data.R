@@ -11,7 +11,7 @@ library(mia)                    # data sets and analysis
 library(microbiomeDataSets)     # data sets
 library(curatedMetagenomicData) # data sets
 library(scater)                 # beta diversity
-library(parallel)               # parallel computing
+# library(parallel)               # parallel computing
 library(tidyr)                  # pivot_wider function
 library(SingleCellExperiment)   # manipulate tse objects
 library(reshape)                # merge_all command
@@ -25,7 +25,7 @@ sample_sizes <- c(10, 100)
 # define experimental setup
 set.seed(3)
 len_N <- length(sample_sizes)
-numCores <- detectCores() - 1
+# numCores <- detectCores() - 1
 
 ### FUNCTION TO LOAD DATASETS ###
 load_dataset <- function(data_set) {

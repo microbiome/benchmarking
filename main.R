@@ -6,7 +6,7 @@ source("experiments/data.R", local = knitr::knit_global())
 source("experiments/experiment.R", local = knitr::knit_global())
 
 # render output of "melt_benchmark.R" as a md document
-rmarkdown::render("experiments/melt_benchmark.R", output_format = "md_document", output_file = "melt_benchmark.md", output_dir = "reports")
+rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "md_document", output_file = "melt_benchmark.md", output_dir = "reports")
 
 # render output as a md document
 # rmarkdown::render("experiments/transform_benchmark.R", output_format = "md_document", output_file = "transform_benchmark.md", output_dir = "reports")
