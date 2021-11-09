@@ -75,7 +75,14 @@ data_sets <- c("AsnicarF_2017", "GlobalPatterns")
 sample_sizes <- c(10, 100)
 ```
 
-To plot the execution times of a specific taxonomic rank and / or sample size, go to one of the [analytical routines](https://github.com/microbiome/benchmarking/tree/RiboRings/experiments) and modify the first 3 lines.
+You can also customise the threshold for the minimum number of features in line 38:
+
+```
+# define minimal number of features an altExp should contain
+min_features <- 10
+```
+
+To plot the execution times of a specific taxonomic rank and / or sample size, go to one of the [analytical routines](https://github.com/microbiome/benchmarking/tree/RiboRings/experiments) and modify the lines 11 and 12.
 
 Right now, those lines should look like this:
 
