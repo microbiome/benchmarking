@@ -8,7 +8,7 @@ date: "`r Sys.Date()`"
 
 ```{r parameters, echo = FALSE}
 # define sample size N and rank R for the plots
-N <- 10
+N <- 100
 R <- "Order"
 ```
 

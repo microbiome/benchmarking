@@ -7,7 +7,7 @@ source("experiments/experiment.R")
 
 # render output of "melt_benchmark.R" as a md document
 rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "md_document", output_dir = "reports")
-rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "pdf_document", output_dir = "reports")
+# rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "pdf_document", output_dir = "reports")
 
 # render output as a md document
 # rmarkdown::render("experiments/transform_benchmark.R", output_format = "md_document", output_file = "transform_benchmark.md", output_dir = "reports")
