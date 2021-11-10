@@ -8,7 +8,7 @@ date: "`r Sys.Date()`"
 
 ```{r parameters, echo = FALSE}
 # define sample size N and rank R for the plots
-N <- 10
+N <- 100
 R <- "Order"
 ```
 
@@ -72,8 +72,7 @@ print(p2_melt)
 
 ## Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
 
-```{r melt_multi_ex_time, echo = FALSE}
+```{r melt_multi_ex_time, echo = FALSE, warning = FALSE}
 p3_melt <- plot_multi_exec_time(df_melt)
 print(p3_melt)
 ```
-
