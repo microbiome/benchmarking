@@ -48,6 +48,21 @@ print(p2_melt)
 ## Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
 
 ```{r melt_multi_ex_time, echo = FALSE, warning = FALSE}
-p3_melt <- plot_multi_exec_time(df_melt)
-print(p3_melt)
+p <- ggplot(df, aes(x = Features, y = Time * 1000, color = Command)) + 
+    geom_point() + 
+    geom_line() +
+    labs(title = "Melting comparison",
+         x = "Features (D)",
+         y = "Execution time (ms)",
+         color = "Method:",
+         caption = "Execution time of melting as a function of number of features") +
+    scale_x_log10() + # Log is often useful with sample size
+    # scale_y_log10() + # Log is often useful with sample size
+    scale_color_manual(values = c("black", "darkgray")) +
+    facet_grid(Samples ~ Rank)
+  
+  return(p)
+  
+
+print(p)
 ```
