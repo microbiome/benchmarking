@@ -21,9 +21,10 @@ df_melt <- experiment_benchmark(containers, df, melt_tse_exec_time, melt_pseq_ex
 df_melt <- df_melt %>% merge_all() %>% filter(!is.na(Time))
 ```
 
-## Plot of execution times vs number of features with fixed number of samples
 
-```{r melt_ex_time, echo = FALSE}
+
+```{r melt_ex_time, echo = FALSE, eval=FALSE}
+## Execution times vs number of features with fixed number of samples
 # plot execution time for melting subsets from
 # the taxonomic rank "Order" and with 1000 samples 
 p1_melt <- plot_exec_time(df_melt, N, R)
@@ -57,7 +58,7 @@ print(p)
 ## Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
 
 ```{r melt_multi_ex_time, echo = FALSE, warning = FALSE}
-df <- df_melt
+df <- df_melt 
 p <- ggplot(df, aes(x = Features, y = Time * 1000, color = Command)) + 
     geom_point() + 
     geom_line() +
@@ -70,8 +71,6 @@ p <- ggplot(df, aes(x = Features, y = Time * 1000, color = Command)) +
     # scale_y_log10() + # Log is often useful with sample size
     scale_color_manual(values = c("black", "darkgray")) +
     facet_grid(Samples ~ Rank)
-  
-  return(p)
   
 
 print(p)
