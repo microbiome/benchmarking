@@ -111,8 +111,13 @@ plot_multi_exec_time <- function(df) {
     geom_line() +
     labs(title = "Melting comparison",
          x = "Features (D)",
-         y = "Execution time (ms)") +
-    facet_wrap(~ Samples + Rank, strip.position = "right")
+         y = "Execution time (ms)",
+         color = "Method:",
+         caption = "Execution time of melting as a function of number of features") +
+    scale_x_log10() + # Log is often useful with sample size
+    # scale_y_log10() + # Log is often useful with sample size
+    scale_color_manual(values = c("black", "darkgray")) +
+    facet_grid(Samples ~ Rank)
   
   return(p)
   
