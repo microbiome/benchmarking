@@ -15,7 +15,6 @@ library(parallel)               # parallel computing
 library(tidyr)                  # pivot_wider function
 library(SingleCellExperiment)   # manipulate tse objects
 library(reshape)                # merge_all command
-source("funcs.R")               # Load utils functions
 
 # list data sets to run benchmark on
 data_sets <- c("AsnicarF_2017", "GlobalPatterns", "SongQAData", "SprockettTHData", "SilvermanAGutData")
@@ -35,4 +34,4 @@ containers <- mclapply(data_sets, load_dataset, mc.cores = numCores)
 
 # make a data frame for each tse object
 # and store them into a list of data frames
-df <- lapply(containers, make_data_frame)
+datasetlist <- lapply(containers, make_data_frame)

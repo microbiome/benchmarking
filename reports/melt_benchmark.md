@@ -1,13 +1,71 @@
-# Melting Experiment
+Melting benchmark
+=================
 
-## Plot of execution times vs number of features with fixed number of samples
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
+    ## [1] "store dimensions"
 
-![](benchmark_files/figure-markdown_strict/melt_ex_time.png)
+Relative execution time by sample size
+--------------------------------------
 
-## Plot of tse-to-pseq ratio of vs number of features
+![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_ratio-1.png)
 
-![](benchmark_files/figure-markdown_strict/melt_ratio.png)
+Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
+-----------------------------------------------------------------------------------------------------------
 
-## Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
-
-![](benchmark_files/figure-markdown_strict/melt_multi_ex_time.png)
+![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_multi_ex_time-1.png)
