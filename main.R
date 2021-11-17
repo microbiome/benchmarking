@@ -1,11 +1,11 @@
 # Load utils functions
-source("experiments/funcs.R") 
+source("experiments/funcs.R")
 
 # load data sets and store them into the list "containers"
 # prepare a list of data frames "df" for the data on execution times
 source("experiments/data.R")
 
-# render output of "melt_benchmark.R" as a md document
+# render output of "melt_benchmark.Rmd" as a md document
 rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "md_document", output_dir = "reports")
 rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "pdf_document", output_dir = "reports")
 

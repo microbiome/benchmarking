@@ -1,71 +1,9 @@
-Melting benchmark
-=================
+# Melting benchmark
 
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
-    ## [1] "store dimensions"
+## Relative execution time by sample size
 
-Relative execution time by sample size
---------------------------------------
+![](benchmark_files/figure-markdown_strict/melt_ratio.png)
 
-![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_ratio-1.png)
+## Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
 
-Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
------------------------------------------------------------------------------------------------------------
-
-![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_multi_ex_time-1.png)
+![](benchmark_files/figure-markdown_strict/melt_multi_ex_time.png)

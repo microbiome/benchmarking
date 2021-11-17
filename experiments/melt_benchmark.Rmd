@@ -17,7 +17,7 @@ R <- "Genus"
 # run benchmark on melting of tse and pseq with custom sample sizes
 df_melt <- experiment_benchmark(containers, datasetlist, melt_tse_exec_time, melt_pseq_exec_time, sample_sizes) %>%
            merge_all() %>%      # merge results from each data set into one data frame
-	   filter(!is.na(Time)) 
+	         filter(!is.na(Time)) 
 ```
 
 
@@ -35,10 +35,9 @@ print(p1_melt)
 
 
 ```{r melt_ratio, echo = FALSE, fig.width = 10, fig.height = 12}
-df <- df_melt %>% select(Dataset, Time, Features, Samples, Rank, ObjectType) %>%
-		  pivot_wider(names_from = c(ObjectType),
-                     values_from = Time) %>%
-                  mutate(Ratio = tse / pseq) 
+df <- df_melt %>% select(Dataset, Time, Features, Samples, Rank, ObjectType) %>% 
+      pivot_wider(names_from = c(ObjectType), values_from = Time) %>% 
+      mutate(Ratio = tse / pseq) 
 
 df <- df %>% filter(Dataset %in% names(which(table(df$Dataset) >= 10)))
 
@@ -59,9 +58,8 @@ print(p)
 
 ## Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
 
-```{r melt_multi_ex_time, echo = FALSE, warning = FALSE, fig.width=15, fig.height=15}
-df <- df_melt 
-p <- ggplot(df, aes(x = Features, y = Time * 1000, color = Command)) + 
+```{r melt_multi_ex_time, echo = FALSE}
+p <- ggplot(df_melt, aes(x = Features, y = Time * 1000, color = Command)) + 
     geom_point() + 
     geom_line() +
     labs(title = "Melting comparison",
@@ -72,8 +70,7 @@ p <- ggplot(df, aes(x = Features, y = Time * 1000, color = Command)) +
     scale_x_log10() + # Log is often useful with sample size
     # scale_y_log10() + # Log is often useful with sample size
     scale_color_manual(values = c("black", "darkgray")) +
-    facet_grid(Samples ~ Rank)
-  
+    facet_grid(Samples ~ Rank, scales = "free_y")
 
 print(p)
 ```
