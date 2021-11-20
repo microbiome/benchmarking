@@ -23,10 +23,14 @@ different methods and sample/feature count combinations.
  
 ## Results of the Benchmarking
 
-Execution time was benchmarked for the following operations; see the links for reports:
+Execution time has been benchmarked for the following operations; see the
+links for reports:
 
 * [Melting](reports/melt.md);
-* [CLR transformations](reports/transform.md) 
+
+TODO:
+
+* [CLR transformation](reports/transform.md) 
 * [Agglomeration to Phylum level](reports/agglomerate.md);
 * [Alpha diversity estimation (Shannon)](reports/alpha.md);
 * [Beta diversity estimation (Bray-Curtis / MDS)](reports/beta.md).

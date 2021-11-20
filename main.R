@@ -15,11 +15,15 @@ tests[["melt"]] <- c(tse = melt_tse_exec_time, pseq = melt_pseq_exec_time)
 # tests[["beta"]] <- c(tse = beta_tse_exec_time, pseq = beta_pseq_exec_time)
 # Other functionality to test..? Tree-based functions? It would then be necessary to ensure that all example data sets have tree info.
 
+# We are now using the same Rmd for all benchmark reports.
+# Later, if needs arise, we can customize some of those and render them
+# independently. 
+
 # render output of "melt_benchmark.Rmd" as a md document
 for (testmethod in names(tests)) {
   print(testmethod)
   # Define test file names
-  testfile <- paste0(testmethod, "_benchmark_run.R")
+  testfile <- paste0("experiments/", testmethod, "_benchmark_run.R")
   # Run benchmarking tests
   source(testfile) 
   # Report benchmarking tests
