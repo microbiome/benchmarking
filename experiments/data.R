@@ -17,10 +17,11 @@ library(SingleCellExperiment)   # manipulate tse objects
 library(reshape)                # merge_all command
 
 # list data sets to run benchmark on
-data_sets <- c("AsnicarF_2017", "GlobalPatterns", "SongQAData")
+#data_sets <- c("AsnicarF_2017", "GlobalPatterns", "SongQAData")
+data_sets <- "SongQAData"
 
 # list sample sizes for random subsetting
-sample_sizes <- c(10, 100, 1000)
+sample_sizes <- c(10, 100, 200, 500, 1000)
 
 # define experimental setup
 set.seed(3)

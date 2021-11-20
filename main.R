@@ -6,6 +6,7 @@ source("experiments/funcs.R")
 source("experiments/data.R")
 
 # render output of "melt_benchmark.Rmd" as a md document
+source("melt_benchmark_run.R")
 rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "md_document", output_dir = "reports")
 rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "pdf_document", output_dir = "reports")
 

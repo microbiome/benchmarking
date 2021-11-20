@@ -7,34 +7,17 @@ date: "`r Sys.Date()`"
 # Melting benchmark
 
 ```{r parameters, echo = FALSE}
+theme_set(theme_bw(20))
+
 # define sample size N and rank R for the plots
 N <- 100
 R <- "Genus"
 ```
 
 
-```{r experiment, echo = FALSE, warning = FALSE}
-# run benchmark on melting of tse and pseq with custom sample sizes
-df_melt <- experiment_benchmark(containers, datasetlist, melt_tse_exec_time, melt_pseq_exec_time, sample_sizes) %>%
-           merge_all() %>%      # merge results from each data set into one data frame
-	         filter(!is.na(Time)) 
-```
+## Relative differences in execution time by sample size
 
-
-
-```{r melt_ex_time, echo = FALSE, eval=FALSE}
-## Execution times vs number of features with fixed number of samples
-# plot execution time for melting subsets from
-# the taxonomic rank "Order" and with 1000 samples 
-p1_melt <- plot_exec_time(df_melt, N, R)
-print(p1_melt)
-```
-
-
-## Relative execution time by sample size
-
-
-```{r melt_ratio, echo = FALSE, fig.width = 10, fig.height = 12}
+```{r melt_ratio, echo = FALSE, fig.width = 10, fig.height = 6}
 df <- df_melt %>% select(Dataset, Time, Features, Samples, Rank, ObjectType) %>% 
       pivot_wider(names_from = c(ObjectType), values_from = Time) %>% 
       mutate(Ratio = tse / pseq) 
@@ -46,19 +29,40 @@ p <- ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) +
     geom_line() +
     labs(title = "Melt",
          x = "Samples (N)",
-         y = "Relative execution time (TreeSE / phyloseq)",
+         y = "Relative time (TreeSE / phyloseq)",
          color = "Features (N)",
          caption = "Execution time ratio by samples") +
-    scale_y_continuous(label = scales::percent) +
+    # scale_y_continuous(label = scales::percent) +
     facet_grid(Dataset ~ . ) +
     geom_hline(yintercept = 1, linetype = 2)    
 
 print(p)
 ```
 
-## Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
 
-```{r melt_multi_ex_time, echo = FALSE}
+## Absolute execution time by sample size
+
+```{r melt_abs_by_time, echo = FALSE, fig.width = 10, fig.height = 6}
+df <- df_melt %>% select(Dataset, Time, Features, Samples, Rank, ObjectType)
+df <- df %>% filter(Dataset %in% names(which(table(df$Dataset) >= 10)))
+
+p <- ggplot(df, aes(x = Samples, y = Time * 1000, group = ObjectType, color = Features)) + 
+    geom_point() + 
+    geom_line() +
+    labs(title = "Melt",
+         x = "Samples (N)",
+         y = "Time (ms)",
+         color = "Features (N)",
+         caption = "Execution time ratio by samples") +
+    facet_grid(Dataset ~ Rank)
+
+print(p)
+```
+
+
+## Execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
+
+```{r melt_multi_ex_time, echo = FALSE, fig.width=10, fig.height=10}
 p <- ggplot(df_melt, aes(x = Features, y = Time * 1000, color = Command)) + 
     geom_point() + 
     geom_line() +
@@ -70,7 +74,21 @@ p <- ggplot(df_melt, aes(x = Features, y = Time * 1000, color = Command)) +
     scale_x_log10() + # Log is often useful with sample size
     # scale_y_log10() + # Log is often useful with sample size
     scale_color_manual(values = c("black", "darkgray")) +
-    facet_grid(Samples ~ Rank, scales = "free_y")
+    facet_grid(Rank ~ Samples, scales = "free_y")
 
 print(p)
+```
+
+
+
+
+
+
+
+```{r melt_ex_time, echo = FALSE, eval=FALSE}
+## Execution times vs number of features with fixed number of samples
+# plot execution time for melting subsets from
+# the taxonomic rank R and with N samples 
+p1_melt <- plot_exec_time(df_melt, N, R)
+print(p1_melt)
 ```
