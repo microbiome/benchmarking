@@ -4,7 +4,7 @@
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 library(ggplot2)                # plotting
-theme_set(theme_bw())
+theme_set(theme_bw(20))
 
 library(dplyr)                  # pipe operator
 library(mia)                    # data sets and analysis

@@ -6,6 +6,11 @@ Relative differences in execution time by sample size
 
 ![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_ratio-1.png)
 
+Absolute execution time by sample size
+--------------------------------------
+
+![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_abs_by_time-1.png)
+
 Execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
 ---------------------------------------------------------------------------------------------------
 
