@@ -1,6 +1,3 @@
-Melting benchmark
-=================
-
 Relative differences in execution time by sample size
 -----------------------------------------------------
 

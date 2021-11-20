@@ -8,7 +8,7 @@ date: "`r Sys.Date()`"
 
 ## Relative differences in execution time by sample size
 
-```{r melt_ratio, echo = FALSE, fig.width = 10, fig.height = 6}
+```{r melt_ratio, echo = FALSE, fig.width = 10, fig.height = 7}
 df <- df_melt %>% select(Dataset, Time, Features, Samples, Rank, ObjectType) %>% 
       pivot_wider(names_from = c(ObjectType), values_from = Time) %>% 
       mutate(Ratio = tse / pseq) 
@@ -22,6 +22,7 @@ p <- ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) +
          color = "Features (N)",
          caption = "Execution time ratio by samples") +
     # scale_y_continuous(label = scales::percent) +
+    scale_x_log10() +    
     geom_hline(yintercept = 1, linetype = 2) 
 
 print(p)
