@@ -1,9 +1,14 @@
-# Melting benchmark
+Relative differences in execution time by sample size
+-----------------------------------------------------
 
-## Relative execution time by sample size
+![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_ratio-1.png)
 
-![](benchmark_files/figure-markdown_strict/melt_ratio.png)
+Absolute execution time by sample size
+--------------------------------------
 
-## Plot of execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
+![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_abs_by_time-1.png)
 
-![](benchmark_files/figure-markdown_strict/melt_multi_ex_time.png)
+Execution times vs number of features for multiple combinations of taxonomic ranks and sample sizes
+---------------------------------------------------------------------------------------------------
+
+![](/home/lemila/Git/Rpackages/ME/benchmarking/reports/melt_benchmark_files/figure-markdown_strict/melt_multi_ex_time-1.png)

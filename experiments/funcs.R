@@ -127,7 +127,12 @@ load_dataset <- function(data_set) {
     mapply(data, list = data_set, package = "mia")
     tse <- eval(parse(text = data_set))
     
-    # load microbiomeDataSets
+  } else if (data_set == "hitchip1006") {
+    
+    mapply(data, list = data_set, package = "miaTime")
+    tse <- eval(parse(text = data_set))
+    
+    # load microbiomeDataSets    
   } else if (data_set %in% c("SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")) {
     
     tse <- eval((parse(text = paste0("microbiomeDataSets::", data_set, "()"))))
