@@ -13,7 +13,7 @@ feature set sizes.
 
 Multiple data sets, either in the form of a tse or a pseq object, were
 processed through a few common [analytical
-routines](https://github.com/microbiome/benchmarking/tree/RiboRings/experiments):
+routines](https://github.com/microbiome/benchmarking/tree/main/experiments):
 
 The data sets were splitted by taxonomic ranks to get variations in
 feature counts, while keeping the data set and sample sizes
