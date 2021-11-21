@@ -13,7 +13,7 @@ feature set sizes.
 
 Multiple data sets, either in the form of a tse or a pseq object, were
 processed through a few common [analytical
-routines](https://github.com/microbiome/benchmarking/tree/RiboRings/experiments):
+routines](https://github.com/microbiome/benchmarking/tree/main/experiments):
 
 The data sets were splitted by taxonomic ranks to get variations in
 feature counts, while keeping the data set and sample sizes
@@ -26,14 +26,15 @@ different methods and sample/feature count combinations.
 Execution time has been benchmarked for the following operations; see the
 links for reports:
 
-* [Melting](reports/melt.md);
+* [Melting](reports/melt.md)
 
-TODO:
+
+The following will be added soon:
 
 * [CLR transformation](reports/transform.md) 
-* [Agglomeration to Phylum level](reports/agglomerate.md);
-* [Alpha diversity estimation (Shannon)](reports/alpha.md);
-* [Beta diversity estimation (Bray-Curtis / MDS)](reports/beta.md).
+* [Agglomeration to Phylum level](reports/agglomerate.md)
+* [Alpha diversity estimation (Shannon)](reports/alpha.md)
+* [Beta diversity estimation (Bray-Curtis / MDS)](reports/beta.md)
 
 
 ## How to run this analysis locally
@@ -47,7 +48,10 @@ source("main.R")
 
 ## License
 
-The code and results in this repository are open source with [Artistic License 2.0](LICENSE.md).
+This work is part of [miaverse](microbiome.github.io). The code and
+results in this repository are open source with [Artistic License
+2.0](LICENSE.md).
+
 
 
 
