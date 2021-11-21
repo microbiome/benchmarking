@@ -28,7 +28,8 @@ links for reports:
 
 * [Melting](reports/melt.md)
 
-TODO:
+
+The following will be added soon:
 
 * [CLR transformation](reports/transform.md) 
 * [Agglomeration to Phylum level](reports/agglomerate.md)
@@ -47,7 +48,10 @@ source("main.R")
 
 ## License
 
-The code and results in this repository are open source with [Artistic License 2.0](LICENSE.md).
+This work is part of [miaverse](microbiome.github.io). The code and
+results in this repository are open source with [Artistic License
+2.0](LICENSE.md).
+
 
 
 
