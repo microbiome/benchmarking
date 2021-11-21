@@ -6,8 +6,18 @@ date: "`r Sys.Date()`"
 
 
 ```{r setup, echo = FALSE}
-knitr::opts_chunk$set(fig.path='figure/', fig.prefix=testmethod)
+library(Cairo)
+
+# global knitr options
+knitr::opts_chunk$set(fig.path='figure/',
+                      fig.prefix=testmethod,
+                      dpi=300,
+                      dev = "png",
+                      dev.args = list(type = "cairo-png"),
+		      # fig.width=10		      
+		      )
 ```
+
 
 ## Data characteristics
 

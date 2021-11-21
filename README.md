@@ -26,14 +26,14 @@ different methods and sample/feature count combinations.
 Execution time has been benchmarked for the following operations; see the
 links for reports:
 
-* [Melting](reports/melt.md);
+* [Melting](reports/melt.md)
 
 TODO:
 
 * [CLR transformation](reports/transform.md) 
-* [Agglomeration to Phylum level](reports/agglomerate.md);
-* [Alpha diversity estimation (Shannon)](reports/alpha.md);
-* [Beta diversity estimation (Bray-Curtis / MDS)](reports/beta.md).
+* [Agglomeration to Phylum level](reports/agglomerate.md)
+* [Alpha diversity estimation (Shannon)](reports/alpha.md)
+* [Beta diversity estimation (Bray-Curtis / MDS)](reports/beta.md)
 
 
 ## How to run this analysis locally
