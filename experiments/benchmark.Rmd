@@ -98,7 +98,7 @@ p <- ggplot(df, aes(x = Samples, y = Time * 1000, color = ObjectType)) +
          caption = "Execution time comparison between TreeSE and phyloseq."
 	 ) +
 	 scale_color_manual(values=cols[unique(df$ObjectType)]) + 
-    facet_grid(Rank ~ Dataset) 
+    facet_grid(Rank ~ Dataset, scales = "free_y") 
 
 print(p)
 ```
@@ -119,7 +119,7 @@ p <- ggplot(df_benchmark, aes(x = Features, y = Time * 1000, color = ObjectType)
     # scale_y_log10() + # Log is often useful with sample size
     scale_color_manual(values=cols[unique(df$ObjectType)]) +     
     # facet_grid(Rank ~ Samples, scales = "free_y")
-    facet_grid(Samples ~ Dataset )    
+    facet_grid(Samples ~ Dataset, scales = "free_y")    
 
 print(p)
 ```

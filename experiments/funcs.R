@@ -85,7 +85,6 @@ plot_exec_time <- function(df, sample_size, rank) {
   
 }
 
-
 ### FUNCTION TO TEST MELTING FOR TSE OBJECT ###
 melt_tse_exec_time <- function(tse) {
   
@@ -99,7 +98,7 @@ melt_tse_exec_time <- function(tse) {
   
 }
 
-### FUNCTION TO TEST MELTING FOR TSE OBJECT ###
+### FUNCTION TO TEST MELTING FOR PSEQ OBJECT ###
 melt_pseq_exec_time <- function(pseq) {
   
   start.time2 <- Sys.time()
@@ -110,6 +109,106 @@ melt_pseq_exec_time <- function(pseq) {
   
 }
 
+### FUNCTION TO TEST TRANSFORMING FOR TSE OBJECT ###
+transform_tse_exec_time <- function(tse) {
+  
+  start.time2 <- Sys.time()
+  trans_tse <- mia::transformSamples(tse,
+                                     method = "log10",
+                                     pseudocount = 1)
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST TRANSFORMING FOR PSEQ OBJECT ###
+transform_pseq_exec_time <- function(pseq) {
+  
+  start.time2 <- Sys.time()
+  trans_pseq <- microbiome::transform(pseq,
+                                      transform = "log10p",
+                                      target = "sample")
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST AGGLOMERATING FOR TSE OBJECT ###
+agglomerate_tse_exec_time <- function(tse) {
+  
+  start.time2 <- Sys.time()
+  tse_phylum <- agglomerateByRank(tse,
+                                  rank = "Phylum",
+                                  na.rm = TRUE)
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST AGGLOMERATING FOR PSEQ OBJECT ###
+agglomerate_pseq_exec_time <- function(pseq) {
+  
+  start.time2 <- Sys.time()
+  pseq_phylum <- phyloseq::tax_glom(pseq,
+                                    taxrank = "Phylum")
+  # na.rm = TRUE by default in tax_glom
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST ALPHA ESTIMATION FOR TSE OBJECT ###
+alpha_tse_exec_time <- function(tse) {
+  
+  start.time2 <- Sys.time()
+  alpha_tse <- mia::estimateDiversity(tse,
+                                      index = "shannon",
+                                      name = "shannon")
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST ALPHA ESTIMATION FOR PSEQ OBJECT ###
+alpha_pseq_exec_time <- function(pseq) {
+  
+  start.time2 <- Sys.time()
+  alpha_pseq <- microbiome::diversity(pseq,
+                                      index = "shannon")
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST BETA ESTIMATION FOR TSE OBJECT ###
+beta_tse_exec_time <- function(tse) {
+  
+  start.time1 <- Sys.time()
+  beta_tse <- scater::runMDS(tse, FUN = vegan::vegdist, name = "MDS_BC")
+  pcoa_tse <- scater::plotReducedDim(beta_tse, "MDS_BC")
+  end.time1 <- Sys.time()
+  
+  return(end.time1 - start.time1)
+  
+}
+
+### FUNCTION TO TEST BETA ESTIMATION FOR PSEQ OBJECT ###
+beta_pseq_exec_time <- function(pseq) {
+  
+  start.time2 <- Sys.time()
+  beta_pseq <- phyloseq::ordinate(pseq, "MDS", "bray")
+  pcoa_pseq <- phyloseq::plot_ordination(pseq, beta_pseq, type = "samples")
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
 
 ### FUNCTION TO LOAD DATASETS ###
 load_dataset <- function(data_set) {
