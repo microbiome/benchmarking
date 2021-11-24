@@ -278,7 +278,7 @@ load_dataset <- function(data_set) {
 }
 
 ### FUNCTION TO MAKE DATA FRAME ###
-make_data_frame <- function(tse) {
+make_data_frame <- function(tse, len_N) {
   
   data_set <- mainExpName(tse)
   
