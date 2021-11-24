@@ -1,23 +1,41 @@
+# Load utils functions
+source("experiments/funcs.R")
+
 # load data sets and store them into the list "containers"
 # prepare a list of data frames "df" for the data on execution times
 source("experiments/data.R")
 
-# load functions to run experiments and plot results
-source("experiments/experiment.R")
+# Define all tests
+tests <- list()
+tests[["melt"]] <- c(tse = melt_tse_exec_time, pseq = melt_pseq_exec_time)
+tests[["transform"]] <- c(tse = transform_tse_exec_time, pseq = transform_pseq_exec_time)
+tests[["agglomerate"]] <- c(tse = agglomerate_tse_exec_time, pseq = agglomerate_pseq_exec_time)
+tests[["alpha"]] <- c(tse = alpha_tse_exec_time, pseq = alpha_pseq_exec_time)
+tests[["beta"]] <- c(tse = beta_tse_exec_time, pseq = beta_pseq_exec_time)
 
 # render output of "melt_benchmark.R" as a md document
 rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "md_document", output_dir = "reports")
-rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "pdf_document", output_dir = "reports")
 # rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "pdf_document", output_dir = "reports")
+# beta estimation needs debugging
+# try to run the line below to reproduce the error:
+# experiment_benchmark(containers, datasetlist, beta_tse_exec_time, beta_pseq_exec_time, sample_sizes)
 
-# render output as a md document
-# rmarkdown::render("experiments/transform_benchmark.R", output_format = "md_document", output_file = "transform_benchmark.md", output_dir = "reports")
+# Other functionality to test..? Tree-based functions? It would then be necessary to ensure that all example data sets have tree info.
 
-# render output as a md document
-# rmarkdown::render("experiments/agglomerate_benchmark.R", output_format = "md_document", output_file = "agglomerate_benchmark.md", output_dir = "reports")
+# We are now using the same Rmd for all benchmark reports.
+# Later, if needs arise, we can customize some of those and render them
+# independently. 
 
-# render output as a md document
-# rmarkdown::render("experiments/alpha_benchmark.R", output_format = "md_document", output_file = "alpha_benchmark.md", output_dir = "reports")
+# render output of "melt_benchmark.Rmd" as a md document
+for (testmethod in names(tests)) {
+  
+  print(testmethod)
+  
+  # Run benchmarking tests
+  source("experiments/benchmark_run.R") 
+  
+  # Report benchmarking tests
+  rmarkdown::render("experiments/benchmark.Rmd", output_format = "md_document",  output_file = paste0("../reports/", testmethod, ".md"))
+  rmarkdown::render("experiments/benchmark.Rmd", output_format = "pdf_document", output_file = paste0("../reports/", testmethod, ".pdf"))
 
-# render output as a md document
-# rmarkdown::render("experiments/beta_benchmark.R", output_format = "md_document", output_file = "beta_benchmark.md", output_dir = "reports")
+}
