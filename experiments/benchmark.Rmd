@@ -22,16 +22,16 @@ references:
 
 
 ```{r setup, echo = FALSE}
-library(Cairo)
+#library(Cairo)
 
 # global knitr options
-knitr::opts_chunk$set(fig.path='figure/',
-                      fig.prefix=testmethod,
-                      dpi=300,
-                      dev = "png",
-                      dev.args = list(type = "cairo-png"),
+#knitr::opts_chunk$set(fig.path='figure/',
+#                      fig.prefix=testmethod,
+#                      dpi=300,
+#                      dev = "png",
+#                      dev.args = list(type = "cairo-png"),
 		      # fig.width=10		      
-		      )
+#		      )
 ```
 
 

@@ -5,3 +5,5 @@ reports/.DS_Store
 experiments/.Rhistory
 .Rhistory
 reports/.RData
+*.tex
+*.log

@@ -31,6 +31,8 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
           subset_names <- sample(colnames(alt_tse), N)
           sub_tse <- alt_tse[ , colnames(alt_tse) %in% subset_names]
           sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
+          
+          # store features and samples
           df[[cur_set]]$Features[tse_ind] <- nrow(sub_tse)
           df[[cur_set]]$Features[pseq_ind] <- nrow(sub_tse)
           df[[cur_set]]$Samples[tse_ind] <- ncol(sub_tse)
@@ -190,7 +192,10 @@ alpha_pseq_exec_time <- function(pseq) {
 beta_tse_exec_time <- function(tse) {
   
   start.time1 <- Sys.time()
-  beta_tse <- scater::runMDS(tse, FUN = vegan::vegdist, name = "MDS_BC")
+  beta_tse <- scater::runMDS(tse,
+                             FUN = vegan::vegdist,
+                             name = "MDS_BC",
+                             exprs_values = "counts")
   pcoa_tse <- scater::plotReducedDim(beta_tse, "MDS_BC")
   end.time1 <- Sys.time()
   
@@ -202,7 +207,7 @@ beta_tse_exec_time <- function(tse) {
 beta_pseq_exec_time <- function(pseq) {
   
   start.time2 <- Sys.time()
-  beta_pseq <- phyloseq::ordinate(pseq, "MDS", "bray")
+  beta_pseq <- phyloseq::ordinate(pseq,"MDS", "bray")
   pcoa_pseq <- phyloseq::plot_ordination(pseq, beta_pseq, type = "samples")
   end.time2 <- Sys.time()
   
