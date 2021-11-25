@@ -1,9 +1,9 @@
 ### FUNCTION TO RUN BENCHMARK ON EXPERIMENTS ###
-experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes, message=FALSE) {
+experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes, message=TRUE) {
   
-  for (tsename in names(containers)) {
+  for (tseind in seq_along(containers)) {
 
-    tse <- containers[[tsename]]
+    tse <- containers[[tseind]]
 
     # define index and ranks of current data set
     cur_set <- which(lapply(containers, mainExpName) == mainExpName(tse))
@@ -23,28 +23,32 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
         if (ncol(alt_tse) >= N) {
 
           if (message) {
-            message(c(tsename, rank, N))
-          ]
+            message(paste(tseind, rank, N, sep="/"))
+          }
           # define index of current sample size
           cur_N <- which(N == sample_sizes)
 
           if (message) {
             message("define df index to store results")
-          ]
+          }
+
+	  # FIXME: the code would be less error prone if you would not need to calculate these
+	  # indices like this here. Instead, you can collect all info in a data.frame with a single for, and
+	  # then merge that single row data.frame in the end of the larger data.frame that will contain
+	  # all info
           tse_ind <- cur_N + 2 * len_N * (rank - 1)
           pseq_ind <- cur_N + len_N + 2 * len_N * (rank - 1)
 
-
           if (message) {
             message("random subsetting")
-          ]
+          }
           subset_names <- sample(colnames(alt_tse), N)
           sub_tse <- alt_tse[ , colnames(alt_tse) %in% subset_names]
           sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
 
           if (message) {
 	    message("Remove zero rows and columns")
-          ]
+          }
 	  rind <- names(which(rowMeans(assay(sub_tse, "counts")==0)<1))
 	  cind <- names(which(colMeans(assay(sub_tse, "counts")==0)<1))
           sub_tse <- sub_tse[rind, cind]
@@ -54,21 +58,28 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
           sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
 
           if (message) {
-            message("store features and samples")
-          ]
+            message("Store features and samples")
+          }
+          df[[cur_set]]$Features[tse_ind]  <- nrow(sub_tse)
+          df[[cur_set]]$Features[pseq_ind] <- nrow(phyloseq::otu_table(sub_pseq))
+          df[[cur_set]]$Samples[tse_ind]   <- ncol(sub_tse)
+          df[[cur_set]]$Samples[pseq_ind]  <- ncol(phyloseq::otu_table(sub_pseq))
 
-          df[[cur_set]]$Features[tse_ind] <- nrow(sub_tse)
-          df[[cur_set]]$Features[pseq_ind] <- nrow(sub_tse)
-          df[[cur_set]]$Samples[tse_ind] <- ncol(sub_tse)
-          df[[cur_set]]$Samples[pseq_ind] <- ncol(sub_tse)
-
+          if (message) {
+            message("--TreeSE")
+          }
           # test melting for tse
 	  # save(sub_tse, file = "test.RData")
           df[[cur_set]]$Time[tse_ind] <- tse_fun(sub_tse)
-          
+          if (message) {
+            message("--phyloseq")
+          }
           # test melting for pseq
           df[[cur_set]]$Time[pseq_ind] <- pseq_fun(sub_pseq)
-          
+
+          if (message) {
+            message("OK")
+          }
         }
         
       }

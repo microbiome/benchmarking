@@ -32,7 +32,7 @@ containers <- mclapply(data_sets, load_dataset, mc.cores = numCores)
 # containers <- lapply(data_sets, load_dataset)
 
 # list sample sizes for random subsetting
-sample_sizes <- c(10, 20, 50, 100)
+sample_sizes <- c(10, 20, 50)
 len_N <- length(sample_sizes)
 
 # make a data frame for each tse object

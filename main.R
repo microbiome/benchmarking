@@ -13,20 +13,10 @@ tests[["agglomerate"]] <- c(tse = agglomerate_tse_exec_time, pseq = agglomerate_
 tests[["alpha"]] <- c(tse = alpha_tse_exec_time, pseq = alpha_pseq_exec_time)
 tests[["beta"]] <- c(tse = beta_tse_exec_time, pseq = beta_pseq_exec_time)
 
-# render output of "melt_benchmark.R" as a md document
-# rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "md_document", output_dir = "reports")
-# rmarkdown::render("experiments/melt_benchmark.Rmd", output_format = "pdf_document", output_dir = "reports")
-# beta estimation needs debugging
-# try to run the line below to reproduce the error:
-# experiment_benchmark(containers, datasetlist, beta_tse_exec_time, beta_pseq_exec_time, sample_sizes)
+# TODO? Other functionality to test..? Tree-based functions? It would then
+# be necessary to ensure that all example data sets have tree info.
 
-# Other functionality to test..? Tree-based functions? It would then be necessary to ensure that all example data sets have tree info.
-
-# We are now using the same Rmd for all benchmark reports.
-# Later, if needs arise, we can customize some of those and render them
-# independently. 
-
-# render output of "melt_benchmark.Rmd" as a md document
+# Generate reports
 for (testmethod in names(tests)) {
   
   print(testmethod)
@@ -35,7 +25,11 @@ for (testmethod in names(tests)) {
   source("experiments/benchmark_run.R") 
   
   # Report benchmarking tests
-  rmarkdown::render("experiments/benchmark.Rmd", output_format = "md_document",  output_file = paste0("../reports/", testmethod, ".md"))
-  rmarkdown::render("experiments/benchmark.Rmd", output_format = "pdf_document", output_file = paste0("../reports/", testmethod, ".pdf"))
+  rmarkdown::render("experiments/benchmark.Rmd",
+      output_format = "md_document",
+      output_file = paste0("../reports/", testmethod, ".md"))
+  rmarkdown::render("experiments/benchmark.Rmd",
+      output_format = "pdf_document",
+      output_file = paste0("../reports/", testmethod, ".pdf"))
 
 }
