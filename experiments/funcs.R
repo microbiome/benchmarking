@@ -1,8 +1,10 @@
 ### FUNCTION TO RUN BENCHMARK ON EXPERIMENTS ###
 experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes) {
   
-  for (tse in containers) {
-    
+  for (tsename in names(containers)) {
+
+    tse <- containers[[tsename]]
+
     # define index and ranks of current data set
     cur_set <- which(lapply(containers, mainExpName) == mainExpName(tse))
     len_exp <- length(altExps(tse))
@@ -19,29 +21,45 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
         
         # select data sets at least as large as sample_size
         if (ncol(alt_tse) >= N) {
-          
+
+          print(c(tsename, rank, N))
+
           # define index of current sample size
           cur_N <- which(N == sample_sizes)
           
-          # define df index to store results
+          print("define df index to store results")
           tse_ind <- cur_N + 2 * len_N * (rank - 1)
           pseq_ind <- cur_N + len_N + 2 * len_N * (rank - 1)
           
-          # random subsetting
+          print("random subsetting")
           subset_names <- sample(colnames(alt_tse), N)
           sub_tse <- alt_tse[ , colnames(alt_tse) %in% subset_names]
           sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
-          
-          # store features and samples
+
+	  print("Remove zero rows and columns")
+	  print("--tse")
+	  rind <- names(which(rowMeans(assay(sub_tse, "counts")==0)<1))
+	  cind <- names(which(colMeans(assay(sub_tse, "counts")==0)<1))
+          sub_tse <- sub_tse[rind, cind]
+	  print("--pseq")
+	  rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq)==0)<1))
+	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq)==0)<1))	  
+          sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
+          sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
+
+          print("store features and samples")
           df[[cur_set]]$Features[tse_ind] <- nrow(sub_tse)
           df[[cur_set]]$Features[pseq_ind] <- nrow(sub_tse)
           df[[cur_set]]$Samples[tse_ind] <- ncol(sub_tse)
           df[[cur_set]]$Samples[pseq_ind] <- ncol(sub_tse)
-          
+
           # test melting for tse
+	  message("--TreeSE")
+	  # save(sub_tse, file = "test.RData")
           df[[cur_set]]$Time[tse_ind] <- tse_fun(sub_tse)
           
           # test melting for pseq
+	  message("--phyloseq")	  
           df[[cur_set]]$Time[pseq_ind] <- pseq_fun(sub_pseq)
           
         }
@@ -196,7 +214,7 @@ beta_tse_exec_time <- function(tse) {
                              FUN = vegan::vegdist,
                              name = "MDS_BC",
                              exprs_values = "counts")
-  pcoa_tse <- scater::plotReducedDim(beta_tse, "MDS_BC")
+  #pcoa_tse <- scater::plotReducedDim(beta_tse, "MDS_BC")
   end.time1 <- Sys.time()
   
   return(end.time1 - start.time1)
@@ -208,7 +226,7 @@ beta_pseq_exec_time <- function(pseq) {
   
   start.time2 <- Sys.time()
   beta_pseq <- phyloseq::ordinate(pseq,"MDS", "bray")
-  pcoa_pseq <- phyloseq::plot_ordination(pseq, beta_pseq, type = "samples")
+  #pcoa_pseq <- phyloseq::plot_ordination(pseq, beta_pseq, type = "samples")
   end.time2 <- Sys.time()
   
   return(end.time2 - start.time2)
