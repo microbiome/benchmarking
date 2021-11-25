@@ -2,12 +2,12 @@ Overview
 --------
 
 This report contains benchmarking results for the agglomerate operation
-with common microbiome data containers in R/Bioconductor.
+with common microbiome data containers in R/Bioconductor for the
+agglomerate operation.
 
-The benchmarking tests utilize the following publicly available data
-sets. We thank the original authors for making these valuable data
-resources openly available. Check the links for details and original
-references:
+The tests utilize the following publicly available data sets. We thank
+the original authors for making these valuable data resources openly
+available. Check the links for details and original references:
 
 -   [hitchip1006](https://github.com/microbiome/miaTime/blob/master/R/data.R)
     (Lahti et al. 2014)
@@ -58,38 +58,38 @@ Feature counts by data set:
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Phylum</td>
-<td style="text-align: right;">19</td>
+<td style="text-align: right;">39</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">12</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Class</td>
-<td style="text-align: right;">48</td>
+<td style="text-align: right;">92</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">18</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Order</td>
-<td style="text-align: right;">85</td>
+<td style="text-align: right;">167</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">24</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Species</td>
-<td style="text-align: right;">122</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Family</td>
+<td style="text-align: right;">271</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">40</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Family</td>
-<td style="text-align: right;">157</td>
-<td style="text-align: right;">21</td>
-<td style="text-align: right;">40</td>
+<td style="text-align: left;">Species</td>
+<td style="text-align: right;">375</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Genus</td>
-<td style="text-align: right;">239</td>
-<td style="text-align: right;">119</td>
+<td style="text-align: right;">583</td>
+<td style="text-align: right;">130</td>
 <td style="text-align: right;">92</td>
 </tr>
 </tbody>

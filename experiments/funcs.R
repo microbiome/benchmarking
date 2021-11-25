@@ -47,6 +47,16 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
           sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
 
           if (message) {
+            message("Store feature and sample counts before filtering out zero rows and cols")
+          }
+	  
+          df[[cur_set]]$Features[tse_ind]  <- nrow(sub_tse)
+          df[[cur_set]]$Features[pseq_ind] <- nrow(phyloseq::otu_table(sub_pseq))
+          df[[cur_set]]$Samples[tse_ind]   <- ncol(sub_tse)
+          df[[cur_set]]$Samples[pseq_ind]  <- ncol(phyloseq::otu_table(sub_pseq))
+
+
+          if (message) {
 	    message("Remove zero rows and columns")
           }
 	  rind <- names(which(rowMeans(assay(sub_tse, "counts")==0)<1))
@@ -56,15 +66,7 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
 	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq)==0)<1))	  
           sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
           sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
-
-          if (message) {
-            message("Store features and samples")
-          }
-          df[[cur_set]]$Features[tse_ind]  <- nrow(sub_tse)
-          df[[cur_set]]$Features[pseq_ind] <- nrow(phyloseq::otu_table(sub_pseq))
-          df[[cur_set]]$Samples[tse_ind]   <- ncol(sub_tse)
-          df[[cur_set]]$Samples[pseq_ind]  <- ncol(phyloseq::otu_table(sub_pseq))
-
+	  
           if (message) {
             message("--TreeSE")
           }
