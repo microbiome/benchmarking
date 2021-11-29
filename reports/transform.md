@@ -1,12 +1,13 @@
-## Overview
+Overview
+--------
 
 This report contains benchmarking results for the transform operation
-with common microbiome data containers in R/Bioconductor.
+with common microbiome data containers in R/Bioconductor for the
+transform operation.
 
-The benchmarking tests utilize the following publicly available data
-sets. We thank the original authors for making these valuable data
-resources openly available. Check the links for details and original
-references:
+The tests utilize the following publicly available data sets. We thank
+the original authors for making these valuable data resources openly
+available. Check the links for details and original references:
 
 -   [hitchip1006](https://github.com/microbiome/miaTime/blob/master/R/data.R)
     (Lahti et al. 2014)
@@ -15,7 +16,8 @@ references:
 -   [GrieneisenTSData](https://microbiome.github.io/microbiomeDataSets/reference/GrieneisenTSData.html)
     Grieneisen et al. (2021) baboon data set
 
-## Data characteristics
+Data characteristics
+--------------------
 
 Full sample sizes by data set:
 
@@ -93,14 +95,17 @@ Feature counts by data set:
 </tbody>
 </table>
 
-## Relative differences in execution time by sample size
+Relative differences in execution time by sample size
+-----------------------------------------------------
 
-![](fig/transform_files/figure-markdown_strict/ratio-1.png)
+![](../reports/transform_files/figure-markdown_strict/ratio-1.png)
 
-## Absolute execution time by sample size
+Absolute execution time by sample size
+--------------------------------------
 
-![](fig/transform_files/figure-markdown_strict/abs_by_time-1.png)
+![](../reports/transform_files/figure-markdown_strict/abs_by_time-1.png)
 
-## Execution times vs number of features
+Execution times vs number of features
+-------------------------------------
 
-![](fig/transform_files/figure-markdown_strict/multi_ex_time-1.png)
+![](../reports/transform_files/figure-markdown_strict/multi_ex_time-1.png)
