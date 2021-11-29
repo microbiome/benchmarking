@@ -18,9 +18,10 @@ library(reshape)                # merge_all command
 library(knitr)                  # kable
 
 # list data sets to run benchmark on
-# data_sets <- c("AsnicarF_2017", "GlobalPatterns", "SongQAData")
+data_sets <- c("AsnicarF_2017", "GlobalPatterns", "AsnicarF_2021")
 # data_sets <- "SongQAData" # Just pick a single data set to keep things simple. Must have N>1000 samples.
-data_sets <- c("SongQAData", "hitchip1006", "GrieneisenTSData") # All data sets must have N>1000 samples.
+# data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData") # All data sets must have N>1000 samples.
+# data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019") 
 
 # define experimental setup
 set.seed(3)
@@ -29,10 +30,9 @@ numCores <- detectCores() - 1
 # load tse objects and store them into
 # a list of containers
 containers <- mclapply(data_sets, load_dataset, mc.cores = numCores)
-# containers <- lapply(data_sets, load_dataset)
 
 # list sample sizes for random subsetting
-sample_sizes <- c(10, 20, 50, 100, 500, 1000)
+sample_sizes <- c(10, 20, 50, 100, 500)
 len_N <- length(sample_sizes)
 
 # make a data frame for each tse object

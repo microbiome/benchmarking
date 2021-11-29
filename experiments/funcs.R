@@ -245,7 +245,7 @@ beta_tse_exec_time <- function(tse) {
 beta_pseq_exec_time <- function(pseq) {
   
   start.time2 <- Sys.time()
-  beta_pseq <- phyloseq::ordinate(pseq,"MDS", "bray")
+  beta_pseq <- phyloseq::ordinate(pseq, "MDS", "bray")
   #pcoa_pseq <- phyloseq::plot_ordination(pseq, beta_pseq, type = "samples")
   end.time2 <- Sys.time()
   
@@ -269,13 +269,8 @@ load_dataset <- function(data_set) {
     mapply(data, list = data_set, package = "mia")
     tse <- eval(parse(text = data_set))
     
-  } else if (data_set == "hitchip1006") {
-    
-    mapply(data, list = data_set, package = "miaTime")
-    tse <- eval(parse(text = data_set))
-    
     # load microbiomeDataSets    
-  } else if (data_set %in% c("SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")) {
+  } else if (data_set %in% c("SongQAData", "GrieneisenTSData")) {
     
     tse <- eval((parse(text = paste0("microbiomeDataSets::", data_set, "()"))))
     
@@ -286,7 +281,7 @@ load_dataset <- function(data_set) {
     }
     
     # load curatedMetagenomicData
-  } else if (data_set %in% c("AsnicarF_2017", "VincentC_2016", "BackhedF_2015", "ZeeviD_2015")) {
+  } else if (data_set %in% c("AsnicarF_2017", "AsnicarF_2021", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019")) {
     
     tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
     
@@ -329,9 +324,6 @@ make_data_frame <- function(tse, len_N) {
                    Samples = NA,
                    Time = NA,
                    Command = NA)
-  
-  df$Command[df$ObjectType == "tse"] <- "mia::meltAssay"
-  df$Command[df$ObjectType == "pseq"] <- "phyloseq::psMelt"
   
   df$Dataset <- df$Dataset %>% stringr::str_replace("\\.1$", "") %>% # Ensure UNIQUE data set name
     factor() # Treat data set as a factor
