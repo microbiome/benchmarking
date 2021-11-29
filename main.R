@@ -33,3 +33,21 @@ for (testmethod in names(tests)) {
       output_file = paste0("../reports/", testmethod, ".pdf"))
 
 }
+
+# Generate reports for big data
+for (testmethod in names(tests)) {
+  
+  print(testmethod)
+  
+  # Run benchmarking tests
+  source("experiments/bigdata.R") 
+  
+  # Report benchmarking tests
+  rmarkdown::render("experiments/big_benchmark.Rmd",
+                    output_format = "md_document",
+                    output_file = paste0("../reports/big_", testmethod, ".md"))
+  rmarkdown::render("experiments/big_benchmark.Rmd",
+                    output_format = "pdf_document",
+                    output_file = paste0("../reports/big_", testmethod, ".pdf"))
+  
+}

@@ -41,31 +41,13 @@ for (rank in 1:len_exp) {
       big_df$Samples[pseq_ind] <- ncol(sub_tse)
           
       # test melting for tse
-      big_df$Time[tse_ind] <- transform_tse_exec_time(sub_tse)
+      big_df$Time[tse_ind] <- tests[[testmethod]]$tse(sub_tse)
       
       # test melting for pseq
-      big_df$Time[pseq_ind] <- transform_pseq_exec_time(sub_pseq)
+      big_df$Time[pseq_ind] <- tests[[testmethod]]$pseq(sub_pseq)
           
     }
         
   }
       
 }
-
-df <- big_df %>%
-      select(Features, Samples, Rank, ObjectType, Time)  %>% 
-      pivot_wider(names_from = c(ObjectType), values_from = Time) %>% 
-      mutate(Ratio = tse / pseq) 
-
-p <- ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) + 
-    geom_point() + 
-    geom_line() +
-    labs(title = "Relative difference in execution times",
-         x = "Samples (N)",
-         y = "Relative time (TreeSE / phyloseq)",
-         color = "Features (N)",
-         caption = "Execution time ratio by samples (TreeSE/phyloseq)") +
-    scale_x_log10() +
-    geom_hline(yintercept = 1, linetype = 2) 
-
-print(p)
