@@ -59,11 +59,11 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
           if (message) {
 	    message("Remove zero rows and columns")
           }
-	  rind <- names(which(rowMeans(assay(sub_tse, "counts")==0)<1))
-	  cind <- names(which(colMeans(assay(sub_tse, "counts")==0)<1))
+	  rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
+	  cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
           sub_tse <- sub_tse[rind, cind]
-	  rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq)==0)<1))
-	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq)==0)<1))	  
+	  rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
+	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))	  
           sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
           sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
 	  
@@ -71,12 +71,13 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
             message("--TreeSE")
           }
           # test melting for tse
-	  # save(sub_tse, file = "test.RData")
+	        # save(sub_tse, file = "tse_test.RData")
           df[[cur_set]]$Time[tse_ind] <- tse_fun(sub_tse)
           if (message) {
             message("--phyloseq")
           }
           # test melting for pseq
+          # save(sub_pseq, file = "pseq_test.RData")
           df[[cur_set]]$Time[pseq_ind] <- pseq_fun(sub_pseq)
 
           if (message) {

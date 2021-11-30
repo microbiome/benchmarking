@@ -18,7 +18,7 @@ library(reshape)                # merge_all command
 library(knitr)                  # kable
 
 # list data sets to run benchmark on
-data_sets <- c("AsnicarF_2017", "GlobalPatterns", "AsnicarF_2021")
+data_sets <- c("AsnicarF_2017", "GlobalPatterns", "GrieneisenTSData")
 # data_sets <- "SongQAData" # Just pick a single data set to keep things simple. Must have N>1000 samples.
 # data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData") # All data sets must have N>1000 samples.
 # data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019") 

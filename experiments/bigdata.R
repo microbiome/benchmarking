@@ -3,7 +3,7 @@ ind <- which.max(sapply(containers, ncol))
 bigdata <- containers[[ind]]
 
 max_sample_size <- ncol(bigdata)
-big_sample_sizes <- c(10, 100, 1000, 10000, max_sample_size)
+big_sample_sizes <- c(10, 100, 1000)
 big_df <- make_data_frame(bigdata, length(big_sample_sizes))
 
 # define index and ranks of current data set
