@@ -1,5 +1,4 @@
-Overview
---------
+## Overview
 
 This report contains benchmarking results for the transform operation
 with common microbiome data containers in R/Bioconductor for the
@@ -16,8 +15,7 @@ available. Check the links for details and original references:
 -   [GrieneisenTSData](https://microbiome.github.io/microbiomeDataSets/reference/GrieneisenTSData.html)
     Grieneisen et al. (2021) baboon data set
 
-Data characteristics
---------------------
+## Data characteristics
 
 Full sample sizes by data set:
 
@@ -30,8 +28,8 @@ Full sample sizes by data set:
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">hitchip1006</td>
-<td style="text-align: right;">1151</td>
+<td style="text-align: left;">AsnicarF_2021</td>
+<td style="text-align: right;">1098</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SongQAData</td>
@@ -50,62 +48,59 @@ Feature counts by data set:
 <thead>
 <tr class="header">
 <th style="text-align: left;">Rank</th>
+<th style="text-align: right;">AsnicarF_2021</th>
 <th style="text-align: right;">SongQAData</th>
-<th style="text-align: right;">hitchip1006</th>
 <th style="text-align: right;">GrieneisenTSData</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Phylum</td>
+<td style="text-align: right;">15</td>
 <td style="text-align: right;">39</td>
-<td style="text-align: right;">0</td>
 <td style="text-align: right;">12</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Class</td>
+<td style="text-align: right;">27</td>
 <td style="text-align: right;">92</td>
-<td style="text-align: right;">0</td>
 <td style="text-align: right;">18</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Order</td>
+<td style="text-align: right;">42</td>
 <td style="text-align: right;">167</td>
-<td style="text-align: right;">0</td>
 <td style="text-align: right;">24</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Family</td>
+<td style="text-align: right;">84</td>
 <td style="text-align: right;">271</td>
-<td style="text-align: right;">22</td>
 <td style="text-align: right;">40</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Species</td>
-<td style="text-align: right;">375</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: left;">Genus</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">583</td>
+<td style="text-align: right;">92</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Genus</td>
-<td style="text-align: right;">583</td>
-<td style="text-align: right;">130</td>
-<td style="text-align: right;">92</td>
+<td style="text-align: left;">Species</td>
+<td style="text-align: right;">639</td>
+<td style="text-align: right;">375</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
 
-Relative differences in execution time by sample size
------------------------------------------------------
+## Relative differences in execution time by sample size
 
 ![](../reports/transform_files/figure-markdown_strict/ratio-1.png)
 
-Absolute execution time by sample size
---------------------------------------
+## Absolute execution time by sample size
 
 ![](../reports/transform_files/figure-markdown_strict/abs_by_time-1.png)
 
-Execution times vs number of features
--------------------------------------
+## Execution times vs number of features
 
 ![](../reports/transform_files/figure-markdown_strict/multi_ex_time-1.png)
