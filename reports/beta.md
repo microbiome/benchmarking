@@ -28,12 +28,12 @@ Full sample sizes by data set:
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">AsnicarF_2017</td>
-<td style="text-align: right;">24</td>
+<td style="text-align: left;">AsnicarF_2021</td>
+<td style="text-align: right;">1098</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">GlobalPatterns</td>
-<td style="text-align: right;">26</td>
+<td style="text-align: left;">SongQAData</td>
+<td style="text-align: right;">1522</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">GrieneisenTSData</td>
@@ -48,46 +48,79 @@ Feature counts by data set:
 <thead>
 <tr class="header">
 <th style="text-align: left;">Rank</th>
-<th style="text-align: right;">AsnicarF_2017</th>
-<th style="text-align: right;">GlobalPatterns</th>
+<th style="text-align: right;">AsnicarF_2021</th>
+<th style="text-align: right;">SongQAData</th>
 <th style="text-align: right;">GrieneisenTSData</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Phylum</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">66</td>
+<td style="text-align: right;">15</td>
+<th style="text-align: right;">GrieneisenTSData</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Phylum</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">39</td>
 <td style="text-align: right;">12</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Class</td>
-<td style="text-align: right;">21</td>
-<td style="text-align: right;">139</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Class</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">92</td>
 <td style="text-align: right;">18</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Order</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">204</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Order</td>
+<td style="text-align: right;">42</td>
 <td style="text-align: right;">24</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Family</td>
-<td style="text-align: right;">56</td>
-<td style="text-align: right;">341</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">271</td>
 <td style="text-align: right;">40</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Genus</td>
-<td style="text-align: right;">118</td>
-<td style="text-align: right;">996</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">583</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Genus</td>
+<td style="text-align: right;">200</td>
 <td style="text-align: right;">92</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Species</td>
-<td style="text-align: right;">301</td>
-<td style="text-align: right;">944</td>
+<td style="text-align: right;">639</td>
+<td style="text-align: right;">375</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+
+## Relative differences in execution time by sample size
+
 <td style="text-align: right;">0</td>
 </tr>
 </tbody>

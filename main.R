@@ -7,9 +7,13 @@ source("experiments/data.R")
 
 # Define all tests
 tests <- list()
-tests[["melt"]] <- c(tse = melt_tse_exec_time, pseq = melt_pseq_exec_time)
+tests[["melt"]] <- c(tse = melt_tse_exec_time,
+                     pseq = melt_pseq_exec_time,
+                     speedyseq = melt_speedyseq_exec_time)
+tests[["agglomerate"]] <- c(tse = agglomerate_tse_exec_time,
+                            pseq = agglomerate_pseq_exec_time,
+                            speedyseq = agglomerate_speedyseq_exec_time)
 tests[["transform"]] <- c(tse = transform_tse_exec_time, pseq = transform_pseq_exec_time)
-tests[["agglomerate"]] <- c(tse = agglomerate_tse_exec_time, pseq = agglomerate_pseq_exec_time)
 tests[["alpha"]] <- c(tse = alpha_tse_exec_time, pseq = alpha_pseq_exec_time)
 tests[["beta"]] <- c(tse = beta_tse_exec_time, pseq = beta_pseq_exec_time)
 
