@@ -63,63 +63,27 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           if (message) {
 	          message("Remove zero rows and columns")
           }
-<<<<<<< HEAD
-	  rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
-	  cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
-||||||| 78c5b8f
-	  rind <- names(which(rowMeans(assay(sub_tse, "counts")==0)<1))
-	  cind <- names(which(colMeans(assay(sub_tse, "counts")==0)<1))
-=======
           
 	        rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
 	        cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
->>>>>>> speedyseq
           sub_tse <- sub_tse[rind, cind]
-<<<<<<< HEAD
-	  rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
-	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))	  
-||||||| 78c5b8f
-	  rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq)==0)<1))
-	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq)==0)<1))	  
-=======
           
 	        rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
 	        cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))	  
->>>>>>> speedyseq
           sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
           sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
 	  
           if (message) {
             message("--TreeSE")
           }
-<<<<<<< HEAD
-          # test melting for tse
-	        # save(sub_tse, file = "tse_test.RData")
-          df[[cur_set]]$Time[tse_ind] <- tse_fun(sub_tse)
-||||||| 78c5b8f
-          # test melting for tse
-	  # save(sub_tse, file = "test.RData")
-          df[[cur_set]]$Time[tse_ind] <- tse_fun(sub_tse)
-=======
           
           # run experiment for tse
 	        # save(sub_tse, file = "test.RData")
           df[[1]]$Time[ind] <- fun_list[[1]](sub_tse)
           
->>>>>>> speedyseq
           if (message) {
             message("--phyloseq")
           }
-<<<<<<< HEAD
-          # test melting for pseq
-          # save(sub_pseq, file = "pseq_test.RData")
-          df[[cur_set]]$Time[pseq_ind] <- pseq_fun(sub_pseq)
-
-||||||| 78c5b8f
-          # test melting for pseq
-          df[[cur_set]]$Time[pseq_ind] <- pseq_fun(sub_pseq)
-
-=======
           
           # run experiment for pseq
           df[[2]]$Time[ind] <- fun_list[[2]](sub_pseq)
@@ -135,7 +99,6 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           
           }
           
->>>>>>> speedyseq
           if (message) {
             message("OK")
           }
