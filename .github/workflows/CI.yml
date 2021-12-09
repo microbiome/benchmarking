@@ -11,8 +11,12 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@v1
         
-      - name: Install libcurl
-        run: sudo apt-get install libcurl4-openssl-dev
+      - name: Install utilities
+        run: |
+          sudo apt-get install libcurl4-openssl-dev
+          sudo apt-get install texlive-latex-base
+          sudo apt-get install texlive-fonts-recommended
+          sudo apt-get install texlive-fonts-extra
         
       - name: Setup dependencies
         uses: r-lib/actions/setup-r-dependencies@v1
