@@ -11,9 +11,13 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         
       - name: Setup dependencies
-        run: |
-          R -e 'install.packages(c("ggplot2", "dplyr", "scater", "parallel", "tidyr", "reshape", "knitr", "rmarkdown", "BiocManager"))'
-          R -e 'BiocManager::install(c("phyloseq", "mia", "curatedMetagenomicData", "microbiomeDataSets", "SingleCellExperiment", "speedyseq"))'
+        uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: rmarkdown
             
-      - name: Test
-        run: Rscript -e 'reshape::merge_all(data.frame(), data.frame())'
+      - name: Load datasets
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          R -e 'source("experiments/funcs.R")'
+          R -e 'source("experiments/data.R")'
