@@ -7,7 +7,6 @@ Imports:
     microbiomeDataSets,
     curatedMetagenomicData,
     scater,
-    parallel,
     tidyr,
     SingleCellExperiment,
     reshape,

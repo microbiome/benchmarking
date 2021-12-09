@@ -11,7 +11,6 @@ library(mia)                    # data sets and analysis
 library(microbiomeDataSets)     # data sets
 library(curatedMetagenomicData) # data sets
 library(scater)                 # beta diversity
-library(parallel)               # parallel computing
 library(tidyr)                  # pivot_wider function
 library(SingleCellExperiment)   # manipulate tse objects
 library(reshape)                # merge_all command
@@ -27,11 +26,10 @@ data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData") # All data set
 
 # define experimental setup
 set.seed(3)
-numCores <- detectCores() - 1
 
 # load tse objects and store them into
 # a list of containers
-containers <- mclapply(data_sets, load_dataset, mc.cores = numCores)
+containers <- lapply(data_sets, load_dataset)
 
 # list sample sizes for random subsetting
 sample_sizes <- c(10, 100, 1000)
