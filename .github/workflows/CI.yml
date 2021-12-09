@@ -19,10 +19,6 @@ jobs:
         with:
           extra-packages: |
             rmarkdown
-            remotes
-            
-      - name: Setup additional dependencies
-        run: R -e 'remotes::install_github("mikemc/speedyseq")'
             
       - name: Run analysis
         env:
