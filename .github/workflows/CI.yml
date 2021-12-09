@@ -17,8 +17,22 @@ jobs:
           sudo apt-get install texlive-latex-base
           sudo apt-get install texlive-fonts-recommended
           sudo apt-get install texlive-fonts-extra
+          
+      - name: Cache node modules
+        id: my_cache_step
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.cache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
         
       - name: Setup dependencies
+        if: steps.my_cache_step.outputs.cache-hit != 'true'
         uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: |
