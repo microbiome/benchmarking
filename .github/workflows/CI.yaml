@@ -1,5 +1,4 @@
 name: CI
-
 on: push
 
 jobs:
@@ -10,4 +9,6 @@ jobs:
       
       - name: Setup R
       - uses: r-lib/actions/setup-r@v1
-  
+      
+      - name: Test
+      - run: Rscript -e 'print("Hello World!")'
