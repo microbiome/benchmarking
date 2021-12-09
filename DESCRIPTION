@@ -12,4 +12,5 @@ Imports:
     SingleCellExperiment,
     reshape,
     knitr,
-    phyloseq
+    phyloseq,
+    speedyseq
