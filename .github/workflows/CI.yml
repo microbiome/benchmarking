@@ -2,34 +2,16 @@ name: CI
 on: push
 
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest 
     
     steps:
+      - uses: actions/checkout@master
     
-    - uses: actions/checkout@master
-    
-    - name: Setup R
-    - uses: r-lib/actions/setup-r@v1
-      with:
-        r-version: '3.5.3'
-    - run: Rscript -e 'print("hello")'
-        
-    - name: Setup dependencies
-    - uses: r-lib/actions/setup-r-dependencies@v1
-      with:
-      cache-version: 1
-      extra-packages: |
-        ggplot2
-        dplyr
-        mia
-        microbiomeDataSetscuratedMetagenomicData
-        scater
-        paralleltidyr
-        SingleCellExperiment
-        reshape
-        knitr
-	phyloseq
-	speedyseq
-
-        
+      - name: Setup R
+      - uses: r-lib/actions/setup-r@v1
+      
+      - name: Setup dependencies
+      - uses: r-lib/actions/setup-r-dependencies@v1
+      
+      - name: Benchmarking
