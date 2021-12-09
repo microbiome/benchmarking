@@ -12,8 +12,10 @@ jobs:
         
       - name: Setup dependencies
         uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          working-directory: '.github'
             
       - name: Test
         run: |
-          Rscript -e 'print("Hello World!")'
-          Rscript -e '"Hello dplyr!" %>% print()'
+          r -e 'library(dplyr)'
+          Rscript -e '"Hello World!" %>% print()'
