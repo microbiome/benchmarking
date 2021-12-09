@@ -16,6 +16,8 @@ library(tidyr)                  # pivot_wider function
 library(SingleCellExperiment)   # manipulate tse objects
 library(reshape)                # merge_all command
 library(knitr)                  # kable
+library(phyloseq)               # phyloseq functions
+library(speedyseq)              # speedyseq functions
 
 # list data sets to run benchmark on
 # data_sets <- c("AsnicarF_2017", "GlobalPatterns", "AsnicarF_2021")
