@@ -1,0 +1,14 @@
+Imports:
+    ggplot2,
+    dplyr,
+    mia,
+    microbiomeDataSets,
+    curatedMetagenomicData,
+    scater,
+    parallel,
+    tidyr,
+    SingleCellExperiment,
+    reshape,
+    knitr,
+    phyloseq,
+    speedyseq
