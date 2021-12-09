@@ -12,7 +12,7 @@ jobs:
         
       - name: Setup dependencies
         run: |
-          R -e 'install.packages(c("ggplot2", "dplyr", "scater", "parallel", "tidyr", "reshape", "knitr", "BiocManager")'
+          R -e 'install.packages(c("ggplot2", "dplyr", "scater", "parallel", "tidyr", "reshape", "knitr", "BiocManager"))'
           R -e 'BiocManager::install("phyloseq")'
             
       - name: Test
