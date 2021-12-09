@@ -12,6 +12,23 @@ jobs:
         
       - name: Setup dependencies
         uses: r-lib/actions/setup-r-dependencies@v1
-      
+        with:
+          extra-packages:
+            ggplot2
+            dplyr
+            mia
+            microbiomeDataSets
+            curatedMetagenomicData
+            scater
+            parallel
+            tidyr
+            SingleCellExperiment
+            reshape
+            knitr
+            phyloseq
+            speedyseq
+            
       - name: Test
-        run: Rscript -e 'print("Hello World!")'
+        run: |
+          Rscript -e 'print("Hello World!")'
+          Rscript -e '"Hello dplyr!" %>% print()'
