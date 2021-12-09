@@ -13,6 +13,7 @@ jobs:
       - name: Setup dependencies
         uses: r-lib/actions/setup-r-dependencies@v1
         with:
+          cache-version: 2
           extra-packages:
             ggplot2
             dplyr
