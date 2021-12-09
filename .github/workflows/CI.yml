@@ -11,9 +11,9 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         
       - name: Setup dependencies
-        run: R -e 'install.packages("dplyr")'
+        run: R -e 'install.packages(c("ggplot2", "dplyr", "scater", "parallel", "tidyr", "reshape", "knitr")'
             
       - name: Test
         run: |
-          R -e 'library(dplyr)'
-          Rscript -e '"Hello World!" %>% print()'
+          R -e 'library(reshape)'
+          Rscript -e 'merge_all(data.frame(), data.frame())'
