@@ -12,10 +12,8 @@ jobs:
         
       - name: Setup dependencies
         run: |
-          R -e 'install.packages(c("ggplot2", "dplyr", "scater", "parallel", "tidyr", "reshape", "knitr", "BiocManager"))'
-          R -e 'BiocManager::install("phyloseq")'
+          R -e 'install.packages(c("ggplot2", "dplyr", "scater", "parallel", "tidyr", "reshape", "knitr", "rmarkdown", "BiocManager"))'
+          R -e 'BiocManager::install(c("phyloseq", "mia", "curatedMetagenomicData", "microbiomeDataSets", "SingleCellExperiment", "speedyseq"))'
             
       - name: Test
-        run: |
-          R -e 'library(reshape)'
-          Rscript -e 'merge_all(data.frame(), data.frame())'
+        run: Rscript -e 'reshape::merge_all(data.frame(), data.frame())'
