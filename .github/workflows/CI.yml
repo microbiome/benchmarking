@@ -10,8 +10,4 @@ jobs:
     
       - name: Setup R
       - uses: r-lib/actions/setup-r@v1
-      
-      - name: Setup dependencies
-      - uses: r-lib/actions/setup-r-dependencies@v1
-      
-      - name: Benchmarking
+      - run: Rscript -e 'print("hello")'
