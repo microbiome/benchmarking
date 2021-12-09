@@ -32,9 +32,9 @@ for (testmethod in names(tests)) {
   rmarkdown::render("experiments/benchmark.Rmd",
       output_format = "md_document",
       output_file = paste0("../reports/", testmethod, ".md"))
-  rmarkdown::render("experiments/benchmark.Rmd",
-      output_format = "pdf_document",
-      output_file = paste0("../reports/", testmethod, ".pdf"))
+#  rmarkdown::render("experiments/benchmark.Rmd",
+#      output_format = "pdf_document",
+#      output_file = paste0("../reports/", testmethod, ".pdf"))
 
 }
 
@@ -50,8 +50,8 @@ for (testmethod in names(tests)) {
   rmarkdown::render("experiments/big_benchmark.Rmd",
                     output_format = "md_document",
                     output_file = paste0("../reports/big_", testmethod, ".md"))
-  rmarkdown::render("experiments/big_benchmark.Rmd",
-                    output_format = "pdf_document",
-                    output_file = paste0("../reports/big_", testmethod, ".pdf"))
+#  rmarkdown::render("experiments/big_benchmark.Rmd",
+#                    output_format = "pdf_document",
+#                    output_file = paste0("../reports/big_", testmethod, ".pdf"))
   
 }
