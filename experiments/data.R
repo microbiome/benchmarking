@@ -35,4 +35,3 @@ containers <- lapply(data_sets, load_dataset)
 
 # list sample sizes for random subsetting
 sample_sizes <- c(10, 100, 1000)
-len_N <- length(sample_sizes)
