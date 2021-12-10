@@ -18,7 +18,7 @@ jobs:
           path: |
             ~/cache
             !~/cache/exclude
-          key: ${{ runner.os }}-mycache-v1-${{ hashFiles(...) }}
+          key: ${{ runner.os }}-mycache-v1-${{ hashFiles('**/lockfiles') }}
         
       - name: Install utilities
         if: steps.my_cache_step.outputs.cache-hit != 'true'
