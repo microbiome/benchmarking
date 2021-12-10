@@ -8,10 +8,10 @@ jobs:
       - name: Check out
         uses: actions/checkout@v2
       
-      - name: Setup R
+      - name: Set up R
         uses: r-lib/actions/setup-r@v1
         
-      - name: Cache multiple paths
+      - name: Cache node modules
         id: my_cache_step
         uses: actions/cache@v2
         with:
@@ -28,17 +28,17 @@ jobs:
           sudo apt-get install texlive-fonts-recommended
           sudo apt-get install texlive-fonts-extra
         
-      - name: Setup dependencies
+      - name: Set up dependencies
         if: steps.my_cache_step.outputs.cache-hit != 'true'
         uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: |
             rmarkdown
             
-      #- name: Run analysis
-        #env:
-        #  repo_token: ${{ secrets.GITHUB_TOKEN }}
-        #run: R -e 'source("main.R")'
+      - name: Run analysis
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: R -e 'source("main.R")'
         
       - name: Commit results
         run: |
