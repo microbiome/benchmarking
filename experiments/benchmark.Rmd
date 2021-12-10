@@ -40,7 +40,7 @@ available. Check the links for details and original references:
 
 Full sample sizes by data set:
 
-```{r samples, echo = FALSE, fig.width = 10, fig.height = 4*length(containers)}
+```{r samples, echo = FALSE, fig.width = 10, fig.height = 4 * length(containers)}
 samples <- data.frame(Dataset=sapply(containers, mainExpName), N=sapply(containers, ncol)) %>% arrange(N)
 kable(samples)
 ```
@@ -60,7 +60,7 @@ kable(feat)
 
 ## Relative differences in execution time by sample size
 
-```{r ratio, echo = FALSE, fig.height = 5, fig.width = 4*length(containers)}
+```{r ratio1, echo = FALSE, fig.height = 5, fig.width = 4 * length(containers)}
 df <- df_benchmark %>% select(Dataset, Time, Features, Samples, Rank, ObjectType) %>% 
       pivot_wider(names_from = c(ObjectType), values_from = Time) %>% 
       mutate(Ratio = tse / pseq) 
@@ -80,26 +80,47 @@ p <- ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) +
 print(p)
 ```
 
+```{r ratio2, echo = FALSE, fig.height = 5, fig.width = 4 * length(containers)}
+if (length(tests[[testmethod]]) == 3) {
+  
+  df <- df %>% mutate(SpeedyRatio = tse / speedyseq)
+  
+  p <- ggplot(df, aes(x = Samples, y = SpeedyRatio, group = Rank, color = Features)) + 
+    geom_point() + 
+    geom_line() +
+    labs(title = "Relative difference in execution times",
+         x = "Samples (N)",
+         y = "Relative time (TreeSE / speedyseq)",
+         color = "Features (N)",
+         caption = paste("Execution time ratio by samples (TreeSE/speedyseq): ", testmethod)) +
+    scale_x_log10() +
+    facet_grid(. ~ Dataset) + 
+    geom_hline(yintercept = 1, linetype = 2) 
+
+  print(p)
+
+}
+```
 
 
 ## Absolute execution time by sample size
 
-```{r abs_by_time, echo = FALSE, fig.height = 13, fig.width = 3*length(containers)}
+```{r abs_by_time, echo = FALSE, fig.height = 13, fig.width = 3 * length(containers)}
 df <- df_benchmark %>% select(Dataset, Time, Features, Samples, Rank, ObjectType)
 df <- df %>% filter(Dataset %in% names(which(table(df$Dataset) >= 10))) %>%
              mutate(Rank = factor(Rank, levels=as.character(feat$Rank)))
-cols <- c(tse="black",pseq="darkgray") # Ensure colors always in same order
+cols <- c(tse = "black", pseq = "darkgray", speedyseq = "lightgray") # Ensure colors always in same order
 
 p <- ggplot(df, aes(x = Samples, y = Time * 1000, color = ObjectType)) + 
     geom_point() + 
     geom_line() +
-    theme(axis.text.x=element_text(angle=90)) + 
+    theme(axis.text.x = element_text(angle = 90)) + 
     labs(title = "Absolute times",
          x = "Samples (N)",
          y = "Time (ms)",
          color = "Container",
          caption = paste("Execution time by sample size:", testmethod)) +
-	 scale_color_manual(values=cols[unique(df$ObjectType)]) + 
+	 scale_color_manual(values = cols[unique(df$ObjectType)]) + 
     facet_grid(Rank ~ Dataset, scales = "free_y") 
 
 print(p)
@@ -108,7 +129,7 @@ print(p)
 
 ## Execution times vs number of features
 
-```{r multi_ex_time, echo = FALSE, fig.height=13, fig.width = 3*length(containers)}
+```{r multi_ex_time, echo = FALSE, fig.height = 13, fig.width = 3 * length(containers)}
 df <- df_benchmark 
 
 p <- ggplot(df, aes(x = Features, y = Time * 1000, color = ObjectType)) + 
@@ -120,11 +141,8 @@ p <- ggplot(df, aes(x = Features, y = Time * 1000, color = ObjectType)) +
          color = "Method:",
          caption = paste("Execution time by feature count:", testmethod)) +
     scale_x_log10() + # Log is often useful with sample size
-    scale_color_manual(values=cols[unique(df$ObjectType)]) +     
+    scale_color_manual(values = cols[unique(df$ObjectType)]) +     
     facet_grid(Samples ~ Dataset, scales = "free_y")
 
 print(p)
 ```
-
-
-

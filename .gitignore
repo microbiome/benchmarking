@@ -8,3 +8,6 @@ reports/.RData
 reports/*.pdf
 *.tex
 *.log
+experiments/.benchmark.Rmd.swp
+.RData
+.Rproj.user
