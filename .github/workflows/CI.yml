@@ -11,25 +11,22 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@v1
         
+      - name: Cache multiple paths
+        id: my_cache_step
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/cache
+            !~/cache/exclude
+          key: ${{ runner.os }}-mycache-v1-${{ hashFiles(...) }}
+        
       - name: Install utilities
+        if: steps.my_cache_step.outputs.cache-hit != 'true'
         run: |
           sudo apt-get install libcurl4-openssl-dev
           sudo apt-get install texlive-latex-base
           sudo apt-get install texlive-fonts-recommended
           sudo apt-get install texlive-fonts-extra
-          
-      - name: Cache node modules
-        id: my_cache_step
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
         
       - name: Setup dependencies
         if: steps.my_cache_step.outputs.cache-hit != 'true'
@@ -38,10 +35,10 @@ jobs:
           extra-packages: |
             rmarkdown
             
-      - name: Run analysis
-        env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-        run: R -e 'source("main.R")'
+      #- name: Run analysis
+        #env:
+        #  repo_token: ${{ secrets.GITHUB_TOKEN }}
+        #run: R -e 'source("main.R")'
         
       - name: Commit results
         run: |
