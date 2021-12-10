@@ -12,4 +12,5 @@ Imports:
     reshape,
     knitr,
     phyloseq,
-    stringr
+    stringr,
+    microbiome
