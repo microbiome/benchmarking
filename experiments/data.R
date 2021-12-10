@@ -17,6 +17,7 @@ library(reshape)                # merge_all command
 library(knitr)                  # kable
 library(phyloseq)               # phyloseq functions
 # library(speedyseq)              # speedyseq functions
+library(stringr)                # str_to_title function
 
 # list data sets to run benchmark on
 # data_sets <- c("AsnicarF_2017", "GlobalPatterns", "AsnicarF_2021")

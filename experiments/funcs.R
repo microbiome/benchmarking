@@ -345,6 +345,10 @@ load_dataset <- function(data_set) {
     
   }
   
+  # convert first letter of taxonomic ranks to upper case
+  colnames(rowData(tse)) <- str_to_title(colnames(rowData(tse)))
+  
+  # generate alternative experiments by taxonomic rank
   altExps(tse) <- splitByRanks(tse)
   
   # select elements of altExps(tse) with at least min_features 
