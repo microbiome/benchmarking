@@ -56,37 +56,37 @@ Feature counts by data set:
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Phylum</td>
-<td style="text-align: right;">15</td>
+<td style="text-align: right;">16</td>
 <td style="text-align: right;">39</td>
 <td style="text-align: right;">12</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Class</td>
-<td style="text-align: right;">27</td>
+<td style="text-align: right;">23</td>
 <td style="text-align: right;">92</td>
 <td style="text-align: right;">18</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Order</td>
-<td style="text-align: right;">42</td>
+<td style="text-align: right;">40</td>
 <td style="text-align: right;">167</td>
 <td style="text-align: right;">24</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Family</td>
-<td style="text-align: right;">84</td>
+<td style="text-align: right;">74</td>
 <td style="text-align: right;">271</td>
 <td style="text-align: right;">40</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Genus</td>
-<td style="text-align: right;">200</td>
+<td style="text-align: right;">205</td>
 <td style="text-align: right;">583</td>
 <td style="text-align: right;">92</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Species</td>
-<td style="text-align: right;">639</td>
+<td style="text-align: right;">633</td>
 <td style="text-align: right;">375</td>
 <td style="text-align: right;">0</td>
 </tr>
@@ -95,7 +95,7 @@ Feature counts by data set:
 
 ## Relative differences in execution time by sample size
 
-![](../reports/melt_files/figure-markdown_strict/ratio-1.png)
+![](../reports/melt_files/figure-markdown_strict/ratio1-1.png)
 
 ## Absolute execution time by sample size
 
