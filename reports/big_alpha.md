@@ -1,1 +1,1 @@
-![](figs/big_alpha_abs_by_time.png)
+![](figs/big_whichmethod_abs_by_time.png)
