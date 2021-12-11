@@ -1,1 +1,1 @@
-![](figs/big_transform_abs_by_time.png)
+![](figs/big_transform_ratio.png)

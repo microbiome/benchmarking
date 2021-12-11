@@ -1,1 +1,1 @@
-![](figs/big_melt_abs_by_time.png)
+![](figs/big_melt_ratio.png)
