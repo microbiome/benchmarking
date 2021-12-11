@@ -45,6 +45,41 @@ jobs:
       #    sed -i '' 's/whichmethod/transform/g' reports/{transform,big_transform}.md
       #    sed -i '' 's/whichmethod/alpha/g' reports/{alpha,big_alpha}.md
       #    sed -i '' 's/whichmethod/beta/g' reports/beta.md
+      
+      - name: Find and Replace 1
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "whichmethod"
+          replace: "melt"
+          include: "reports/{melt,big_melt}.md"
+      
+      - name: Find and Replace 2
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "whichmethod"
+          replace: "agglomerate"
+          include: "reports/{agglomerate,big_agglomerate}.md"
+      
+      - name: Find and Replace 3
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "whichmethod"
+          replace: "transform"
+          include: "reports/{transform,big_transform}.md"
+      
+      - name: Find and Replace 4
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "whichmethod"
+          replace: "alpha"
+          include: "reports/{alpha,big_alpha}.md"
+      
+      - name: Find and Replace 5
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "whichmethod"
+          replace: "beta"
+          include: "reports/beta.md"
         
       - name: Commit results
         run: |
