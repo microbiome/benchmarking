@@ -1,9 +1,9 @@
 # Load utils functions
-source("experiments/funcs.R")
+source("funcs.R")
 
 # load data sets and store them into the list "containers"
 # prepare a list of data frames "df" for the data on execution times
-source("experiments/data.R")
+source("data.R")
 
 # Define all tests
 tests <- list()
@@ -26,24 +26,24 @@ for (testmethod in names(tests)) {
   print(testmethod)
   
   # Run benchmarking tests
-  source("experiments/benchmark_run.R") 
+  source("benchmark_run.R") 
   
   # Report benchmarking tests
-  rmarkdown::render("experiments/benchmark.Rmd",
+  rmarkdown::render("benchmark.Rmd",
       output_format = "md_document",
-      output_file = paste0("../reports/", testmethod, ".md"))
+      output_file = paste0(testmethod, ".md"))
   
   if (testmethod != "beta") {
     
     print(paste("big", testmethod))
     
     # Run benchmarking tests
-    source("experiments/bigdata.R") 
+    source("bigdata.R") 
     
     # Report benchmarking tests
-    rmarkdown::render("experiments/big_benchmark.Rmd",
+    rmarkdown::render("big_benchmark.Rmd",
                       output_format = "md_document",
-                      output_file = paste0("../reports/big_", testmethod, ".md"))
+                      output_file = paste0("big_", testmethod, ".md"))
     
   }
 
