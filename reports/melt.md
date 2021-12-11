@@ -76,16 +76,16 @@ Feature counts by data set:
 Relative differences in execution time by sample size
 -----------------------------------------------------
 
-![](figs/whichmethod_first_ratio.png)
+![](figs/melt_first_ratio.png)
 
-![](figs/whichmethod_second_ratio.png)
+![](figs/melt_second_ratio.png)
 
 Absolute execution time by sample size
 --------------------------------------
 
-![](figs/whichmethod_abs_by_time.png)
+![](figs/melt_abs_by_time.png)
 
 Execution times vs number of features
 -------------------------------------
 
-![](figs/whichmethod_multi_ex_time.png)
+![](figs/melt_multi_ex_time.png)
