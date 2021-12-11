@@ -24,9 +24,6 @@ jobs:
         # if: steps.my_cache_step.outputs.cache-hit != 'true'
         run: |
           sudo apt-get install libcurl4-openssl-dev
-          sudo apt-get install texlive-latex-base
-          sudo apt-get install texlive-fonts-recommended
-          sudo apt-get install texlive-fonts-extra
         
       - name: Set up dependencies
         # if: steps.my_cache_step.outputs.cache-hit != 'true'
