@@ -22,8 +22,8 @@ library(microbiome)             # transform functions
 
 # list data sets to run benchmark on
 # data_sets <- c("AsnicarF_2017", "GlobalPatterns", "AsnicarF_2021")
-# data_sets <- "SongQAData" # Just pick a single data set to keep things simple. Must have N>1000 samples.
-data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData") # All data sets must have N>1000 samples.
+data_sets <- "SongQAData" # Just pick a single data set to keep things simple. Must have N>1000 samples.
+# data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData") # All data sets must have N>1000 samples.
 # data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019") 
 
 # define experimental setup
@@ -34,4 +34,5 @@ set.seed(3)
 containers <- lapply(data_sets, load_dataset)
 
 # list sample sizes for random subsetting
-sample_sizes <- c(10, 20, 50, 100, 200, 500, 1000, min(sapply(containers, ncol)))
+# sample_sizes <- c(10, 20, 50, 100, 200, 500, 1000, min(sapply(containers, ncol)))
+sample_sizes <- c(10, 100)
