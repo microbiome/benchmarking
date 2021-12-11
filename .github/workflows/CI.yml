@@ -77,5 +77,6 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
+          git fetch; git pull; git add reports
           git commit reports -m 'Rebuild reports' || echo "No changes to commit"
           git push origin dev || echo "No changes to commit"
