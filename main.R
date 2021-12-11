@@ -23,7 +23,7 @@ tests[["beta"]] <- c(tse = beta_tse_exec_time, pseq = beta_pseq_exec_time)
 # Generate reports
 for (testmethod in names(tests)) {
   
-  print(testmethod)
+  print(paste("big", testmethod))
   
   # Run benchmarking tests
   source("experiments/benchmark_run.R") 
@@ -32,16 +32,6 @@ for (testmethod in names(tests)) {
   rmarkdown::render("experiments/benchmark.Rmd",
       output_format = "md_document",
       output_file = paste0("../reports/", testmethod, ".md"))
-  rmarkdown::render("experiments/benchmark.Rmd",
-      output_format = "pdf_document",
-      output_file = paste0("../reports/", testmethod, ".pdf"))
-
-}
-
-# Generate reports for big data
-for (testmethod in names(tests)) {
-  
-  print(testmethod)
   
   # Run benchmarking tests
   source("experiments/bigdata.R") 
@@ -50,8 +40,5 @@ for (testmethod in names(tests)) {
   rmarkdown::render("experiments/big_benchmark.Rmd",
                     output_format = "md_document",
                     output_file = paste0("../reports/big_", testmethod, ".md"))
-  rmarkdown::render("experiments/big_benchmark.Rmd",
-                    output_format = "pdf_document",
-                    output_file = paste0("../reports/big_", testmethod, ".pdf"))
-  
+
 }
