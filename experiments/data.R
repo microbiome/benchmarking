@@ -27,7 +27,7 @@ data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData") # All data set
 # data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019") 
 
 # define experimental setup
-set.seed(5)
+set.seed(3)
 
 # load tse objects and store them into
 # a list of containers
