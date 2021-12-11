@@ -37,14 +37,6 @@ jobs:
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: R -e 'source("main.R")'
-        
-      #- name: Finalise reports
-      #  run: |
-      #    sed -i '' 's/whichmethod/melt/g' reports/{melt,big_melt}.md
-      #    sed -i '' 's/whichmethod/agglomerate/g' reports/{agglomerate,big_agglomerate}.md
-      #    sed -i '' 's/whichmethod/transform/g' reports/{transform,big_transform}.md
-      #    sed -i '' 's/whichmethod/alpha/g' reports/{alpha,big_alpha}.md
-      #    sed -i '' 's/whichmethod/beta/g' reports/beta.md
       
       - name: Find and Replace 1
         uses: jacobtomlinson/gha-find-replace@v2
