@@ -31,7 +31,7 @@ for (testmethod in names(tests)) {
   # Report benchmarking tests
   rmarkdown::render("experiments/benchmark.Rmd",
       output_format = "md_document",
-      output_file = paste0(testmethod, ".md"))
+      output_file = paste0("../reports/", testmethod, ".md"))
   
   if (testmethod != "beta") {
     
@@ -43,7 +43,7 @@ for (testmethod in names(tests)) {
     # Report benchmarking tests
     rmarkdown::render("experiments/big_benchmark.Rmd",
                       output_format = "md_document",
-                      output_file = paste0("big_", testmethod, ".md"))
+                      output_file = paste0("../reports/big_", testmethod, ".md"))
     
   }
 
