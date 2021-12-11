@@ -62,7 +62,7 @@ p <- ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) +
 ggsave(paste0("../reports/figs/", testmethod, "_first_ratio.png"), height = 5, width = 4 * length(containers))
 ```
 
-![](figs/"testmethod"_first_ratio.png)
+![](figs/whichmethod_first_ratio.png)
 
 ```{r second_ratio, echo = FALSE}
 if (length(tests[[testmethod]]) == 3) {
@@ -86,7 +86,7 @@ if (length(tests[[testmethod]]) == 3) {
 }
 ```
 
-![](figs/"testmethod"_second_ratio.png)
+![](figs/whichmethod_second_ratio.png)
 
 ## Absolute execution time by sample size
 
@@ -111,7 +111,7 @@ p <- ggplot(df, aes(x = Samples, y = Time * 1000, color = ObjectType)) +
 ggsave(paste0("../reports/figs/", testmethod, "_abs_by_time.png"), height = 13, width = 3 * length(containers))
 ```
 
-![](figs/"testmethod"_abs_by_time.png)
+![](figs/whichmethod_abs_by_time.png)
 
 ## Execution times vs number of features
 
@@ -133,4 +133,4 @@ p <- ggplot(df, aes(x = Features, y = Time * 1000, color = ObjectType)) +
 ggsave(paste0("../reports/figs/", testmethod, "_multi_ex_time.png"), height = 13, width = 3 * length(containers))
 ```
 
-![](figs/"testmethod"_multi_ex_time.png)
+![](figs/whichmethod_multi_ex_time.png)

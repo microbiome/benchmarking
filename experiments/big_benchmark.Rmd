@@ -27,4 +27,4 @@ p <- ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) +
 ggsave(paste0("../reports/figs/big_", testmethod, "_ratio.png"))
 ```
 
-![](figs/big_"testmethod"_abs_by_time.png)
+![](figs/big_whichmethod_abs_by_time.png)
