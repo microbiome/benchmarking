@@ -6,8 +6,9 @@ date: "`r Sys.Date()`"
 ---
 
 ```{r, echo = FALSE}
-df <- big_df %>% 
-  select(Features, Samples, Rank, ObjectType, Time)  %>% 
+df <- big_df %>%
+  rbind(df_benchmark %>% filter(Dataset == "GrieneisenTSData", Samples %in% c(10, 1000))) %>%
+  select(Features, Samples, Rank, ObjectType, Time) %>% 
   pivot_wider(names_from = c(ObjectType), values_from = Time) %>% 
   mutate(Ratio = tse / pseq)
 ```
