@@ -24,6 +24,7 @@ p <- ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) +
     scale_x_log10() +
     geom_hline(yintercept = 1, linetype = 2) 
 
-print(p)
+ggsave(paste0("../reports/figs/big_", testmethod, "_ratio.png"))
 ```
 
+![](figs/big_"testmethod"_abs_by_time.png)
