@@ -40,7 +40,7 @@ jobs:
         
       - name: Commit results
         run: |
-          mv experiments/*{md,files,figure} reports/
+          mv experiments/*{.md,files,figure} reports/
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git commit reports -m 'Re-build reports' || echo "No changes to commit"
