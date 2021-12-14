@@ -27,8 +27,6 @@ Execution time has been benchmarked for the following operations; see the
 links for reports:
 
 * [Melting](reports/melt.md)
-
-The following will be added soon:
 * [CLR transformation](reports/transform.md) 
 * [Agglomeration to Phylum level](reports/agglomerate.md)
 * [Alpha diversity estimation (Shannon)](reports/alpha.md)
