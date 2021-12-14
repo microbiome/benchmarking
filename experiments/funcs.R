@@ -180,15 +180,15 @@ melt_pseq_exec_time <- function(pseq) {
 }
 
 ### FUNCTION TO TEST MELTING FOR SPEEDYSEQ OBJECT ###
-#melt_speedyseq_exec_time <- function(speedyseq) {
+melt_speedyseq_exec_time <- function(speedyseq) {
   
-#  start.time2 <- Sys.time()
-#  molten_speedyseq <- speedyseq::psmelt(speedyseq)
-#  end.time2 <- Sys.time()
+  start.time2 <- Sys.time()
+  molten_speedyseq <- speedyseq::psmelt(speedyseq)
+  end.time2 <- Sys.time()
   
-#  return(end.time2 - start.time2)
+  return(end.time2 - start.time2)
   
-#}
+}
 
 ### FUNCTION TO TEST TRANSFORMING FOR TSE OBJECT ###
 transform_tse_exec_time <- function(tse) {
@@ -243,17 +243,17 @@ agglomerate_pseq_exec_time <- function(pseq) {
 }
 
 ### FUNCTION TO TEST AGGLOMERATING FOR SPEEDYSEQ OBJECT ###
-#agglomerate_speedyseq_exec_time <- function(speedyseq) {
+agglomerate_speedyseq_exec_time <- function(speedyseq) {
   
-#  start.time2 <- Sys.time()
-#  speedyseq_phylum <- speedyseq::tax_glom(speedyseq,
-#                                    taxrank = "Phylum")
+  start.time2 <- Sys.time()
+  speedyseq_phylum <- speedyseq::tax_glom(speedyseq,
+                                    taxrank = "Phylum")
   # na.rm = TRUE by default in tax_glom
-#  end.time2 <- Sys.time()
+  end.time2 <- Sys.time()
   
-#  return(end.time2 - start.time2)
+  return(end.time2 - start.time2)
   
-#}
+}
 
 ### FUNCTION TO TEST ALPHA ESTIMATION FOR TSE OBJECT ###
 alpha_tse_exec_time <- function(tse) {

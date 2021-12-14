@@ -16,7 +16,7 @@ library(SingleCellExperiment)   # manipulate tse objects
 library(reshape)                # merge_all command
 library(knitr)                  # kable
 library(phyloseq)               # phyloseq functions
-# library(speedyseq)              # speedyseq functions
+library(speedyseq)              # speedyseq functions
 library(stringr)                # str_to_title function
 library(microbiome)             # transform functions
 
