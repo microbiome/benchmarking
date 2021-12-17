@@ -1,8 +1,8 @@
 Overview
 --------
 
-This report contains benchmarking results for the melt operation with
-common microbiome data containers in R/Bioconductor for the melt
+This report contains benchmarking results for the alpha operation with
+common microbiome data containers in R/Bioconductor for the alpha
 operation.
 
 The tests utilize the following publicly available data sets. We thank
@@ -140,16 +140,16 @@ Feature counts by data set:
 Relative differences in execution time by sample size
 -----------------------------------------------------
 
-![](figs/melt_first_ratio.png)
+![](figs/alpha_first_ratio.png)
 
-![](figs/melt_second_ratio.png)
+![](figs/alpha_second_ratio.png)
 
 Absolute execution time by sample size
 --------------------------------------
 
-![](figs/melt_abs_by_time.png)
+![](figs/alpha_abs_by_time.png)
 
 Execution times vs number of features
 -------------------------------------
 
-![](figs/melt_multi_ex_time.png)
+![](figs/alpha_multi_ex_time.png)
