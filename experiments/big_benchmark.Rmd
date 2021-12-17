@@ -5,6 +5,10 @@ author: "Giulio Benedetti and Leo Lahti"
 date: "`r Sys.Date()`"
 ---
 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(fig.path = paste0("../reports/figs/big_", testmethod, "_"))
+```
+
 ## Overview
 
 This report contains the benchmarking results of the largest analysed data set (`r mainExpName(bigdata[[1]])`) for the `r testmethod` operation.
@@ -20,7 +24,7 @@ kable(overview)
 
 Feature counts by data set:
 
-```{r chars, echo = FALSE, fig.width = 10, fig.height = 4*length(containers)}
+```{r chars, echo = FALSE, fig.width = 10, fig.height = 4 * length(containers)}
 big_feat <- big_df %>% select(Dataset, Rank, Features) %>%
      	            group_by(Dataset, Rank) %>%
                     summarize(Features = max(Features)) %>% # Variation due to removing zero rows & cols per round
@@ -40,8 +44,8 @@ df <- big_df %>%
   mutate(Ratio = tse / pseq)
 ```
 
-```{r, echo = FALSE}
-p <- ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) + 
+```{r first_ratio, echo = FALSE}
+ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) + 
     geom_point() + 
     geom_line() +
     labs(title = "Relative difference in execution times",
@@ -51,18 +55,14 @@ p <- ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) +
          caption = paste("Execution time ratio by samples (TreeSE/phyloseq): ", testmethod)) +
     scale_x_log10() +
     geom_hline(yintercept = 1, linetype = 2) 
-
-ggsave(paste0("../reports/figs/big_", testmethod, "_first_ratio.png"))
 ```
-
-![](figs/big_whichmethod_first_ratio.png)
 
 ```{r second_ratio, echo = FALSE}
 if (length(tests[[testmethod]]) == 3) {
   
   df <- df %>% mutate(SpeedyRatio = tse / speedyseq)
   
-  p <- ggplot(df, aes(x = Samples, y = SpeedyRatio, group = Rank, color = Features)) + 
+  ggplot(df, aes(x = Samples, y = SpeedyRatio, group = Rank, color = Features)) + 
     geom_point() + 
     geom_line() +
     labs(title = "Relative difference in execution times",
@@ -72,10 +72,5 @@ if (length(tests[[testmethod]]) == 3) {
          caption = paste("Execution time ratio by samples (TreeSE/speedyseq): ", testmethod)) +
     scale_x_log10() + 
     geom_hline(yintercept = 1, linetype = 2) 
-
-  ggsave(paste0("../reports/figs/big_", testmethod, "_second_ratio.png"))
-
 }
 ```
-
-![](figs/big_whichmethod_second_ratio.png)
