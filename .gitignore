@@ -4,3 +4,10 @@
 reports/.DS_Store
 experiments/.Rhistory
 .Rhistory
+reports/.RData
+reports/*.pdf
+*.tex
+*.log
+experiments/.benchmark.Rmd.swp
+.RData
+.Rproj.user

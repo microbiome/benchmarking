@@ -1,15 +1,27 @@
 ### FUNCTION TO RUN BENCHMARK ON EXPERIMENTS ###
-experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes) {
+experiment_benchmark <- function(containers, fun_list, sample_sizes, message = TRUE) {
   
-  for (tse in containers) {
+  datasetlist <- list()
+  
+  for (tseind in seq_along(containers)) {
+
+    tse <- containers[[tseind]]
     
-    # define index and ranks of current data set
-    cur_set <- which(lapply(containers, mainExpName) == mainExpName(tse))
-    len_exp <- length(altExps(tse))
-    len_N <- length(sample_sizes)
+    # make a data frame to store execution times
+    if (length(fun_list) == 2) {
+    
+      df <- make_data_frame(tse, sample_sizes)
+    
+    } else if (length(fun_list) == 3) {
+      
+      df <- make_data_frame3(tse, sample_sizes)
+      
+    }
+    
+    ind <- 1
     
     # repeat experiment for each taxonomic rank
-    for (rank in 1:len_exp) {
+    for (rank in 1:length(altExps(tse))) {
       
       # extract tse from list of containers
       alt_tse <- altExps(tse)[[rank]]
@@ -19,38 +31,96 @@ experiment_benchmark <- function(containers, df, tse_fun, pseq_fun, sample_sizes
         
         # select data sets at least as large as sample_size
         if (ncol(alt_tse) >= N) {
+
+          if (message) {
+            message(paste(tseind, rank, N, sep = "/"))
+          }
+
+          if (message) {
+            message("random subsetting")
+          }
           
-          # define index of current sample size
-          cur_N <- which(N == sample_sizes)
-          
-          # define df index to store results
-          tse_ind <- cur_N + 2 * len_N * (rank - 1)
-          pseq_ind <- cur_N + len_N + 2 * len_N * (rank - 1)
-          
-          # random subsetting
           subset_names <- sample(colnames(alt_tse), N)
           sub_tse <- alt_tse[ , colnames(alt_tse) %in% subset_names]
           sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
-          df[[cur_set]]$Features[tse_ind] <- nrow(sub_tse)
-          df[[cur_set]]$Features[pseq_ind] <- nrow(sub_tse)
-          df[[cur_set]]$Samples[tse_ind] <- ncol(sub_tse)
-          df[[cur_set]]$Samples[pseq_ind] <- ncol(sub_tse)
+
+          if (message) {
+            message("Store feature and sample counts before filtering out zero rows and cols")
+          }
+	  
+          df[[1]]$Features[ind] <- nrow(sub_tse)
+          df[[2]]$Features[ind] <- nrow(phyloseq::otu_table(sub_pseq))
+          df[[1]]$Samples[ind] <- ncol(sub_tse)
+          df[[2]]$Samples[ind] <- ncol(phyloseq::otu_table(sub_pseq))
           
-          # test melting for tse
-          df[[cur_set]]$Time[tse_ind] <- tse_fun(sub_tse)
+          if (length(fun_list) == 3) {
+            
+            df[[3]]$Features[ind] <- nrow(phyloseq::otu_table(sub_pseq))
+            df[[3]]$Samples[ind] <- ncol(phyloseq::otu_table(sub_pseq))
+            
+          }
+
+          if (message) {
+	          message("Remove zero rows and columns")
+          }
           
-          # test melting for pseq
-          df[[cur_set]]$Time[pseq_ind] <- pseq_fun(sub_pseq)
+	        rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
+	        cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
+          sub_tse <- sub_tse[rind, cind]
+          
+	        rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
+	        cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))	  
+          sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
+          sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
+	  
+          if (message) {
+            message("--TreeSE")
+          }
+          
+          # run experiment for tse
+	        # save(sub_tse, file = "test.RData")
+          df[[1]]$Time[ind] <- fun_list[[1]](sub_tse)
+          
+          if (message) {
+            message("--phyloseq")
+          }
+          
+          # run experiment for pseq
+          df[[2]]$Time[ind] <- fun_list[[2]](sub_pseq)
+          
+          # run experiment for speedyseq
+          if (length(fun_list) == 3) {
+            
+            if (message) {
+              message("--speedyseq")
+            }
+          
+            df[[3]]$Time[ind] <- fun_list[[3]](sub_pseq)
+          
+          }
+          
+          if (message) {
+            message("OK")
+          }
           
         }
+        
+        ind <- ind + 1
         
       }
       
     }
     
+    # browser() 
+    datasetlist[[tseind]] <- df %>% merge_all()
+    
   }
   
-  return(df)
+  # merge results from each data set into one data frame and filter them
+  DF <- datasetlist %>% merge_all() %>% 
+    filter(!is.na(Time))
+  
+  return(DF)
   
 }
 
@@ -85,7 +155,6 @@ plot_exec_time <- function(df, sample_size, rank) {
   
 }
 
-
 ### FUNCTION TO TEST MELTING FOR TSE OBJECT ###
 melt_tse_exec_time <- function(tse) {
   
@@ -99,7 +168,7 @@ melt_tse_exec_time <- function(tse) {
   
 }
 
-### FUNCTION TO TEST MELTING FOR TSE OBJECT ###
+### FUNCTION TO TEST MELTING FOR PSEQ OBJECT ###
 melt_pseq_exec_time <- function(pseq) {
   
   start.time2 <- Sys.time()
@@ -110,6 +179,133 @@ melt_pseq_exec_time <- function(pseq) {
   
 }
 
+### FUNCTION TO TEST MELTING FOR SPEEDYSEQ OBJECT ###
+melt_speedyseq_exec_time <- function(speedyseq) {
+  
+  start.time2 <- Sys.time()
+  molten_speedyseq <- speedyseq::psmelt(speedyseq)
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST TRANSFORMING FOR TSE OBJECT ###
+transform_tse_exec_time <- function(tse) {
+  
+  start.time2 <- Sys.time()
+  trans_tse <- mia::transformSamples(tse,
+                                     method = "log10",
+                                     pseudocount = 1)
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST TRANSFORMING FOR PSEQ OBJECT ###
+transform_pseq_exec_time <- function(pseq) {
+  
+  start.time2 <- Sys.time()
+  trans_pseq <- microbiome::transform(pseq,
+                                      transform = "log10p",
+                                      target = "sample")
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST AGGLOMERATING FOR TSE OBJECT ###
+agglomerate_tse_exec_time <- function(tse) {
+  
+  start.time2 <- Sys.time()
+  tse_phylum <- agglomerateByRank(tse,
+                                  rank = "Phylum",
+                                  na.rm = TRUE)
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST AGGLOMERATING FOR PSEQ OBJECT ###
+agglomerate_pseq_exec_time <- function(pseq) {
+  
+  start.time2 <- Sys.time()
+  pseq_phylum <- phyloseq::tax_glom(pseq,
+                                    taxrank = "Phylum")
+  # na.rm = TRUE by default in tax_glom
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST AGGLOMERATING FOR SPEEDYSEQ OBJECT ###
+agglomerate_speedyseq_exec_time <- function(speedyseq) {
+  
+  start.time2 <- Sys.time()
+  speedyseq_phylum <- speedyseq::tax_glom(speedyseq,
+                                    taxrank = "Phylum")
+  # na.rm = TRUE by default in tax_glom
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST ALPHA ESTIMATION FOR TSE OBJECT ###
+alpha_tse_exec_time <- function(tse) {
+  
+  start.time2 <- Sys.time()
+  alpha_tse <- mia::estimateDiversity(tse,
+                                      index = "shannon",
+                                      name = "shannon")
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST ALPHA ESTIMATION FOR PSEQ OBJECT ###
+alpha_pseq_exec_time <- function(pseq) {
+  
+  start.time2 <- Sys.time()
+  alpha_pseq <- microbiome::diversity(pseq,
+                                      index = "shannon")
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
+
+### FUNCTION TO TEST BETA ESTIMATION FOR TSE OBJECT ###
+beta_tse_exec_time <- function(tse) {
+  
+  start.time1 <- Sys.time()
+  beta_tse <- scater::runMDS(tse,
+                             FUN = vegan::vegdist,
+                             name = "MDS_BC",
+                             exprs_values = "counts")
+  #pcoa_tse <- scater::plotReducedDim(beta_tse, "MDS_BC")
+  end.time1 <- Sys.time()
+  
+  return(end.time1 - start.time1)
+  
+}
+
+### FUNCTION TO TEST BETA ESTIMATION FOR PSEQ OBJECT ###
+beta_pseq_exec_time <- function(pseq) {
+  
+  start.time2 <- Sys.time()
+  beta_pseq <- phyloseq::ordinate(pseq, "MDS", "bray")
+  #pcoa_pseq <- phyloseq::plot_ordination(pseq, beta_pseq, type = "samples")
+  end.time2 <- Sys.time()
+  
+  return(end.time2 - start.time2)
+  
+}
 
 ### FUNCTION TO LOAD DATASETS ###
 load_dataset <- function(data_set) {
@@ -127,13 +323,8 @@ load_dataset <- function(data_set) {
     mapply(data, list = data_set, package = "mia")
     tse <- eval(parse(text = data_set))
     
-  } else if (data_set == "hitchip1006") {
-    
-    mapply(data, list = data_set, package = "miaTime")
-    tse <- eval(parse(text = data_set))
-    
     # load microbiomeDataSets    
-  } else if (data_set %in% c("SilvermanAGutData", "SongQAData", "SprockettTHData", "GrieneisenTSData")) {
+  } else if (data_set %in% c("SongQAData", "GrieneisenTSData")) {
     
     tse <- eval((parse(text = paste0("microbiomeDataSets::", data_set, "()"))))
     
@@ -144,7 +335,7 @@ load_dataset <- function(data_set) {
     }
     
     # load curatedMetagenomicData
-  } else if (data_set %in% c("AsnicarF_2017", "VincentC_2016", "BackhedF_2015", "ZeeviD_2015")) {
+  } else if (data_set %in% c("AsnicarF_2017", "AsnicarF_2021", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019")) {
     
     tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
     
@@ -154,6 +345,10 @@ load_dataset <- function(data_set) {
     
   }
   
+  # convert first letter of taxonomic ranks to upper case
+  colnames(rowData(tse)) <- str_to_title(colnames(rowData(tse)))
+  
+  # generate alternative experiments by taxonomic rank
   altExps(tse) <- splitByRanks(tse)
   
   # select elements of altExps(tse) with at least min_features 
@@ -174,26 +369,72 @@ load_dataset <- function(data_set) {
 }
 
 ### FUNCTION TO MAKE DATA FRAME ###
-make_data_frame <- function(tse) {
+make_data_frame <- function(tse, sample_sizes) {
   
   data_set <- mainExpName(tse)
-  
+  len_N <- length(sample_sizes)
   len_exp <- length(altExps(tse))
   
-  df <- data.frame(Dataset = rep(data_set, 2 * len_N * len_exp),
-                   ObjectType = rep(c("tse", "pseq"), len_exp, each = len_N),
-                   Rank = rep(altExpNames(tse), each = 2 * len_N),
+  df1 <- data.frame(Dataset = data_set,
+                   ObjectType = "tse",
+                   Rank = rep(altExpNames(tse), each = len_N),
+                   Samples = rep(sample_sizes, len_exp),
                    Features = NA,
-                   Samples = NA,
-                   Time = NA,
-                   Command = NA)
+                   Time = NA)
   
-  df$Command[df$ObjectType == "tse"] <- "mia::meltAssay"
-  df$Command[df$ObjectType == "pseq"] <- "phyloseq::psMelt"
+  df2 <- data.frame(Dataset = data_set,
+                    ObjectType = "pseq",
+                    Rank = rep(altExpNames(tse), each = len_N),
+                    Samples = rep(sample_sizes, len_exp),
+                    Features = NA,
+                    Time = NA)
   
-  df$Dataset <- df$Dataset %>% stringr::str_replace("\\.1$", "") %>% # Ensure UNIQUE data set name
-    factor() # Treat data set as a factor
+  # Ensure UNIQUE data set name and treat it as a factor
+  df1$Dataset <- df1$Dataset %>% stringr::str_replace("\\.1$", "") %>%
+    factor()
+  df2$Dataset <- df2$Dataset %>% stringr::str_replace("\\.1$", "") %>%
+    factor()
   
-  return(df)
+  return(list(df1, df2))
+  
+}
+
+### FUNCTION TO MAKE 3-LEVEL DATA FRAME ###
+make_data_frame3 <- function(tse, sample_sizes) {
+  
+  data_set <- mainExpName(tse)
+  len_N <- length(sample_sizes)
+  len_exp <- length(altExps(tse))
+  
+  df1 <- data.frame(Dataset = data_set,
+                    ObjectType = "tse",
+                    Rank = rep(altExpNames(tse), each = len_N),
+                    Samples = rep(sample_sizes, len_exp),
+                    Features = NA,
+                    Time = NA)
+  
+  df2 <- data.frame(Dataset = data_set,
+                    ObjectType = "pseq",
+                    Rank = rep(altExpNames(tse), each = len_N),
+                    Samples = rep(sample_sizes, len_exp),
+                    Features = NA,
+                    Time = NA)
+  
+  df3 <- data.frame(Dataset = data_set,
+                    ObjectType = "speedyseq",
+                    Rank = rep(altExpNames(tse), each = len_N),
+                    Samples = rep(sample_sizes, len_exp),
+                    Features = NA,
+                    Time = NA)
+  
+  # Ensure UNIQUE data set name and treat it as a factor
+  df1$Dataset <- df1$Dataset %>% stringr::str_replace("\\.1$", "") %>%
+    factor()
+  df2$Dataset <- df2$Dataset %>% stringr::str_replace("\\.1$", "") %>%
+    factor()
+  df3$Dataset <- df3$Dataset %>% stringr::str_replace("\\.1$", "") %>%
+    factor()
+  
+  return(list(df1, df2, df3))
   
 }

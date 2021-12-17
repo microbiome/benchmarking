@@ -1,0 +1,16 @@
+Package: benchmarking
+Version: 0.0.1
+Imports:
+    ggplot2,
+    dplyr,
+    mia,
+    microbiomeDataSets,
+    curatedMetagenomicData,
+    scater,
+    tidyr,
+    SingleCellExperiment,
+    reshape,
+    knitr,
+    phyloseq,
+    stringr,
+    microbiome
