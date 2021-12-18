@@ -35,26 +35,7 @@ for (testmethod in sort(names(tests))) {
 
 }
 
+###################################
 
-# Exclude beta diversity from the big data analysis because it crashes the worfklow
-for (testmethod in setdiff(sort(names(tests)), "beta")) {
-  
-  print(testmethod)
-
-  # FIXME: Below does not work currently
-  # could be separated into another for loop for more modular testing
-  # and easier debugging
-      
-  print(paste("big", testmethod))
-    
-    # Run benchmarking tests
-    source("experiments/bigdata.R") 
-    
-    # Report benchmarking tests
-    rmarkdown::render("experiments/big_benchmark.Rmd",
-                      output_format = "md_document",
-                      output_file = paste0("../reports/big_", testmethod, ".md"))
-   
-  
-
-}
+# Does not work now
+# source("bigdata_run.R")

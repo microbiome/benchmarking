@@ -87,7 +87,7 @@ if (length(tests[[testmethod]]) == 3) {
 
 ## Absolute execution time by sample size
 
-```{r abs_by_time, echo = FALSE, fig.height = 3 * length(containers), fig.width = 3 * length(containers)}
+```{r abs_by_time, echo = FALSE, fig.height = 2 * length(containers), fig.width = 3 * length(containers)}
 df <- df_benchmark %>% select(Dataset, Time, Features, Samples, Rank, ObjectType)
 df <- df %>% filter(Dataset %in% names(which(table(df$Dataset) >= 10))) %>%
              mutate(Rank = factor(Rank, levels = as.character(feat$Rank)))
@@ -108,7 +108,7 @@ ggplot(df, aes(x = Samples, y = Time * 1000, color = ObjectType)) +
 
 ## Execution times vs number of features
 
-```{r multi_ex_time, echo = FALSE, fig.height = 3 * length(containers), fig.width = 3 * length(containers)}
+```{r multi_ex_time, echo = FALSE, fig.height = 2 * length(containers), fig.width = 3 * length(containers)}
 df <- df_benchmark 
 
 ggplot(df, aes(x = Features, y = Time * 1000, color = ObjectType)) + 

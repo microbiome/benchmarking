@@ -271,7 +271,7 @@ beta_pseq_exec_time <- function(pseq) {
 }
 
 ### FUNCTION TO LOAD DATASETS ###
-load_dataset <- function(data_set, ranks) {
+load_dataset <- function(data_set, ranks=NULL) {
   
   # create placeholders for working variables
   tse <- TreeSummarizedExperiment()
@@ -292,9 +292,7 @@ load_dataset <- function(data_set, ranks) {
     tse <- eval((parse(text = paste0("microbiomeDataSets::", data_set, "()"))))
     
     if (data_set == "GrieneisenTSData") {
-      
       rowData(tse) <- DataFrame(lapply(rowData(tse), unfactor))
-      
     }
     
     # load curatedMetagenomicData
@@ -310,15 +308,17 @@ load_dataset <- function(data_set, ranks) {
   
   # convert first letter of taxonomic ranks to upper case
   colnames(rowData(tse)) <- str_to_title(colnames(rowData(tse)))
+  colnames(rowData(tse)) <- gsub("Asv", "ASV", colnames(rowData(tse)))
 
   # Include selected ranks only
-  rowData(tse) <- rowData(tse)[, ranks]
-
+  if (!is.null(ranks)) {
+    rowData(tse) <- rowData(tse)[, ranks]
+  }
   # generate alternative experiments by taxonomic rank
   altExps(tse) <- splitByRanks(tse)
   
   # select elements of altExps(tse) with at least min_features 
-  for (rank in taxonomyRanks(tse)) {
+  for (rank in ranks) {
     
     if (nrow(altExps(tse)[names(altExps(tse)) == rank][[1]]) < min_features) {
       

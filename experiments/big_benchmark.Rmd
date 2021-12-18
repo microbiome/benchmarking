@@ -11,14 +11,16 @@ knitr::opts_chunk$set(fig.path = paste0("../reports/figs/big_", testmethod, "_")
 
 ## Overview
 
-This report contains the benchmarking results of the largest analysed data set (`r mainExpName(bigdata[[1]])`) for the `r testmethod` operation.
+This report contains the benchmarking results of the largest analysed data set (`r mainExpName(bigdata)`) for the `r testmethod` operation.
 
 ## Data Characteristics
 
 Full sample sizes by data set:
 
 ```{r samples, echo = FALSE, fig.width = 10, fig.height = 4 * length(containers)}
-overview <- data.frame(Dataset = mainExpName(bigdata[[1]]), Samples  = ncol(containers[[3]]), Features = nrow(bigdata[[1]]))
+overview <- data.frame(Dataset = mainExpName(bigdata),
+                       Samples  = ncol(bigdata),
+		       Features = nrow(bigdata))
 kable(overview)
 ```
 
