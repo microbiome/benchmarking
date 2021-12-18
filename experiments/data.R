@@ -32,7 +32,7 @@ set.seed(3)
 
 # load tse objects and store them into
 # a list of containers
-containers <- lapply(data_sets, load_dataset)
+containers <- lapply(data_sets, function (x) {load_dataset(x, ranks)})
 
 # list sample sizes for random subsetting
 sample_sizes <- c(100, 500, 1000, 1500) #, min(sapply(containers, ncol)))
