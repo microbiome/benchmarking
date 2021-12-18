@@ -1,5 +1,5 @@
 ### FUNCTION TO RUN BENCHMARK ON EXPERIMENTS ###
-experiment_benchmark <- function(containers, fun_list, sample_sizes, message = TRUE) {
+experiment_benchmark <- function(containers, fun_list, sample_sizes, ranks, message = TRUE) {
   
   datasetlist <- list()
   
@@ -21,7 +21,8 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
     ind <- 1
     
     # repeat experiment for each taxonomic rank
-    for (rank in 1:length(altExps(tse))) {
+    #for (rank in 1:length(altExps(tse))) {
+    for (rank in ranks) {    
       
       # extract tse from list of containers
       alt_tse <- altExps(tse)[[rank]]
@@ -64,16 +65,8 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
           sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
 	  
-          #if (message) {
-          #  message("--TreeSE")
-          #}
-          
           # run experiment for tse
           df[[1]]$Time[ind] <- fun_list[[1]](sub_tse)
-          
-          #if (message) {
-          #  message("--phyloseq")
-          #}
           
           # run experiment for pseq
           df[[2]]$Time[ind] <- fun_list[[2]](sub_pseq)
@@ -81,17 +74,9 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           # run experiment for speedyseq
           if (length(fun_list) == 3) {
             
-            #if (message) {
-            #  message("--speedyseq")
-            #}
-          
             df[[3]]$Time[ind] <- fun_list[[3]](sub_pseq)
           
           }
-          
-          #if (message) {
-          #  message("OK")
-          #}
           
         }
         

@@ -20,8 +20,8 @@ tests[["beta"]] <- c(tse = beta_tse_exec_time, pseq = beta_pseq_exec_time)
 # TODO? Other functionality to test..? Tree-based functions? It would then
 # be necessary to ensure that all example data sets have tree info.
 
-# Generate reports
-for (testmethod in names(tests)) {
+# Generate reports (go through tests in alphabetical order)
+for (testmethod in sort(names(tests))) {
   
   print(testmethod)
   
