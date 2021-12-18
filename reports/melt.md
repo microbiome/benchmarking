@@ -9,16 +9,12 @@ The tests utilize the following publicly available data sets. We thank
 the original authors for making these valuable data resources openly
 available. Check the links for details and original references:
 
--   [AsnicarF\_2021](https://pubmed.ncbi.nlm.nih.gov/33432175/)
--   [LifeLinesDeep\_2016](https://pubmed.ncbi.nlm.nih.gov/27126040/)
 -   [SongQAData](https://microbiome.github.io/microbiomeDataSets/reference/SongQAData.html)
     Song et al. (2016)
 -   HMP\_2019\_ibdmdb (([source
     1](https://pubmed.ncbi.nlm.nih.gov/29311644/), [source
     2](https://pubmed.ncbi.nlm.nih.gov/31142855/))
 -   [ShaoY\_2019](https://pubmed.ncbi.nlm.nih.gov/31534227/)
--   [GrieneisenTSData](https://microbiome.github.io/microbiomeDataSets/reference/GrieneisenTSData.html)
-    Grieneisen et al. (2021) baboon data set
 
 Data characteristics
 --------------------
@@ -67,14 +63,14 @@ Feature counts by data set:
 <td style="text-align: right;">14</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Class</td>
+<td style="text-align: left;">Family</td>
 <td style="text-align: right;">271</td>
 <td style="text-align: right;">69</td>
 <td style="text-align: right;">90</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Order</td>
-<td style="text-align: right;">375</td>
+<td style="text-align: left;">Species</td>
+<td style="text-align: right;">374</td>
 <td style="text-align: right;">579</td>
 <td style="text-align: right;">819</td>
 </tr>

@@ -35,7 +35,8 @@ for (testmethod in sort(names(tests))) {
 
 }
 
-# Exclude beta diversity from the big data analysis
+
+# Exclude beta diversity from the big data analysis because it crashes the worfklow
 for (testmethod in setdiff(sort(names(tests)), "beta")) {
   
   print(testmethod)
