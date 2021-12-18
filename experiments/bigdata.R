@@ -6,7 +6,7 @@ bigdata <- containers[ind]
 
 # define sample sizes
 max_sample_size <- ncol(bigdata[[1]])
-big_sample_sizes <- c(10000, max_sample_size)
+big_sample_sizes <- c(10, 100, 1000, 10000, max_sample_size)
 # big_sample_sizes <- c(200, 300, 400)
 
 # run analysis
