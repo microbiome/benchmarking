@@ -36,18 +36,13 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
             message(paste(tseind, rank, N, sep = "/"))
           }
 
-          if (message) {
-            message("random subsetting")
-          }
-          
+          # message("random subsetting")
           subset_names <- sample(colnames(alt_tse), N)
           sub_tse <- alt_tse[ , colnames(alt_tse) %in% subset_names]
           sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
 
-          if (message) {
-            message("Store feature and sample counts before filtering out zero rows and cols")
-          }
-	  
+          #  Store feature and sample counts before filtering out
+	  # zero rows and cols	 
           df[[1]]$Features[ind] <- nrow(sub_tse)
           df[[2]]$Features[ind] <- nrow(phyloseq::otu_table(sub_pseq))
           df[[1]]$Samples[ind] <- ncol(sub_tse)
@@ -60,30 +55,25 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
             
           }
 
-          if (message) {
-	          message("Remove zero rows and columns")
-          }
-          
-	        rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
-	        cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
+          rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
+	  cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
           sub_tse <- sub_tse[rind, cind]
           
-	        rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
-	        cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))	  
+	  rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
+	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
           sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
           sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
 	  
-          if (message) {
-            message("--TreeSE")
-          }
+          #if (message) {
+          #  message("--TreeSE")
+          #}
           
           # run experiment for tse
-	        # save(sub_tse, file = "test.RData")
           df[[1]]$Time[ind] <- fun_list[[1]](sub_tse)
           
-          if (message) {
-            message("--phyloseq")
-          }
+          #if (message) {
+          #  message("--phyloseq")
+          #}
           
           # run experiment for pseq
           df[[2]]$Time[ind] <- fun_list[[2]](sub_pseq)
@@ -91,17 +81,17 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           # run experiment for speedyseq
           if (length(fun_list) == 3) {
             
-            if (message) {
-              message("--speedyseq")
-            }
+            #if (message) {
+            #  message("--speedyseq")
+            #}
           
             df[[3]]$Time[ind] <- fun_list[[3]](sub_pseq)
           
           }
           
-          if (message) {
-            message("OK")
-          }
+          #if (message) {
+          #  message("OK")
+          #}
           
         }
         

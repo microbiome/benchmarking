@@ -34,5 +34,5 @@ set.seed(3)
 containers <- lapply(data_sets, load_dataset)
 
 # list sample sizes for random subsetting
-sample_sizes <- c(10, 20, 50, 100, 200, 500, 1000, min(sapply(containers, ncol)))
+sample_sizes <- c(20, 50, 100, 200, 500, 1000) #, min(sapply(containers, ncol)))
 # sample_sizes <- c(10, 100, 1000)
