@@ -9,10 +9,14 @@ The tests utilize the following publicly available data sets. We thank
 the original authors for making these valuable data resources openly
 available. Check the links for details and original references:
 
--   [hitchip1006](https://github.com/microbiome/miaTime/blob/master/R/data.R)
-    (Lahti et al. 2014)
+-   [AsnicarF\_2021](https://pubmed.ncbi.nlm.nih.gov/33432175/)
+-   [LifeLinesDeep\_2016](https://pubmed.ncbi.nlm.nih.gov/27126040/)
 -   [SongQAData](https://microbiome.github.io/microbiomeDataSets/reference/SongQAData.html)
     Song et al. (2016)
+-   HMP\_2019\_ibdmdb (([source
+    1](https://pubmed.ncbi.nlm.nih.gov/29311644/), [source
+    2](https://pubmed.ncbi.nlm.nih.gov/31142855/))
+-   [ShaoY\_2019](https://pubmed.ncbi.nlm.nih.gov/31534227/)
 -   [GrieneisenTSData](https://microbiome.github.io/microbiomeDataSets/reference/GrieneisenTSData.html)
     Grieneisen et al. (2021) baboon data set
 
@@ -140,16 +144,14 @@ Feature counts by data set:
 Relative differences in execution time by sample size
 -----------------------------------------------------
 
-![](figs/transform_first_ratio.png)
-
-![](figs/transform_second_ratio.png)
+![](../reports/figs/transform_first_ratio-1.png)
 
 Absolute execution time by sample size
 --------------------------------------
 
-![](figs/transform_abs_by_time.png)
+![](../reports/figs/transform_abs_by_time-1.png)
 
 Execution times vs number of features
 -------------------------------------
 
-![](figs/transform_multi_ex_time.png)
+![](../reports/figs/transform_multi_ex_time-1.png)
