@@ -42,3 +42,4 @@ for (testmethod in sort(names(tests))) {
       output_file = paste0("../reports/big_", testmethod, ".md"))
 
 }
+
