@@ -271,7 +271,7 @@ beta_pseq_exec_time <- function(pseq) {
 }
 
 ### FUNCTION TO LOAD DATASETS ###
-load_dataset <- function(data_set, ranks=NULL) {
+load_dataset <- function(data_set, ranks = NULL) {
   
   # create placeholders for working variables
   tse <- TreeSummarizedExperiment()
@@ -312,8 +312,11 @@ load_dataset <- function(data_set, ranks=NULL) {
 
   # Include selected ranks only
   if (!is.null(ranks)) {
-    rowData(tse) <- rowData(tse)[, ranks]
+    
+    rowData(tse) <- rowData(tse)[ , ranks]
+    
   }
+  
   # generate alternative experiments by taxonomic rank
   altExps(tse) <- splitByRanks(tse)
   

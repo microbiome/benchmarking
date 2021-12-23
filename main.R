@@ -32,10 +32,13 @@ for (testmethod in sort(names(tests))) {
   rmarkdown::render("experiments/benchmark.Rmd",
       output_format = "md_document",
       output_file = paste0("../reports/", testmethod, ".md"))
+  
+  # Run benchmarking tests
+  source("experiments/bigdata.R")
+  
+  # Report benchmarking tests
+  rmarkdown::render("experiments/big_benchmark.Rmd",
+      output_format = "md_document",
+      output_file = paste0("../reports/big_", testmethod, ".md"))
 
 }
-
-###################################
-
-# Does not work now
-# source("bigdata_run.R")
