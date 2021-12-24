@@ -40,13 +40,12 @@ kable(big_feat)
 
 ```{r, echo = FALSE}
 df <- big_df %>%
-  rbind(df_benchmark %>% filter(Dataset == "GrieneisenTSData", Samples %in% c(100, 1000))) %>%  
   select(Features, Samples, Rank, ObjectType, Time) %>% 
   pivot_wider(names_from = c(ObjectType), values_from = Time) %>% 
   mutate(Ratio = tse / pseq)
 ```
 
-```{r first_ratio, echo = FALSE, out.width="50%", fig.show="keep"}
+```{r first_ratio, echo = FALSE, out.width="50%", fig.show="keep", fig.width=8, fig.height=8}
 ggplot(df, aes(x = Samples, y = Ratio, group = Rank, fill = Rank)) +
     geom_bar(position="dodge", stat="identity", color="black") + 
     labs(title = "Relative difference in execution times",

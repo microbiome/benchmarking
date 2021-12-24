@@ -23,6 +23,7 @@ tests[["beta"]] <- c(tse = beta_tse_exec_time, pseq = beta_pseq_exec_time)
 # Generate reports (go through tests in alphabetical order)
 
 # Standard tests with common sample sizes
+
 for (testmethod in sort(names(tests))) {
   
   print(testmethod)
