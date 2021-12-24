@@ -46,7 +46,7 @@ df <- big_df %>%
   mutate(Ratio = tse / pseq)
 ```
 
-```{r first_ratio, echo = FALSE}
+```{r first_ratio, echo = FALSE, out.width="50%", fig.show="keep"}
 ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) + 
     geom_point() + 
     geom_line() +
@@ -57,9 +57,8 @@ ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) +
          caption = paste("Execution time ratio by samples (TreeSE/phyloseq): ", testmethod)) +
     scale_x_log10() +
     geom_hline(yintercept = 1, linetype = 2) 
-```
 
-```{r second_ratio, echo = FALSE}
+
 if (length(tests[[testmethod]]) == 3) {
   
   df <- df %>% mutate(SpeedyRatio = tse / speedyseq)
