@@ -47,7 +47,7 @@ for (testmethod in setdiff(sort(names(tests)), "beta")) {
   # Report benchmarking tests
   rmarkdown::render("experiments/big_benchmark.Rmd",
       output_format = "md_document",
-      output_file = paste0("../reports/testmethod, "_bigdata", ".md"))
+      output_file = paste0("../reports/", testmethod, "_bigdata", ".md"))
 
 }
 
