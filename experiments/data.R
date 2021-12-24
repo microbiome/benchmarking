@@ -41,6 +41,6 @@ bigdata <- load_dataset(bigdata_set, ranks = c("Phylum", "Genus","ASV"))
 
 # list sample sizes for random subsetting
 sample_sizes <- c(100, 500, 1000, 1500) #, min(sapply(containers, ncol)))
-big_sample_sizes <- c(500, 2000, 5000, ncol(bigdata))
+big_sample_sizes <- c(1000, 4000, ncol(bigdata))
 #big_sample_sizes <- c(10,20,30)
 
