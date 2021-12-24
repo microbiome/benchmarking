@@ -53,7 +53,7 @@ ggplot(df, aes(x = Samples, y = Ratio, group = Rank, fill = Rank)) +
          y = "Relative time (TreeSE / phyloseq)",
          color = "Features (N)",
          caption = paste("Execution time ratio by samples (TreeSE/phyloseq): ", testmethod)) +
-    scale_x_log10() +
+    scale_x_log10(breaks=big_sample_sizes) +
     theme(legend.position="top") + 
     geom_hline(yintercept = 1, linetype = 2) 
 
@@ -68,7 +68,7 @@ if (length(tests[[testmethod]]) == 3) {
          y = "Relative time (TreeSE / speedyseq)",
          color = "Features (N)",
          caption = paste("Execution time ratio by samples (TreeSE/speedyseq): ", testmethod)) +
-    scale_x_log10() +
+    scale_x_log10(breaks=big_sample_sizes) +    
     theme(legend.position="top") + 
     geom_hline(yintercept = 1, linetype = 2) 
 
