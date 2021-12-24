@@ -37,7 +37,7 @@ containers <- lapply(data_sets, function (x) {load_dataset(x, ranks)})
 
 # Big data
 # bigdata <- load_dataset(bigdata_set, ranks = c("Phylum", "Genus", "ASV"))
-bigdata <- load_dataset(bigdata_set, ranks = c("Phylum", "Family", "Genus"))
+bigdata <- load_dataset(bigdata_set, ranks = c("Phylum", "Genus","ASV"))
 
 # list sample sizes for random subsetting
 sample_sizes <- c(100, 500, 1000, 1500) #, min(sapply(containers, ncol)))

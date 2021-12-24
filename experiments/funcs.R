@@ -312,13 +312,23 @@ load_dataset <- function(data_set, ranks = NULL) {
 
   # Include selected ranks only
   if (!is.null(ranks)) {
-    
-    rowData(tse) <- rowData(tse)[ , ranks]
-    
+    dif <- setdiff(ranks, colnames(rowData(tse)))
+    if (!is.null(dif)) {warning(paste("Following ranks not in rowData:", dif))}
+    rowData(tse) <- rowData(tse)[ , intersect(ranks, colnames(rowData(tse)))]
   }
   
   # generate alternative experiments by taxonomic rank
   altExps(tse) <- splitByRanks(tse)
+
+  # If the rank contains ASV/OTU, add this separately
+  # (not in current splitByRanks implementation)
+  if ("ASV" %in% ranks) {
+    altExp(tse, "ASV") <- TreeSummarizedExperiment(
+                                     assays = list(counts=assay(tse, "counts")),
+                                     colData = colData(tse),
+                                     rowData = rowData(tse),
+				     rowTree = rowTree(tse))				    
+  }
   
   # select elements of altExps(tse) with at least min_features 
   for (rank in ranks) {
