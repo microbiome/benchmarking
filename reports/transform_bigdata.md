@@ -41,12 +41,12 @@ Feature counts by data set:
 <td style="text-align: right;">12</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Family</td>
-<td style="text-align: right;">40</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Genus</td>
 <td style="text-align: right;">92</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ASV</td>
+<td style="text-align: right;">613</td>
 </tr>
 </tbody>
 </table>
@@ -54,4 +54,4 @@ Feature counts by data set:
 Relative differences in execution time by sample size
 -----------------------------------------------------
 
-![](../reports/figs/big_transform_first_ratio-1.png)
+<img src="../reports/figs/big_transform_first_ratio-1.png" width="50%" />
