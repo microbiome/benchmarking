@@ -20,8 +20,11 @@ tests[["beta"]] <- c(tse = beta_tse_exec_time, pseq = beta_pseq_exec_time)
 # TODO? Other functionality to test..? Tree-based functions? It would then
 # be necessary to ensure that all example data sets have tree info.
 
-# Generate reports
-for (testmethod in names(tests)) {
+# Generate reports (go through tests in alphabetical order)
+
+# Standard tests with common sample sizes
+
+for (testmethod in sort(names(tests))) {
   
   print(testmethod)
   
@@ -32,19 +35,20 @@ for (testmethod in names(tests)) {
   rmarkdown::render("experiments/benchmark.Rmd",
       output_format = "md_document",
       output_file = paste0("../reports/", testmethod, ".md"))
-  
-  if (testmethod != "beta") {
-    
-    print(paste("big", testmethod))
-    
-    # Run benchmarking tests
-    source("experiments/bigdata.R") 
-    
-    # Report benchmarking tests
-    rmarkdown::render("experiments/big_benchmark.Rmd",
-                      output_format = "md_document",
-                      output_file = paste0("../reports/big_", testmethod, ".md"))
-    
-  }
 
 }
+
+# Separate analysis for the big data set
+# Ignore beta test, as it gets prohibitively slow with very large sample sizes
+for (testmethod in setdiff(sort(names(tests)), "beta")) {
+
+  # Run benchmarking tests
+  source("experiments/bigdata.R")
+  
+  # Report benchmarking tests
+  rmarkdown::render("experiments/big_benchmark.Rmd",
+      output_format = "md_document",
+      output_file = paste0("../reports/", testmethod, "_bigdata", ".md"))
+
+}
+

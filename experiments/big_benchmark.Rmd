@@ -11,14 +11,16 @@ knitr::opts_chunk$set(fig.path = paste0("../reports/figs/big_", testmethod, "_")
 
 ## Overview
 
-This report contains the benchmarking results of the largest analysed data set (`r mainExpName(bigdata[[1]])`) for the `r testmethod` operation.
+This report contains the benchmarking results of the largest analysed data set (`r mainExpName(bigdata)`) for the `r testmethod` operation.
 
 ## Data Characteristics
 
 Full sample sizes by data set:
 
 ```{r samples, echo = FALSE, fig.width = 10, fig.height = 4 * length(containers)}
-overview <- data.frame(Dataset = mainExpName(bigdata[[1]]), Samples  = ncol(containers[[3]]), Features = nrow(bigdata[[1]]))
+overview <- data.frame(Dataset = mainExpName(bigdata),
+                       Samples  = ncol(bigdata),
+		       Features = nrow(bigdata))
 kable(overview)
 ```
 
@@ -38,39 +40,37 @@ kable(big_feat)
 
 ```{r, echo = FALSE}
 df <- big_df %>%
-  rbind(df_benchmark %>% filter(Dataset == "GrieneisenTSData", Samples %in% c(100, 1000))) %>%
   select(Features, Samples, Rank, ObjectType, Time) %>% 
   pivot_wider(names_from = c(ObjectType), values_from = Time) %>% 
   mutate(Ratio = tse / pseq)
 ```
 
-```{r first_ratio, echo = FALSE}
-ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) + 
-    geom_point() + 
-    geom_line() +
+```{r first_ratio, echo = FALSE, out.width="50%", fig.show="keep", fig.width=8, fig.height=8}
+ggplot(df, aes(x = Samples, y = Ratio, group = Rank, fill = Rank)) +
+    geom_bar(position="dodge", stat="identity", color="black") + 
     labs(title = "Relative difference in execution times",
          x = "Samples (N)",
          y = "Relative time (TreeSE / phyloseq)",
          color = "Features (N)",
          caption = paste("Execution time ratio by samples (TreeSE/phyloseq): ", testmethod)) +
-    scale_x_log10() +
+    scale_x_log10(breaks=big_sample_sizes) +
+    theme(legend.position="top") + 
     geom_hline(yintercept = 1, linetype = 2) 
-```
 
-```{r second_ratio, echo = FALSE}
 if (length(tests[[testmethod]]) == 3) {
   
-  df <- df %>% mutate(SpeedyRatio = tse / speedyseq)
-  
-  ggplot(df, aes(x = Samples, y = SpeedyRatio, group = Rank, color = Features)) + 
-    geom_point() + 
-    geom_line() +
+  df <- df %>% mutate(Ratio = tse / speedyseq)
+
+  ggplot(df, aes(x = Samples, y = Ratio, group = Rank, fill = Rank)) +
+    geom_bar(position="dodge", stat="identity", color="black") + 
     labs(title = "Relative difference in execution times",
          x = "Samples (N)",
          y = "Relative time (TreeSE / speedyseq)",
          color = "Features (N)",
          caption = paste("Execution time ratio by samples (TreeSE/speedyseq): ", testmethod)) +
-    scale_x_log10() + 
+    scale_x_log10(breaks=big_sample_sizes) +    
+    theme(legend.position="top") + 
     geom_hline(yintercept = 1, linetype = 2) 
+
 }
 ```

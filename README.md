@@ -21,16 +21,22 @@ constant. The execution times were measured and recorded for the
 different methods and sample/feature count combinations.
 
  
-## Results of the Benchmarking
+## Benchmarking results 
 
-Execution time has been benchmarked for the following operations; see the
-links for reports:
+Standard data sets:
 
 * [Melting](reports/melt.md)
 * [CLR transformation](reports/transform.md) 
 * [Agglomeration to Phylum level](reports/agglomerate.md)
 * [Alpha diversity estimation (Shannon)](reports/alpha.md)
 * [Beta diversity estimation (Bray-Curtis / MDS)](reports/beta.md)
+
+Big data set:
+
+* [Melting](reports/melt_bigdata.md)
+* [CLR transformation](reports/transform_bigdata.md) 
+* [Agglomeration to Phylum level](reports/agglomerate_bigdata.md)
+* [Alpha diversity estimation (Shannon)](reports/alpha_bigdata.md)
 
 
 ## How to run this analysis locally

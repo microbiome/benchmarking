@@ -21,18 +21,26 @@ library(stringr)                # str_to_title function
 library(microbiome)             # transform functions
 
 # list data sets to run benchmark on
-# data_sets <- c("AsnicarF_2017", "GlobalPatterns", "AsnicarF_2021")
-# data_sets <- "SongQAData" # Just pick a single data set to keep things simple. Must have N>1000 samples.
-# data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData") # All data sets must have N>1000 samples.
-data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019") 
+# data_sets <- c("AsnicarF_2021", "SongQAData", "GrieneisenTSData", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019")
+data_sets <- c("SongQAData", "HMP_2019_ibdmdb", "ShaoY_2019")
+bigdata_set <- "GrieneisenTSData"
+
+# Limit to main ranks to reduce unnecessary computing
+ranks <- c("Phylum", "Family", "Species")
 
 # define experimental setup
 set.seed(3)
 
 # load tse objects and store them into
 # a list of containers
-containers <- lapply(data_sets, load_dataset)
+containers <- lapply(data_sets, function (x) {load_dataset(x, ranks)})
+
+# Big data
+# bigdata <- load_dataset(bigdata_set, ranks = c("Phylum", "Genus", "ASV"))
+bigdata <- load_dataset(bigdata_set, ranks = c("Phylum", "Genus","ASV"))
 
 # list sample sizes for random subsetting
-sample_sizes <- c(10, 20, 50, 100, 200, 500, 1000, min(sapply(containers, ncol)))
-# sample_sizes <- c(10, 100, 1000)
+sample_sizes <- c(100, 500, 1000, 1500) #, min(sapply(containers, ncol)))
+big_sample_sizes <- c(1000, 4000, ncol(bigdata))
+#big_sample_sizes <- c(10,20,30)
+

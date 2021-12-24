@@ -19,12 +19,10 @@ The tests utilize the following publicly available data sets. We thank
 the original authors for making these valuable data resources openly
 available. Check the links for details and original references:
 
-- [AsnicarF_2021](https://pubmed.ncbi.nlm.nih.gov/33432175/)
-- [LifeLinesDeep_2016](https://pubmed.ncbi.nlm.nih.gov/27126040/)
 - [SongQAData](https://microbiome.github.io/microbiomeDataSets/reference/SongQAData.html) Song et al. (2016)
 - HMP_2019_ibdmdb (([source 1](https://pubmed.ncbi.nlm.nih.gov/29311644/), [source 2](https://pubmed.ncbi.nlm.nih.gov/31142855/))
 - [ShaoY_2019](https://pubmed.ncbi.nlm.nih.gov/31534227/)
-- [GrieneisenTSData](https://microbiome.github.io/microbiomeDataSets/reference/GrieneisenTSData.html) Grieneisen et al. (2021) baboon data set
+
 
 ## Data characteristics
 
@@ -89,7 +87,7 @@ if (length(tests[[testmethod]]) == 3) {
 
 ## Absolute execution time by sample size
 
-```{r abs_by_time, echo = FALSE, fig.height = 13, fig.width = 3 * length(containers)}
+```{r abs_by_time, echo = FALSE, fig.height = 2 * length(containers), fig.width = 3 * length(containers)}
 df <- df_benchmark %>% select(Dataset, Time, Features, Samples, Rank, ObjectType)
 df <- df %>% filter(Dataset %in% names(which(table(df$Dataset) >= 10))) %>%
              mutate(Rank = factor(Rank, levels = as.character(feat$Rank)))
@@ -110,7 +108,7 @@ ggplot(df, aes(x = Samples, y = Time * 1000, color = ObjectType)) +
 
 ## Execution times vs number of features
 
-```{r multi_ex_time, echo = FALSE, fig.height = 13, fig.width = 3 * length(containers)}
+```{r multi_ex_time, echo = FALSE, fig.height = 2 * length(containers), fig.width = 3 * length(containers)}
 df <- df_benchmark 
 
 ggplot(df, aes(x = Features, y = Time * 1000, color = ObjectType)) + 

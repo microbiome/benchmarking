@@ -6,22 +6,14 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
   for (tseind in seq_along(containers)) {
 
     tse <- containers[[tseind]]
-    
+     
     # make a data frame to store execution times
-    if (length(fun_list) == 2) {
-    
-      df <- make_data_frame(tse, sample_sizes)
-    
-    } else if (length(fun_list) == 3) {
-      
-      df <- make_data_frame3(tse, sample_sizes)
-      
-    }
+    df <- make_data_frame(tse, sample_sizes, fun_list)
     
     ind <- 1
     
     # repeat experiment for each taxonomic rank
-    for (rank in 1:length(altExps(tse))) {
+    for (rank in altExpNames(tse)) {    
       
       # extract tse from list of containers
       alt_tse <- altExps(tse)[[rank]]
@@ -36,71 +28,42 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
             message(paste(tseind, rank, N, sep = "/"))
           }
 
-          if (message) {
-            message("random subsetting")
-          }
-          
-          subset_names <- sample(colnames(alt_tse), N)
-          sub_tse <- alt_tse[ , colnames(alt_tse) %in% subset_names]
+          # message("random subsetting to the desired sample size")          
+          sub_tse <- alt_tse[ , sample(ncol(alt_tse), N)]
+
+	  # Convert to phyloseq
           sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
 
-          if (message) {
-            message("Store feature and sample counts before filtering out zero rows and cols")
-          }
-	  
-          df[[1]]$Features[ind] <- nrow(sub_tse)
-          df[[2]]$Features[ind] <- nrow(phyloseq::otu_table(sub_pseq))
-          df[[1]]$Samples[ind] <- ncol(sub_tse)
-          df[[2]]$Samples[ind] <- ncol(phyloseq::otu_table(sub_pseq))
+          # Store feature and sample counts before filtering out
+	  # zero rows and cols	 
+          df[["tse"]]$Features[ind]  <- nrow(sub_tse)
+          df[["pseq"]]$Features[ind] <- nrow(phyloseq::otu_table(sub_pseq))
+          df[["tse"]]$Samples[ind]   <- ncol(sub_tse)
+          df[["pseq"]]$Samples[ind]  <- ncol(phyloseq::otu_table(sub_pseq))
           
-          if (length(fun_list) == 3) {
-            
-            df[[3]]$Features[ind] <- nrow(phyloseq::otu_table(sub_pseq))
-            df[[3]]$Samples[ind] <- ncol(phyloseq::otu_table(sub_pseq))
-            
+          if (length(fun_list) == 3) {            
+            df[["speedyseq"]]$Features[ind] <- nrow(phyloseq::otu_table(sub_pseq))
+            df[["speedyseq"]]$Samples[ind] <- ncol(phyloseq::otu_table(sub_pseq))            
           }
 
-          if (message) {
-	          message("Remove zero rows and columns")
-          }
-          
-	        rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
-	        cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
+          rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
+	  cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
           sub_tse <- sub_tse[rind, cind]
           
-	        rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
-	        cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))	  
+	  rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
+	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
           sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
           sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
 	  
-          if (message) {
-            message("--TreeSE")
-          }
-          
           # run experiment for tse
-	        # save(sub_tse, file = "test.RData")
-          df[[1]]$Time[ind] <- fun_list[[1]](sub_tse)
-          
-          if (message) {
-            message("--phyloseq")
-          }
+          df[["tse"]]$Time[ind] <- fun_list[["tse"]](sub_tse)
           
           # run experiment for pseq
-          df[[2]]$Time[ind] <- fun_list[[2]](sub_pseq)
+          df[["pseq"]]$Time[ind] <- fun_list[["pseq"]](sub_pseq)
           
           # run experiment for speedyseq
-          if (length(fun_list) == 3) {
-            
-            if (message) {
-              message("--speedyseq")
-            }
-          
-            df[[3]]$Time[ind] <- fun_list[[3]](sub_pseq)
-          
-          }
-          
-          if (message) {
-            message("OK")
+          if (length(fun_list) == 3) {            
+            df[["speedyseq"]]$Time[ind] <- fun_list[["speedyseq"]](sub_pseq)          
           }
           
         }
@@ -308,7 +271,7 @@ beta_pseq_exec_time <- function(pseq) {
 }
 
 ### FUNCTION TO LOAD DATASETS ###
-load_dataset <- function(data_set) {
+load_dataset <- function(data_set, ranks = NULL) {
   
   # create placeholders for working variables
   tse <- TreeSummarizedExperiment()
@@ -329,9 +292,7 @@ load_dataset <- function(data_set) {
     tse <- eval((parse(text = paste0("microbiomeDataSets::", data_set, "()"))))
     
     if (data_set == "GrieneisenTSData") {
-      
       rowData(tse) <- DataFrame(lapply(rowData(tse), unfactor))
-      
     }
     
     # load curatedMetagenomicData
@@ -347,12 +308,30 @@ load_dataset <- function(data_set) {
   
   # convert first letter of taxonomic ranks to upper case
   colnames(rowData(tse)) <- str_to_title(colnames(rowData(tse)))
+  colnames(rowData(tse)) <- gsub("Asv", "ASV", colnames(rowData(tse)))
+
+  # Include selected ranks only
+  if (!is.null(ranks)) {
+    dif <- setdiff(ranks, colnames(rowData(tse)))
+    if (!is.null(dif)) {warning(paste("Following ranks not in rowData:", dif))}
+    rowData(tse) <- rowData(tse)[ , intersect(ranks, colnames(rowData(tse)))]
+  }
   
   # generate alternative experiments by taxonomic rank
   altExps(tse) <- splitByRanks(tse)
+
+  # If the rank contains ASV/OTU, add this separately
+  # (not in current splitByRanks implementation)
+  if ("ASV" %in% ranks) {
+    altExp(tse, "ASV") <- TreeSummarizedExperiment(
+                                     assays = list(counts=assay(tse, "counts")),
+                                     colData = colData(tse),
+                                     rowData = rowData(tse),
+				     rowTree = rowTree(tse))				    
+  }
   
   # select elements of altExps(tse) with at least min_features 
-  for (rank in taxonomyRanks(tse)) {
+  for (rank in ranks) {
     
     if (nrow(altExps(tse)[names(altExps(tse)) == rank][[1]]) < min_features) {
       
@@ -369,72 +348,28 @@ load_dataset <- function(data_set) {
 }
 
 ### FUNCTION TO MAKE DATA FRAME ###
-make_data_frame <- function(tse, sample_sizes) {
+make_data_frame <- function(tse, sample_sizes, fun_list) {
   
   data_set <- mainExpName(tse)
   len_N <- length(sample_sizes)
   len_exp <- length(altExps(tse))
-  
-  df1 <- data.frame(Dataset = data_set,
-                   ObjectType = "tse",
-                   Rank = rep(altExpNames(tse), each = len_N),
-                   Samples = rep(sample_sizes, len_exp),
-                   Features = NA,
-                   Time = NA)
-  
-  df2 <- data.frame(Dataset = data_set,
-                    ObjectType = "pseq",
-                    Rank = rep(altExpNames(tse), each = len_N),
-                    Samples = rep(sample_sizes, len_exp),
-                    Features = NA,
-                    Time = NA)
-  
-  # Ensure UNIQUE data set name and treat it as a factor
-  df1$Dataset <- df1$Dataset %>% stringr::str_replace("\\.1$", "") %>%
-    factor()
-  df2$Dataset <- df2$Dataset %>% stringr::str_replace("\\.1$", "") %>%
-    factor()
-  
-  return(list(df1, df2))
-  
-}
 
-### FUNCTION TO MAKE 3-LEVEL DATA FRAME ###
-make_data_frame3 <- function(tse, sample_sizes) {
-  
-  data_set <- mainExpName(tse)
-  len_N <- length(sample_sizes)
-  len_exp <- length(altExps(tse))
-  
-  df1 <- data.frame(Dataset = data_set,
-                    ObjectType = "tse",
+  dlist <- list()
+  for (f in names(fun_list)) {
+    d <- data.frame(Dataset = data_set,
+                    ObjectType = f,
                     Rank = rep(altExpNames(tse), each = len_N),
                     Samples = rep(sample_sizes, len_exp),
                     Features = NA,
                     Time = NA)
+
+    # Ensure UNIQUE data set name and treat it as a factor
+    d$Dataset <- d$Dataset %>% stringr::str_replace("\\.1$", "") %>% factor()
+
+    dlist[[f]] <- d
+
+  }
   
-  df2 <- data.frame(Dataset = data_set,
-                    ObjectType = "pseq",
-                    Rank = rep(altExpNames(tse), each = len_N),
-                    Samples = rep(sample_sizes, len_exp),
-                    Features = NA,
-                    Time = NA)
-  
-  df3 <- data.frame(Dataset = data_set,
-                    ObjectType = "speedyseq",
-                    Rank = rep(altExpNames(tse), each = len_N),
-                    Samples = rep(sample_sizes, len_exp),
-                    Features = NA,
-                    Time = NA)
-  
-  # Ensure UNIQUE data set name and treat it as a factor
-  df1$Dataset <- df1$Dataset %>% stringr::str_replace("\\.1$", "") %>%
-    factor()
-  df2$Dataset <- df2$Dataset %>% stringr::str_replace("\\.1$", "") %>%
-    factor()
-  df3$Dataset <- df3$Dataset %>% stringr::str_replace("\\.1$", "") %>%
-    factor()
-  
-  return(list(df1, df2, df3))
+  return(dlist)
   
 }
