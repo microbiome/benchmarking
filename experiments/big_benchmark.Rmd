@@ -47,31 +47,31 @@ df <- big_df %>%
 ```
 
 ```{r first_ratio, echo = FALSE, out.width="50%", fig.show="keep"}
-ggplot(df, aes(x = Samples, y = Ratio, group = Rank, color = Features)) + 
-    geom_point() + 
-    geom_line() +
+ggplot(df, aes(x = Samples, y = Ratio, group = Rank, fill = Rank)) +
+    geom_bar(position="dodge", stat="identity", color="black") + 
     labs(title = "Relative difference in execution times",
          x = "Samples (N)",
          y = "Relative time (TreeSE / phyloseq)",
          color = "Features (N)",
          caption = paste("Execution time ratio by samples (TreeSE/phyloseq): ", testmethod)) +
     scale_x_log10() +
+    theme(legend.position="top") + 
     geom_hline(yintercept = 1, linetype = 2) 
-
 
 if (length(tests[[testmethod]]) == 3) {
   
-  df <- df %>% mutate(SpeedyRatio = tse / speedyseq)
-  
-  ggplot(df, aes(x = Samples, y = SpeedyRatio, group = Rank, color = Features)) + 
-    geom_point() + 
-    geom_line() +
+  df <- df %>% mutate(Ratio = tse / speedyseq)
+
+  ggplot(df, aes(x = Samples, y = Ratio, group = Rank, fill = Rank)) +
+    geom_bar(position="dodge", stat="identity", color="black") + 
     labs(title = "Relative difference in execution times",
          x = "Samples (N)",
          y = "Relative time (TreeSE / speedyseq)",
          color = "Features (N)",
          caption = paste("Execution time ratio by samples (TreeSE/speedyseq): ", testmethod)) +
-    scale_x_log10() + 
+    scale_x_log10() +
+    theme(legend.position="top") + 
     geom_hline(yintercept = 1, linetype = 2) 
+
 }
 ```
