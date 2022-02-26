@@ -3,7 +3,7 @@
 ## Overview 
 
 [TreeSummarizedExperiment](https://www.bioconductor.org/packages/release/bioc/html/mia.html)
-(tse) and
+(TreeSE) and
 [phyloseq](https://www.bioconductor.org/packages/release/bioc/html/phyloseq.html)
 (pseq) objects are alternative containers for microbiome data. Here we
 evaluate their computational efficiency in terms of varying sample and
@@ -11,7 +11,7 @@ feature set sizes.
 
 ## Analysis method
 
-Multiple data sets, either in the form of a tse or a pseq object, were
+Multiple data sets, either in the form of a TreeSE or a phyloseq object, were
 processed through a few common [analytical
 routines](https://github.com/microbiome/benchmarking/tree/main/experiments):
 
@@ -50,7 +50,7 @@ source("main.R")
 
 ## License
 
-This work is part of [miaverse](microbiome.github.io). The code and
+This work is part of [miaverse](https://microbiome.github.io). The code and
 results in this repository are open source with [Artistic License
 2.0](LICENSE.md).
 
