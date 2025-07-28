@@ -10,7 +10,7 @@ available. Check the links for details and original references:
 
 -   [SongQAData](https://microbiome.github.io/microbiomeDataSets/reference/SongQAData.html)
     Song et al. (2016)
--   HMP\_2019\_ibdmdb (([source
+-   HMP\_2019\_ibdmdb ([source
     1](https://pubmed.ncbi.nlm.nih.gov/29311644/), [source
     2](https://pubmed.ncbi.nlm.nih.gov/31142855/))
 -   [ShaoY\_2019](https://pubmed.ncbi.nlm.nih.gov/31534227/)

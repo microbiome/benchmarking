@@ -122,9 +122,9 @@ plot_exec_time <- function(df, sample_size, rank) {
 melt_tse_exec_time <- function(tse) {
   
   start.time1 <- Sys.time()
-  molten_tse <- mia::meltAssay(tse,
-                               add_row_data = TRUE,
-                               add_col_data = TRUE)
+  molten_tse <- mia::meltSE(tse,
+                            add.row = TRUE,
+                            add.col = TRUE)
   end.time1 <- Sys.time()
   
   return(end.time1 - start.time1)
@@ -157,9 +157,9 @@ melt_speedyseq_exec_time <- function(speedyseq) {
 transform_tse_exec_time <- function(tse) {
   
   start.time2 <- Sys.time()
-  trans_tse <- mia::transformSamples(tse,
-                                     method = "log10",
-                                     pseudocount = 1)
+  trans_tse <- mia::transformAssay(tse,
+                                   method = "log10",
+                                   pseudocount = 1)
   end.time2 <- Sys.time()
   
   return(end.time2 - start.time2)
@@ -222,9 +222,9 @@ agglomerate_speedyseq_exec_time <- function(speedyseq) {
 alpha_tse_exec_time <- function(tse) {
   
   start.time2 <- Sys.time()
-  alpha_tse <- mia::estimateDiversity(tse,
-                                      index = "shannon",
-                                      name = "shannon")
+  alpha_tse <- mia::addAlpha(tse,
+                             index = "shannon",
+                             name = "shannon")
   end.time2 <- Sys.time()
   
   return(end.time2 - start.time2)
@@ -298,7 +298,9 @@ load_dataset <- function(data_set, ranks = NULL) {
     # load curatedMetagenomicData
   } else if (data_set %in% c("AsnicarF_2017", "AsnicarF_2021", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019")) {
     
-    tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
+    tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"),
+                                  dryrun = FALSE,
+                                  counts = TRUE)
     
     tse <- tmp[[1]]
     
@@ -324,10 +326,11 @@ load_dataset <- function(data_set, ranks = NULL) {
   # (not in current splitByRanks implementation)
   if ("ASV" %in% ranks) {
     altExp(tse, "ASV") <- TreeSummarizedExperiment(
-                                     assays = list(counts=assay(tse, "counts")),
-                                     colData = colData(tse),
-                                     rowData = rowData(tse),
-				     rowTree = rowTree(tse))				    
+      assays = list(counts=assay(tse, "counts")),
+      colData = colData(tse),
+      rowData = rowData(tse),
+      rowTree = rowTree(tse)
+    )  
   }
   
   # select elements of altExps(tse) with at least min_features 
