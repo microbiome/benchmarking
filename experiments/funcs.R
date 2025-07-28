@@ -32,7 +32,7 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           sub_tse <- alt_tse[ , sample(ncol(alt_tse), N)]
 
 	  # Convert to phyloseq
-          sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
+          sub_pseq <- convertToPhyloseq(sub_tse)
 
           # Store feature and sample counts before filtering out
 	  # zero rows and cols	 

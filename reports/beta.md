@@ -1,5 +1,4 @@
-Overview
---------
+## Overview
 
 This report contains benchmarking results for the beta operation with
 common microbiome data containers in R/Bioconductor for the beta
@@ -16,8 +15,7 @@ available. Check the links for details and original references:
     2](https://pubmed.ncbi.nlm.nih.gov/31142855/))
 -   [ShaoY\_2019](https://pubmed.ncbi.nlm.nih.gov/31534227/)
 
-Data characteristics
---------------------
+## Data characteristics
 
 Full sample sizes by data set:
 
@@ -77,17 +75,14 @@ Feature counts by data set:
 </tbody>
 </table>
 
-Relative differences in execution time by sample size
------------------------------------------------------
+## Relative differences in execution time by sample size
 
 ![](../reports/figs/beta_first_ratio-1.png)
 
-Absolute execution time by sample size
---------------------------------------
+## Absolute execution time by sample size
 
 ![](../reports/figs/beta_abs_by_time-1.png)
 
-Execution times vs number of features
--------------------------------------
+## Execution times vs number of features
 
 ![](../reports/figs/beta_multi_ex_time-1.png)
