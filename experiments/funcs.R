@@ -6,7 +6,7 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
   for (tseind in seq_along(containers)) {
 
     tse <- containers[[tseind]]
-     
+    
     # make a data frame to store execution times
     df <- make_data_frame(tse, sample_sizes, fun_list)
     
@@ -31,11 +31,11 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           # message("random subsetting to the desired sample size")          
           sub_tse <- alt_tse[ , sample(ncol(alt_tse), N)]
 
-	  # Convert to phyloseq
+	        # Convert to phyloseq
           sub_pseq <- convertToPhyloseq(sub_tse)
 
           # Store feature and sample counts before filtering out
-	  # zero rows and cols	 
+	        # zero rows and cols	 
           df[["tse"]]$Features[ind]  <- nrow(sub_tse)
           df[["pseq"]]$Features[ind] <- nrow(phyloseq::otu_table(sub_pseq))
           df[["tse"]]$Samples[ind]   <- ncol(sub_tse)
@@ -47,11 +47,11 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           }
 
           rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
-	  cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
+	        cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
           sub_tse <- sub_tse[rind, cind]
           
-	  rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
-	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
+	        rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
+	        cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
           sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
           sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
 	  
