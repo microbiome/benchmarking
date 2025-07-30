@@ -19,7 +19,6 @@ The data sets were splitted by taxonomic ranks to get variations in
 feature counts, while keeping the data set and sample sizes
 constant. The execution times were measured and recorded for the
 different methods and sample/feature count combinations.
-
  
 ## Benchmarking results 
 
@@ -38,6 +37,15 @@ Big data set:
 * [Agglomeration to Phylum level](reports/agglomerate_bigdata.md)
 * [Alpha diversity estimation (Shannon)](reports/alpha_bigdata.md)
 
+## Benchmarking for OMA
+
+The article subdirectory contains the benchmarking script for the OMA
+publication and results as tables and figures.
+
+* [Benchmarking script](article/OMA_figure.R)
+* [Raw output](article/benchmark_rawdata.csv)
+* [Summarised results](article/benchmark_results.csv)
+* [Figure](article/OMA_figure.png)
 
 ## How to run this analysis locally
 
@@ -47,16 +55,8 @@ To reproduce the analyses, start R from within your local copy of this repositor
 source("main.R")
 ```
 
-
 ## License
 
 This work is part of [miaverse](https://microbiome.github.io). The code and
 results in this repository are open source with [Artistic License
 2.0](LICENSE.md).
-
-
-
-
-
-
-
