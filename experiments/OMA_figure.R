@@ -78,7 +78,9 @@ benchmark_df <- benchmark_out %>%
             TimeSD = sd(time), MemorySD = sd(mem_alloc),
             .groups = "drop")
 
-write.csv("~/Desktop/benchmark_results.csv")
+write.csv(benchmark_df,
+          file = "benchmark_results.csv",
+          row.names = FALSE)
 
 p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
   geom_errorbar(aes(ymin = Time - TimeSD, ymax = Time + TimeSD), width = 10) +
