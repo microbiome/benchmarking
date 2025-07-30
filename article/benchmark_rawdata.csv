@@ -1,641 +1,661 @@
 "method","object","N","time"
-"alpha","pseq",100, 249.51ms
-"alpha","pseq",100, 289.5ms
-"alpha","pseq",100, 266.44ms
-"alpha","pseq",100, 300.86ms
-"alpha","pseq",100, 252.75ms
-"alpha","pseq",100, 304ms
-"alpha","pseq",100, 251.49ms
-"alpha","pseq",100, 266.99ms
-"alpha","pseq",100, 849.27ms
-"alpha","pseq",100, 262.07ms
-"alpha","tse",100,  56.18ms
-"alpha","tse",100,  55.12ms
-"alpha","tse",100,  39.06ms
-"alpha","tse",100,  39.22ms
-"alpha","tse",100,  38.84ms
-"alpha","tse",100,  39.27ms
-"alpha","tse",100,  42.35ms
-"alpha","tse",100,  38.67ms
-"alpha","tse",100,  40.62ms
-"alpha","tse",100,  40.94ms
-"trans","pseq",100, 262.77ms
-"trans","pseq",100,   6.54ms
-"trans","pseq",100,   6.89ms
-"trans","pseq",100,   6.85ms
-"trans","pseq",100,   6.9ms
-"trans","pseq",100,   7.2ms
-"trans","pseq",100,   6.62ms
-"trans","pseq",100,   7.35ms
-"trans","pseq",100,   6.64ms
-"trans","pseq",100,   6.71ms
-"trans","tse",100, 181.62ms
-"trans","tse",100, 164.53ms
-"trans","tse",100, 155.78ms
-"trans","tse",100, 155.58ms
-"trans","tse",100, 178.08ms
-"trans","tse",100, 150.59ms
-"trans","tse",100, 153.11ms
-"trans","tse",100, 154.47ms
-"trans","tse",100, 155.89ms
-"trans","tse",100, 152.99ms
-"melt","pseq",100,  91.23ms
-"melt","pseq",100,  84.22ms
-"melt","pseq",100, 104.67ms
-"melt","pseq",100,  85.58ms
-"melt","pseq",100,  85.02ms
-"melt","pseq",100,  85.62ms
-"melt","pseq",100,  85.06ms
-"melt","pseq",100,  85.2ms
-"melt","pseq",100,  84.78ms
-"melt","pseq",100,  84.78ms
-"melt","tse",100, 110.73ms
-"melt","tse",100,  84.61ms
-"melt","tse",100,  73.32ms
-"melt","tse",100,  73.83ms
-"melt","tse",100,  71.6ms
-"melt","tse",100,  71.28ms
-"melt","tse",100,  71.99ms
-"melt","tse",100,  71.6ms
-"melt","tse",100,  71.97ms
-"melt","tse",100,  72.02ms
-"agglomerate","pseq",100, 351.97ms
-"agglomerate","pseq",100, 288.2ms
-"agglomerate","pseq",100, 284.55ms
-"agglomerate","pseq",100, 282.9ms
-"agglomerate","pseq",100, 275.23ms
-"agglomerate","pseq",100, 261.82ms
-"agglomerate","pseq",100, 261.3ms
-"agglomerate","pseq",100, 294.2ms
-"agglomerate","pseq",100, 297.84ms
-"agglomerate","pseq",100, 284.01ms
-"agglomerate","tse",100, 625.8ms
-"agglomerate","tse",100, 600.07ms
-"agglomerate","tse",100, 590.28ms
-"agglomerate","tse",100, 574.86ms
-"agglomerate","tse",100, 615ms
-"agglomerate","tse",100, 592.31ms
-"agglomerate","tse",100, 610.28ms
-"agglomerate","tse",100, 600.01ms
-"agglomerate","tse",100, 629.98ms
-"agglomerate","tse",100, 570.68ms
-"beta","pseq",100, 814.67ms
-"beta","pseq",100, 798.21ms
-"beta","pseq",100, 813.55ms
-"beta","pseq",100, 796.27ms
-"beta","pseq",100, 774.64ms
-"beta","pseq",100, 797.49ms
-"beta","pseq",100, 787.82ms
-"beta","pseq",100, 772.6ms
-"beta","pseq",100, 845.01ms
-"beta","pseq",100, 795.18ms
-"beta","tse",100,  64.84ms
-"beta","tse",100,  19.92ms
-"beta","tse",100,  19.28ms
-"beta","tse",100,  19.79ms
-"beta","tse",100,  19.37ms
-"beta","tse",100,  21.01ms
-"beta","tse",100,  29.37ms
-"beta","tse",100,  20.1ms
-"beta","tse",100,  19.49ms
-"beta","tse",100,  19.82ms
-"alpha","pseq",225, 558.47ms
-"alpha","pseq",225, 586.03ms
-"alpha","pseq",225, 619.79ms
-"alpha","pseq",225, 532.72ms
-"alpha","pseq",225, 581.76ms
-"alpha","pseq",225, 532.37ms
-"alpha","pseq",225, 583.93ms
-"alpha","pseq",225, 579.79ms
-"alpha","pseq",225, 537.28ms
-"alpha","pseq",225, 568.58ms
-"alpha","tse",225,  36.31ms
-"alpha","tse",225,  34.17ms
-"alpha","tse",225,  33.55ms
-"alpha","tse",225,  33.65ms
-"alpha","tse",225,  33.44ms
-"alpha","tse",225,  33.03ms
-"alpha","tse",225,  33.06ms
-"alpha","tse",225,  33.3ms
-"alpha","tse",225,  35.35ms
-"alpha","tse",225,  37.95ms
-"trans","pseq",225,   9.09ms
-"trans","pseq",225,   9.34ms
-"trans","pseq",225,   9.2ms
-"trans","pseq",225,   9.08ms
-"trans","pseq",225,   9.12ms
-"trans","pseq",225,   9.43ms
-"trans","pseq",225,  10.16ms
-"trans","pseq",225,  10.67ms
-"trans","pseq",225,   9.45ms
-"trans","pseq",225,   9.34ms
-"trans","tse",225, 185.29ms
-"trans","tse",225, 138.27ms
-"trans","tse",225, 138.53ms
-"trans","tse",225, 146.43ms
-"trans","tse",225, 143.9ms
-"trans","tse",225, 160.26ms
-"trans","tse",225, 141.29ms
-"trans","tse",225, 145.41ms
-"trans","tse",225, 147.54ms
-"trans","tse",225, 145.69ms
-"melt","pseq",225, 198.29ms
-"melt","pseq",225, 192.09ms
-"melt","pseq",225, 219.08ms
-"melt","pseq",225, 194.65ms
-"melt","pseq",225, 193.18ms
-"melt","pseq",225, 193.43ms
-"melt","pseq",225, 212.24ms
-"melt","pseq",225, 193.57ms
-"melt","pseq",225, 192.77ms
-"melt","pseq",225, 213.67ms
-"melt","tse",225,  80.01ms
-"melt","tse",225,  77.67ms
-"melt","tse",225,  77.48ms
-"melt","tse",225,  76.72ms
-"melt","tse",225,  77.68ms
-"melt","tse",225, 100.84ms
-"melt","tse",225,  79.03ms
-"melt","tse",225,  77.4ms
-"melt","tse",225,  76.88ms
-"melt","tse",225,  74.92ms
-"agglomerate","pseq",225, 264.99ms
-"agglomerate","pseq",225, 262.01ms
-"agglomerate","pseq",225, 285.42ms
-"agglomerate","pseq",225, 258.06ms
-"agglomerate","pseq",225, 264.66ms
-"agglomerate","pseq",225, 284.17ms
-"agglomerate","pseq",225, 263.42ms
-"agglomerate","pseq",225, 260.85ms
-"agglomerate","pseq",225, 266.81ms
-"agglomerate","pseq",225, 281.84ms
-"agglomerate","tse",225, 549.27ms
-"agglomerate","tse",225, 591.92ms
-"agglomerate","tse",225, 579.83ms
-"agglomerate","tse",225, 568.95ms
-"agglomerate","tse",225, 549.95ms
-"agglomerate","tse",225, 586.82ms
-"agglomerate","tse",225, 576.95ms
-"agglomerate","tse",225, 567.79ms
-"agglomerate","tse",225, 551.78ms
-"agglomerate","tse",225, 570.74ms
-"beta","pseq",225,   4.25s
-"beta","pseq",225,   4.18s
-"beta","pseq",225,   4.13s
-"beta","pseq",225,   4.22s
-"beta","pseq",225,   4.18s
-"beta","pseq",225,   4.16s
-"beta","pseq",225,   4.15s
-"beta","pseq",225,   4.65s
-"beta","pseq",225,   4.04s
-"beta","pseq",225,   4.04s
-"beta","tse",225,  59.26ms
-"beta","tse",225,  23.49ms
-"beta","tse",225,  22.93ms
-"beta","tse",225,  22.87ms
-"beta","tse",225,  22.86ms
-"beta","tse",225,  22.62ms
-"beta","tse",225,  22.5ms
-"beta","tse",225,  22.34ms
-"beta","tse",225,  23.5ms
-"beta","tse",225,  24.59ms
-"alpha","pseq",500,   1.23s
-"alpha","pseq",500,   1.22s
-"alpha","pseq",500,   1.26s
-"alpha","pseq",500,   1.2s
-"alpha","pseq",500,   1.22s
-"alpha","pseq",500,   1.25s
-"alpha","pseq",500,   1.28s
-"alpha","pseq",500,   1.28s
-"alpha","pseq",500,   1.22s
-"alpha","pseq",500,   1.28s
-"alpha","tse",500,  35.14ms
-"alpha","tse",500,  35.7ms
-"alpha","tse",500,  36.18ms
-"alpha","tse",500,  34.91ms
-"alpha","tse",500,  34.93ms
-"alpha","tse",500,  36.01ms
-"alpha","tse",500,  34.69ms
-"alpha","tse",500,  34.69ms
-"alpha","tse",500,  34.7ms
-"alpha","tse",500,  37.36ms
-"trans","pseq",500,  15.96ms
-"trans","pseq",500,  15.61ms
-"trans","pseq",500,  17.19ms
-"trans","pseq",500,  16.15ms
-"trans","pseq",500,  16.36ms
-"trans","pseq",500,  16.61ms
-"trans","pseq",500,  16.21ms
-"trans","pseq",500,  15.97ms
-"trans","pseq",500,  15.88ms
-"trans","pseq",500,  15.86ms
-"trans","tse",500, 151.43ms
-"trans","tse",500, 150.47ms
-"trans","tse",500, 180.46ms
-"trans","tse",500, 149.55ms
-"trans","tse",500, 146.88ms
-"trans","tse",500, 150.92ms
-"trans","tse",500, 155.35ms
-"trans","tse",500, 148.76ms
-"trans","tse",500, 166.04ms
-"trans","tse",500, 151.06ms
-"melt","pseq",500, 475.55ms
-"melt","pseq",500, 483.95ms
-"melt","pseq",500, 488.64ms
-"melt","pseq",500, 489.2ms
-"melt","pseq",500, 500.9ms
-"melt","pseq",500, 485.07ms
-"melt","pseq",500, 542.15ms
-"melt","pseq",500, 476.67ms
-"melt","pseq",500, 513.87ms
-"melt","pseq",500, 490.43ms
-"melt","tse",500, 107.85ms
-"melt","tse",500, 113.16ms
-"melt","tse",500,  88.77ms
-"melt","tse",500,  92.35ms
-"melt","tse",500,  91.65ms
-"melt","tse",500, 109.2ms
-"melt","tse",500,  89.59ms
-"melt","tse",500,  88.03ms
-"melt","tse",500,  91.06ms
-"melt","tse",500, 109.38ms
-"agglomerate","pseq",500, 268.03ms
-"agglomerate","pseq",500, 271.93ms
-"agglomerate","pseq",500, 273.36ms
-"agglomerate","pseq",500, 293.66ms
-"agglomerate","pseq",500, 267.05ms
-"agglomerate","pseq",500, 270.17ms
-"agglomerate","pseq",500, 288.29ms
-"agglomerate","pseq",500, 267.67ms
-"agglomerate","pseq",500, 269.5ms
-"agglomerate","pseq",500, 265.24ms
-"agglomerate","tse",500, 576.27ms
-"agglomerate","tse",500, 620.15ms
-"agglomerate","tse",500, 586.97ms
-"agglomerate","tse",500, 557.38ms
-"agglomerate","tse",500, 565.8ms
-"agglomerate","tse",500, 570.91ms
-"agglomerate","tse",500, 574.65ms
-"agglomerate","tse",500, 553.64ms
-"agglomerate","tse",500, 566.03ms
-"agglomerate","tse",500, 573.88ms
-"beta","pseq",500,  24.63s
-"beta","pseq",500,  24.13s
-"beta","pseq",500,  24.18s
-"beta","pseq",500,  24.29s
-"beta","pseq",500,  24.68s
-"beta","pseq",500,  24.36s
-"beta","pseq",500,  24.73s
-"beta","pseq",500,  24.53s
-"beta","pseq",500,  24.8s
-"beta","pseq",500,  24.17s
-"beta","tse",500, 193.25ms
-"beta","tse",500,  35.08ms
-"beta","tse",500,  35.25ms
-"beta","tse",500,  64.55ms
-"beta","tse",500,  38.7ms
-"beta","tse",500,  37.63ms
-"beta","tse",500,  36.41ms
-"beta","tse",500,  36.19ms
-"beta","tse",500,  36.33ms
-"beta","tse",500,  36.3ms
-"alpha","pseq",1000,   2.67s
-"alpha","pseq",1000,   2.6s
-"alpha","pseq",1000,   2.59s
-"alpha","pseq",1000,   2.58s
-"alpha","pseq",1000,   2.58s
-"alpha","pseq",1000,   2.63s
-"alpha","pseq",1000,   2.58s
-"alpha","pseq",1000,   2.59s
-"alpha","pseq",1000,   2.58s
-"alpha","pseq",1000,   2.58s
-"alpha","tse",1000,  37.58ms
-"alpha","tse",1000,  39.58ms
-"alpha","tse",1000,  37.27ms
-"alpha","tse",1000,  37.34ms
-"alpha","tse",1000,  89.28ms
-"alpha","tse",1000,  40.18ms
-"alpha","tse",1000,  38.01ms
-"alpha","tse",1000,  39.01ms
-"alpha","tse",1000,  38.29ms
-"alpha","tse",1000,  37.89ms
-"trans","pseq",1000,  27.45ms
-"trans","pseq",1000,  27.45ms
-"trans","pseq",1000,  27.77ms
-"trans","pseq",1000,  27.84ms
-"trans","pseq",1000,  29.87ms
-"trans","pseq",1000,  27.72ms
-"trans","pseq",1000,  27.65ms
-"trans","pseq",1000,  55.25ms
-"trans","pseq",1000,  28.97ms
-"trans","pseq",1000,  28.42ms
-"trans","tse",1000, 173.34ms
-"trans","tse",1000, 165.07ms
-"trans","tse",1000, 164.42ms
-"trans","tse",1000, 162.06ms
-"trans","tse",1000, 196.44ms
-"trans","tse",1000, 172.28ms
-"trans","tse",1000, 161.62ms
-"trans","tse",1000, 163.93ms
-"trans","tse",1000, 165.53ms
-"trans","tse",1000, 189.41ms
-"melt","pseq",1000,   1.15s
-"melt","pseq",1000,   1.73s
-"melt","pseq",1000,   1.67s
-"melt","pseq",1000,   1.04s
-"melt","pseq",1000,   1.06s
-"melt","pseq",1000,   1.06s
-"melt","pseq",1000,   1.6s
-"melt","pseq",1000,   1.04s
-"melt","pseq",1000,   1.04s
-"melt","pseq",1000,   1.03s
-"melt","tse",1000, 149.57ms
-"melt","tse",1000, 115.14ms
-"melt","tse",1000, 142.38ms
-"melt","tse",1000, 112.9ms
-"melt","tse",1000, 166.7ms
-"melt","tse",1000, 112.71ms
-"melt","tse",1000, 113.3ms
-"melt","tse",1000, 114.38ms
-"melt","tse",1000, 151.62ms
-"melt","tse",1000, 114.69ms
-"agglomerate","pseq",1000, 279.16ms
-"agglomerate","pseq",1000, 283.5ms
-"agglomerate","pseq",1000, 876.29ms
-"agglomerate","pseq",1000, 275.38ms
-"agglomerate","pseq",1000, 288.78ms
-"agglomerate","pseq",1000, 310.71ms
-"agglomerate","pseq",1000, 281.13ms
-"agglomerate","pseq",1000, 278.51ms
-"agglomerate","pseq",1000, 283.61ms
-"agglomerate","pseq",1000, 307.59ms
-"agglomerate","tse",1000, 557.94ms
-"agglomerate","tse",1000, 590.4ms
-"agglomerate","tse",1000, 587.28ms
-"agglomerate","tse",1000, 584.51ms
-"agglomerate","tse",1000, 558.6ms
-"agglomerate","tse",1000, 591.5ms
-"agglomerate","tse",1000, 586.87ms
-"agglomerate","tse",1000, 582.16ms
-"agglomerate","tse",1000, 567.54ms
-"agglomerate","tse",1000, 582.73ms
-"beta","pseq",1000,   2.51m
-"beta","pseq",1000,   2.85m
-"beta","pseq",1000,   3.03m
-"beta","pseq",1000,   2.88m
-"beta","pseq",1000,   2.87m
-"beta","pseq",1000,   3.08m
-"beta","pseq",1000,   2.91m
-"beta","pseq",1000,   3.1m
-"beta","pseq",1000,   3.09m
-"beta","pseq",1000,   3.17m
-"beta","tse",1000,   1.01s
-"beta","tse",1000, 834.79ms
-"beta","tse",1000, 877.56ms
-"beta","tse",1000, 811.78ms
-"beta","tse",1000, 847.01ms
-"beta","tse",1000, 162.46ms
-"beta","tse",1000, 827ms
-"beta","tse",1000,   1.72s
-"beta","tse",1000, 830.15ms
-"beta","tse",1000, 813.57ms
-"alpha","pseq",2250,   7.81s
-"alpha","pseq",2250,   7.83s
-"alpha","pseq",2250,   7.75s
-"alpha","pseq",2250,   7.7s
-"alpha","pseq",2250,   7.79s
-"alpha","pseq",2250,   7.6s
-"alpha","pseq",2250,   7.65s
-"alpha","pseq",2250,   7.83s
-"alpha","pseq",2250,   7.85s
-"alpha","pseq",2250,   7.57s
-"alpha","tse",2250,  50.19ms
-"alpha","tse",2250,  55.98ms
-"alpha","tse",2250,  53.78ms
-"alpha","tse",2250,  52.27ms
-"alpha","tse",2250,  51.46ms
-"alpha","tse",2250,  49.84ms
-"alpha","tse",2250,  57.68ms
-"alpha","tse",2250,  49.18ms
-"alpha","tse",2250,  52.59ms
-"alpha","tse",2250,  55.66ms
-"trans","pseq",2250,  62.01ms
-"trans","pseq",2250, 969.43ms
-"trans","pseq",2250,  65.76ms
-"trans","pseq",2250,  64.93ms
-"trans","pseq",2250,  63.77ms
-"trans","pseq",2250,  64.22ms
-"trans","pseq",2250,  65.56ms
-"trans","pseq",2250, 152.59ms
-"trans","pseq",2250,  59.87ms
-"trans","pseq",2250,  69.2ms
-"trans","tse",2250, 232.16ms
-"trans","tse",2250, 243.86ms
-"trans","tse",2250, 232.03ms
-"trans","tse",2250, 308.1ms
-"trans","tse",2250, 231.68ms
-"trans","tse",2250, 240.54ms
-"trans","tse",2250, 236.32ms
-"trans","tse",2250, 239.66ms
-"trans","tse",2250, 235.92ms
-"trans","tse",2250, 311.16ms
-"melt","pseq",2250,   3.02s
-"melt","pseq",2250,   4.58s
-"melt","pseq",2250,   3.77s
-"melt","pseq",2250,   3.72s
-"melt","pseq",2250,   3.69s
-"melt","pseq",2250,   3.59s
-"melt","pseq",2250,   3.36s
-"melt","pseq",2250,   2.87s
-"melt","pseq",2250,   3.38s
-"melt","pseq",2250,   2.67s
-"melt","tse",2250, 273.29ms
-"melt","tse",2250, 273.81ms
-"melt","tse",2250, 177.11ms
-"melt","tse",2250, 260.19ms
-"melt","tse",2250, 247.04ms
-"melt","tse",2250, 273.17ms
-"melt","tse",2250, 178.15ms
-"melt","tse",2250, 257.06ms
-"melt","tse",2250, 251.54ms
-"melt","tse",2250, 983.27ms
-"agglomerate","pseq",2250, 341.32ms
-"agglomerate","pseq",2250, 338.16ms
-"agglomerate","pseq",2250, 343.3ms
-"agglomerate","pseq",2250, 365.88ms
-"agglomerate","pseq",2250,   1.19s
-"agglomerate","pseq",2250, 342.41ms
-"agglomerate","pseq",2250, 336.28ms
-"agglomerate","pseq",2250, 346.7ms
-"agglomerate","pseq",2250, 343.56ms
-"agglomerate","pseq",2250, 422ms
-"agglomerate","tse",2250, 627.27ms
-"agglomerate","tse",2250, 636.21ms
-"agglomerate","tse",2250, 687.53ms
-"agglomerate","tse",2250, 636.49ms
-"agglomerate","tse",2250, 686.5ms
-"agglomerate","tse",2250, 627.78ms
-"agglomerate","tse",2250, 680.98ms
-"agglomerate","tse",2250, 640.95ms
-"agglomerate","tse",2250, 695.01ms
-"agglomerate","tse",2250, 634.3ms
-"alpha","pseq",5000,  14.96s
-"alpha","pseq",5000,  14.93s
-"alpha","pseq",5000,  16.76s
-"alpha","pseq",5000,  14.99s
-"alpha","pseq",5000,  15.27s
-"alpha","pseq",5000,  14.96s
-"alpha","pseq",5000,  14.99s
-"alpha","pseq",5000,  14.97s
-"alpha","pseq",5000,  14.97s
-"alpha","pseq",5000,  14.95s
-"alpha","tse",5000,  54.91ms
-"alpha","tse",5000,  56.61ms
-"alpha","tse",5000,  56.27ms
-"alpha","tse",5000,  56.83ms
-"alpha","tse",5000,  55.96ms
-"alpha","tse",5000,  56.35ms
-"alpha","tse",5000,  55.27ms
-"alpha","tse",5000,  57.05ms
-"alpha","tse",5000,  55.06ms
-"alpha","tse",5000,  58.38ms
-"trans","pseq",5000, 240.49ms
-"trans","pseq",5000, 125.3ms
-"trans","pseq",5000, 127.92ms
-"trans","pseq",5000, 125.07ms
-"trans","pseq",5000, 125.18ms
-"trans","pseq",5000, 132.95ms
-"trans","pseq",5000, 209.3ms
-"trans","pseq",5000, 126.36ms
-"trans","pseq",5000, 129.07ms
-"trans","pseq",5000, 124.83ms
-"trans","tse",5000, 284.05ms
-"trans","tse",5000, 357.32ms
-"trans","tse",5000, 276.16ms
-"trans","tse",5000, 280.14ms
-"trans","tse",5000, 276.63ms
-"trans","tse",5000, 368.42ms
-"trans","tse",5000, 276.15ms
-"trans","tse",5000, 279.19ms
-"trans","tse",5000, 280.24ms
-"trans","tse",5000, 275.64ms
-"melt","pseq",5000,   8.82s
-"melt","pseq",5000,   7.83s
-"melt","pseq",5000,   7.64s
-"melt","pseq",5000,   7.61s
-"melt","pseq",5000,   6.85s
-"melt","pseq",5000,   6.87s
-"melt","pseq",5000,   7.49s
-"melt","pseq",5000,   6.83s
-"melt","pseq",5000,   6.85s
-"melt","pseq",5000,   7.14s
-"melt","tse",5000, 329.8ms
-"melt","tse",5000, 426.59ms
-"melt","tse",5000, 390.51ms
-"melt","tse",5000, 419.52ms
-"melt","tse",5000, 393.38ms
-"melt","tse",5000,   1.24s
-"melt","tse",5000, 307.5ms
-"melt","tse",5000, 421.49ms
-"melt","tse",5000, 533.07ms
-"melt","tse",5000, 381.71ms
-"agglomerate","pseq",5000,   1.21s
-"agglomerate","pseq",5000, 391.21ms
-"agglomerate","pseq",5000, 390.1ms
-"agglomerate","pseq",5000, 404.65ms
-"agglomerate","pseq",5000, 481.93ms
-"agglomerate","pseq",5000, 392.17ms
-"agglomerate","pseq",5000, 389.12ms
-"agglomerate","pseq",5000, 396.26ms
-"agglomerate","pseq",5000, 483.84ms
-"agglomerate","pseq",5000, 397.16ms
-"agglomerate","tse",5000, 650.39ms
-"agglomerate","tse",5000, 785.33ms
-"agglomerate","tse",5000, 655.57ms
-"agglomerate","tse",5000, 715.11ms
-"agglomerate","tse",5000, 644.21ms
-"agglomerate","tse",5000, 701.1ms
-"agglomerate","tse",5000, 627.75ms
-"agglomerate","tse",5000, 699.98ms
-"agglomerate","tse",5000, 632ms
-"agglomerate","tse",5000, 689.17ms
-"alpha","pseq",10000,  30.18s
-"alpha","pseq",10000,  31.15s
-"alpha","pseq",10000,  31.64s
-"alpha","pseq",10000,  30.59s
-"alpha","pseq",10000,  31.58s
-"alpha","pseq",10000,  30.14s
-"alpha","pseq",10000,  30.56s
-"alpha","pseq",10000,  30.52s
-"alpha","pseq",10000,  31.78s
-"alpha","pseq",10000,  31.5s
-"alpha","tse",10000,  84.06ms
-"alpha","tse",10000,  77.59ms
-"alpha","tse",10000,  79.5ms
-"alpha","tse",10000,  85.58ms
-"alpha","tse",10000,  84.44ms
-"alpha","tse",10000,  84.07ms
-"alpha","tse",10000,  87.89ms
-"alpha","tse",10000, 999.93ms
-"alpha","tse",10000,  74.42ms
-"alpha","tse",10000,  73.66ms
-"trans","pseq",10000, 254.69ms
-"trans","pseq",10000, 256.9ms
-"trans","pseq",10000, 294.76ms
-"trans","pseq",10000,   1.09s
-"trans","pseq",10000, 304.41ms
-"trans","pseq",10000, 289.08ms
-"trans","pseq",10000, 376.74ms
-"trans","pseq",10000, 260.43ms
-"trans","pseq",10000, 258.37ms
-"trans","pseq",10000, 259.58ms
-"trans","tse",10000, 497.84ms
-"trans","tse",10000, 415.56ms
-"trans","tse",10000, 425.79ms
-"trans","tse",10000, 487.04ms
-"trans","tse",10000, 419.38ms
-"trans","tse",10000, 410.05ms
-"trans","tse",10000,   1.22s
-"trans","tse",10000, 419.39ms
-"trans","tse",10000, 414.28ms
-"trans","tse",10000, 510.65ms
-"melt","pseq",10000,  17.6s
-"melt","pseq",10000,  14.92s
-"melt","pseq",10000,  14.7s
-"melt","pseq",10000,  14.71s
-"melt","pseq",10000,  15.61s
-"melt","pseq",10000,  14.56s
-"melt","pseq",10000,  15.56s
-"melt","pseq",10000,  15.79s
-"melt","pseq",10000,  14.92s
-"melt","pseq",10000,  14.05s
-"melt","tse",10000,   1.62s
-"melt","tse",10000, 550.43ms
-"melt","tse",10000, 718.72ms
-"melt","tse",10000, 591.33ms
-"melt","tse",10000, 734.78ms
-"melt","tse",10000, 675.24ms
-"melt","tse",10000, 773.43ms
-"melt","tse",10000, 550.27ms
-"melt","tse",10000, 715.92ms
-"melt","tse",10000, 671.98ms
-"agglomerate","pseq",10000, 764.23ms
-"agglomerate","pseq",10000, 494.21ms
-"agglomerate","pseq",10000, 493.43ms
-"agglomerate","pseq",10000, 555.18ms
-"agglomerate","pseq",10000, 563.66ms
-"agglomerate","pseq",10000,   1.46s
-"agglomerate","pseq",10000, 498.52ms
-"agglomerate","pseq",10000, 539.92ms
-"agglomerate","pseq",10000, 546.53ms
-"agglomerate","pseq",10000,   1.43s
-"agglomerate","tse",10000, 746ms
-"agglomerate","tse",10000, 849.58ms
-"agglomerate","tse",10000, 725.32ms
-"agglomerate","tse",10000, 799.41ms
-"agglomerate","tse",10000, 647.91ms
-"agglomerate","tse",10000, 738.26ms
-"agglomerate","tse",10000, 765.38ms
-"agglomerate","tse",10000, 666.93ms
-"agglomerate","tse",10000, 727.55ms
-"agglomerate","tse",10000, 665.21ms
+"alpha","pseq",100,0.263269198
+"alpha","pseq",100,0.727827324000003
+"alpha","pseq",100,0.230975037
+"alpha","pseq",100,0.249284159000002
+"alpha","pseq",100,0.285053254000001
+"alpha","pseq",100,0.234310752999999
+"alpha","pseq",100,0.234074248000002
+"alpha","pseq",100,0.271677635
+"alpha","pseq",100,0.231218483999999
+"alpha","pseq",100,0.281237446000002
+"alpha","tse",100,0.0477978149999991
+"alpha","tse",100,0.041664652999998
+"alpha","tse",100,0.0301458089999969
+"alpha","tse",100,0.030176768999997
+"alpha","tse",100,0.0337119639999983
+"alpha","tse",100,0.0303186079999982
+"alpha","tse",100,0.0312585239999983
+"alpha","tse",100,0.0304688490000018
+"alpha","tse",100,0.0307813090000018
+"alpha","tse",100,0.030758947999999
+"trans","pseq",100,0.204643562000001
+"trans","pseq",100,0.00596856499999987
+"trans","pseq",100,0.00588941600000226
+"trans","pseq",100,0.00585467400000184
+"trans","pseq",100,0.0058445510000027
+"trans","pseq",100,0.00725317900000277
+"trans","pseq",100,0.00655822200000244
+"trans","pseq",100,0.0063169390000013
+"trans","pseq",100,0.00602829100000335
+"trans","pseq",100,0.00599419000000267
+"trans","tse",100,0.173433827
+"trans","tse",100,0.139358042000001
+"trans","tse",100,0.130607398000002
+"trans","tse",100,0.128450788000002
+"trans","tse",100,0.131712066000002
+"trans","tse",100,0.140420026000001
+"trans","tse",100,0.124281608
+"trans","tse",100,0.129072838000003
+"trans","tse",100,0.125895034999999
+"trans","tse",100,0.143979025000004
+"melt","pseq",100,0.0451123760000023
+"melt","pseq",100,0.0379984550000003
+"melt","pseq",100,0.0380166100000032
+"melt","pseq",100,0.0376963420000003
+"melt","pseq",100,0.0383544850000028
+"melt","pseq",100,0.0389594010000032
+"melt","pseq",100,0.0540333360000034
+"melt","pseq",100,0.0380948960000005
+"melt","pseq",100,0.0385121270000042
+"melt","pseq",100,0.042969118000002
+"melt","tse",100,0.0777233409999987
+"melt","tse",100,0.0751599229999975
+"melt","tse",100,0.0681388299999988
+"melt","tse",100,0.068880201999999
+"melt","tse",100,0.070203252999999
+"melt","tse",100,0.092132380999999
+"melt","tse",100,0.0705375979999978
+"melt","tse",100,0.0683728989999999
+"melt","tse",100,0.0686996519999994
+"melt","tse",100,0.0693569289999978
+"agglomerate","pseq",100,0.256702894000004
+"agglomerate","pseq",100,0.239644224000003
+"agglomerate","pseq",100,0.215407085000002
+"agglomerate","pseq",100,0.215713665999999
+"agglomerate","pseq",100,0.228665563000003
+"agglomerate","pseq",100,0.218213207000002
+"agglomerate","pseq",100,0.217223455999999
+"agglomerate","pseq",100,0.232609357000001
+"agglomerate","pseq",100,0.213578603000002
+"agglomerate","pseq",100,0.220427241000003
+"agglomerate","tse",100,0.575216403000002
+"agglomerate","tse",100,0.525324952000002
+"agglomerate","tse",100,0.546015539000003
+"agglomerate","tse",100,0.621459373
+"agglomerate","tse",100,0.619278215000001
+"agglomerate","tse",100,0.534857759000001
+"agglomerate","tse",100,0.530942543000002
+"agglomerate","tse",100,0.548080543000001
+"agglomerate","tse",100,0.526730240999999
+"agglomerate","tse",100,0.534269589000004
+"beta","pseq",100,0.766146400999997
+"beta","pseq",100,0.748318267999998
+"beta","pseq",100,0.811206936999998
+"beta","pseq",100,0.758042345
+"beta","pseq",100,0.815120185000001
+"beta","pseq",100,0.768642721999999
+"beta","pseq",100,0.780858353999999
+"beta","pseq",100,0.801328829999999
+"beta","pseq",100,0.783757039999998
+"beta","pseq",100,0.756401620999998
+"beta","tse",100,0.0651149480000015
+"beta","tse",100,0.0186283380000027
+"beta","tse",100,0.0186228480000032
+"beta","tse",100,0.0205957060000017
+"beta","tse",100,0.0198121150000041
+"beta","tse",100,0.0189442450000037
+"beta","tse",100,0.0189132409999999
+"beta","tse",100,0.0187372100000012
+"beta","tse",100,0.0189564510000011
+"beta","tse",100,0.0189861860000029
+"alpha","pseq",225,0.518918613
+"alpha","pseq",225,0.564625550000002
+"alpha","pseq",225,0.588114277000003
+"alpha","pseq",225,0.624566665000003
+"alpha","pseq",225,0.587423725000001
+"alpha","pseq",225,0.589869078000003
+"alpha","pseq",225,0.542568322000001
+"alpha","pseq",225,0.639284635000003
+"alpha","pseq",225,0.701881004000001
+"alpha","pseq",225,0.598709756000002
+"alpha","tse",225,0.0437388980000009
+"alpha","tse",225,0.0379015300000027
+"alpha","tse",225,0.0344964670000003
+"alpha","tse",225,0.0344939229999994
+"alpha","tse",225,0.0331161350000002
+"alpha","tse",225,0.0324404960000031
+"alpha","tse",225,0.0331356700000036
+"alpha","tse",225,0.0341806330000018
+"alpha","tse",225,0.0341057669999998
+"alpha","tse",225,0.0352085280000018
+"trans","pseq",225,0.00956551600000211
+"trans","pseq",225,0.0092396720000032
+"trans","pseq",225,0.00909048300000137
+"trans","pseq",225,0.00898749699999968
+"trans","pseq",225,0.00925712700000147
+"trans","pseq",225,0.00928605500000046
+"trans","pseq",225,0.00913100500000397
+"trans","pseq",225,0.0317116910000017
+"trans","pseq",225,0.00906008500000155
+"trans","pseq",225,0.00905085700000186
+"trans","tse",225,0.169122858000001
+"trans","tse",225,0.150981554000001
+"trans","tse",225,0.138801691000001
+"trans","tse",225,0.139611921
+"trans","tse",225,0.144023002000001
+"trans","tse",225,0.180785759000003
+"trans","tse",225,0.140792521000005
+"trans","tse",225,0.143636130000001
+"trans","tse",225,0.143195878
+"trans","tse",225,0.154448098000003
+"melt","pseq",225,0.111738456000001
+"melt","pseq",225,0.0883751540000013
+"melt","pseq",225,0.106101600000002
+"melt","pseq",225,0.0904856910000014
+"melt","pseq",225,0.109428144000002
+"melt","pseq",225,0.0902766380000024
+"melt","pseq",225,0.105682003000002
+"melt","pseq",225,0.0895667600000003
+"melt","pseq",225,0.105303349
+"melt","pseq",225,0.115956912000001
+"melt","tse",225,0.078470087000003
+"melt","tse",225,0.0762113230000026
+"melt","tse",225,0.0745686740000018
+"melt","tse",225,0.103410676000003
+"melt","tse",225,0.0764490550000048
+"melt","tse",225,0.0990601840000025
+"melt","tse",225,0.0746904750000006
+"melt","tse",225,0.0757618710000045
+"melt","tse",225,0.0747170880000034
+"melt","tse",225,0.0778719130000027
+"agglomerate","pseq",225,0.224595962000002
+"agglomerate","pseq",225,0.242336545000001
+"agglomerate","pseq",225,0.217598468000002
+"agglomerate","pseq",225,0.220071192000002
+"agglomerate","pseq",225,0.227555638000002
+"agglomerate","pseq",225,0.21458951
+"agglomerate","pseq",225,0.231819287
+"agglomerate","pseq",225,0.236867827000005
+"agglomerate","pseq",225,0.218369645000003
+"agglomerate","pseq",225,0.222023366000002
+"agglomerate","tse",225,0.581895424000002
+"agglomerate","tse",225,0.602226173000002
+"agglomerate","tse",225,0.566847586000002
+"agglomerate","tse",225,0.590431025000004
+"agglomerate","tse",225,1.077852448
+"agglomerate","tse",225,0.667078757000002
+"agglomerate","tse",225,0.554106659000002
+"agglomerate","tse",225,0.547157245000001
+"agglomerate","tse",225,0.530402385000002
+"agglomerate","tse",225,0.541274741000002
+"beta","pseq",225,4.423660989
+"beta","pseq",225,4.115965865
+"beta","pseq",225,3.893416025
+"beta","pseq",225,3.91799144
+"beta","pseq",225,3.866195491
+"beta","pseq",225,3.89188912199999
+"beta","pseq",225,3.958913074
+"beta","pseq",225,3.930498343
+"beta","pseq",225,3.895106483
+"beta","pseq",225,3.94300599
+"beta","tse",225,0.0577545110000024
+"beta","tse",225,0.0230138840000045
+"beta","tse",225,0.0226386430000005
+"beta","tse",225,0.0437167959999982
+"beta","tse",225,0.024180826000002
+"beta","tse",225,0.0242291280000018
+"beta","tse",225,0.024042921000003
+"beta","tse",225,0.0244950559999992
+"beta","tse",225,0.0239545950000029
+"beta","tse",225,0.0563830250000024
+"alpha","pseq",500,1.206509878
+"alpha","pseq",500,1.235209037
+"alpha","pseq",500,1.228872874
+"alpha","pseq",500,1.190618926
+"alpha","pseq",500,1.222844471
+"alpha","pseq",500,1.218633815
+"alpha","pseq",500,1.21238728
+"alpha","pseq",500,1.221596396
+"alpha","pseq",500,1.267630631
+"alpha","pseq",500,1.232254893
+"alpha","tse",500,0.0339215230000001
+"alpha","tse",500,0.0331665120000011
+"alpha","tse",500,0.0330341090000026
+"alpha","tse",500,0.0334838429999991
+"alpha","tse",500,0.0357818020000025
+"alpha","tse",500,0.033182539000002
+"alpha","tse",500,0.0325684869999989
+"alpha","tse",500,0.0326319240000039
+"alpha","tse",500,0.0330731829999991
+"alpha","tse",500,0.0325926890000012
+"trans","pseq",500,0.0155144840000041
+"trans","pseq",500,0.0153788729999995
+"trans","pseq",500,0.0156392280000013
+"trans","pseq",500,0.0156775620000005
+"trans","pseq",500,0.015603732999999
+"trans","pseq",500,0.015444696000003
+"trans","pseq",500,0.0154321410000016
+"trans","pseq",500,0.0154567590000028
+"trans","pseq",500,0.0152391919999992
+"trans","pseq",500,0.0152290410000013
+"trans","tse",500,0.157508952999997
+"trans","tse",500,0.140991216999996
+"trans","tse",500,0.141292760999999
+"trans","tse",500,0.137514407999998
+"trans","tse",500,0.160683785
+"trans","tse",500,0.142702343
+"trans","tse",500,0.136407742999996
+"trans","tse",500,0.137039660999996
+"trans","tse",500,0.156885165999995
+"trans","tse",500,0.144384269
+"melt","pseq",500,0.207650088000001
+"melt","pseq",500,0.202013147000002
+"melt","pseq",500,0.207714918000001
+"melt","pseq",500,0.736940861000001
+"melt","pseq",500,0.187773004
+"melt","pseq",500,0.196278639000003
+"melt","pseq",500,0.194633529000001
+"melt","pseq",500,0.219208854000001
+"melt","pseq",500,0.184396663000001
+"melt","pseq",500,0.196925827000001
+"melt","tse",500,0.0807679509999986
+"melt","tse",500,0.0952358750000037
+"melt","tse",500,0.0851928310000041
+"melt","tse",500,0.0980300720000038
+"melt","tse",500,0.083082000000001
+"melt","tse",500,0.104424932000001
+"melt","tse",500,0.0832885889999986
+"melt","tse",500,0.0866641460000004
+"melt","tse",500,0.0837677990000039
+"melt","tse",500,0.100064141000001
+"agglomerate","pseq",500,0.211861493000001
+"agglomerate","pseq",500,0.217495125000003
+"agglomerate","pseq",500,0.234591656000003
+"agglomerate","pseq",500,0.215968952000001
+"agglomerate","pseq",500,0.213861401999999
+"agglomerate","pseq",500,0.225935105000001
+"agglomerate","pseq",500,0.212108574000002
+"agglomerate","pseq",500,0.208498890000001
+"agglomerate","pseq",500,0.230546449999999
+"agglomerate","pseq",500,0.209479987000002
+"agglomerate","tse",500,0.52352381
+"agglomerate","tse",500,0.543347766000004
+"agglomerate","tse",500,0.562101700000003
+"agglomerate","tse",500,0.535754991000001
+"agglomerate","tse",500,0.531062068000004
+"agglomerate","tse",500,0.523108192000002
+"agglomerate","tse",500,0.526048004000003
+"agglomerate","tse",500,0.509956598000002
+"agglomerate","tse",500,0.529336129000004
+"agglomerate","tse",500,0.522493749000002
+"beta","pseq",500,22.599204233
+"beta","pseq",500,23.629722908
+"beta","pseq",500,23.124828208
+"beta","pseq",500,23.290697784
+"beta","pseq",500,23.721738811
+"beta","pseq",500,23.206896551
+"beta","pseq",500,23.193403116
+"beta","pseq",500,23.605052223
+"beta","pseq",500,23.706507674
+"beta","pseq",500,23.509439312
+"beta","tse",500,0.193355991999997
+"beta","tse",500,0.0364756779999986
+"beta","tse",500,0.0341352879999981
+"beta","tse",500,0.0345781350000003
+"beta","tse",500,0.034532690999999
+"beta","tse",500,0.0362371930000016
+"beta","tse",500,0.034761593999999
+"beta","tse",500,0.0633560220000007
+"beta","tse",500,0.0365856670000007
+"beta","tse",500,0.0353298589999973
+"alpha","pseq",1000,2.579783319
+"alpha","pseq",1000,2.566171696
+"alpha","pseq",1000,2.598570729
+"alpha","pseq",1000,2.572037373
+"alpha","pseq",1000,2.539803223
+"alpha","pseq",1000,2.58555145
+"alpha","pseq",1000,2.946928858
+"alpha","pseq",1000,3.141213247
+"alpha","pseq",1000,2.627613245
+"alpha","pseq",1000,2.595426887
+"alpha","tse",1000,0.0847253079999994
+"alpha","tse",1000,0.0355418920000012
+"alpha","tse",1000,0.0367893539999997
+"alpha","tse",1000,0.0415570330000037
+"alpha","tse",1000,0.0379965630000001
+"alpha","tse",1000,0.0371221750000004
+"alpha","tse",1000,0.0363987400000028
+"alpha","tse",1000,0.0371477129999995
+"alpha","tse",1000,0.0350292960000012
+"alpha","tse",1000,0.0352870799999998
+"trans","pseq",1000,0.0274103270000019
+"trans","pseq",1000,0.0276324330000008
+"trans","pseq",1000,0.0273628170000038
+"trans","pseq",1000,0.028049524
+"trans","pseq",1000,0.0275548730000033
+"trans","pseq",1000,0.027674729000001
+"trans","pseq",1000,0.0277229739999996
+"trans","pseq",1000,0.612517612000001
+"trans","pseq",1000,0.0274086740000037
+"trans","pseq",1000,0.0276042220000008
+"trans","tse",1000,0.158671461000001
+"trans","tse",1000,0.158184010000003
+"trans","tse",1000,0.159554802000002
+"trans","tse",1000,0.159299670999999
+"trans","tse",1000,0.176225914000003
+"trans","tse",1000,0.157549579000001
+"trans","tse",1000,0.158229003000002
+"trans","tse",1000,0.154001179000002
+"trans","tse",1000,0.176579797999999
+"trans","tse",1000,0.155372957000001
+"melt","pseq",1000,0.440248719000003
+"melt","pseq",1000,0.979246311000001
+"melt","pseq",1000,1.012594703
+"melt","pseq",1000,0.477954254000004
+"melt","pseq",1000,0.978039507000002
+"melt","pseq",1000,0.433639647000003
+"melt","pseq",1000,0.483769038000002
+"melt","pseq",1000,0.430820660999998
+"melt","pseq",1000,0.465991485000004
+"melt","pseq",1000,0.450021835000001
+"melt","tse",1000,0.153765103000001
+"melt","tse",1000,0.110144268000003
+"melt","tse",1000,0.106972911
+"melt","tse",1000,0.130739927
+"melt","tse",1000,0.103926559000001
+"melt","tse",1000,0.134986314999999
+"melt","tse",1000,0.129740422000001
+"melt","tse",1000,0.659391265
+"melt","tse",1000,0.105769669000001
+"melt","tse",1000,0.105574817000001
+"agglomerate","pseq",1000,0.234155421000001
+"agglomerate","pseq",1000,0.232939072000001
+"agglomerate","pseq",1000,0.260845842999998
+"agglomerate","pseq",1000,0.232721808000001
+"agglomerate","pseq",1000,0.250660937000003
+"agglomerate","pseq",1000,0.234787139000002
+"agglomerate","pseq",1000,0.234300336
+"agglomerate","pseq",1000,0.250905321000001
+"agglomerate","pseq",1000,0.232653904999999
+"agglomerate","pseq",1000,0.234857405000003
+"agglomerate","tse",1000,0.557678739
+"agglomerate","tse",1000,0.550404225000001
+"agglomerate","tse",1000,0.556239285
+"agglomerate","tse",1000,0.552573760000001
+"agglomerate","tse",1000,0.553559958000001
+"agglomerate","tse",1000,0.551640576
+"agglomerate","tse",1000,0.548791569000002
+"agglomerate","tse",1000,0.547123358
+"agglomerate","tse",1000,0.553708251000003
+"agglomerate","tse",1000,0.564687250000002
+"beta","pseq",1000,144.64414453
+"beta","pseq",1000,173.966796671
+"beta","pseq",1000,200.839448682
+"beta","pseq",1000,164.974250826
+"beta","pseq",1000,161.187354204
+"beta","pseq",1000,162.517737803
+"beta","pseq",1000,173.209386691
+"beta","pseq",1000,200.677685418
+"beta","pseq",1000,199.48427478
+"beta","pseq",1000,197.636137981
+"beta","tse",1000,0.777341617999998
+"beta","tse",1000,0.807625443999999
+"beta","tse",1000,0.945961191999999
+"beta","tse",1000,0.764501259999999
+"beta","tse",1000,0.0732292329999993
+"beta","tse",1000,0.0729645519999984
+"beta","tse",1000,0.840854297
+"beta","tse",1000,0.0721399239999982
+"beta","tse",1000,0.145479978999997
+"beta","tse",1000,0.783175214
+"alpha","pseq",2250,7.046077938
+"alpha","pseq",2250,6.748176033
+"alpha","pseq",2250,6.754312801
+"alpha","pseq",2250,6.716863064
+"alpha","pseq",2250,7.511394021
+"alpha","pseq",2250,6.566348681
+"alpha","pseq",2250,6.443551691
+"alpha","pseq",2250,6.553538668
+"alpha","pseq",2250,6.548133884
+"alpha","pseq",2250,6.628423744
+"alpha","tse",2250,0.0442153900000051
+"alpha","tse",2250,0.0440343210000016
+"alpha","tse",2250,0.0427839820000031
+"alpha","tse",2250,0.0427831510000019
+"alpha","tse",2250,0.0469950539999999
+"alpha","tse",2250,0.0430782150000013
+"alpha","tse",2250,0.042459565000005
+"alpha","tse",2250,0.0426164300000025
+"alpha","tse",2250,0.0426864640000026
+"alpha","tse",2250,0.0420585469999999
+"trans","pseq",2250,0.0579222490000006
+"trans","pseq",2250,0.057287168000002
+"trans","pseq",2250,0.133981935000001
+"trans","pseq",2250,0.0567335880000037
+"trans","pseq",2250,0.0574984769999993
+"trans","pseq",2250,0.0564712530000016
+"trans","pseq",2250,0.0572385450000041
+"trans","pseq",2250,0.0580432550000047
+"trans","pseq",2250,0.0574969190000019
+"trans","pseq",2250,0.0576068470000024
+"trans","tse",2250,0.256672442999999
+"trans","tse",2250,0.195601096999997
+"trans","tse",2250,0.196691883
+"trans","tse",2250,0.195306721999998
+"trans","tse",2250,0.196457619
+"trans","tse",2250,0.201559389999996
+"trans","tse",2250,0.252504388999998
+"trans","tse",2250,0.196947907999999
+"trans","tse",2250,0.202282648999997
+"trans","tse",2250,0.191016294999997
+"melt","pseq",2250,2.724311584
+"melt","pseq",2250,1.817100701
+"melt","pseq",2250,1.751972966
+"melt","pseq",2250,1.698837256
+"melt","pseq",2250,1.100536285
+"melt","pseq",2250,1.883714151
+"melt","pseq",2250,1.766994669
+"melt","pseq",2250,1.765483745
+"melt","pseq",2250,1.711678341
+"melt","pseq",2250,1.19322623
+"melt","tse",2250,0.168898600000002
+"melt","tse",2250,0.237923118000001
+"melt","tse",2250,0.229439150000001
+"melt","tse",2250,0.230087495000003
+"melt","tse",2250,0.235132677999999
+"melt","tse",2250,0.239916614000002
+"melt","tse",2250,0.229259066000001
+"melt","tse",2250,0.236525122
+"melt","tse",2250,0.230599508000001
+"melt","tse",2250,0.914136954000003
+"agglomerate","pseq",2250,0.277158428999996
+"agglomerate","pseq",2250,0.274682771999998
+"agglomerate","pseq",2250,0.288595594999997
+"agglomerate","pseq",2250,0.296706102999998
+"agglomerate","pseq",2250,0.410022433999998
+"agglomerate","pseq",2250,0.273692777999997
+"agglomerate","pseq",2250,0.272039336999999
+"agglomerate","pseq",2250,0.277306286999998
+"agglomerate","pseq",2250,0.280405842999997
+"agglomerate","pseq",2250,0.347182047999997
+"agglomerate","tse",2250,0.596527205000005
+"agglomerate","tse",2250,0.640288108000004
+"agglomerate","tse",2250,0.582466032000003
+"agglomerate","tse",2250,0.637816473000001
+"agglomerate","tse",2250,0.586373100000003
+"agglomerate","tse",2250,0.647792975000002
+"agglomerate","tse",2250,0.580886976000002
+"agglomerate","tse",2250,0.638658853000003
+"agglomerate","tse",2250,0.580821658000001
+"agglomerate","tse",2250,0.633469352000002
+"beta","tse",2250,3.418498708
+"beta","tse",2250,3.462459963
+"beta","tse",2250,3.53903348
+"beta","tse",2250,4.310636199
+"beta","tse",2250,3.569753264
+"beta","tse",2250,4.156461002
+"beta","tse",2250,3.41754164
+"beta","tse",2250,3.559082452
+"beta","tse",2250,3.377387065
+"beta","tse",2250,3.424575972
+"alpha","pseq",5000,14.701092058
+"alpha","pseq",5000,14.657616232
+"alpha","pseq",5000,14.666762745
+"alpha","pseq",5000,15.122896021
+"alpha","pseq",5000,14.692105258
+"alpha","pseq",5000,15.240115433
+"alpha","pseq",5000,14.589972305
+"alpha","pseq",5000,14.531253584
+"alpha","pseq",5000,14.614500225
+"alpha","pseq",5000,14.512011407
+"alpha","tse",5000,0.0523362670000012
+"alpha","tse",5000,0.053441037999999
+"alpha","tse",5000,0.053070151
+"alpha","tse",5000,0.0526791640000042
+"alpha","tse",5000,0.0523489410000018
+"alpha","tse",5000,0.0539555000000043
+"alpha","tse",5000,0.0544753100000044
+"alpha","tse",5000,0.0518472890000012
+"alpha","tse",5000,0.0525932020000006
+"alpha","tse",5000,0.0551575269999987
+"trans","pseq",5000,0.124124210000002
+"trans","pseq",5000,0.123911889000002
+"trans","pseq",5000,0.222694060000002
+"trans","pseq",5000,0.126141526000001
+"trans","pseq",5000,0.125898101000001
+"trans","pseq",5000,0.122994319000004
+"trans","pseq",5000,0.122000760000002
+"trans","pseq",5000,0.129354863000003
+"trans","pseq",5000,0.197379687000002
+"trans","pseq",5000,0.121709677000002
+"trans","tse",5000,0.267094093000004
+"trans","tse",5000,0.263005999000001
+"trans","tse",5000,0.271920440000002
+"trans","tse",5000,0.351202002000001
+"trans","tse",5000,0.268255212
+"trans","tse",5000,0.266823025000001
+"trans","tse",5000,0.262610267000003
+"trans","tse",5000,0.268707071000001
+"trans","tse",5000,0.339463947000002
+"trans","tse",5000,0.262318801000003
+"melt","pseq",5000,3.852235196
+"melt","pseq",5000,3.664629311
+"melt","pseq",5000,2.901379506
+"melt","pseq",5000,3.702560185
+"melt","pseq",5000,3.413415107
+"melt","pseq",5000,2.904161429
+"melt","pseq",5000,2.899702125
+"melt","pseq",5000,3.531861359
+"melt","pseq",5000,2.950881869
+"melt","pseq",5000,2.887184461
+"melt","tse",5000,1.201104762
+"melt","tse",5000,0.274188919
+"melt","tse",5000,0.375348291999998
+"melt","tse",5000,0.287232913
+"melt","tse",5000,0.368550818999996
+"melt","tse",5000,1.108368562
+"melt","tse",5000,0.280659374999999
+"melt","tse",5000,0.381595499999996
+"melt","tse",5000,0.283364948999999
+"melt","tse",5000,0.370019214999999
+"agglomerate","pseq",5000,0.396721070000002
+"agglomerate","pseq",5000,0.431388592000001
+"agglomerate","pseq",5000,0.334024657000004
+"agglomerate","pseq",5000,0.327264672000002
+"agglomerate","pseq",5000,0.334497362
+"agglomerate","pseq",5000,0.431467606000002
+"agglomerate","pseq",5000,0.325677058
+"agglomerate","pseq",5000,0.334621801000001
+"agglomerate","pseq",5000,0.327107076000001
+"agglomerate","pseq",5000,0.323777375999999
+"agglomerate","tse",5000,1.381349342
+"agglomerate","tse",5000,0.614780954
+"agglomerate","tse",5000,0.648272984999998
+"agglomerate","tse",5000,0.646065414999999
+"agglomerate","tse",5000,0.586543293999998
+"agglomerate","tse",5000,0.654322117999996
+"agglomerate","tse",5000,0.593650369999999
+"agglomerate","tse",5000,0.655765021999997
+"agglomerate","tse",5000,0.588191145
+"agglomerate","tse",5000,0.64753541
+"beta","tse",5000,19.726393868
+"beta","tse",5000,18.978630167
+"beta","tse",5000,17.552690684
+"beta","tse",5000,18.2738932
+"beta","tse",5000,16.815462689
+"beta","tse",5000,18.117518523
+"beta","tse",5000,17.380979674
+"beta","tse",5000,17.587085093
+"beta","tse",5000,18.117350482
+"beta","tse",5000,17.642857713
+"alpha","pseq",10000,29.608520622
+"alpha","pseq",10000,29.388697575
+"alpha","pseq",10000,29.242565326
+"alpha","pseq",10000,30.011431153
+"alpha","pseq",10000,29.253108414
+"alpha","pseq",10000,29.375634579
+"alpha","pseq",10000,29.450883169
+"alpha","pseq",10000,29.464619917
+"alpha","pseq",10000,29.236379462
+"alpha","pseq",10000,36.364151157
+"alpha","tse",10000,0.0787093720000023
+"alpha","tse",10000,0.0717826949999996
+"alpha","tse",10000,0.0716883230000036
+"alpha","tse",10000,0.0711092120000032
+"alpha","tse",10000,0.0698343200000018
+"alpha","tse",10000,0.0699919740000006
+"alpha","tse",10000,0.0708204019999989
+"alpha","tse",10000,0.0753713580000017
+"alpha","tse",10000,0.0726897460000018
+"alpha","tse",10000,0.0726561440000033
+"trans","pseq",10000,0.251846828000001
+"trans","pseq",10000,0.381516675000004
+"trans","pseq",10000,0.253537063
+"trans","pseq",10000,0.253784399000001
+"trans","pseq",10000,0.264246201000002
+"trans","pseq",10000,0.255510257000005
+"trans","pseq",10000,0.351449497000004
+"trans","pseq",10000,0.249061255000001
+"trans","pseq",10000,0.254998716000003
+"trans","pseq",10000,0.252297908999999
+"trans","tse",10000,0.404064234000003
+"trans","tse",10000,0.475719121000001
+"trans","tse",10000,0.406427384000001
+"trans","tse",10000,0.401249617000005
+"trans","tse",10000,0.400422791
+"trans","tse",10000,0.505292719000003
+"trans","tse",10000,0.401925996000003
+"trans","tse",10000,0.400240628000002
+"trans","tse",10000,0.406460207000002
+"trans","tse",10000,0.490086133000002
+"melt","pseq",10000,6.51412448
+"melt","pseq",10000,7.002001211
+"melt","pseq",10000,6.266924936
+"melt","pseq",10000,6.0332532
+"melt","pseq",10000,5.994808405
+"melt","pseq",10000,6.103346701
+"melt","pseq",10000,6.14432748
+"melt","pseq",10000,6.943807013
+"melt","pseq",10000,6.135824233
+"melt","pseq",10000,5.950928804
+"melt","tse",10000,1.524420499
+"melt","tse",10000,0.500305679
+"melt","tse",10000,0.636388668999999
+"melt","tse",10000,0.677057091000002
+"melt","tse",10000,0.624662219000005
+"melt","tse",10000,0.674716460000003
+"melt","tse",10000,0.648083570000001
+"melt","tse",10000,0.673176881
+"melt","tse",10000,0.625226038000001
+"melt","tse",10000,0.618895348999999
+"agglomerate","pseq",10000,0.651890578
+"agglomerate","pseq",10000,0.435475661000002
+"agglomerate","pseq",10000,0.437396025000002
+"agglomerate","pseq",10000,0.539727477
+"agglomerate","pseq",10000,0.432425055000003
+"agglomerate","pseq",10000,0.535980782000003
+"agglomerate","pseq",10000,0.430496231000003
+"agglomerate","pseq",10000,0.435476975000004
+"agglomerate","pseq",10000,0.532760705000005
+"agglomerate","pseq",10000,0.430194220000001
+"agglomerate","tse",10000,0.631321960000001
+"agglomerate","tse",10000,0.722125549000005
+"agglomerate","tse",10000,0.602471435000002
+"agglomerate","tse",10000,0.672311559000001
+"agglomerate","tse",10000,0.603118437000003
+"agglomerate","tse",10000,0.667598755000004
+"agglomerate","tse",10000,0.601803512
+"agglomerate","tse",10000,0.673346873
+"agglomerate","tse",10000,0.611934688000002
+"agglomerate","tse",10000,1.367769076
