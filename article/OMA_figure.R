@@ -105,12 +105,18 @@ benchmark_df %>%
   mutate(time = as.numeric(time)) %>%
   write.csv(file = "article/benchmark_rawdata.csv", row.names = FALSE)
 
+# benchmark_df <- read.csv("article/benchmark_rawdata.csv") %>%
+#   mutate(time = as_bench_time(time), mem_alloc = as_bench_bytes(mem_alloc),
+#          method = factor(method, levels = names(methods)),
+#          object = factor(object, levels = c("tse", "pseq")))
+
 # Summarise benchmarking results with mean time and standard deviation
 benchmark_df <- benchmark_df %>%
   group_by(method, object, N) %>%
+  filter(if( sum(gc == "none") >= 5 ) gc == "none" else TRUE) %>%
   summarise(Time = mean(time), Memory = as_bench_bytes(mean(mem_alloc)),
             TimeSD = sd(time), TimeSE = TimeSD / sqrt(n_iter),
-            .groups = "drop") %>%
+            Count = n(), .groups = "drop") %>%
   mutate(method = factor(method, levels = names(methods)),
          object = factor(object, levels = c("tse", "pseq")))
 
@@ -124,13 +130,16 @@ benchmark_df %>%
 #          method = factor(method, levels = names(methods)),
 #          object = factor(object, levels = c("tse", "pseq")))
 
+time_breaks <- as_bench_time(c("10ms", "100ms", "1s", "10s", "1.67m"))
+byte_breaks <- as_bench_bytes(c("1MB", "10MB", "100MB", "1GB", "10GB"))
+
 # Visualise benchmarking results
 p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
   geom_errorbar(aes(ymin = Time - TimeSE, ymax = Time + TimeSE), width = 0) +
   geom_line() +
   geom_point() +
   scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
-  scale_y_bench_time(breaks = as_bench_time(c("10ms", "100ms", "1s", "10s", "1.67m"))) +
+  scale_y_bench_time(breaks = time_breaks) +
   scale_colour_manual(labels = c("TreeSE", "phyloseq"),
                       values = c("black", "darkgrey")) +
   facet_grid(. ~ method,
@@ -145,7 +154,7 @@ p2 <- ggplot(benchmark_df, aes(x = N, y = Memory, colour = object)) +
   geom_line() +
   geom_point() +
   scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
-  scale_y_bench_bytes(breaks = as_bench_bytes(c("1MB", "10MB", "100MB", "1GB", "10GB"))) +
+  scale_y_bench_bytes(breaks = byte_breaks) +
   scale_colour_manual(labels = c("TreeSE", "phyloseq"),
                       values = c("black", "darkgrey")) +
   facet_grid(. ~ method,

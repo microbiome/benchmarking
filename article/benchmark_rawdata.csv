@@ -1,661 +1,661 @@
 "method","object","N","time","gc","mem_alloc"
-"alpha","pseq",100,0.224882573,"none", 38.42MB
-"alpha","pseq",100,0.296620173,"level1", 38.42MB
-"alpha","pseq",100,0.225608526,"none", 38.42MB
-"alpha","pseq",100,0.263244542,"level0", 38.42MB
-"alpha","pseq",100,0.264294243,"level0", 38.42MB
-"alpha","pseq",100,0.22472934,"none", 38.42MB
-"alpha","pseq",100,0.264283131,"level0", 38.42MB
-"alpha","pseq",100,0.259514139,"level0", 38.42MB
-"alpha","pseq",100,0.224474373,"none", 38.42MB
-"alpha","pseq",100,0.258445022,"level0", 38.42MB
-"alpha","tse",100,0.0417340249999998,"none",  1.94MB
-"alpha","tse",100,0.0294803369999999,"none",  1.94MB
-"alpha","tse",100,0.0309626949999999,"none",  1.94MB
-"alpha","tse",100,0.0342976770000001,"none",  1.94MB
-"alpha","tse",100,0.0324845200000001,"none",  1.94MB
-"alpha","tse",100,0.0334778410000003,"none",  1.94MB
-"alpha","tse",100,0.0324527760000004,"none",  1.94MB
-"alpha","tse",100,0.0311318840000001,"none",  1.94MB
-"alpha","tse",100,0.0303842889999997,"none",  1.94MB
-"alpha","tse",100,0.0320239470000003,"none",  1.94MB
-"trans","pseq",100,0.00588610200000028,"none",  8.16MB
-"trans","pseq",100,0.00582784700000039,"none",  8.16MB
-"trans","pseq",100,0.00570207899999975,"none",  8.16MB
-"trans","pseq",100,0.0056418589999998,"none",  8.16MB
-"trans","pseq",100,0.00570767799999983,"none",  8.16MB
-"trans","pseq",100,0.00565296599999998,"none",  8.16MB
-"trans","pseq",100,0.00562488700000019,"none",  8.16MB
-"trans","pseq",100,0.00570082799999971,"none",  8.16MB
-"trans","pseq",100,0.031874797,"level0",  8.16MB
-"trans","pseq",100,0.00729374100000024,"none",  8.16MB
-"trans","tse",100,0.147424007000001,"none",  4.45MB
-"trans","tse",100,0.125125456000001,"none",  4.45MB
-"trans","tse",100,0.124227112000001,"none",  4.45MB
-"trans","tse",100,0.144216416,"level0",  4.45MB
-"trans","tse",100,0.129490939000001,"none",  4.45MB
-"trans","tse",100,0.129177728,"none",  4.45MB
-"trans","tse",100,0.129724597,"none",  4.45MB
-"trans","tse",100,0.148603689,"level0",  4.45MB
-"trans","tse",100,0.135518398,"none",  4.45MB
-"trans","tse",100,0.130399384,"none",  4.45MB
-"melt","pseq",100,0.0423085219999999,"none", 19.3MB
-"melt","pseq",100,0.039160952,"none", 19.3MB
-"melt","pseq",100,0.0565428450000005,"level0", 19.3MB
-"melt","pseq",100,0.0438298020000003,"none", 19.3MB
-"melt","pseq",100,0.0395772590000005,"none", 19.3MB
-"melt","pseq",100,0.0619327180000004,"level1", 19.3MB
-"melt","pseq",100,0.0387801690000003,"none", 19.3MB
-"melt","pseq",100,0.0395916920000001,"none", 19.3MB
-"melt","pseq",100,0.605453442,"level2", 19.3MB
-"melt","pseq",100,0.0377654360000004,"none", 19.3MB
-"melt","tse",100,0.0712083209999999,"none",  7.32MB
-"melt","tse",100,0.063523365,"none",  7.32MB
-"melt","tse",100,0.0634489879999998,"none",  7.32MB
-"melt","tse",100,0.0639991500000003,"none",  7.32MB
-"melt","tse",100,0.0638189909999998,"none",  7.32MB
-"melt","tse",100,0.0647883409999999,"none",  7.32MB
-"melt","tse",100,0.0712213959999999,"none",  7.32MB
-"melt","tse",100,0.0708911560000001,"none",  7.32MB
-"melt","tse",100,0.07622551,"none",  7.32MB
-"melt","tse",100,0.0805090669999999,"level0",  7.32MB
-"agglomerate","pseq",100,0.550887495,"level0", 20.31MB
-"agglomerate","pseq",100,0.528069362,"none", 20.31MB
-"agglomerate","pseq",100,0.536606096,"level0", 20.31MB
-"agglomerate","pseq",100,0.544040392,"level0", 20.31MB
-"agglomerate","pseq",100,0.54250223,"level0", 20.31MB
-"agglomerate","pseq",100,0.545560346,"level0", 20.31MB
-"agglomerate","pseq",100,0.553575606,"level0", 20.31MB
-"agglomerate","pseq",100,0.539560725,"level0", 20.31MB
-"agglomerate","pseq",100,0.538275895,"level0", 20.31MB
-"agglomerate","pseq",100,0.533474079,"level0", 20.31MB
-"agglomerate","tse",100,0.505439626,"level0",  3.53MB
-"agglomerate","tse",100,0.989813577,"level2",  3.53MB
-"agglomerate","tse",100,0.496475575,"level0",  3.53MB
-"agglomerate","tse",100,0.491940133,"level0",  3.53MB
-"agglomerate","tse",100,0.493226165,"level0",  3.53MB
-"agglomerate","tse",100,0.493350004,"level0",  3.53MB
-"agglomerate","tse",100,0.490361301,"level0",  3.53MB
-"agglomerate","tse",100,0.483308039,"none",  3.53MB
-"agglomerate","tse",100,0.493584499,"level0",  3.53MB
-"agglomerate","tse",100,0.496389948,"level0",  3.53MB
-"beta","pseq",100,0.712403907,"level0", 99.24MB
-"beta","pseq",100,0.704149475,"level0", 99.24MB
-"beta","pseq",100,0.6897693,"level0", 99.24MB
-"beta","pseq",100,0.689539891,"level0", 99.24MB
-"beta","pseq",100,0.710999706,"level0", 99.24MB
-"beta","pseq",100,0.703978495,"level0", 99.24MB
-"beta","pseq",100,0.692426612,"level0", 99.24MB
-"beta","pseq",100,0.698238413,"level0", 99.24MB
-"beta","pseq",100,0.70390571,"level0", 99.24MB
-"beta","pseq",100,0.680128953,"level0", 99.24MB
-"beta","tse",100,0.0284885779999997,"none",  5.75MB
-"beta","tse",100,0.0176393080000001,"none",  5.75MB
-"beta","tse",100,0.0167985820000003,"none",  5.75MB
-"beta","tse",100,0.0167176790000001,"none",  5.75MB
-"beta","tse",100,0.017336872,"none",  5.75MB
-"beta","tse",100,0.017331703,"none",  5.75MB
-"beta","tse",100,0.0178036260000001,"none",  5.75MB
-"beta","tse",100,0.0175559710000002,"none",  5.75MB
-"beta","tse",100,0.01756424,"none",  5.75MB
-"beta","tse",100,0.01745478,"none",  5.75MB
-"alpha","pseq",250,0.711457205,"level1", 87.23MB
-"alpha","pseq",250,1.445180814,"level2", 87.23MB
-"alpha","pseq",250,0.548019345000001,"none", 87.23MB
-"alpha","pseq",250,0.578645475000001,"none", 87.23MB
-"alpha","pseq",250,0.648016886000001,"level0", 87.23MB
-"alpha","pseq",250,0.554369323,"none", 87.23MB
-"alpha","pseq",250,0.626568129000001,"level0", 87.23MB
-"alpha","pseq",250,0.559809789,"none", 87.23MB
-"alpha","pseq",250,0.562387482000001,"none", 87.23MB
-"alpha","pseq",250,0.620946679,"level0", 87.23MB
-"alpha","tse",250,0.0335553750000002,"none",  1.01MB
-"alpha","tse",250,0.0306332760000001,"none",  1.01MB
-"alpha","tse",250,0.0307861659999999,"none",  1.01MB
-"alpha","tse",250,0.0307328289999997,"none",  1.01MB
-"alpha","tse",250,0.030849093,"none",  1.01MB
-"alpha","tse",250,0.030416625,"none",  1.01MB
-"alpha","tse",250,0.0302280320000001,"none",  1.01MB
-"alpha","tse",250,0.0314754709999998,"none",  1.01MB
-"alpha","tse",250,0.0311315910000003,"none",  1.01MB
-"alpha","tse",250,0.0297146339999999,"none",  1.01MB
-"trans","pseq",250,0.0109772289999999,"none",  4.18MB
-"trans","pseq",250,0.00937606299999993,"none",  4.18MB
-"trans","pseq",250,0.00926220000000022,"none",  4.18MB
-"trans","pseq",250,0.00922916200000001,"none",  4.18MB
-"trans","pseq",250,0.00929849899999979,"none",  4.18MB
-"trans","pseq",250,0.00928306900000031,"none",  4.18MB
-"trans","pseq",250,0.00934104899999966,"none",  4.18MB
-"trans","pseq",250,0.00926574200000019,"none",  4.18MB
-"trans","pseq",250,0.00919812599999981,"none",  4.18MB
-"trans","pseq",250,0.00923606299999991,"none",  4.18MB
-"trans","tse",250,0.129840613,"none",  4.47MB
-"trans","tse",250,0.127764239,"none",  4.47MB
-"trans","tse",250,0.176792315,"level0",  4.47MB
-"trans","tse",250,0.126630698,"none",  4.47MB
-"trans","tse",250,0.125012937,"none",  4.47MB
-"trans","tse",250,0.124565574,"none",  4.47MB
-"trans","tse",250,0.137735418,"none",  4.47MB
-"trans","tse",250,0.129443671,"none",  4.47MB
-"trans","tse",250,0.124666286,"none",  4.47MB
-"trans","tse",250,0.125355523,"none",  4.47MB
-"melt","pseq",250,0.0915176700000004,"none", 45.18MB
-"melt","pseq",250,0.0864707140000003,"none", 45.18MB
-"melt","pseq",250,0.0853170300000001,"none", 45.18MB
-"melt","pseq",250,0.0841824550000005,"none", 45.18MB
-"melt","pseq",250,0.108228972,"level0", 45.18MB
-"melt","pseq",250,0.0838530820000001,"none", 45.18MB
-"melt","pseq",250,0.0866085299999999,"none", 45.18MB
-"melt","pseq",250,0.0842109040000003,"none", 45.18MB
-"melt","pseq",250,0.0823408180000005,"none", 45.18MB
-"melt","pseq",250,0.108815971,"level1", 45.18MB
-"melt","tse",250,0.0690587930000004,"none", 13.51MB
-"melt","tse",250,0.0710978680000003,"none", 13.51MB
-"melt","tse",250,0.0741596480000006,"none", 13.51MB
-"melt","tse",250,0.0716641100000004,"none", 13.51MB
-"melt","tse",250,0.0700825590000003,"none", 13.51MB
-"melt","tse",250,0.0703106230000001,"none", 13.51MB
-"melt","tse",250,0.0716497720000002,"none", 13.51MB
-"melt","tse",250,0.0692805190000003,"none", 13.51MB
-"melt","tse",250,0.0702260720000005,"none", 13.51MB
-"melt","tse",250,0.0726502950000003,"none", 13.51MB
-"agglomerate","pseq",250,0.555151098,"none", 22.51MB
-"agglomerate","pseq",250,0.562311846,"level0", 22.51MB
-"agglomerate","pseq",250,0.543427474,"none", 22.51MB
-"agglomerate","pseq",250,0.56626453,"level0", 22.51MB
-"agglomerate","pseq",250,0.544192426,"none", 22.51MB
-"agglomerate","pseq",250,0.559737343,"level0", 22.51MB
-"agglomerate","pseq",250,0.543074657,"none", 22.51MB
-"agglomerate","pseq",250,0.567375375,"level0", 22.51MB
-"agglomerate","pseq",250,0.543490385,"none", 22.51MB
-"agglomerate","pseq",250,0.564177617,"none", 22.51MB
-"agglomerate","tse",250,0.513711181,"level0",  2.55MB
-"agglomerate","tse",250,0.491890302,"none",  2.55MB
-"agglomerate","tse",250,0.508796552,"level0",  2.55MB
-"agglomerate","tse",250,0.493367016,"none",  2.55MB
-"agglomerate","tse",250,0.510729825,"level0",  2.55MB
-"agglomerate","tse",250,0.488654284,"none",  2.55MB
-"agglomerate","tse",250,0.500186117,"none",  2.55MB
-"agglomerate","tse",250,0.509113493,"level0",  2.55MB
-"agglomerate","tse",250,0.502764931,"none",  2.55MB
-"agglomerate","tse",250,0.50367105,"level0",  2.55MB
-"beta","pseq",250,4.708383709,"level0",648.94MB
-"beta","pseq",250,4.677511994,"level0",648.94MB
-"beta","pseq",250,4.679807671,"level0",648.94MB
-"beta","pseq",250,4.803448178,"level1",648.94MB
-"beta","pseq",250,4.722014379,"level0",648.94MB
-"beta","pseq",250,4.743610078,"level0",648.94MB
-"beta","pseq",250,4.693871993,"level0",648.94MB
-"beta","pseq",250,4.712004675,"level0",648.94MB
-"beta","pseq",250,4.742508986,"level1",648.94MB
-"beta","pseq",250,4.702114958,"level0",648.94MB
-"beta","tse",250,0.0620440480000002,"none", 10.8MB
-"beta","tse",250,0.0217466420000001,"none", 10.8MB
-"beta","tse",250,0.021509531,"none", 10.8MB
-"beta","tse",250,0.0222135040000002,"none", 10.8MB
-"beta","tse",250,0.0228122330000002,"none", 10.8MB
-"beta","tse",250,0.0231849789999998,"none", 10.8MB
-"beta","tse",250,0.0227446000000002,"none", 10.8MB
-"beta","tse",250,0.0238770829999999,"none", 10.8MB
-"beta","tse",250,0.0605422149999999,"level0", 10.8MB
-"beta","tse",250,0.0250225880000001,"none", 10.8MB
-"alpha","pseq",500,1.50724613,"level0",177.56MB
-"alpha","pseq",500,1.429692321,"level0",177.56MB
-"alpha","pseq",500,1.471381952,"level0",177.56MB
-"alpha","pseq",500,1.472179838,"level0",177.56MB
-"alpha","pseq",500,1.633179361,"level0",177.56MB
-"alpha","pseq",500,1.373692873,"level0",177.56MB
-"alpha","pseq",500,1.861821131,"level1",177.56MB
-"alpha","pseq",500,1.425341132,"level0",177.56MB
-"alpha","pseq",500,1.496034639,"level0",177.56MB
-"alpha","pseq",500,1.387460915,"level0",177.56MB
-"alpha","tse",500,0.045473264,"none",  1.91MB
-"alpha","tse",500,0.039115631,"none",  1.91MB
-"alpha","tse",500,0.0391531829999998,"none",  1.91MB
-"alpha","tse",500,0.042356963,"none",  1.91MB
-"alpha","tse",500,0.115264544,"level0",  1.91MB
-"alpha","tse",500,0.0382636339999998,"none",  1.91MB
-"alpha","tse",500,0.03791659,"none",  1.91MB
-"alpha","tse",500,0.0389570749999999,"none",  1.91MB
-"alpha","tse",500,0.0393715399999999,"none",  1.91MB
-"alpha","tse",500,0.040221024,"none",  1.91MB
-"trans","pseq",500,0.0192508309999999,"none",  7.35MB
-"trans","pseq",500,0.017629254,"none",  7.35MB
-"trans","pseq",500,0.0169576599999997,"none",  7.35MB
-"trans","pseq",500,0.0174081319999999,"none",  7.35MB
-"trans","pseq",500,0.0165021099999998,"none",  7.35MB
-"trans","pseq",500,0.0165884890000001,"none",  7.35MB
-"trans","pseq",500,0.0170899859999998,"none",  7.35MB
-"trans","pseq",500,0.017110905,"none",  7.35MB
-"trans","pseq",500,0.0176764619999998,"none",  7.35MB
-"trans","pseq",500,0.0174207229999999,"none",  7.35MB
-"trans","tse",500,0.163929205,"none",  7.72MB
-"trans","tse",500,0.159182112,"none",  7.72MB
-"trans","tse",500,0.160551537,"none",  7.72MB
-"trans","tse",500,0.205787996,"level0",  7.72MB
-"trans","tse",500,0.157220533,"none",  7.72MB
-"trans","tse",500,0.163793785,"none",  7.72MB
-"trans","tse",500,0.161546301,"none",  7.72MB
-"trans","tse",500,0.169083531000001,"none",  7.72MB
-"trans","tse",500,0.167076463,"none",  7.72MB
-"trans","tse",500,0.194848842,"level0",  7.72MB
-"melt","pseq",500,0.214572301,"none", 90.19MB
-"melt","pseq",500,0.201297065,"none", 90.19MB
-"melt","pseq",500,0.196132395,"none", 90.19MB
-"melt","pseq",500,0.202636348,"none", 90.19MB
-"melt","pseq",500,0.278057712,"level0", 90.19MB
-"melt","pseq",500,0.197887286,"none", 90.19MB
-"melt","pseq",500,0.194916516,"none", 90.19MB
-"melt","pseq",500,0.196775827,"none", 90.19MB
-"melt","pseq",500,0.261246715,"level0", 90.19MB
-"melt","pseq",500,0.194922833,"none", 90.19MB
-"melt","tse",500,0.099010394,"none", 26.43MB
-"melt","tse",500,0.0946466829999997,"none", 26.43MB
-"melt","tse",500,0.0947714019999997,"none", 26.43MB
-"melt","tse",500,0.0962478359999999,"none", 26.43MB
-"melt","tse",500,0.0973008470000001,"none", 26.43MB
-"melt","tse",500,0.0984613909999998,"none", 26.43MB
-"melt","tse",500,0.0986373959999995,"none", 26.43MB
-"melt","tse",500,0.153852452,"level0", 26.43MB
-"melt","tse",500,0.089375204,"none", 26.43MB
-"melt","tse",500,0.088507635,"none", 26.43MB
-"agglomerate","pseq",500,0.704800258,"level0", 38.63MB
-"agglomerate","pseq",500,0.651321438,"none", 38.63MB
-"agglomerate","pseq",500,0.715729239999999,"level1", 38.63MB
-"agglomerate","pseq",500,0.694296106,"level0", 38.63MB
-"agglomerate","pseq",500,0.702389191,"level0", 38.63MB
-"agglomerate","pseq",500,0.666461117,"none", 38.63MB
-"agglomerate","pseq",500,0.686098702,"level0", 38.63MB
-"agglomerate","pseq",500,0.685893802999999,"level0", 38.63MB
-"agglomerate","pseq",500,0.687236916,"level0", 38.63MB
-"agglomerate","pseq",500,0.697205302,"level0", 38.63MB
-"agglomerate","tse",500,0.577687504,"none",  3.62MB
-"agglomerate","tse",500,0.611408384000001,"level0",  3.62MB
-"agglomerate","tse",500,0.609356061,"level0",  3.62MB
-"agglomerate","tse",500,0.622843107,"level1",  3.62MB
-"agglomerate","tse",500,0.577528084,"none",  3.62MB
-"agglomerate","tse",500,0.607442104,"level0",  3.62MB
-"agglomerate","tse",500,0.625260558,"level0",  3.62MB
-"agglomerate","tse",500,0.632101363,"level0",  3.62MB
-"agglomerate","tse",500,0.625841986,"level0",  3.62MB
-"agglomerate","tse",500,0.579149083,"none",  3.62MB
-"beta","pseq",500,25.95557201,"level1",  2.97GB
-"beta","pseq",500,28.206166132,"level2",  2.97GB
-"beta","pseq",500,24.675621006,"level1",  2.97GB
-"beta","pseq",500,23.686217483,"level0",  2.97GB
-"beta","pseq",500,24.469143406,"level1",  2.97GB
-"beta","pseq",500,23.528633147,"level0",  2.97GB
-"beta","pseq",500,23.648616479,"level1",  2.97GB
-"beta","pseq",500,23.339512932,"level0",  2.97GB
-"beta","pseq",500,29.130161763,"level1",  2.97GB
-"beta","pseq",500,29.307160782,"level0",  2.97GB
-"beta","tse",500,0.272093645,"none", 32.83MB
-"beta","tse",500,0.0480639009999999,"none", 32.83MB
-"beta","tse",500,0.0428093940000003,"none", 32.83MB
-"beta","tse",500,0.0356722299999999,"none", 32.83MB
-"beta","tse",500,0.0455488759999998,"none", 32.83MB
-"beta","tse",500,0.043910855,"none", 32.83MB
-"beta","tse",500,0.0395730699999999,"none", 32.83MB
-"beta","tse",500,0.0517936370000003,"none", 32.83MB
-"beta","tse",500,0.0499153209999998,"none", 32.83MB
-"beta","tse",500,0.0410647860000002,"none", 32.83MB
-"alpha","pseq",1000,11.453583259,"none",354.66MB
-"alpha","pseq",1000,12.470995404,"none",354.66MB
-"alpha","pseq",1000,9.436939654,"level0",354.66MB
-"alpha","pseq",1000,9.690793158,"none",354.66MB
-"alpha","pseq",1000,8.467598734,"level0",354.66MB
-"alpha","pseq",1000,8.549820703,"none",354.66MB
-"alpha","pseq",1000,8.237361208,"level0",354.66MB
-"alpha","pseq",1000,7.140150772,"none",354.66MB
-"alpha","pseq",1000,8.31029463,"none",354.66MB
-"alpha","pseq",1000,8.096032022,"level0",354.66MB
-"alpha","tse",1000,0.445541935,"none",  3.7MB
-"alpha","tse",1000,0.122345146,"none",  3.7MB
-"alpha","tse",1000,0.0952262090000002,"none",  3.7MB
-"alpha","tse",1000,0.108827709,"none",  3.7MB
-"alpha","tse",1000,0.0960524170000001,"none",  3.7MB
-"alpha","tse",1000,0.0983599450000003,"none",  3.7MB
-"alpha","tse",1000,0.101795904,"none",  3.7MB
-"alpha","tse",1000,0.113050568,"none",  3.7MB
-"alpha","tse",1000,0.0982610940000002,"none",  3.7MB
-"alpha","tse",1000,0.1088834,"none",  3.7MB
-"trans","pseq",1000,0.0774493780000003,"none", 13.68MB
-"trans","pseq",1000,0.0537706240000007,"none", 13.68MB
-"trans","pseq",1000,0.0422678320000003,"none", 13.68MB
-"trans","pseq",1000,0.0441964040000005,"none", 13.68MB
-"trans","pseq",1000,0.0380409640000003,"none", 13.68MB
-"trans","pseq",1000,0.0335770010000003,"none", 13.68MB
-"trans","pseq",1000,0.0469352500000007,"none", 13.68MB
-"trans","pseq",1000,0.0471962260000005,"none", 13.68MB
-"trans","pseq",1000,0.0388789300000005,"none", 13.68MB
-"trans","pseq",1000,0.0488504730000003,"none", 13.68MB
-"trans","tse",1000,1.007762759,"none", 14.21MB
-"trans","tse",1000,0.655165617,"none", 14.21MB
-"trans","tse",1000,0.52509463,"none", 14.21MB
-"trans","tse",1000,0.732478979000001,"none", 14.21MB
-"trans","tse",1000,0.617509979,"none", 14.21MB
-"trans","tse",1000,0.432422403,"none", 14.21MB
-"trans","tse",1000,0.826481441,"none", 14.21MB
-"trans","tse",1000,0.910397405,"none", 14.21MB
-"trans","tse",1000,1.141212543,"none", 14.21MB
-"trans","tse",1000,0.932514048,"none", 14.21MB
-"melt","pseq",1000,0.885476547,"none",184.23MB
-"melt","pseq",1000,0.48711742,"none",184.23MB
-"melt","pseq",1000,0.567613594,"none",184.23MB
-"melt","pseq",1000,0.595219833,"none",184.23MB
-"melt","pseq",1000,0.595824534,"none",184.23MB
-"melt","pseq",1000,2.218822579,"level0",184.23MB
-"melt","pseq",1000,0.500096053,"none",184.23MB
-"melt","pseq",1000,0.465238,"none",184.23MB
-"melt","pseq",1000,0.462324996,"none",184.23MB
-"melt","pseq",1000,0.469293555,"none",184.23MB
-"melt","tse",1000,0.433056877,"none", 52.28MB
-"melt","tse",1000,0.249543847,"none", 52.28MB
-"melt","tse",1000,0.279915325,"none", 52.28MB
-"melt","tse",1000,0.276966583000001,"none", 52.28MB
-"melt","tse",1000,0.264607296,"none", 52.28MB
-"melt","tse",1000,0.265883458,"none", 52.28MB
-"melt","tse",1000,0.274078724,"none", 52.28MB
-"melt","tse",1000,0.311826976,"none", 52.28MB
-"melt","tse",1000,0.272905792,"none", 52.28MB
-"melt","tse",1000,0.300016863,"none", 52.28MB
-"agglomerate","pseq",1000,2.277448651,"none", 70.88MB
-"agglomerate","pseq",1000,2.533370332,"none", 70.88MB
-"agglomerate","pseq",1000,2.467700115,"none", 70.88MB
-"agglomerate","pseq",1000,3.121961232,"level0", 70.88MB
-"agglomerate","pseq",1000,0.891846012,"none", 70.88MB
-"agglomerate","pseq",1000,0.896941733,"none", 70.88MB
-"agglomerate","pseq",1000,0.898837325,"none", 70.88MB
-"agglomerate","pseq",1000,1.355844416,"none", 70.88MB
-"agglomerate","pseq",1000,2.337161702,"none", 70.88MB
-"agglomerate","pseq",1000,2.700548417,"none", 70.88MB
-"agglomerate","tse",1000,2.266620343,"none",  5.75MB
-"agglomerate","tse",1000,1.659938112,"none",  5.75MB
-"agglomerate","tse",1000,3.187622277,"level0",  5.75MB
-"agglomerate","tse",1000,0.868668130000001,"none",  5.75MB
-"agglomerate","tse",1000,1.29052652,"none",  5.75MB
-"agglomerate","tse",1000,1.828360451,"none",  5.75MB
-"agglomerate","tse",1000,1.768315141,"none",  5.75MB
-"agglomerate","tse",1000,1.667203627,"none",  5.75MB
-"agglomerate","tse",1000,2.252367119,"none",  5.75MB
-"agglomerate","tse",1000,1.887549555,"none",  5.75MB
-"beta","pseq",1000,395.825343961,"level2", 18.93GB
-"beta","pseq",1000,271.301818676,"level0", 18.93GB
-"beta","pseq",1000,425.300768259,"level1", 18.93GB
-"beta","pseq",1000,325.857090259,"level0", 18.93GB
-"beta","pseq",1000,312.313692646,"level1", 18.93GB
-"beta","pseq",1000,404.395838333,"level0", 18.93GB
-"beta","pseq",1000,339.101795859,"level1", 18.93GB
-"beta","pseq",1000,272.999267264,"level0", 18.93GB
-"beta","pseq",1000,282.311334236,"level1", 18.93GB
-"beta","pseq",1000,332.246501285,"level1", 18.93GB
-"beta","tse",1000,1.666151478,"none",111.14MB
-"beta","tse",1000,1.232054991,"none",111.14MB
-"beta","tse",1000,1.427911106,"none",111.14MB
-"beta","tse",1000,1.923461066,"none",111.14MB
-"beta","tse",1000,1.434477676,"none",111.14MB
-"beta","tse",1000,1.210067147,"none",111.14MB
-"beta","tse",1000,6.722866571,"level0",111.14MB
-"beta","tse",1000,0.974406967000001,"none",111.14MB
-"beta","tse",1000,0.865679547000001,"none",111.14MB
-"beta","tse",1000,0.917071493000001,"none",111.14MB
-"alpha","pseq",2250,20.305302762,"level0",    NA
-"alpha","pseq",2250,13.872454195,"none",    NA
-"alpha","pseq",2250,16.99002799,"level0",    NA
-"alpha","pseq",2250,16.589422306,"level0",    NA
-"alpha","pseq",2250,17.006166335,"level0",    NA
-"alpha","pseq",2250,13.453231854,"none",    NA
-"alpha","pseq",2250,18.194976327,"level0",    NA
-"alpha","pseq",2250,18.885440728,"level0",    NA
-"alpha","pseq",2250,17.825611413,"level0",    NA
-"alpha","pseq",2250,14.172707553,"none",    NA
-"alpha","tse",2250,0.476980256,"none",    NA
-"alpha","tse",2250,0.141579985999999,"none",    NA
-"alpha","tse",2250,0.128050911,"none",    NA
-"alpha","tse",2250,4.268713453,"level0",    NA
-"alpha","tse",2250,0.120979384,"none",    NA
-"alpha","tse",2250,0.110769456000001,"none",    NA
-"alpha","tse",2250,0.102304609,"none",    NA
-"alpha","tse",2250,0.0958392430000004,"none",    NA
-"alpha","tse",2250,0.0961713390000005,"none",    NA
-"alpha","tse",2250,0.0887452449999993,"none",    NA
-"trans","pseq",2250,0.112077907000001,"none",    NA
-"trans","pseq",2250,0.0740128749999993,"none",    NA
-"trans","pseq",2250,0.0707812260000003,"none",    NA
-"trans","pseq",2250,0.0710764569999993,"none",    NA
-"trans","pseq",2250,0.0699785289999992,"none",    NA
-"trans","pseq",2250,0.0723256749999992,"none",    NA
-"trans","pseq",2250,0.0927230199999993,"none",    NA
-"trans","pseq",2250,0.0796555339999996,"none",    NA
-"trans","pseq",2250,0.0839485870000001,"none",    NA
-"trans","pseq",2250,0.0923619360000005,"none",    NA
-"trans","tse",2250,0.696464009000001,"none",    NA
-"trans","tse",2250,0.397658622000001,"none",    NA
-"trans","tse",2250,0.410465344000001,"none",    NA
-"trans","tse",2250,0.355152251000001,"none",    NA
-"trans","tse",2250,0.414870305000001,"none",    NA
-"trans","tse",2250,0.475776563000001,"none",    NA
-"trans","tse",2250,0.469061767000001,"none",    NA
-"trans","tse",2250,0.460105979000001,"none",    NA
-"trans","tse",2250,0.406196883000001,"none",    NA
-"trans","tse",2250,0.453281088000001,"none",    NA
-"melt","pseq",2250,1.471026582,"none",    NA
-"melt","pseq",2250,1.362882475,"none",    NA
-"melt","pseq",2250,1.306773612,"none",    NA
-"melt","pseq",2250,3.245293175,"level0",    NA
-"melt","pseq",2250,1.157734122,"none",    NA
-"melt","pseq",2250,1.090505971,"none",    NA
-"melt","pseq",2250,1.091341649,"none",    NA
-"melt","pseq",2250,1.097968918,"none",    NA
-"melt","pseq",2250,1.53562226,"level0",    NA
-"melt","pseq",2250,1.083660314,"none",    NA
-"melt","tse",2250,0.511266508999999,"none",    NA
-"melt","tse",2250,0.368022451,"none",    NA
-"melt","tse",2250,0.306813917,"none",    NA
-"melt","tse",2250,0.294040326,"none",    NA
-"melt","tse",2250,0.406060303,"none",    NA
-"melt","tse",2250,0.449503313999999,"none",    NA
-"melt","tse",2250,0.460837968,"none",    NA
-"melt","tse",2250,0.485213056,"none",    NA
-"melt","tse",2250,0.491328406999999,"none",    NA
-"melt","tse",2250,0.555994747000001,"none",    NA
-"agglomerate","pseq",2250,2.666610559,"level0",    NA
-"agglomerate","pseq",2250,1.349948742,"none",    NA
-"agglomerate","pseq",2250,1.789044275,"none",    NA
-"agglomerate","pseq",2250,2.241314663,"none",    NA
-"agglomerate","pseq",2250,2.146328657,"none",    NA
-"agglomerate","pseq",2250,2.190585933,"none",    NA
-"agglomerate","pseq",2250,2.239884537,"none",    NA
-"agglomerate","pseq",2250,2.395559182,"none",    NA
-"agglomerate","pseq",2250,2.721250356,"none",    NA
-"agglomerate","pseq",2250,2.591372648,"none",    NA
-"agglomerate","tse",2250,3.055951271,"none",    NA
-"agglomerate","tse",2250,4.821566934,"level0",    NA
-"agglomerate","tse",2250,1.266321101,"none",    NA
-"agglomerate","tse",2250,1.070535658,"none",    NA
-"agglomerate","tse",2250,1.4345223,"none",    NA
-"agglomerate","tse",2250,1.380321914,"none",    NA
-"agglomerate","tse",2250,1.455900912,"none",    NA
-"agglomerate","tse",2250,1.436409304,"none",    NA
-"agglomerate","tse",2250,1.449233794,"none",    NA
-"agglomerate","tse",2250,1.466906633,"none",    NA
-"beta","tse",2250,8.547369171,"level0",    NA
-"beta","tse",2250,5.999223912,"none",    NA
-"beta","tse",2250,7.884608477,"none",    NA
-"beta","tse",2250,7.908379603,"level0",    NA
-"beta","tse",2250,5.75185781,"none",    NA
-"beta","tse",2250,9.169883229,"level0",    NA
-"beta","tse",2250,5.992593511,"none",    NA
-"beta","tse",2250,8.526234353,"level0",    NA
-"beta","tse",2250,5.462666358,"none",    NA
-"beta","tse",2250,9.589725662,"level0",    NA
-"alpha","pseq",5000,72.358184869,"level2",    NA
-"alpha","pseq",5000,21.635619067,"level1",    NA
-"alpha","pseq",5000,16.179366679,"level0",    NA
-"alpha","pseq",5000,14.371016124,"level0",    NA
-"alpha","pseq",5000,14.215387394,"level0",    NA
-"alpha","pseq",5000,14.094672604,"level0",    NA
-"alpha","pseq",5000,14.418052289,"level0",    NA
-"alpha","pseq",5000,14.528133047,"level0",    NA
-"alpha","pseq",5000,14.01282051,"level0",    NA
-"alpha","pseq",5000,14.209623269,"level0",    NA
-"alpha","tse",5000,0.18863171,"none",    NA
-"alpha","tse",5000,0.0517243089999999,"none",    NA
-"alpha","tse",5000,0.0511449110000006,"none",    NA
-"alpha","tse",5000,0.05580228,"none",    NA
-"alpha","tse",5000,0.0591046909999999,"none",    NA
-"alpha","tse",5000,0.0528129699999997,"none",    NA
-"alpha","tse",5000,0.0516444470000001,"none",    NA
-"alpha","tse",5000,0.0590513669999995,"none",    NA
-"alpha","tse",5000,0.056565387,"none",    NA
-"alpha","tse",5000,0.0523638399999999,"none",    NA
-"trans","pseq",5000,0.125656576,"none",    NA
-"trans","pseq",5000,0.122029327000001,"none",    NA
-"trans","pseq",5000,0.121468983,"none",    NA
-"trans","pseq",5000,0.121309365,"none",    NA
-"trans","pseq",5000,0.139870643,"none",    NA
-"trans","pseq",5000,0.138067656,"none",    NA
-"trans","pseq",5000,0.154081194000001,"none",    NA
-"trans","pseq",5000,0.146378845,"none",    NA
-"trans","pseq",5000,0.140449996,"none",    NA
-"trans","pseq",5000,0.158173965,"none",    NA
-"trans","tse",5000,0.370509168000001,"none",    NA
-"trans","tse",5000,0.28371758,"none",    NA
-"trans","tse",5000,0.293303318,"none",    NA
-"trans","tse",5000,0.298024656000001,"none",    NA
-"trans","tse",5000,0.308172305,"none",    NA
-"trans","tse",5000,0.333942831000001,"none",    NA
-"trans","tse",5000,0.304531027000001,"none",    NA
-"trans","tse",5000,0.345793055000001,"none",    NA
-"trans","tse",5000,0.302530088,"none",    NA
-"trans","tse",5000,0.268165399000001,"none",    NA
-"melt","pseq",5000,2.869789831,"level0",    NA
-"melt","pseq",5000,1.773923628,"none",    NA
-"melt","pseq",5000,1.803209267,"none",    NA
-"melt","pseq",5000,1.987536658,"level0",    NA
-"melt","pseq",5000,1.695952377,"none",    NA
-"melt","pseq",5000,1.914894804,"level0",    NA
-"melt","pseq",5000,2.01881169,"level1",    NA
-"melt","pseq",5000,1.72155603,"none",    NA
-"melt","pseq",5000,1.707902728,"none",    NA
-"melt","pseq",5000,1.978975677,"level0",    NA
-"melt","tse",5000,0.472287511999999,"none",    NA
-"melt","tse",5000,0.343521834,"none",    NA
-"melt","tse",5000,0.337252584000001,"none",    NA
-"melt","tse",5000,0.373065761,"none",    NA
-"melt","tse",5000,0.573325973,"level0",    NA
-"melt","tse",5000,0.2835196,"none",    NA
-"melt","tse",5000,0.274217216,"none",    NA
-"melt","tse",5000,0.297688853,"none",    NA
-"melt","tse",5000,0.324828252000001,"none",    NA
-"melt","tse",5000,0.584647897,"level0",    NA
-"agglomerate","pseq",5000,1.040914065,"none",    NA
-"agglomerate","pseq",5000,1.147229643,"none",    NA
-"agglomerate","pseq",5000,1.491065089,"none",    NA
-"agglomerate","pseq",5000,1.330219804,"level0",    NA
-"agglomerate","pseq",5000,0.934258297,"none",    NA
-"agglomerate","pseq",5000,0.933930708,"none",    NA
-"agglomerate","pseq",5000,24.051230581,"level2",    NA
-"agglomerate","pseq",5000,1.154816863,"none",    NA
-"agglomerate","pseq",5000,1.073957444,"none",    NA
-"agglomerate","pseq",5000,1.366409903,"none",    NA
-"agglomerate","tse",5000,0.73260887,"none",    NA
-"agglomerate","tse",5000,0.768300040000001,"none",    NA
-"agglomerate","tse",5000,0.820958919000001,"none",    NA
-"agglomerate","tse",5000,0.894756549,"none",    NA
-"agglomerate","tse",5000,0.901510404000001,"none",    NA
-"agglomerate","tse",5000,1.480958241,"level0",    NA
-"agglomerate","tse",5000,0.747203310000001,"none",    NA
-"agglomerate","tse",5000,0.767712541000001,"none",    NA
-"agglomerate","tse",5000,0.74680123,"none",    NA
-"agglomerate","tse",5000,0.740799867000001,"none",    NA
-"beta","tse",5000,17.882605138,"level0",    NA
-"beta","tse",5000,21.418546888,"level0",    NA
-"beta","tse",5000,17.059408718,"level1",    NA
-"beta","tse",5000,16.890322064,"level0",    NA
-"beta","tse",5000,20.787097661,"level1",    NA
-"beta","tse",5000,16.896845558,"level1",    NA
-"beta","tse",5000,42.945306987,"level2",    NA
-"beta","tse",5000,21.66814556,"level0",    NA
-"beta","tse",5000,21.136982948,"level1",    NA
-"beta","tse",5000,18.05250849,"level0",    NA
-"alpha","pseq",10000,46.107839083,"level1",    NA
-"alpha","pseq",10000,37.220571469,"level1",    NA
-"alpha","pseq",10000,48.474454497,"level0",    NA
-"alpha","pseq",10000,34.624800821,"level0",    NA
-"alpha","pseq",10000,27.813011169,"level0",    NA
-"alpha","pseq",10000,28.378176526,"level0",    NA
-"alpha","pseq",10000,28.839273913,"level1",    NA
-"alpha","pseq",10000,28.112492787,"level0",    NA
-"alpha","pseq",10000,28.037286564,"level0",    NA
-"alpha","pseq",10000,28.409546651,"level0",    NA
-"alpha","tse",10000,0.190826465,"none",    NA
-"alpha","tse",10000,0.0751378449999995,"none",    NA
-"alpha","tse",10000,0.077170389,"none",    NA
-"alpha","tse",10000,0.0702486179999999,"none",    NA
-"alpha","tse",10000,0.0685481670000003,"none",    NA
-"alpha","tse",10000,0.0732657430000003,"none",    NA
-"alpha","tse",10000,0.0673803199999998,"none",    NA
-"alpha","tse",10000,0.067529822,"none",    NA
-"alpha","tse",10000,0.0742104899999996,"none",    NA
-"alpha","tse",10000,0.0726660630000007,"none",    NA
-"trans","pseq",10000,0.259636372,"none",    NA
-"trans","pseq",10000,0.244837613000001,"none",    NA
-"trans","pseq",10000,0.266034815999999,"none",    NA
-"trans","pseq",10000,0.315447991,"none",    NA
-"trans","pseq",10000,0.307745349,"none",    NA
-"trans","pseq",10000,0.316353674,"none",    NA
-"trans","pseq",10000,0.286356916000001,"none",    NA
-"trans","pseq",10000,0.301406244,"none",    NA
-"trans","pseq",10000,0.300549976999999,"none",    NA
-"trans","pseq",10000,0.301499578,"none",    NA
-"trans","tse",10000,0.625996529000001,"none",    NA
-"trans","tse",10000,24.756450692,"level2",    NA
-"trans","tse",10000,0.598390827,"none",    NA
-"trans","tse",10000,0.567150204000001,"none",    NA
-"trans","tse",10000,0.523521174000001,"none",    NA
-"trans","tse",10000,0.514710840000001,"none",    NA
-"trans","tse",10000,0.536987769,"none",    NA
-"trans","tse",10000,0.670637080000001,"none",    NA
-"trans","tse",10000,0.543164844000001,"none",    NA
-"trans","tse",10000,0.522633925,"none",    NA
-"melt","pseq",10000,5.436449326,"level0",    NA
-"melt","pseq",10000,4.054053263,"level0",    NA
-"melt","pseq",10000,6.916518042,"level1",    NA
-"melt","pseq",10000,4.617257125,"level0",    NA
-"melt","pseq",10000,22.714156499,"level2",    NA
-"melt","pseq",10000,5.48192094,"level0",    NA
-"melt","pseq",10000,4.569601094,"level1",    NA
-"melt","pseq",10000,21.179184388,"level2",    NA
-"melt","pseq",10000,7.330976598,"level0",    NA
-"melt","pseq",10000,4.99688386,"level1",    NA
-"melt","tse",10000,1.423161861,"level0",    NA
-"melt","tse",10000,0.593900644000001,"none",    NA
-"melt","tse",10000,1.506568404,"level1",    NA
-"melt","tse",10000,0.645771024,"none",    NA
-"melt","tse",10000,0.655946869999999,"none",    NA
-"melt","tse",10000,0.720452161,"none",    NA
-"melt","tse",10000,1.038604932,"level0",    NA
-"melt","tse",10000,0.645562305,"none",    NA
-"melt","tse",10000,0.660106898,"none",    NA
-"melt","tse",10000,1.000647967,"level0",    NA
-"agglomerate","pseq",10000,1.761855725,"none",    NA
-"agglomerate","pseq",10000,1.95551923,"level0",    NA
-"agglomerate","pseq",10000,1.820638227,"level1",    NA
-"agglomerate","pseq",10000,1.44551618,"none",    NA
-"agglomerate","pseq",10000,1.84867283,"none",    NA
-"agglomerate","pseq",10000,2.260684672,"level0",    NA
-"agglomerate","pseq",10000,1.440806877,"none",    NA
-"agglomerate","pseq",10000,1.461708267,"none",    NA
-"agglomerate","pseq",10000,1.68697205,"level0",    NA
-"agglomerate","pseq",10000,1.427149472,"none",    NA
-"agglomerate","tse",10000,0.860233337,"none",    NA
-"agglomerate","tse",10000,1.258187833,"none",    NA
-"agglomerate","tse",10000,1.01032877,"none",    NA
-"agglomerate","tse",10000,1.021080444,"none",    NA
-"agglomerate","tse",10000,1.138239464,"none",    NA
-"agglomerate","tse",10000,1.124136106,"none",    NA
-"agglomerate","tse",10000,1.725729014,"level0",    NA
-"agglomerate","tse",10000,0.775987225000001,"none",    NA
-"agglomerate","tse",10000,0.769888235,"none",    NA
-"agglomerate","tse",10000,0.864268667,"none",    NA
+"alpha","pseq",100,0.224882573,"none",40286289.92
+"alpha","pseq",100,0.296620173,"level1",40286289.92
+"alpha","pseq",100,0.225608526,"none",40286289.92
+"alpha","pseq",100,0.263244542,"level0",40286289.92
+"alpha","pseq",100,0.264294243,"level0",40286289.92
+"alpha","pseq",100,0.22472934,"none",40286289.92
+"alpha","pseq",100,0.264283131,"level0",40286289.92
+"alpha","pseq",100,0.259514139,"level0",40286289.92
+"alpha","pseq",100,0.224474373,"none",40286289.92
+"alpha","pseq",100,0.258445022,"level0",40286289.92
+"alpha","tse",100,0.0417340249999998,"none",2034237.44
+"alpha","tse",100,0.0294803369999999,"none",2034237.44
+"alpha","tse",100,0.0309626949999999,"none",2034237.44
+"alpha","tse",100,0.0342976770000001,"none",2034237.44
+"alpha","tse",100,0.0324845200000001,"none",2034237.44
+"alpha","tse",100,0.0334778410000003,"none",2034237.44
+"alpha","tse",100,0.0324527760000004,"none",2034237.44
+"alpha","tse",100,0.0311318840000001,"none",2034237.44
+"alpha","tse",100,0.0303842889999997,"none",2034237.44
+"alpha","tse",100,0.0320239470000003,"none",2034237.44
+"trans","pseq",100,0.00588610200000028,"none",8556380.16
+"trans","pseq",100,0.00582784700000039,"none",8556380.16
+"trans","pseq",100,0.00570207899999975,"none",8556380.16
+"trans","pseq",100,0.0056418589999998,"none",8556380.16
+"trans","pseq",100,0.00570767799999983,"none",8556380.16
+"trans","pseq",100,0.00565296599999998,"none",8556380.16
+"trans","pseq",100,0.00562488700000019,"none",8556380.16
+"trans","pseq",100,0.00570082799999971,"none",8556380.16
+"trans","pseq",100,0.031874797,"level0",8556380.16
+"trans","pseq",100,0.00729374100000024,"none",8556380.16
+"trans","tse",100,0.147424007000001,"none",4666163.2
+"trans","tse",100,0.125125456000001,"none",4666163.2
+"trans","tse",100,0.124227112000001,"none",4666163.2
+"trans","tse",100,0.144216416,"level0",4666163.2
+"trans","tse",100,0.129490939000001,"none",4666163.2
+"trans","tse",100,0.129177728,"none",4666163.2
+"trans","tse",100,0.129724597,"none",4666163.2
+"trans","tse",100,0.148603689,"level0",4666163.2
+"trans","tse",100,0.135518398,"none",4666163.2
+"trans","tse",100,0.130399384,"none",4666163.2
+"melt","pseq",100,0.0423085219999999,"none",20237516.8
+"melt","pseq",100,0.039160952,"none",20237516.8
+"melt","pseq",100,0.0565428450000005,"level0",20237516.8
+"melt","pseq",100,0.0438298020000003,"none",20237516.8
+"melt","pseq",100,0.0395772590000005,"none",20237516.8
+"melt","pseq",100,0.0619327180000004,"level1",20237516.8
+"melt","pseq",100,0.0387801690000003,"none",20237516.8
+"melt","pseq",100,0.0395916920000001,"none",20237516.8
+"melt","pseq",100,0.605453442,"level2",20237516.8
+"melt","pseq",100,0.0377654360000004,"none",20237516.8
+"melt","tse",100,0.0712083209999999,"none",7675576.32
+"melt","tse",100,0.063523365,"none",7675576.32
+"melt","tse",100,0.0634489879999998,"none",7675576.32
+"melt","tse",100,0.0639991500000003,"none",7675576.32
+"melt","tse",100,0.0638189909999998,"none",7675576.32
+"melt","tse",100,0.0647883409999999,"none",7675576.32
+"melt","tse",100,0.0712213959999999,"none",7675576.32
+"melt","tse",100,0.0708911560000001,"none",7675576.32
+"melt","tse",100,0.07622551,"none",7675576.32
+"melt","tse",100,0.0805090669999999,"level0",7675576.32
+"agglomerate","pseq",100,0.550887495,"level0",21296578.56
+"agglomerate","pseq",100,0.528069362,"none",21296578.56
+"agglomerate","pseq",100,0.536606096,"level0",21296578.56
+"agglomerate","pseq",100,0.544040392,"level0",21296578.56
+"agglomerate","pseq",100,0.54250223,"level0",21296578.56
+"agglomerate","pseq",100,0.545560346,"level0",21296578.56
+"agglomerate","pseq",100,0.553575606,"level0",21296578.56
+"agglomerate","pseq",100,0.539560725,"level0",21296578.56
+"agglomerate","pseq",100,0.538275895,"level0",21296578.56
+"agglomerate","pseq",100,0.533474079,"level0",21296578.56
+"agglomerate","tse",100,0.505439626,"level0",3701473.28
+"agglomerate","tse",100,0.989813577,"level2",3701473.28
+"agglomerate","tse",100,0.496475575,"level0",3701473.28
+"agglomerate","tse",100,0.491940133,"level0",3701473.28
+"agglomerate","tse",100,0.493226165,"level0",3701473.28
+"agglomerate","tse",100,0.493350004,"level0",3701473.28
+"agglomerate","tse",100,0.490361301,"level0",3701473.28
+"agglomerate","tse",100,0.483308039,"none",3701473.28
+"agglomerate","tse",100,0.493584499,"level0",3701473.28
+"agglomerate","tse",100,0.496389948,"level0",3701473.28
+"beta","pseq",100,0.712403907,"level0",104060682.24
+"beta","pseq",100,0.704149475,"level0",104060682.24
+"beta","pseq",100,0.6897693,"level0",104060682.24
+"beta","pseq",100,0.689539891,"level0",104060682.24
+"beta","pseq",100,0.710999706,"level0",104060682.24
+"beta","pseq",100,0.703978495,"level0",104060682.24
+"beta","pseq",100,0.692426612,"level0",104060682.24
+"beta","pseq",100,0.698238413,"level0",104060682.24
+"beta","pseq",100,0.70390571,"level0",104060682.24
+"beta","pseq",100,0.680128953,"level0",104060682.24
+"beta","tse",100,0.0284885779999997,"none",6029312
+"beta","tse",100,0.0176393080000001,"none",6029312
+"beta","tse",100,0.0167985820000003,"none",6029312
+"beta","tse",100,0.0167176790000001,"none",6029312
+"beta","tse",100,0.017336872,"none",6029312
+"beta","tse",100,0.017331703,"none",6029312
+"beta","tse",100,0.0178036260000001,"none",6029312
+"beta","tse",100,0.0175559710000002,"none",6029312
+"beta","tse",100,0.01756424,"none",6029312
+"beta","tse",100,0.01745478,"none",6029312
+"alpha","pseq",250,0.711457205,"level1",91467284.48
+"alpha","pseq",250,1.445180814,"level2",91467284.48
+"alpha","pseq",250,0.548019345000001,"none",91467284.48
+"alpha","pseq",250,0.578645475000001,"none",91467284.48
+"alpha","pseq",250,0.648016886000001,"level0",91467284.48
+"alpha","pseq",250,0.554369323,"none",91467284.48
+"alpha","pseq",250,0.626568129000001,"level0",91467284.48
+"alpha","pseq",250,0.559809789,"none",91467284.48
+"alpha","pseq",250,0.562387482000001,"none",91467284.48
+"alpha","pseq",250,0.620946679,"level0",91467284.48
+"alpha","tse",250,0.0335553750000002,"none",1059061.76
+"alpha","tse",250,0.0306332760000001,"none",1059061.76
+"alpha","tse",250,0.0307861659999999,"none",1059061.76
+"alpha","tse",250,0.0307328289999997,"none",1059061.76
+"alpha","tse",250,0.030849093,"none",1059061.76
+"alpha","tse",250,0.030416625,"none",1059061.76
+"alpha","tse",250,0.0302280320000001,"none",1059061.76
+"alpha","tse",250,0.0314754709999998,"none",1059061.76
+"alpha","tse",250,0.0311315910000003,"none",1059061.76
+"alpha","tse",250,0.0297146339999999,"none",1059061.76
+"trans","pseq",250,0.0109772289999999,"none",4383047.68
+"trans","pseq",250,0.00937606299999993,"none",4383047.68
+"trans","pseq",250,0.00926220000000022,"none",4383047.68
+"trans","pseq",250,0.00922916200000001,"none",4383047.68
+"trans","pseq",250,0.00929849899999979,"none",4383047.68
+"trans","pseq",250,0.00928306900000031,"none",4383047.68
+"trans","pseq",250,0.00934104899999966,"none",4383047.68
+"trans","pseq",250,0.00926574200000019,"none",4383047.68
+"trans","pseq",250,0.00919812599999981,"none",4383047.68
+"trans","pseq",250,0.00923606299999991,"none",4383047.68
+"trans","tse",250,0.129840613,"none",4687134.72
+"trans","tse",250,0.127764239,"none",4687134.72
+"trans","tse",250,0.176792315,"level0",4687134.72
+"trans","tse",250,0.126630698,"none",4687134.72
+"trans","tse",250,0.125012937,"none",4687134.72
+"trans","tse",250,0.124565574,"none",4687134.72
+"trans","tse",250,0.137735418,"none",4687134.72
+"trans","tse",250,0.129443671,"none",4687134.72
+"trans","tse",250,0.124666286,"none",4687134.72
+"trans","tse",250,0.125355523,"none",4687134.72
+"melt","pseq",250,0.0915176700000004,"none",47374663.68
+"melt","pseq",250,0.0864707140000003,"none",47374663.68
+"melt","pseq",250,0.0853170300000001,"none",47374663.68
+"melt","pseq",250,0.0841824550000005,"none",47374663.68
+"melt","pseq",250,0.108228972,"level0",47374663.68
+"melt","pseq",250,0.0838530820000001,"none",47374663.68
+"melt","pseq",250,0.0866085299999999,"none",47374663.68
+"melt","pseq",250,0.0842109040000003,"none",47374663.68
+"melt","pseq",250,0.0823408180000005,"none",47374663.68
+"melt","pseq",250,0.108815971,"level1",47374663.68
+"melt","tse",250,0.0690587930000004,"none",14166261.76
+"melt","tse",250,0.0710978680000003,"none",14166261.76
+"melt","tse",250,0.0741596480000006,"none",14166261.76
+"melt","tse",250,0.0716641100000004,"none",14166261.76
+"melt","tse",250,0.0700825590000003,"none",14166261.76
+"melt","tse",250,0.0703106230000001,"none",14166261.76
+"melt","tse",250,0.0716497720000002,"none",14166261.76
+"melt","tse",250,0.0692805190000003,"none",14166261.76
+"melt","tse",250,0.0702260720000005,"none",14166261.76
+"melt","tse",250,0.0726502950000003,"none",14166261.76
+"agglomerate","pseq",250,0.555151098,"none",23603445.76
+"agglomerate","pseq",250,0.562311846,"level0",23603445.76
+"agglomerate","pseq",250,0.543427474,"none",23603445.76
+"agglomerate","pseq",250,0.56626453,"level0",23603445.76
+"agglomerate","pseq",250,0.544192426,"none",23603445.76
+"agglomerate","pseq",250,0.559737343,"level0",23603445.76
+"agglomerate","pseq",250,0.543074657,"none",23603445.76
+"agglomerate","pseq",250,0.567375375,"level0",23603445.76
+"agglomerate","pseq",250,0.543490385,"none",23603445.76
+"agglomerate","pseq",250,0.564177617,"none",23603445.76
+"agglomerate","tse",250,0.513711181,"level0",2673868.8
+"agglomerate","tse",250,0.491890302,"none",2673868.8
+"agglomerate","tse",250,0.508796552,"level0",2673868.8
+"agglomerate","tse",250,0.493367016,"none",2673868.8
+"agglomerate","tse",250,0.510729825,"level0",2673868.8
+"agglomerate","tse",250,0.488654284,"none",2673868.8
+"agglomerate","tse",250,0.500186117,"none",2673868.8
+"agglomerate","tse",250,0.509113493,"level0",2673868.8
+"agglomerate","tse",250,0.502764931,"none",2673868.8
+"agglomerate","tse",250,0.50367105,"level0",2673868.8
+"beta","pseq",250,4.708383709,"level0",680462909.44
+"beta","pseq",250,4.677511994,"level0",680462909.44
+"beta","pseq",250,4.679807671,"level0",680462909.44
+"beta","pseq",250,4.803448178,"level1",680462909.44
+"beta","pseq",250,4.722014379,"level0",680462909.44
+"beta","pseq",250,4.743610078,"level0",680462909.44
+"beta","pseq",250,4.693871993,"level0",680462909.44
+"beta","pseq",250,4.712004675,"level0",680462909.44
+"beta","pseq",250,4.742508986,"level1",680462909.44
+"beta","pseq",250,4.702114958,"level0",680462909.44
+"beta","tse",250,0.0620440480000002,"none",11324620.8
+"beta","tse",250,0.0217466420000001,"none",11324620.8
+"beta","tse",250,0.021509531,"none",11324620.8
+"beta","tse",250,0.0222135040000002,"none",11324620.8
+"beta","tse",250,0.0228122330000002,"none",11324620.8
+"beta","tse",250,0.0231849789999998,"none",11324620.8
+"beta","tse",250,0.0227446000000002,"none",11324620.8
+"beta","tse",250,0.0238770829999999,"none",11324620.8
+"beta","tse",250,0.0605422149999999,"level0",11324620.8
+"beta","tse",250,0.0250225880000001,"none",11324620.8
+"alpha","pseq",500,1.50724613,"level0",186185154.56
+"alpha","pseq",500,1.429692321,"level0",186185154.56
+"alpha","pseq",500,1.471381952,"level0",186185154.56
+"alpha","pseq",500,1.472179838,"level0",186185154.56
+"alpha","pseq",500,1.633179361,"level0",186185154.56
+"alpha","pseq",500,1.373692873,"level0",186185154.56
+"alpha","pseq",500,1.861821131,"level1",186185154.56
+"alpha","pseq",500,1.425341132,"level0",186185154.56
+"alpha","pseq",500,1.496034639,"level0",186185154.56
+"alpha","pseq",500,1.387460915,"level0",186185154.56
+"alpha","tse",500,0.045473264,"none",2002780.16
+"alpha","tse",500,0.039115631,"none",2002780.16
+"alpha","tse",500,0.0391531829999998,"none",2002780.16
+"alpha","tse",500,0.042356963,"none",2002780.16
+"alpha","tse",500,0.115264544,"level0",2002780.16
+"alpha","tse",500,0.0382636339999998,"none",2002780.16
+"alpha","tse",500,0.03791659,"none",2002780.16
+"alpha","tse",500,0.0389570749999999,"none",2002780.16
+"alpha","tse",500,0.0393715399999999,"none",2002780.16
+"alpha","tse",500,0.040221024,"none",2002780.16
+"trans","pseq",500,0.0192508309999999,"none",7707033.6
+"trans","pseq",500,0.017629254,"none",7707033.6
+"trans","pseq",500,0.0169576599999997,"none",7707033.6
+"trans","pseq",500,0.0174081319999999,"none",7707033.6
+"trans","pseq",500,0.0165021099999998,"none",7707033.6
+"trans","pseq",500,0.0165884890000001,"none",7707033.6
+"trans","pseq",500,0.0170899859999998,"none",7707033.6
+"trans","pseq",500,0.017110905,"none",7707033.6
+"trans","pseq",500,0.0176764619999998,"none",7707033.6
+"trans","pseq",500,0.0174207229999999,"none",7707033.6
+"trans","tse",500,0.163929205,"none",8095006.72
+"trans","tse",500,0.159182112,"none",8095006.72
+"trans","tse",500,0.160551537,"none",8095006.72
+"trans","tse",500,0.205787996,"level0",8095006.72
+"trans","tse",500,0.157220533,"none",8095006.72
+"trans","tse",500,0.163793785,"none",8095006.72
+"trans","tse",500,0.161546301,"none",8095006.72
+"trans","tse",500,0.169083531000001,"none",8095006.72
+"trans","tse",500,0.167076463,"none",8095006.72
+"trans","tse",500,0.194848842,"level0",8095006.72
+"melt","pseq",500,0.214572301,"none",94571069.44
+"melt","pseq",500,0.201297065,"none",94571069.44
+"melt","pseq",500,0.196132395,"none",94571069.44
+"melt","pseq",500,0.202636348,"none",94571069.44
+"melt","pseq",500,0.278057712,"level0",94571069.44
+"melt","pseq",500,0.197887286,"none",94571069.44
+"melt","pseq",500,0.194916516,"none",94571069.44
+"melt","pseq",500,0.196775827,"none",94571069.44
+"melt","pseq",500,0.261246715,"level0",94571069.44
+"melt","pseq",500,0.194922833,"none",94571069.44
+"melt","tse",500,0.099010394,"none",27713863.68
+"melt","tse",500,0.0946466829999997,"none",27713863.68
+"melt","tse",500,0.0947714019999997,"none",27713863.68
+"melt","tse",500,0.0962478359999999,"none",27713863.68
+"melt","tse",500,0.0973008470000001,"none",27713863.68
+"melt","tse",500,0.0984613909999998,"none",27713863.68
+"melt","tse",500,0.0986373959999995,"none",27713863.68
+"melt","tse",500,0.153852452,"level0",27713863.68
+"melt","tse",500,0.089375204,"none",27713863.68
+"melt","tse",500,0.088507635,"none",27713863.68
+"agglomerate","pseq",500,0.704800258,"level0",40506490.88
+"agglomerate","pseq",500,0.651321438,"none",40506490.88
+"agglomerate","pseq",500,0.715729239999999,"level1",40506490.88
+"agglomerate","pseq",500,0.694296106,"level0",40506490.88
+"agglomerate","pseq",500,0.702389191,"level0",40506490.88
+"agglomerate","pseq",500,0.666461117,"none",40506490.88
+"agglomerate","pseq",500,0.686098702,"level0",40506490.88
+"agglomerate","pseq",500,0.685893802999999,"level0",40506490.88
+"agglomerate","pseq",500,0.687236916,"level0",40506490.88
+"agglomerate","pseq",500,0.697205302,"level0",40506490.88
+"agglomerate","tse",500,0.577687504,"none",3795845.12
+"agglomerate","tse",500,0.611408384000001,"level0",3795845.12
+"agglomerate","tse",500,0.609356061,"level0",3795845.12
+"agglomerate","tse",500,0.622843107,"level1",3795845.12
+"agglomerate","tse",500,0.577528084,"none",3795845.12
+"agglomerate","tse",500,0.607442104,"level0",3795845.12
+"agglomerate","tse",500,0.625260558,"level0",3795845.12
+"agglomerate","tse",500,0.632101363,"level0",3795845.12
+"agglomerate","tse",500,0.625841986,"level0",3795845.12
+"agglomerate","tse",500,0.579149083,"none",3795845.12
+"beta","pseq",500,25.95557201,"level1",3189013217.28
+"beta","pseq",500,28.206166132,"level2",3189013217.28
+"beta","pseq",500,24.675621006,"level1",3189013217.28
+"beta","pseq",500,23.686217483,"level0",3189013217.28
+"beta","pseq",500,24.469143406,"level1",3189013217.28
+"beta","pseq",500,23.528633147,"level0",3189013217.28
+"beta","pseq",500,23.648616479,"level1",3189013217.28
+"beta","pseq",500,23.339512932,"level0",3189013217.28
+"beta","pseq",500,29.130161763,"level1",3189013217.28
+"beta","pseq",500,29.307160782,"level0",3189013217.28
+"beta","tse",500,0.272093645,"none",34424750.08
+"beta","tse",500,0.0480639009999999,"none",34424750.08
+"beta","tse",500,0.0428093940000003,"none",34424750.08
+"beta","tse",500,0.0356722299999999,"none",34424750.08
+"beta","tse",500,0.0455488759999998,"none",34424750.08
+"beta","tse",500,0.043910855,"none",34424750.08
+"beta","tse",500,0.0395730699999999,"none",34424750.08
+"beta","tse",500,0.0517936370000003,"none",34424750.08
+"beta","tse",500,0.0499153209999998,"none",34424750.08
+"beta","tse",500,0.0410647860000002,"none",34424750.08
+"alpha","pseq",1000,11.453583259,"none",371887964.16
+"alpha","pseq",1000,12.470995404,"none",371887964.16
+"alpha","pseq",1000,9.436939654,"level0",371887964.16
+"alpha","pseq",1000,9.690793158,"none",371887964.16
+"alpha","pseq",1000,8.467598734,"level0",371887964.16
+"alpha","pseq",1000,8.549820703,"none",371887964.16
+"alpha","pseq",1000,8.237361208,"level0",371887964.16
+"alpha","pseq",1000,7.140150772,"none",371887964.16
+"alpha","pseq",1000,8.31029463,"none",371887964.16
+"alpha","pseq",1000,8.096032022,"level0",371887964.16
+"alpha","tse",1000,0.445541935,"none",3879731.2
+"alpha","tse",1000,0.122345146,"none",3879731.2
+"alpha","tse",1000,0.0952262090000002,"none",3879731.2
+"alpha","tse",1000,0.108827709,"none",3879731.2
+"alpha","tse",1000,0.0960524170000001,"none",3879731.2
+"alpha","tse",1000,0.0983599450000003,"none",3879731.2
+"alpha","tse",1000,0.101795904,"none",3879731.2
+"alpha","tse",1000,0.113050568,"none",3879731.2
+"alpha","tse",1000,0.0982610940000002,"none",3879731.2
+"alpha","tse",1000,0.1088834,"none",3879731.2
+"trans","pseq",1000,0.0774493780000003,"none",14344519.68
+"trans","pseq",1000,0.0537706240000007,"none",14344519.68
+"trans","pseq",1000,0.0422678320000003,"none",14344519.68
+"trans","pseq",1000,0.0441964040000005,"none",14344519.68
+"trans","pseq",1000,0.0380409640000003,"none",14344519.68
+"trans","pseq",1000,0.0335770010000003,"none",14344519.68
+"trans","pseq",1000,0.0469352500000007,"none",14344519.68
+"trans","pseq",1000,0.0471962260000005,"none",14344519.68
+"trans","pseq",1000,0.0388789300000005,"none",14344519.68
+"trans","pseq",1000,0.0488504730000003,"none",14344519.68
+"trans","tse",1000,1.007762759,"none",14900264.96
+"trans","tse",1000,0.655165617,"none",14900264.96
+"trans","tse",1000,0.52509463,"none",14900264.96
+"trans","tse",1000,0.732478979000001,"none",14900264.96
+"trans","tse",1000,0.617509979,"none",14900264.96
+"trans","tse",1000,0.432422403,"none",14900264.96
+"trans","tse",1000,0.826481441,"none",14900264.96
+"trans","tse",1000,0.910397405,"none",14900264.96
+"trans","tse",1000,1.141212543,"none",14900264.96
+"trans","tse",1000,0.932514048,"none",14900264.96
+"melt","pseq",1000,0.885476547,"none",193179156.48
+"melt","pseq",1000,0.48711742,"none",193179156.48
+"melt","pseq",1000,0.567613594,"none",193179156.48
+"melt","pseq",1000,0.595219833,"none",193179156.48
+"melt","pseq",1000,0.595824534,"none",193179156.48
+"melt","pseq",1000,2.218822579,"level0",193179156.48
+"melt","pseq",1000,0.500096053,"none",193179156.48
+"melt","pseq",1000,0.465238,"none",193179156.48
+"melt","pseq",1000,0.462324996,"none",193179156.48
+"melt","pseq",1000,0.469293555,"none",193179156.48
+"melt","tse",1000,0.433056877,"none",54819553.28
+"melt","tse",1000,0.249543847,"none",54819553.28
+"melt","tse",1000,0.279915325,"none",54819553.28
+"melt","tse",1000,0.276966583000001,"none",54819553.28
+"melt","tse",1000,0.264607296,"none",54819553.28
+"melt","tse",1000,0.265883458,"none",54819553.28
+"melt","tse",1000,0.274078724,"none",54819553.28
+"melt","tse",1000,0.311826976,"none",54819553.28
+"melt","tse",1000,0.272905792,"none",54819553.28
+"melt","tse",1000,0.300016863,"none",54819553.28
+"agglomerate","pseq",1000,2.277448651,"none",74323066.88
+"agglomerate","pseq",1000,2.533370332,"none",74323066.88
+"agglomerate","pseq",1000,2.467700115,"none",74323066.88
+"agglomerate","pseq",1000,3.121961232,"level0",74323066.88
+"agglomerate","pseq",1000,0.891846012,"none",74323066.88
+"agglomerate","pseq",1000,0.896941733,"none",74323066.88
+"agglomerate","pseq",1000,0.898837325,"none",74323066.88
+"agglomerate","pseq",1000,1.355844416,"none",74323066.88
+"agglomerate","pseq",1000,2.337161702,"none",74323066.88
+"agglomerate","pseq",1000,2.700548417,"none",74323066.88
+"agglomerate","tse",1000,2.266620343,"none",6029312
+"agglomerate","tse",1000,1.659938112,"none",6029312
+"agglomerate","tse",1000,3.187622277,"level0",6029312
+"agglomerate","tse",1000,0.868668130000001,"none",6029312
+"agglomerate","tse",1000,1.29052652,"none",6029312
+"agglomerate","tse",1000,1.828360451,"none",6029312
+"agglomerate","tse",1000,1.768315141,"none",6029312
+"agglomerate","tse",1000,1.667203627,"none",6029312
+"agglomerate","tse",1000,2.252367119,"none",6029312
+"agglomerate","tse",1000,1.887549555,"none",6029312
+"beta","pseq",1000,395.825343961,"level2",20325932728.32
+"beta","pseq",1000,271.301818676,"level0",20325932728.32
+"beta","pseq",1000,425.300768259,"level1",20325932728.32
+"beta","pseq",1000,325.857090259,"level0",20325932728.32
+"beta","pseq",1000,312.313692646,"level1",20325932728.32
+"beta","pseq",1000,404.395838333,"level0",20325932728.32
+"beta","pseq",1000,339.101795859,"level1",20325932728.32
+"beta","pseq",1000,272.999267264,"level0",20325932728.32
+"beta","pseq",1000,282.311334236,"level1",20325932728.32
+"beta","pseq",1000,332.246501285,"level1",20325932728.32
+"beta","tse",1000,1.666151478,"none",116538736.64
+"beta","tse",1000,1.232054991,"none",116538736.64
+"beta","tse",1000,1.427911106,"none",116538736.64
+"beta","tse",1000,1.923461066,"none",116538736.64
+"beta","tse",1000,1.434477676,"none",116538736.64
+"beta","tse",1000,1.210067147,"none",116538736.64
+"beta","tse",1000,6.722866571,"level0",116538736.64
+"beta","tse",1000,0.974406967000001,"none",116538736.64
+"beta","tse",1000,0.865679547000001,"none",116538736.64
+"beta","tse",1000,0.917071493000001,"none",116538736.64
+"alpha","pseq",2250,20.305302762,"level0",NA
+"alpha","pseq",2250,13.872454195,"none",NA
+"alpha","pseq",2250,16.99002799,"level0",NA
+"alpha","pseq",2250,16.589422306,"level0",NA
+"alpha","pseq",2250,17.006166335,"level0",NA
+"alpha","pseq",2250,13.453231854,"none",NA
+"alpha","pseq",2250,18.194976327,"level0",NA
+"alpha","pseq",2250,18.885440728,"level0",NA
+"alpha","pseq",2250,17.825611413,"level0",NA
+"alpha","pseq",2250,14.172707553,"none",NA
+"alpha","tse",2250,0.476980256,"none",NA
+"alpha","tse",2250,0.141579985999999,"none",NA
+"alpha","tse",2250,0.128050911,"none",NA
+"alpha","tse",2250,4.268713453,"level0",NA
+"alpha","tse",2250,0.120979384,"none",NA
+"alpha","tse",2250,0.110769456000001,"none",NA
+"alpha","tse",2250,0.102304609,"none",NA
+"alpha","tse",2250,0.0958392430000004,"none",NA
+"alpha","tse",2250,0.0961713390000005,"none",NA
+"alpha","tse",2250,0.0887452449999993,"none",NA
+"trans","pseq",2250,0.112077907000001,"none",NA
+"trans","pseq",2250,0.0740128749999993,"none",NA
+"trans","pseq",2250,0.0707812260000003,"none",NA
+"trans","pseq",2250,0.0710764569999993,"none",NA
+"trans","pseq",2250,0.0699785289999992,"none",NA
+"trans","pseq",2250,0.0723256749999992,"none",NA
+"trans","pseq",2250,0.0927230199999993,"none",NA
+"trans","pseq",2250,0.0796555339999996,"none",NA
+"trans","pseq",2250,0.0839485870000001,"none",NA
+"trans","pseq",2250,0.0923619360000005,"none",NA
+"trans","tse",2250,0.696464009000001,"none",NA
+"trans","tse",2250,0.397658622000001,"none",NA
+"trans","tse",2250,0.410465344000001,"none",NA
+"trans","tse",2250,0.355152251000001,"none",NA
+"trans","tse",2250,0.414870305000001,"none",NA
+"trans","tse",2250,0.475776563000001,"none",NA
+"trans","tse",2250,0.469061767000001,"none",NA
+"trans","tse",2250,0.460105979000001,"none",NA
+"trans","tse",2250,0.406196883000001,"none",NA
+"trans","tse",2250,0.453281088000001,"none",NA
+"melt","pseq",2250,1.471026582,"none",NA
+"melt","pseq",2250,1.362882475,"none",NA
+"melt","pseq",2250,1.306773612,"none",NA
+"melt","pseq",2250,3.245293175,"level0",NA
+"melt","pseq",2250,1.157734122,"none",NA
+"melt","pseq",2250,1.090505971,"none",NA
+"melt","pseq",2250,1.091341649,"none",NA
+"melt","pseq",2250,1.097968918,"none",NA
+"melt","pseq",2250,1.53562226,"level0",NA
+"melt","pseq",2250,1.083660314,"none",NA
+"melt","tse",2250,0.511266508999999,"none",NA
+"melt","tse",2250,0.368022451,"none",NA
+"melt","tse",2250,0.306813917,"none",NA
+"melt","tse",2250,0.294040326,"none",NA
+"melt","tse",2250,0.406060303,"none",NA
+"melt","tse",2250,0.449503313999999,"none",NA
+"melt","tse",2250,0.460837968,"none",NA
+"melt","tse",2250,0.485213056,"none",NA
+"melt","tse",2250,0.491328406999999,"none",NA
+"melt","tse",2250,0.555994747000001,"none",NA
+"agglomerate","pseq",2250,2.666610559,"level0",NA
+"agglomerate","pseq",2250,1.349948742,"none",NA
+"agglomerate","pseq",2250,1.789044275,"none",NA
+"agglomerate","pseq",2250,2.241314663,"none",NA
+"agglomerate","pseq",2250,2.146328657,"none",NA
+"agglomerate","pseq",2250,2.190585933,"none",NA
+"agglomerate","pseq",2250,2.239884537,"none",NA
+"agglomerate","pseq",2250,2.395559182,"none",NA
+"agglomerate","pseq",2250,2.721250356,"none",NA
+"agglomerate","pseq",2250,2.591372648,"none",NA
+"agglomerate","tse",2250,3.055951271,"none",NA
+"agglomerate","tse",2250,4.821566934,"level0",NA
+"agglomerate","tse",2250,1.266321101,"none",NA
+"agglomerate","tse",2250,1.070535658,"none",NA
+"agglomerate","tse",2250,1.4345223,"none",NA
+"agglomerate","tse",2250,1.380321914,"none",NA
+"agglomerate","tse",2250,1.455900912,"none",NA
+"agglomerate","tse",2250,1.436409304,"none",NA
+"agglomerate","tse",2250,1.449233794,"none",NA
+"agglomerate","tse",2250,1.466906633,"none",NA
+"beta","tse",2250,8.547369171,"level0",NA
+"beta","tse",2250,5.999223912,"none",NA
+"beta","tse",2250,7.884608477,"none",NA
+"beta","tse",2250,7.908379603,"level0",NA
+"beta","tse",2250,5.75185781,"none",NA
+"beta","tse",2250,9.169883229,"level0",NA
+"beta","tse",2250,5.992593511,"none",NA
+"beta","tse",2250,8.526234353,"level0",NA
+"beta","tse",2250,5.462666358,"none",NA
+"beta","tse",2250,9.589725662,"level0",NA
+"alpha","pseq",5000,72.358184869,"level2",NA
+"alpha","pseq",5000,21.635619067,"level1",NA
+"alpha","pseq",5000,16.179366679,"level0",NA
+"alpha","pseq",5000,14.371016124,"level0",NA
+"alpha","pseq",5000,14.215387394,"level0",NA
+"alpha","pseq",5000,14.094672604,"level0",NA
+"alpha","pseq",5000,14.418052289,"level0",NA
+"alpha","pseq",5000,14.528133047,"level0",NA
+"alpha","pseq",5000,14.01282051,"level0",NA
+"alpha","pseq",5000,14.209623269,"level0",NA
+"alpha","tse",5000,0.18863171,"none",NA
+"alpha","tse",5000,0.0517243089999999,"none",NA
+"alpha","tse",5000,0.0511449110000006,"none",NA
+"alpha","tse",5000,0.05580228,"none",NA
+"alpha","tse",5000,0.0591046909999999,"none",NA
+"alpha","tse",5000,0.0528129699999997,"none",NA
+"alpha","tse",5000,0.0516444470000001,"none",NA
+"alpha","tse",5000,0.0590513669999995,"none",NA
+"alpha","tse",5000,0.056565387,"none",NA
+"alpha","tse",5000,0.0523638399999999,"none",NA
+"trans","pseq",5000,0.125656576,"none",NA
+"trans","pseq",5000,0.122029327000001,"none",NA
+"trans","pseq",5000,0.121468983,"none",NA
+"trans","pseq",5000,0.121309365,"none",NA
+"trans","pseq",5000,0.139870643,"none",NA
+"trans","pseq",5000,0.138067656,"none",NA
+"trans","pseq",5000,0.154081194000001,"none",NA
+"trans","pseq",5000,0.146378845,"none",NA
+"trans","pseq",5000,0.140449996,"none",NA
+"trans","pseq",5000,0.158173965,"none",NA
+"trans","tse",5000,0.370509168000001,"none",NA
+"trans","tse",5000,0.28371758,"none",NA
+"trans","tse",5000,0.293303318,"none",NA
+"trans","tse",5000,0.298024656000001,"none",NA
+"trans","tse",5000,0.308172305,"none",NA
+"trans","tse",5000,0.333942831000001,"none",NA
+"trans","tse",5000,0.304531027000001,"none",NA
+"trans","tse",5000,0.345793055000001,"none",NA
+"trans","tse",5000,0.302530088,"none",NA
+"trans","tse",5000,0.268165399000001,"none",NA
+"melt","pseq",5000,2.869789831,"level0",NA
+"melt","pseq",5000,1.773923628,"none",NA
+"melt","pseq",5000,1.803209267,"none",NA
+"melt","pseq",5000,1.987536658,"level0",NA
+"melt","pseq",5000,1.695952377,"none",NA
+"melt","pseq",5000,1.914894804,"level0",NA
+"melt","pseq",5000,2.01881169,"level1",NA
+"melt","pseq",5000,1.72155603,"none",NA
+"melt","pseq",5000,1.707902728,"none",NA
+"melt","pseq",5000,1.978975677,"level0",NA
+"melt","tse",5000,0.472287511999999,"none",NA
+"melt","tse",5000,0.343521834,"none",NA
+"melt","tse",5000,0.337252584000001,"none",NA
+"melt","tse",5000,0.373065761,"none",NA
+"melt","tse",5000,0.573325973,"level0",NA
+"melt","tse",5000,0.2835196,"none",NA
+"melt","tse",5000,0.274217216,"none",NA
+"melt","tse",5000,0.297688853,"none",NA
+"melt","tse",5000,0.324828252000001,"none",NA
+"melt","tse",5000,0.584647897,"level0",NA
+"agglomerate","pseq",5000,1.040914065,"none",NA
+"agglomerate","pseq",5000,1.147229643,"none",NA
+"agglomerate","pseq",5000,1.491065089,"none",NA
+"agglomerate","pseq",5000,1.330219804,"level0",NA
+"agglomerate","pseq",5000,0.934258297,"none",NA
+"agglomerate","pseq",5000,0.933930708,"none",NA
+"agglomerate","pseq",5000,24.051230581,"level2",NA
+"agglomerate","pseq",5000,1.154816863,"none",NA
+"agglomerate","pseq",5000,1.073957444,"none",NA
+"agglomerate","pseq",5000,1.366409903,"none",NA
+"agglomerate","tse",5000,0.73260887,"none",NA
+"agglomerate","tse",5000,0.768300040000001,"none",NA
+"agglomerate","tse",5000,0.820958919000001,"none",NA
+"agglomerate","tse",5000,0.894756549,"none",NA
+"agglomerate","tse",5000,0.901510404000001,"none",NA
+"agglomerate","tse",5000,1.480958241,"level0",NA
+"agglomerate","tse",5000,0.747203310000001,"none",NA
+"agglomerate","tse",5000,0.767712541000001,"none",NA
+"agglomerate","tse",5000,0.74680123,"none",NA
+"agglomerate","tse",5000,0.740799867000001,"none",NA
+"beta","tse",5000,17.882605138,"level0",NA
+"beta","tse",5000,21.418546888,"level0",NA
+"beta","tse",5000,17.059408718,"level1",NA
+"beta","tse",5000,16.890322064,"level0",NA
+"beta","tse",5000,20.787097661,"level1",NA
+"beta","tse",5000,16.896845558,"level1",NA
+"beta","tse",5000,42.945306987,"level2",NA
+"beta","tse",5000,21.66814556,"level0",NA
+"beta","tse",5000,21.136982948,"level1",NA
+"beta","tse",5000,18.05250849,"level0",NA
+"alpha","pseq",10000,46.107839083,"level1",NA
+"alpha","pseq",10000,37.220571469,"level1",NA
+"alpha","pseq",10000,48.474454497,"level0",NA
+"alpha","pseq",10000,34.624800821,"level0",NA
+"alpha","pseq",10000,27.813011169,"level0",NA
+"alpha","pseq",10000,28.378176526,"level0",NA
+"alpha","pseq",10000,28.839273913,"level1",NA
+"alpha","pseq",10000,28.112492787,"level0",NA
+"alpha","pseq",10000,28.037286564,"level0",NA
+"alpha","pseq",10000,28.409546651,"level0",NA
+"alpha","tse",10000,0.190826465,"none",NA
+"alpha","tse",10000,0.0751378449999995,"none",NA
+"alpha","tse",10000,0.077170389,"none",NA
+"alpha","tse",10000,0.0702486179999999,"none",NA
+"alpha","tse",10000,0.0685481670000003,"none",NA
+"alpha","tse",10000,0.0732657430000003,"none",NA
+"alpha","tse",10000,0.0673803199999998,"none",NA
+"alpha","tse",10000,0.067529822,"none",NA
+"alpha","tse",10000,0.0742104899999996,"none",NA
+"alpha","tse",10000,0.0726660630000007,"none",NA
+"trans","pseq",10000,0.259636372,"none",NA
+"trans","pseq",10000,0.244837613000001,"none",NA
+"trans","pseq",10000,0.266034815999999,"none",NA
+"trans","pseq",10000,0.315447991,"none",NA
+"trans","pseq",10000,0.307745349,"none",NA
+"trans","pseq",10000,0.316353674,"none",NA
+"trans","pseq",10000,0.286356916000001,"none",NA
+"trans","pseq",10000,0.301406244,"none",NA
+"trans","pseq",10000,0.300549976999999,"none",NA
+"trans","pseq",10000,0.301499578,"none",NA
+"trans","tse",10000,0.625996529000001,"none",NA
+"trans","tse",10000,24.756450692,"level2",NA
+"trans","tse",10000,0.598390827,"none",NA
+"trans","tse",10000,0.567150204000001,"none",NA
+"trans","tse",10000,0.523521174000001,"none",NA
+"trans","tse",10000,0.514710840000001,"none",NA
+"trans","tse",10000,0.536987769,"none",NA
+"trans","tse",10000,0.670637080000001,"none",NA
+"trans","tse",10000,0.543164844000001,"none",NA
+"trans","tse",10000,0.522633925,"none",NA
+"melt","pseq",10000,5.436449326,"level0",NA
+"melt","pseq",10000,4.054053263,"level0",NA
+"melt","pseq",10000,6.916518042,"level1",NA
+"melt","pseq",10000,4.617257125,"level0",NA
+"melt","pseq",10000,22.714156499,"level2",NA
+"melt","pseq",10000,5.48192094,"level0",NA
+"melt","pseq",10000,4.569601094,"level1",NA
+"melt","pseq",10000,21.179184388,"level2",NA
+"melt","pseq",10000,7.330976598,"level0",NA
+"melt","pseq",10000,4.99688386,"level1",NA
+"melt","tse",10000,1.423161861,"level0",NA
+"melt","tse",10000,0.593900644000001,"none",NA
+"melt","tse",10000,1.506568404,"level1",NA
+"melt","tse",10000,0.645771024,"none",NA
+"melt","tse",10000,0.655946869999999,"none",NA
+"melt","tse",10000,0.720452161,"none",NA
+"melt","tse",10000,1.038604932,"level0",NA
+"melt","tse",10000,0.645562305,"none",NA
+"melt","tse",10000,0.660106898,"none",NA
+"melt","tse",10000,1.000647967,"level0",NA
+"agglomerate","pseq",10000,1.761855725,"none",NA
+"agglomerate","pseq",10000,1.95551923,"level0",NA
+"agglomerate","pseq",10000,1.820638227,"level1",NA
+"agglomerate","pseq",10000,1.44551618,"none",NA
+"agglomerate","pseq",10000,1.84867283,"none",NA
+"agglomerate","pseq",10000,2.260684672,"level0",NA
+"agglomerate","pseq",10000,1.440806877,"none",NA
+"agglomerate","pseq",10000,1.461708267,"none",NA
+"agglomerate","pseq",10000,1.68697205,"level0",NA
+"agglomerate","pseq",10000,1.427149472,"none",NA
+"agglomerate","tse",10000,0.860233337,"none",NA
+"agglomerate","tse",10000,1.258187833,"none",NA
+"agglomerate","tse",10000,1.01032877,"none",NA
+"agglomerate","tse",10000,1.021080444,"none",NA
+"agglomerate","tse",10000,1.138239464,"none",NA
+"agglomerate","tse",10000,1.124136106,"none",NA
+"agglomerate","tse",10000,1.725729014,"level0",NA
+"agglomerate","tse",10000,0.775987225000001,"none",NA
+"agglomerate","tse",10000,0.769888235,"none",NA
+"agglomerate","tse",10000,0.864268667,"none",NA
