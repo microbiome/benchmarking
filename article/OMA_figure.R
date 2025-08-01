@@ -67,7 +67,7 @@ benchmark_out <- bench::press(
       # Agglomerate phyloseq
       agg_pseq = quote(phyloseq::tax_glom(pseq, taxrank = "Family")),
       # Agglomerate speedyseq
-      agg_speq = quote(speedyseq::tax_glom(spseq, taxrank = "Family")),
+      agg_spseq = quote(speedyseq::tax_glom(pseq, taxrank = "Family")),
       # Agglomerate TreeSE
       agg_tse = quote(mia::agglomerateByRank(tse, rank = "Family"))
     )
