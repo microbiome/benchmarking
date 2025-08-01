@@ -15,9 +15,9 @@ set.seed(123)
 
 # Set benchmarking hyperparameters
 n_iter <- 10
-memory_threshold <- 1000
+memory_threshold <- 10000
 beta_threshold <- c(1000, 5000)
-N <- c(100, 250, 500, 1000, 2250, 5000, 10000)
+N <- c(10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
 
 # Define method names
 methods <- c(alpha = "Faith diversity",
@@ -102,7 +102,7 @@ benchmark_df <- benchmark_out %>%
 
 # Write to file
 benchmark_df %>%
-  mutate(time = as.numeric(time)) %>%
+  mutate(time = as.numeric(time), mem_alloc = as.numeric(mem_alloc)) %>%
   write.csv(file = "article/benchmark_rawdata.csv", row.names = FALSE)
 
 # benchmark_df <- read.csv("article/benchmark_rawdata.csv") %>%
