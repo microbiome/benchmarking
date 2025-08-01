@@ -1,13 +1,16 @@
 # Import libraries
 library(bench)
+library(DelayedArray)
 library(dplyr)
 library(ggplot2)
 library(mia)
 library(microbiome)
 library(microbiomeDataSets)
 library(patchwork)
+library(philr)
 library(phyloseq)
 library(picante)
+library(speedyseq)
 library(tidyr)
 
 # Set seed for reproducibility
@@ -19,17 +22,22 @@ memory_threshold <- 10000
 beta_threshold <- c(1000, 5000)
 N <- c(10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
 
+# Define class names
+classes <- c(tse = "TreeSE", pseq = "phyloseq", spseq = "speedyseq")
+
 # Define method names
 methods <- c(alpha = "Faith diversity",
              beta = "UniFrac dissimilarity",
              melt = "Melting",
              trans = "PhILR transformation",
-             agglomerate = "Family agglomeration")
+             agg = "Family agglomeration")
 
 # Import dataset
 GTSD <- GrieneisenTSData()
 # Agglomerate by Genus to reduce size
 GTSD <- mia::agglomerateByRank(GTSD, rank = "Genus")
+# Convert assay to DelayedMatrix
+# assay(GTSD, "counts") <- DelayedArray(assay(GTSD, "counts"))
 
 # Run benchmark for each sample size
 benchmark_out <- bench::press(
@@ -52,12 +60,16 @@ benchmark_out <- bench::press(
       trans_tse = quote(mia::transformAssay(tse, method = "philr", MARGIN = 1L, pseudocount = 1)),
       # Melt phyloseq
       melt_pseq = quote(phyloseq::psmelt(pseq)),
+      # Melt speedyseq
+      melt_spseq = quote(speedyseq::psmelt(pseq)),
       # Melt TreeSE
       melt_tse = quote(mia::meltSE(tse, add.row = TRUE, add.col = TRUE)),
       # Agglomerate phyloseq
-      agglomerate_pseq = quote(phyloseq::tax_glom(pseq, taxrank = "Family")),
+      agg_pseq = quote(phyloseq::tax_glom(pseq, taxrank = "Family")),
+      # Agglomerate speedyseq
+      agg_speq = quote(speedyseq::tax_glom(spseq, taxrank = "Family")),
       # Agglomerate TreeSE
-      agglomerate_tse = quote(mia::agglomerateByRank(tse, rank = "Family"))
+      agg_tse = quote(mia::agglomerateByRank(tse, rank = "Family"))
     )
     
     if( N <= beta_threshold[[1]] ){
@@ -108,7 +120,7 @@ benchmark_df %>%
 # benchmark_df <- read.csv("article/benchmark_rawdata.csv") %>%
 #   mutate(time = as_bench_time(time), mem_alloc = as_bench_bytes(mem_alloc),
 #          method = factor(method, levels = names(methods)),
-#          object = factor(object, levels = c("tse", "pseq")))
+#          object = factor(object, levels = names(classes)))
 
 # Summarise benchmarking results with mean time and standard deviation
 benchmark_df <- benchmark_df %>%
@@ -118,7 +130,7 @@ benchmark_df <- benchmark_df %>%
             TimeSD = sd(time), TimeSE = TimeSD / sqrt(n_iter),
             Count = n(), .groups = "drop") %>%
   mutate(method = factor(method, levels = names(methods)),
-         object = factor(object, levels = c("tse", "pseq")))
+         object = factor(object, levels = names(classes)))
 
 # Write to file
 benchmark_df %>%
@@ -128,7 +140,7 @@ benchmark_df %>%
 # benchmark_df <- read.csv("article/benchmark_results.csv") %>%
 #   mutate(Time = as_bench_time(Time), Memory = as_bench_bytes(Memory),
 #          method = factor(method, levels = names(methods)),
-#          object = factor(object, levels = c("tse", "pseq")))
+#          object = factor(object, levels = names(classes)))
 
 time_breaks <- as_bench_time(c("10ms", "100ms", "1s", "10s", "1.67m"))
 byte_breaks <- as_bench_bytes(c("1MB", "10MB", "100MB", "1GB", "10GB"))
@@ -140,11 +152,11 @@ p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
   geom_point() +
   scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
   scale_y_bench_time(breaks = time_breaks) +
-  scale_colour_manual(labels = c("TreeSE", "phyloseq"),
-                      values = c("black", "darkgrey")) +
+  scale_colour_manual(labels = classes,
+                      values = c("black", "darkgrey", "lightgrey")) +
   facet_grid(. ~ method,
              labeller = labeller(method = methods)) +
-  labs(x = "# Samples", y = "Execution Time", colour = "Object") +
+  labs(x = "# Samples", y = "Execution time (t)", colour = "Object") +
   theme_bw() +
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -155,11 +167,11 @@ p2 <- ggplot(benchmark_df, aes(x = N, y = Memory, colour = object)) +
   geom_point() +
   scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
   scale_y_bench_bytes(breaks = byte_breaks) +
-  scale_colour_manual(labels = c("TreeSE", "phyloseq"),
-                      values = c("black", "darkgrey")) +
+  scale_colour_manual(labels = classes,
+                      values = c("black", "darkgrey", "lightgrey")) +
   facet_grid(. ~ method,
              labeller = labeller(method = methods)) +
-  labs(x = "# Samples", y = "Memory Allocation", colour = "Object") +
+  labs(x = "Sample size (n)", y = "Memory allocation (m)", colour = "Object") +
   theme_bw() +
   guides(colour = "none")
 
