@@ -147,7 +147,7 @@ byte_breaks <- as_bench_bytes(c("1MB", "10MB", "100MB", "1GB", "10GB"))
 
 # Visualise benchmarking results
 p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
-  geom_errorbar(aes(ymin = Time - TimeSE, ymax = Time + TimeSE), width = 0) +
+  geom_errorbar(aes(ymin = Time - TimeSD, ymax = Time + TimeSE), width = 0) +
   geom_line() +
   geom_point() +
   scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
@@ -173,6 +173,7 @@ p2 <- ggplot(benchmark_df, aes(x = N, y = Memory, colour = object)) +
              labeller = labeller(method = methods)) +
   labs(x = "Sample size (n)", y = "Memory allocation (m)", colour = "Object") +
   theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   guides(colour = "none")
 
 p <- (p1 / p2) +
