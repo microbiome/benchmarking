@@ -117,18 +117,17 @@ benchmark_df %>%
   mutate(time = as.numeric(time), mem_alloc = as.numeric(mem_alloc)) %>%
   write.csv(file = "article/benchmark_rawdata.csv", row.names = FALSE)
 
-# benchmark_df <- read.csv("article/benchmark_rawdata.csv") %>%
-#   mutate(time = as_bench_time(time), mem_alloc = as_bench_bytes(mem_alloc),
-#          method = factor(method, levels = names(methods)),
-#          object = factor(object, levels = names(classes)))
+benchmark_df <- read.csv("article/benchmark_rawdata.csv") %>%
+  mutate(time = as_bench_time(time), mem_alloc = as_bench_bytes(mem_alloc),
+          method = factor(method, levels = names(methods)),
+          object = factor(object, levels = names(classes)))
 
 # Summarise benchmarking results with mean time and standard deviation
 benchmark_df <- benchmark_df %>%
   group_by(method, object, N) %>%
-  # filter(if( sum(gc == "none") >= 0 ) gc == "none" else TRUE) %>%
   summarise(Time = mean(time), Memory = as_bench_bytes(mean(mem_alloc)),
             TimeSD = sd(time), TimeSE = TimeSD / sqrt(n_iter),
-            Count = n(), .groups = "drop") %>%
+            NoGC = sum(gc == "none"), .groups = "drop") %>%
   mutate(method = factor(method, levels = names(methods)),
          object = factor(object, levels = names(classes)))
 
