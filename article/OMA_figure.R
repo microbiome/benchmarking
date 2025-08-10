@@ -160,6 +160,7 @@ p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
+        strip.text = element_text(size = 11),
         strip.background = element_blank())
   
 p2 <- ggplot(benchmark_df, aes(x = N, y = Memory, colour = object)) +
