@@ -19,7 +19,7 @@ set.seed(123)
 # Set benchmarking hyperparameters
 n_iter <- 10
 memory_threshold <- 10000
-beta_threshold <- c(1000, 5000)
+beta_threshold <- c(1000, 10000)
 N <- c(10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
 
 # Define class names
@@ -125,7 +125,7 @@ benchmark_df %>%
 # Summarise benchmarking results with mean time and standard deviation
 benchmark_df <- benchmark_df %>%
   group_by(method, object, N) %>%
-  filter(if( sum(gc == "none") >= 5 ) gc == "none" else TRUE) %>%
+  # filter(if( sum(gc == "none") >= 0 ) gc == "none" else TRUE) %>%
   summarise(Time = mean(time), Memory = as_bench_bytes(mean(mem_alloc)),
             TimeSD = sd(time), TimeSE = TimeSD / sqrt(n_iter),
             Count = n(), .groups = "drop") %>%
@@ -142,12 +142,12 @@ benchmark_df %>%
 #          method = factor(method, levels = names(methods)),
 #          object = factor(object, levels = names(classes)))
 
-time_breaks <- as_bench_time(c("10ms", "100ms", "1s", "10s", "1.67m"))
+time_breaks <- as_bench_time(c("10ms", "100ms", "1s", "10s", "100s"))
 byte_breaks <- as_bench_bytes(c("1MB", "10MB", "100MB", "1GB", "10GB"))
 
 # Visualise benchmarking results
 p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
-  geom_errorbar(aes(ymin = Time - TimeSD, ymax = Time + TimeSE), width = 0) +
+  geom_errorbar(aes(ymin = Time - TimeSE, ymax = Time + TimeSE), width = 0) +
   geom_line() +
   geom_point() +
   scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
@@ -160,7 +160,8 @@ p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
   theme_bw() +
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
-        axis.ticks.x = element_blank())
+        axis.ticks.x = element_blank(),
+        strip.background = element_blank())
   
 p2 <- ggplot(benchmark_df, aes(x = N, y = Memory, colour = object)) +
   geom_line() +
@@ -171,9 +172,10 @@ p2 <- ggplot(benchmark_df, aes(x = N, y = Memory, colour = object)) +
                       values = c("black", "darkgrey", "lightgrey")) +
   facet_grid(. ~ method,
              labeller = labeller(method = methods)) +
-  labs(x = "Sample size (n)", y = "Memory allocation (m)", colour = "Object") +
+  labs(x = "Sample size (n)", y = "Allocated memory (m)", colour = "Object") +
   theme_bw() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        strip.text = element_blank()) +
   guides(colour = "none")
 
 p <- (p1 / p2) +
