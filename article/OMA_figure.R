@@ -117,15 +117,15 @@ benchmark_df %>%
   mutate(time = as.numeric(time), mem_alloc = as.numeric(mem_alloc)) %>%
   write.csv(file = "article/benchmark_rawdata.csv", row.names = FALSE)
 
-benchmark_df <- read.csv("article/benchmark_rawdata.csv") %>%
-  mutate(time = as_bench_time(time), mem_alloc = as_bench_bytes(mem_alloc),
-          method = factor(method, levels = names(methods)),
-          object = factor(object, levels = names(classes)))
+# benchmark_df <- read.csv("article/benchmark_rawdata.csv") %>%
+#   mutate(time = as_bench_time(time), mem_alloc = as_bench_bytes(mem_alloc),
+#          method = factor(method, levels = names(methods)),
+#          object = factor(object, levels = names(classes)))
 
 # Summarise benchmarking results with mean time and standard deviation
 benchmark_df <- benchmark_df %>%
   group_by(method, object, N) %>%
-  summarise(Time = mean(time), Memory = as_bench_bytes(mean(mem_alloc)),
+  summarise(Time = as.numeric(mean(time)), Memory = as.numeric(mean(mem_alloc)),
             TimeSD = sd(time), TimeSE = TimeSD / sqrt(n_iter),
             NoGC = sum(gc == "none"), .groups = "drop") %>%
   mutate(method = factor(method, levels = names(methods)),
@@ -141,8 +141,19 @@ benchmark_df %>%
 #          method = factor(method, levels = names(methods)),
 #          object = factor(object, levels = names(classes)))
 
-time_breaks <- as_bench_time(c("10ms", "100ms", "1s", "10s", "100s"))
-byte_breaks <- as_bench_bytes(c("1MB", "10MB", "100MB", "1GB", "10GB"))
+scientific_10 <- function(y) {
+  sapply(y, function(z) {
+    if (is.na(z)){
+      return(NA)
+    } else if (z == 1) {
+      return("1")
+    } else if (z == 10) {
+      return("10")
+    } else {
+      return(parse(text = paste0("10^", log10(z))))
+    }
+  })
+}
 
 # Visualise benchmarking results
 p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
@@ -150,37 +161,43 @@ p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
   geom_line() +
   geom_point() +
   scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
-  scale_y_bench_time(breaks = time_breaks) +
+  scale_y_log10(labels = scientific_10) +
   scale_colour_manual(labels = classes,
                       values = c("black", "darkgrey", "lightgrey")) +
-  facet_grid(. ~ method,
-             labeller = labeller(method = methods)) +
-  labs(x = "# Samples", y = "Execution time (t)", colour = "Object") +
+  facet_grid(. ~ method, labeller = labeller(method = methods)) +
+  labs(x = "# Samples", y = "Execution time (s)", colour = "Object") +
   theme_bw() +
   theme(axis.title.x = element_blank(),
+        axis.title.y = element_text(size = 15),
         axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 12),
         axis.ticks.x = element_blank(),
-        strip.text = element_text(size = 11),
+        strip.text = element_text(size = 15),
         strip.background = element_blank())
   
-p2 <- ggplot(benchmark_df, aes(x = N, y = Memory, colour = object)) +
+p2 <- ggplot(benchmark_df, aes(x = N, y = Memory / 1e6, colour = object)) +
   geom_line() +
   geom_point() +
   scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
-  scale_y_bench_bytes(breaks = byte_breaks) +
+  scale_y_log10(labels = scientific_10) +
   scale_colour_manual(labels = classes,
                       values = c("black", "darkgrey", "lightgrey")) +
   facet_grid(. ~ method,
              labeller = labeller(method = methods)) +
-  labs(x = "Sample size (n)", y = "Allocated memory (m)", colour = "Object") +
+  labs(x = "Sample size (n)", y = "Allocated memory (MB)", colour = "Object") +
   theme_bw() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+  theme(axis.title = element_text(size = 15),
+        axis.text = element_text(size = 12),
+        axis.text.x = element_text(angle = 45, hjust = 1),
         strip.text = element_blank()) +
   guides(colour = "none")
 
 p <- (p1 / p2) +
   plot_layout(guides = "collect") &
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 12),
+        legend.title = element_text(size = 15),
+        legend.key.size = unit(1.2, "cm"))
 
 # Save plot to file
 ggsave("article/OMA_figure.png",
