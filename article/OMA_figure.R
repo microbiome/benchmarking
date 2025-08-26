@@ -141,6 +141,12 @@ benchmark_df %>%
 #          method = factor(method, levels = names(methods)),
 #          object = factor(object, levels = names(classes)))
 
+# Set sample sizes to show
+n <- N[seq(1, 10, by = 3)]
+
+benchmark_df <- benchmark_df %>%
+  filter(N %in% n)
+
 scientific_10 <- function(y) {
   sapply(y, function(z) {
     if (is.na(z)){
@@ -160,7 +166,7 @@ p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
   geom_errorbar(aes(ymin = Time - TimeSE, ymax = Time + TimeSE), width = 0) +
   geom_line() +
   geom_point() +
-  scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
+  scale_x_log10(breaks = n, limits = c(n[[1]], n[[length(n)]]), labels = scientific_10) +
   scale_y_log10(labels = scientific_10) +
   scale_colour_manual(labels = classes,
                       values = c("black", "darkgrey", "lightgrey")) +
@@ -178,7 +184,7 @@ p1 <- ggplot(benchmark_df, aes(x = N, y = Time, colour = object)) +
 p2 <- ggplot(benchmark_df, aes(x = N, y = Memory / 1e6, colour = object)) +
   geom_line() +
   geom_point() +
-  scale_x_log10(breaks = N, limits = c(N[[1]], N[[length(N)]])) +
+  scale_x_log10(breaks = n, limits = c(n[[1]], n[[length(n)]]), labels = scientific_10) +
   scale_y_log10(labels = scientific_10) +
   scale_colour_manual(labels = classes,
                       values = c("black", "darkgrey", "lightgrey")) +
@@ -188,7 +194,7 @@ p2 <- ggplot(benchmark_df, aes(x = N, y = Memory / 1e6, colour = object)) +
   theme_bw() +
   theme(axis.title = element_text(size = 15),
         axis.text = element_text(size = 12),
-        axis.text.x = element_text(angle = 45, hjust = 1),
+        #axis.text.x = element_text(angle = 45, hjust = 1),
         strip.text = element_blank()) +
   guides(colour = "none")
 
@@ -200,6 +206,6 @@ p <- (p1 / p2) +
         legend.key.size = unit(1.2, "cm"))
 
 # Save plot to file
-ggsave("article/OMA_figure.png",
+ggsave("article/OMA_figure2.png",
        width = 15,
        height = 7)
