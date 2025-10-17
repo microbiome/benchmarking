@@ -6,7 +6,7 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
   for (tseind in seq_along(containers)) {
 
     tse <- containers[[tseind]]
-     
+    
     # make a data frame to store execution times
     df <- make_data_frame(tse, sample_sizes, fun_list)
     
@@ -31,11 +31,11 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           # message("random subsetting to the desired sample size")          
           sub_tse <- alt_tse[ , sample(ncol(alt_tse), N)]
 
-	  # Convert to phyloseq
-          sub_pseq <- makePhyloseqFromTreeSummarizedExperiment(sub_tse)
+	        # Convert to phyloseq
+          sub_pseq <- convertToPhyloseq(sub_tse)
 
           # Store feature and sample counts before filtering out
-	  # zero rows and cols	 
+	        # zero rows and cols	 
           df[["tse"]]$Features[ind]  <- nrow(sub_tse)
           df[["pseq"]]$Features[ind] <- nrow(phyloseq::otu_table(sub_pseq))
           df[["tse"]]$Samples[ind]   <- ncol(sub_tse)
@@ -47,11 +47,11 @@ experiment_benchmark <- function(containers, fun_list, sample_sizes, message = T
           }
 
           rind <- names(which(rowMeans(assay(sub_tse, "counts") == 0) < 1))
-	  cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
+	        cind <- names(which(colMeans(assay(sub_tse, "counts") == 0) < 1))
           sub_tse <- sub_tse[rind, cind]
           
-	  rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
-	  cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
+	        rind <- names(which(rowMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
+	        cind <- names(which(colMeans(phyloseq::otu_table(sub_pseq) == 0) < 1))
           sub_pseq <- phyloseq::prune_samples(cind, sub_pseq)
           sub_pseq <- phyloseq::prune_taxa(rind, sub_pseq)	  	  
 	  
@@ -122,9 +122,9 @@ plot_exec_time <- function(df, sample_size, rank) {
 melt_tse_exec_time <- function(tse) {
   
   start.time1 <- Sys.time()
-  molten_tse <- mia::meltAssay(tse,
-                               add_row_data = TRUE,
-                               add_col_data = TRUE)
+  molten_tse <- mia::meltSE(tse,
+                            add.row = TRUE,
+                            add.col = TRUE)
   end.time1 <- Sys.time()
   
   return(end.time1 - start.time1)
@@ -157,9 +157,9 @@ melt_speedyseq_exec_time <- function(speedyseq) {
 transform_tse_exec_time <- function(tse) {
   
   start.time2 <- Sys.time()
-  trans_tse <- mia::transformSamples(tse,
-                                     method = "log10",
-                                     pseudocount = 1)
+  trans_tse <- mia::transformAssay(tse,
+                                   method = "log10",
+                                   pseudocount = 1)
   end.time2 <- Sys.time()
   
   return(end.time2 - start.time2)
@@ -222,9 +222,9 @@ agglomerate_speedyseq_exec_time <- function(speedyseq) {
 alpha_tse_exec_time <- function(tse) {
   
   start.time2 <- Sys.time()
-  alpha_tse <- mia::estimateDiversity(tse,
-                                      index = "shannon",
-                                      name = "shannon")
+  alpha_tse <- mia::addAlpha(tse,
+                             index = "shannon",
+                             name = "shannon")
   end.time2 <- Sys.time()
   
   return(end.time2 - start.time2)
@@ -298,7 +298,9 @@ load_dataset <- function(data_set, ranks = NULL) {
     # load curatedMetagenomicData
   } else if (data_set %in% c("AsnicarF_2017", "AsnicarF_2021", "HMP_2019_ibdmdb", "LifeLinesDeep_2016", "ShaoY_2019")) {
     
-    tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"), dryrun = FALSE, counts = TRUE)
+    tmp <- curatedMetagenomicData(paste0(data_set, ".relative_abundance"),
+                                  dryrun = FALSE,
+                                  counts = TRUE)
     
     tse <- tmp[[1]]
     
@@ -324,10 +326,11 @@ load_dataset <- function(data_set, ranks = NULL) {
   # (not in current splitByRanks implementation)
   if ("ASV" %in% ranks) {
     altExp(tse, "ASV") <- TreeSummarizedExperiment(
-                                     assays = list(counts=assay(tse, "counts")),
-                                     colData = colData(tse),
-                                     rowData = rowData(tse),
-				     rowTree = rowTree(tse))				    
+      assays = list(counts=assay(tse, "counts")),
+      colData = colData(tse),
+      rowData = rowData(tse),
+      rowTree = rowTree(tse)
+    )  
   }
   
   # select elements of altExps(tse) with at least min_features 

@@ -1,11 +1,9 @@
-Overview
---------
+## Overview
 
 This report contains the benchmarking results of the largest analysed
 data set (GrieneisenTSData) for the transform operation.
 
-Data Characteristics
---------------------
+## Data Characteristics
 
 Full sample sizes by data set:
 
@@ -51,7 +49,6 @@ Feature counts by data set:
 </tbody>
 </table>
 
-Relative differences in execution time by sample size
------------------------------------------------------
+## Relative differences in execution time by sample size
 
 <img src="../reports/figs/big_transform_first_ratio-1.png" width="50%" />

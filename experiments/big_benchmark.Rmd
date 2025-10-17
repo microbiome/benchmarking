@@ -20,19 +20,21 @@ Full sample sizes by data set:
 ```{r samples, echo = FALSE, fig.width = 10, fig.height = 4 * length(containers)}
 overview <- data.frame(Dataset = mainExpName(bigdata),
                        Samples  = ncol(bigdata),
-		       Features = nrow(bigdata))
+                       Features = nrow(bigdata))
 kable(overview)
 ```
 
 Feature counts by data set:
 
 ```{r chars, echo = FALSE, fig.width = 10, fig.height = 4 * length(containers)}
-big_feat <- big_df %>% select(Dataset, Rank, Features) %>%
-     	            group_by(Dataset, Rank) %>%
-                    summarize(Features = max(Features)) %>% # Variation due to removing zero rows & cols per round
-		    unique() %>%
-                    pivot_wider(names_from = Dataset, values_from = Features, values_fill = 0)
-big_feat <- big_feat[order(big_feat[ , 2]), ] # Sort by the first dataset feature counts
+big_feat <- big_df %>%
+    select(Dataset, Rank, Features) %>%
+  group_by(Dataset, Rank) %>%
+  summarise(Features = max(Features)) %>% # Variation due to removing zero rows & cols per round
+	unique() %>%
+  pivot_wider(names_from = Dataset, values_from = Features, values_fill = 0)
+
+big_feat <- big_feat[order(pull(big_feat, 2)), ] # Sort by the first dataset feature counts
 kable(big_feat)
 ```
 

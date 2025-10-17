@@ -2,6 +2,3 @@
 df_benchmark <- experiment_benchmark(containers,
                                      tests[[testmethod]], 
                                      sample_sizes)
-
-
-
