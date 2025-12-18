@@ -1,3 +1,6 @@
+# Add path to custom libraries (only for CSC)
+.libPaths(c("/projappl/project_2014893/project_rpackages_451", .libPaths()))
+
 # Import libraries
 if (!require("BiocManager")) {
     install("BiocManager")
