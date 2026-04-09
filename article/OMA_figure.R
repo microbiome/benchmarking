@@ -10,6 +10,7 @@ pkgs <- c(
     "bench", "DelayedArray", "mia", "microbiome", "microbiomeDataSets", "philr",
     "phyloseq", "picante", "tidyverse", "speedyseq"
 )
+
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
         install(pkg)
@@ -39,16 +40,14 @@ methods <- c(
 )
 
 # Import dataset
-GTSD <- GrieneisenTSData()
-# Agglomerate by Genus to reduce size
-GTSD <- mia::agglomerateByRank(GTSD, rank = "Genus")
+metalog <- readRDS("/scratch/project_2014893/metalog_tse.Rds")
 
 # Run benchmark for each sample size
 benchmark_out <- bench::press(
     N = N,
     {
         # Select a random subset of samples
-        tse <- GTSD[, sample(ncol(GTSD), N)]
+        tse <- metalog[, sample(ncol(metalog), N)]
         # Convert TreeSE to phyloseq
         pseq <- mia::convertToPhyloseq(tse)
 

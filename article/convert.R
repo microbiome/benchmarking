@@ -8,7 +8,11 @@ library(biomformat)
 
 scratch_dir <- "/scratch/project_2014893/"
 
-tse <- readRDS(paste0(scratch_dir, "metalog_tse.Rds"))
+tse <- readRDS(paste0(scratch_dir, "orig_metalog_tse.Rds"))
+assayNames(tse) <- "counts"
+
+tse <- agglomerateByRank(tse, rank = "Genus")
+saveRDS(tse, paste0(scratch_dir, "metalog_tse.Rds"))
 
 pseq <- convertToPhyloseq(tse)
 saveRDS(pseq, paste0(scratch_dir, "metalog_pseq.Rds"))
