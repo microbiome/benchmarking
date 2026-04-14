@@ -59,7 +59,7 @@ expr <- switch(
 
 
 # Import dataset
-scratch_dir <- "scratch/"
+scratch_dir <- "/scratch/project_2014893/"
 file_name <- paste0(scratch_dir, "metalog_tse.Rds")
 metalog <- readRDS(file_name)
 
