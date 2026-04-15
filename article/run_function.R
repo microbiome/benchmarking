@@ -9,7 +9,7 @@ if (!require("BiocManager")) {
 }
 
 pkgs <- c("bench", "mia", "microbiome", "phyloseq", "picante", "philr",
-          "speedyseq", "tidyverse")
+          "speedyseq", "SyncRNG", "tidyverse")
 
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
@@ -24,7 +24,7 @@ obj.type <- as.character(params[1])
 obj.fun <- as.character(params[2])
 row.size <- as.integer(params[3])
 col.size <- as.integer(params[4])
-n_iter <- 10
+rand.state <- as.integer(params[5])
 
 key <- paste0(obj.type, "_", obj.fun)
 
@@ -57,18 +57,19 @@ expr <- switch(
     spseq_agg = quote(speedyseq::tax_glom(pseq, taxrank = "Family"))
 )
 
-
 # Import dataset
 scratch_dir <- "/scratch/project_2014893/"
 file_name <- paste0(scratch_dir, "metalog_tse.Rds")
 metalog <- readRDS(file_name)
 
 # Set seed for reproducibility
-set.seed(123)
+s <- SyncRNG(seed = rand.state)
+
+row_subset <- s$shuffle(seq_len(nrow(metalog)))[seq_len(row.size)]
+col_subset <- s$shuffle(seq_len(ncol(metalog)))[seq_len(col.size)]
 
 # Select a random subset of rows and samples
-metalog <- metalog[sample(nrow(metalog), row.size),
-                   sample(ncol(metalog), col.size)]
+metalog <- metalog[row_subset, col_subset]
 
 # Recalculate relative abundance
 assay(metalog) <- apply(assay(metalog), 2L, function(x) x / sum(x))
@@ -81,7 +82,7 @@ if( obj.type != "tse" ){
 # Run benchmark
 out <- bench::mark(
     expr,
-    iterations = n_iter,
+    iterations = 1,
     memory = TRUE,
     check = FALSE
 )
@@ -91,13 +92,12 @@ df <- out |>
     unnest(c(time, gc)) |>
     dplyr::transmute(
         object = obj.type, method = obj.fun,
-        rows = row.size, cols = col.size,
-        time = as.numeric(time), gc, memory = as.numeric(mem_alloc)
+        rows = row.size, cols = col.size, state = rand.state,
+        time = as.numeric(time), memory = as.numeric(mem_alloc), gc
     )
 
-res_dir <- paste0(scratch_dir, "out/")
-file_name <- paste(obj.type, obj.fun, row.size, col.size, sep = "_")
+file_name <- paste(obj.type, obj.fun, row.size, col.size, rand.state, sep = "_")
 
 write.table(
-    df, file = paste0(res_dir, file_name, ".tsv"), sep = "\t", row.names = FALSE
+    df, file = paste0("out/", file_name, ".tsv"), sep = "\t", row.names = FALSE
 )
