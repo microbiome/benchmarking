@@ -86,6 +86,8 @@ scratch_dir <- "/scratch/project_2014893/"
 file_name <- paste0(scratch_dir, "metalog_tse.Rds")
 metalog <- readRDS(file_name)
 
+set.seed(rand.state)
+
 # Select a random subset of rows and samples
 metalog <- metalog[sample(nrow(metalog) , row.size),
                    sample(ncol(metalog), col.size)]
