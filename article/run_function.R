@@ -9,7 +9,7 @@ if (!require("BiocManager")) {
 }
 
 pkgs <- c("bench", "mia", "microbiome", "phyloseq", "picante", "philr",
-          "speedyseq", "SyncRNG", "tidyverse")
+          "speedyseq", "tidyverse")
 
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
@@ -86,19 +86,14 @@ scratch_dir <- "/scratch/project_2014893/"
 file_name <- paste0(scratch_dir, "metalog_tse.Rds")
 metalog <- readRDS(file_name)
 
-# Set seed for reproducibility
-s <- SyncRNG(seed = rand.state)
-
-row_subset <- s$shuffle(seq_len(nrow(metalog)))[seq_len(row.size)]
-col_subset <- s$shuffle(seq_len(ncol(metalog)))[seq_len(col.size)]
-
 # Select a random subset of rows and samples
-metalog <- metalog[row_subset, col_subset]
+metalog <- metalog[sample(nrow(metalog) , row.size),
+                   sample(ncol(metalog), col.size)]
 
 # Recalculate relative abundance
 assay(metalog) <- apply(assay(metalog), 2L, function(x) x / sum(x))
 
-if( obj.type != "tse" ){
+if( obj.type %in% c("pseq", "spseq") ){
     # Convert TreeSE to phyloseq
     metalog <- mia::convertToPhyloseq(metalog)
 }
