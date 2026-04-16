@@ -54,7 +54,31 @@ expr <- switch(
     # Melt speedyseq
     spseq_melt = quote(speedyseq::psmelt(pseq)),
     # Agglomerate speedyseq
-    spseq_agg = quote(speedyseq::tax_glom(pseq, taxrank = "Family"))
+    spseq_agg = quote(speedyseq::tax_glom(pseq, taxrank = "Family")),
+    qiime_alpha = "
+        qiime diversity-lib faith-pd \
+            --i-table feature-table.qza \
+            --i-phylogeny phylogeny.qza \
+            --o-vector faith-pd-vector.qza
+    ",
+    qiime_beta = "
+        qiime diversity-lib unweighted-unifrac \
+            --i-table feature-table.qza \
+            --i-phylogeny phylogeny.qza \
+            --o-distance-matrix unweighted-unifrac-dm.qza
+    ",
+    qiime_agg = "
+        qiime feature-table group \
+            --i-table feature-table.qza \
+            --m-metadata-file sample-metadata.tsv \
+            --m-metadata-column family-rank \
+            --p-mode sum \
+            --p-axis feature \
+            --o-grouped-table agg_table.qza
+    ",
+    mothur_alpha = "mothur > phylo.diversity(tree=final.phylip.tre, count=final.count_table, rarefy=F)",
+    mothur_beta = "mothur > unifrac.unweighted(tree=final.phylip.tre, count=final.count_table, distance=lt,random=F, subsample=F)",
+    mothur_agg = "mothur > summary.tax(taxonomy=rowdata.taxonomy, count=assay.count_table, group=rank.groups)" # maybe
 )
 
 # Import dataset
