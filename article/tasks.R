@@ -1,8 +1,8 @@
 
 obj.types <- c("tse", "pseq", "spseq", "qiime", "mothur")
 obj.funs <- c("alpha", "beta", "trans", "agg", "melt")
-row.sizes <- as.character(10^(1:4))
-col.sizes <- as.character(10^(1:5))
+row.sizes <- format(10^(1:4), scientific = FALSE, trim = TRUE)
+col.sizes <- format(10^(1:5), scientific = FALSE, trim = TRUE)
 rand.states <- 0
 
 df <- expand.grid(
