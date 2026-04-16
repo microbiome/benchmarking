@@ -76,9 +76,9 @@ expr <- switch(
             --p-axis feature \
             --o-grouped-table agg_table.qza
     ",
-    mothur_alpha = "mothur > phylo.diversity(tree=final.phylip.tre, count=final.count_table, rarefy=F)",
-    mothur_beta = "mothur > unifrac.unweighted(tree=final.phylip.tre, count=final.count_table, distance=lt,random=F, subsample=F)",
-    mothur_agg = "mothur > summary.tax(taxonomy=rowdata.taxonomy, count=assay.count_table, group=rank.groups)" # maybe
+    mothur_alpha = "phylo.diversity(tree=tree.nwk, count=counts.tsv, rarefy=F)",
+    mothur_beta = "unifrac.unweighted(tree=tree.nwk, count=counts.tsv, distance=lt, random=F, subsample=F)",
+    mothur_agg = "summary.tax(taxonomy=taxonomy.tsv, count=counts.tsv, group=rank.groups)" # maybe
 )
 
 # Import dataset
@@ -96,8 +96,48 @@ metalog <- metalog[sample(nrow(metalog) , row.size),
 assay(metalog) <- apply(assay(metalog), 2L, function(x) x / sum(x))
 
 if( obj.type %in% c("pseq", "spseq") ){
+    
     # Convert TreeSE to phyloseq
     metalog <- mia::convertToPhyloseq(metalog)
+    
+}else if( obj.type == "qiime" ){
+    
+    metalog <- as_rbiom(metalog)
+    rbiom::write_qiime2(metalog, "unique_tmp_dir?", prefix = "")
+    
+    system("convert2qiime.sh")
+    
+    qiime_commands <- "
+        # Convert classic BIOM table to HDF5
+        biom convert -i counts.tsv -o counts.hdf5 --to-hdf5
+        
+        # Import counts
+        qiime tools import \
+            --input-path counts.hdf5 \
+            --type 'FeatureTable[Frequency]' \
+            --input-format BIOMV210Format \
+            --output-path counts.qza
+        
+        # Import taxonomy
+        qiime tools import \
+            --input-path taxonomy.tsv \
+            --type FeatureData[Taxonomy] \
+            --output-path taxonomy.qza
+        
+        # Import phylogenetic tree
+        qiime tools import \
+            --input-path tree.nwk \
+            --type 'Phylogeny[Rooted]' \
+            --output-path tree.qza
+    "
+    
+}else if( obj.type == "mothur" ){
+    
+    metalog <- as_rbiom(metalog)
+    rbiom::write_mothur(metalog, "unique_tmp_dir?", prefix = "")
+    
+    "make.shared(count=counts.tsv, label=asv)"
+    
 }
 
 # Run benchmark
