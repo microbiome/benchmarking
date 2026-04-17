@@ -84,26 +84,25 @@ expr <- switch(
 # Import dataset
 scratch_dir <- "/scratch/project_2014893/"
 file_name <- paste0(scratch_dir, "metalog_tse.Rds")
-metalog <- readRDS(file_name)
+tse <- readRDS(file_name)
 
 set.seed(rand.state)
 
 # Select a random subset of rows and samples
-metalog <- metalog[sample(nrow(metalog) , row.size),
-                   sample(ncol(metalog), col.size)]
+tse <- tse[sample(nrow(tse) , row.size), sample(ncol(tse), col.size)]
 
 # Recalculate relative abundance
-assay(metalog) <- apply(assay(metalog), 2L, function(x) x / sum(x))
+assay(tse) <- apply(assay(tse), 2L, function(x) x / sum(x))
 
 if( obj.type %in% c("pseq", "spseq") ){
     
     # Convert TreeSE to phyloseq
-    metalog <- mia::convertToPhyloseq(metalog)
+    pseq <- mia::convertToPhyloseq(tse)
     
 }else if( obj.type == "qiime" ){
     
-    metalog <- as_rbiom(metalog)
-    rbiom::write_qiime2(metalog, "unique_tmp_dir?", prefix = "")
+    biom <- as_rbiom(tse)
+    rbiom::write_qiime2(biom, "unique_tmp_dir?", prefix = "")
     
     system("convert2qiime.sh")
     
@@ -133,8 +132,8 @@ if( obj.type %in% c("pseq", "spseq") ){
     
 }else if( obj.type == "mothur" ){
     
-    metalog <- as_rbiom(metalog)
-    rbiom::write_mothur(metalog, "unique_tmp_dir?", prefix = "")
+    biom <- as_rbiom(tse)
+    rbiom::write_mothur(biom, "unique_tmp_dir?", prefix = "")
     
     "make.shared(count=counts.tsv, label=asv)"
     
