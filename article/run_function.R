@@ -142,7 +142,7 @@ if( obj.type %in% c("pseq", "spseq") ){
 
 # Run benchmark
 out <- bench::mark(
-    expr,
+    exprs = list(expr),
     iterations = 1,
     memory = TRUE,
     check = FALSE
