@@ -88,8 +88,14 @@ tse <- readRDS(file_name)
 
 set.seed(rand.state)
 
-# Select a random subset of rows and samples
-tse <- tse[sample(nrow(tse) , row.size), sample(ncol(tse), col.size)]
+# Select a random subset of features
+tse <- tse[sample(nrow(tse), row.size), ]
+
+# Remove samples with only zeros
+tse <- tse[ , colSums(assay(tse)) != 0L]
+
+# Select a random subset of samples
+tse <- tse[ , sample(ncol(tse), col.size)]
 
 # Recalculate relative abundance
 assay(tse) <- apply(assay(tse), 2L, function(x) x / sum(x))
