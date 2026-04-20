@@ -18,18 +18,22 @@ temp <- sapply(pkgs, function(pkg) {
     }
 })
 
+# Store main working directory
+main_wd <- getwd()
+
 # Set benchmarking hyperparameters
 params <- commandArgs(trailingOnly = TRUE)
 obj.type <- as.character(params[1])
 obj.fun <- as.character(params[2])
-row.size <- as.integer(params[3])
-col.size <- as.integer(params[4])
-rand.state <- as.integer(params[5])
+bench.var <- as.character(params[3])
+row.size <- as.integer(params[4])
+col.size <- as.integer(params[5])
+rand.state <- as.integer(params[6])
 
 key <- paste0(obj.type, "_", obj.fun)
 
 # Define expression to run
-expr <- switch(
+bench_expr <- switch(
     key,
     # Estimate faith from TreeSE
     tse_alpha = quote(mia::getAlpha(tse, index = "faith_diversity")),
@@ -76,9 +80,9 @@ expr <- switch(
             --p-axis feature \
             --o-grouped-table agg_table.qza
     ",
-    mothur_alpha = "phylo.diversity(tree=tree.nwk, count=counts.tsv, rarefy=F)",
-    mothur_beta = "unifrac.unweighted(tree=tree.nwk, count=counts.tsv, distance=lt, random=F, subsample=F)",
-    mothur_agg = "summary.tax(taxonomy=taxonomy.tsv, count=counts.tsv, group=rank.groups)" # maybe
+    mothur_alpha = "#phylo.diversity(tree=tree.nwk, count=counts.tsv, rarefy=F)",
+    mothur_beta = "#unifrac.unweighted(tree=tree.nwk, count=counts.tsv, distance=lt, random=F, subsample=F)",
+    mothur_agg = "#summary.tax(taxonomy=taxonomy.tsv, count=counts.tsv, group=Family)"
 )
 
 # Import dataset
@@ -107,62 +111,95 @@ if( obj.type %in% c("pseq", "spseq") ){
     
 }else if( obj.type == "qiime" ){
     
-    biom <- as_rbiom(tse)
-    rbiom::write_qiime2(biom, "unique_tmp_dir?", prefix = "")
+    qiime_dir <- paste0(
+        "qiime/", paste(row_size, col.size, rand.state, collapse = "_")
+    )
     
-    system("convert2qiime.sh")
+    if( dir.exists(qiime_dir) ){
+        
+        setwd(qiime_dir)
     
-    qiime_commands <- "
+    }else{
+        
+        biom <- as_rbiom(tse)
+        rbiom::write_qiime2(biom, qiime_dir, prefix = "")
+        
+        setwd(qiime_dir)
+        
+        system("
         # Convert classic BIOM table to HDF5
         biom convert -i counts.tsv -o counts.hdf5 --to-hdf5
-        
+            
         # Import counts
         qiime tools import \
             --input-path counts.hdf5 \
             --type 'FeatureTable[Frequency]' \
             --input-format BIOMV210Format \
             --output-path counts.qza
-        
+            
         # Import taxonomy
         qiime tools import \
             --input-path taxonomy.tsv \
-            --type FeatureData[Taxonomy] \
+            --type 'FeatureData[Taxonomy]' \
             --output-path taxonomy.qza
-        
+            
         # Import phylogenetic tree
         qiime tools import \
             --input-path tree.nwk \
             --type 'Phylogeny[Rooted]' \
             --output-path tree.qza
-    "
+        ")
+    }
+    
+    bench_expr <- call("system", bench_expr)
     
 }else if( obj.type == "mothur" ){
     
-    biom <- as_rbiom(tse)
-    rbiom::write_mothur(biom, "unique_tmp_dir?", prefix = "")
+    mothur_exec <- "/appl/soft/bio/mothur/mothur-1.48.2/mothur"
     
-    "make.shared(count=counts.tsv, label=asv)"
+    mothur_dir <- paste0(
+        "mothur/", paste(row_size, col.size, rand.state, collapse = "_")
+    )
     
+    if( dir.exists(mothur_dir) ){
+        
+        setwd(mothur_dir)
+    
+    }else{
+        
+        biom <- as_rbiom(tse)
+        rbiom::write_mothur(biom, mothur_dir, prefix = "")
+        setwd(mothur_dir)
+        
+        mothur_command <- "#make.shared(count=counts.tsv, label=asv)"
+        system(paste(mothur_exec, shQuote(mothur_command)))
+    }
+    
+    bench_expr <- paste(mothur_exec, shQuote(bench_expr))
+    bench_expr <- call("system", bench_expr)
 }
 
+bench_fun <- eval(parse(text = paste0("bench_", bench.var)))
+
 # Run benchmark
-out <- bench::mark(
-    exprs = list(expr),
-    iterations = 1,
-    memory = TRUE,
-    check = FALSE
-)
+out <- bench_fun(eval(bench_expr))
+
+bench_col <- switch(bench.var, time = "real", memory = "mem_alloc")
+
+out <- out[[bench_col]]
 
 # Retrieve benchmarking results for each experiment and iteration
-df <- out |>
-    unnest(c(time, gc)) |>
-    dplyr::transmute(
-        object = obj.type, method = obj.fun,
-        rows = row.size, cols = col.size, state = rand.state,
-        time = as.numeric(time), memory = as.numeric(mem_alloc), gc
-    )
+df <- data.frame(
+    object = obj.type, method = obj.fun, var = bench.var,
+    rows = row.size, cols = col.size, state = rand.state,
+    value = as.numeric(out), row.names = NULL
+)
 
-file_name <- paste(obj.type, obj.fun, row.size, col.size, rand.state, sep = "_")
+setwd(main_wd)
+
+file_name <- paste(
+    obj.type, obj.fun, bench.var, row.size, col.size, rand.state, sep = "_"
+)
 
 write.table(
     df, file = paste0("out/", file_name, ".tsv"), sep = "\t", row.names = FALSE
