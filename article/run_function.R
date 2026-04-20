@@ -8,7 +8,7 @@ if (!require("BiocManager")) {
     library("BiocManager")
 }
 
-pkgs <- c("bench", "mia", "microbiome", "phyloseq", "picante", "philr",
+pkgs <- c("bench", "mia", "microbiome", "phyloseq", "picante", "philr", "rbiom",
           "speedyseq", "tidyverse")
 
 temp <- sapply(pkgs, function(pkg) {
@@ -112,7 +112,7 @@ if( obj.type %in% c("pseq", "spseq") ){
 }else if( obj.type == "qiime" ){
     
     qiime_dir <- paste0(
-        "qiime/", paste(row_size, col.size, rand.state, collapse = "_")
+        "qiime/", paste(row.size, col.size, rand.state, collapse = "_")
     )
     
     if( dir.exists(qiime_dir) ){
@@ -158,7 +158,7 @@ if( obj.type %in% c("pseq", "spseq") ){
     mothur_exec <- "/appl/soft/bio/mothur/mothur-1.48.2/mothur"
     
     mothur_dir <- paste0(
-        "mothur/", paste(row_size, col.size, rand.state, collapse = "_")
+        "mothur/", paste(row.size, col.size, rand.state, collapse = "_")
     )
     
     if( dir.exists(mothur_dir) ){
