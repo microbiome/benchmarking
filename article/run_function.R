@@ -121,9 +121,7 @@ if( obj.type %in% c("pseq", "spseq") ){
     
     }else{
         
-        biom <- as_rbiom(tse)
-        rbiom::write_qiime2(biom, qiime_dir, prefix = "")
-        
+        mia::exportQIIME2(tse, qiime_dir)
         setwd(qiime_dir)
         
         system("
@@ -167,8 +165,7 @@ if( obj.type %in% c("pseq", "spseq") ){
     
     }else{
         
-        biom <- as_rbiom(tse)
-        rbiom::write_mothur(biom, mothur_dir, prefix = "")
+        mia::exportMothur(tse, mothur_dir)
         setwd(mothur_dir)
         
         mothur_command <- "#make.shared(count=counts.tsv, label=asv)"
