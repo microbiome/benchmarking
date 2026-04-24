@@ -8,8 +8,8 @@ if (!require("BiocManager")) {
     library("BiocManager")
 }
 
-pkgs <- c("bench", "mia", "microbiome", "phyloseq", "picante", "philr", "rbiom",
-          "speedyseq", "tidyverse")
+pkgs <- c("bench", "mia", "microbiome", "phyloseq", "picante", "philr",
+          "speedyseq", "tidyverse", "TreeSummarizedExperiment")
 
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
@@ -40,7 +40,7 @@ bench_expr <- switch(
     # Estimate unifrac from TreeSE
     tse_beta = quote(mia::getDissimilarity(tse, method = "unifrac")),
     # philr transform TreeSE
-    tse_trans = quote(mia::transformAssay(tse, method = "philr", MARGIN = 1L, pseudocount = 1)),
+    tse_trans = quote(mia::transformAssay(tse, method = "philr", MARGIN = 1L)),
     # Melt TreeSE
     tse_melt = quote(mia::meltSE(tse, add.row = TRUE, add.col = TRUE)),
     # Agglomerate TreeSE
@@ -50,7 +50,7 @@ bench_expr <- switch(
     # Estimate unifrac from phyloseq
     pseq_beta = quote(phyloseq::UniFrac(pseq)),
     # philr transform phyloseq
-    pseq_trans = quote(philr::philr(t(otu_table(pseq)), tree = phy_tree(pseq), pseudocount = 1)),
+    pseq_trans = quote(philr::philr(t(otu_table(pseq)), tree = phy_tree(pseq))),
     # Melt phyloseq
     pseq_melt = quote(phyloseq::psmelt(pseq)),
     # Agglomerate phyloseq
@@ -59,30 +59,30 @@ bench_expr <- switch(
     spseq_melt = quote(speedyseq::psmelt(pseq)),
     # Agglomerate speedyseq
     spseq_agg = quote(speedyseq::tax_glom(pseq, taxrank = "Family")),
-    qiime_alpha = "
-        qiime diversity-lib faith-pd \
-            --i-table feature-table.qza \
-            --i-phylogeny phylogeny.qza \
-            --o-vector faith-pd-vector.qza
-    ",
-    qiime_beta = "
-        qiime diversity-lib unweighted-unifrac \
-            --i-table feature-table.qza \
-            --i-phylogeny phylogeny.qza \
-            --o-distance-matrix unweighted-unifrac-dm.qza
-    ",
-    qiime_agg = "
-        qiime feature-table group \
-            --i-table feature-table.qza \
-            --m-metadata-file sample-metadata.tsv \
-            --m-metadata-column family-rank \
-            --p-mode sum \
-            --p-axis feature \
-            --o-grouped-table agg_table.qza
-    ",
-    mothur_alpha = "#phylo.diversity(tree=tree.nwk, count=counts.tsv, rarefy=F)",
-    mothur_beta = "#unifrac.unweighted(tree=tree.nwk, count=counts.tsv, distance=lt, random=F, subsample=F)",
-    mothur_agg = "#summary.tax(taxonomy=taxonomy.tsv, count=counts.tsv, group=Family)"
+    qiime_alpha = paste("
+        qiime diversity-lib faith-pd",
+            "--i-table counts.qza",
+            "--i-phylogeny tree.qza",
+            "--o-vector faith-pd-vector.qza
+    "),
+    qiime_beta = paste("
+        qiime diversity-lib unweighted-unifrac",
+            "--i-table counts.qza",
+            "--i-phylogeny tree.qza",
+            "--o-distance-matrix unweighted-unifrac-dm.qza
+    "),
+    qiime_agg = paste("
+        qiime feature-table group",
+            "--i-table counts.qza",
+            "--m-metadata-file Family.tsv",
+            "--m-metadata-column Family",
+            "--p-mode sum",
+            "--p-axis feature",
+            "--o-grouped-table agg_table.qza
+    "),
+    mothur_alpha = "#phylo.diversity(tree=tree.nwk, count=counts.tsv)",
+    mothur_beta = "#unifrac.unweighted(tree=tree.nwk, count=counts.tsv, distance=lt)",
+    mothur_agg = "#summary.tax(taxonomy=taxonomy.tsv, count=counts.tsv, groups=Family.group)"
 )
 
 # Import dataset
@@ -101,8 +101,22 @@ tse <- tse[ , colSums(assay(tse)) != 0L]
 # Select a random subset of samples
 tse <- tse[ , sample(ncol(tse), col.size)]
 
+# Prune tree to match subset
+tse <- TreeSummarizedExperiment::subsetByLeaf(tse, rowLeaf = rownames(tse))
+
+# Count rows with only zeros
+zero_rows <- sum(apply(assay(tse), 1L, function(row) all(row == 0L)))
+
+# Compute assay sparsity
+sparsity <- sum(assay(tse) == 0L) / prod(dim(tse))
+
+# add sample proportion
+
 # Recalculate relative abundance
-assay(tse) <- apply(assay(tse), 2L, function(x) x / sum(x))
+#assay(tse) <- apply(assay(tse), 2L, function(x) x / sum(x))
+
+# Add pseudocount
+assay(tse) <- assay(tse) + 1
 
 if( obj.type %in% c("pseq", "spseq") ){
     
@@ -121,32 +135,31 @@ if( obj.type %in% c("pseq", "spseq") ){
     
     }else{
         
-        mia::exportQIIME2(tse, qiime_dir)
+        mia::exportQIIME2(tse, qiime_dir, group.var = "Family")
         setwd(qiime_dir)
         
-        system("
-        # Convert classic BIOM table to HDF5
-        biom convert -i counts.tsv -o counts.hdf5 --to-hdf5
-            
-        # Import counts
-        qiime tools import \
-            --input-path counts.hdf5 \
-            --type 'FeatureTable[Frequency]' \
-            --input-format BIOMV210Format \
-            --output-path counts.qza
-            
-        # Import taxonomy
-        qiime tools import \
-            --input-path taxonomy.tsv \
-            --type 'FeatureData[Taxonomy]' \
-            --output-path taxonomy.qza
-            
-        # Import phylogenetic tree
-        qiime tools import \
-            --input-path tree.nwk \
-            --type 'Phylogeny[Rooted]' \
-            --output-path tree.qza
-        ")
+        system(paste("
+            # Convert classic BIOM table to HDF5
+            biom convert -i counts.tsv -o counts.hdf5 --to-hdf5
+                
+            # Import counts
+            qiime tools import --input-path counts.hdf5",
+                "--type 'FeatureTable[Frequency]'",
+                "--input-format BIOMV210Format",
+                "--output-path counts.qza
+                
+            # Import taxonomy
+            qiime tools import",
+                "--input-path taxonomy.tsv",
+                "--type 'FeatureData[Taxonomy]'",
+                "--output-path taxonomy.qza
+                
+            # Import phylogenetic tree
+            qiime tools import",
+                "--input-path tree.nwk",
+                "--type 'Phylogeny[Rooted]'",
+                "--output-path tree.qza
+        "))
     }
     
     bench_expr <- call("system", bench_expr)
@@ -165,11 +178,8 @@ if( obj.type %in% c("pseq", "spseq") ){
     
     }else{
         
-        mia::exportMothur(tse, mothur_dir)
+        mia::exportMothur(tse, mothur_dir, group.var = "Family")
         setwd(mothur_dir)
-        
-        mothur_command <- "#make.shared(count=counts.tsv, label=asv)"
-        system(paste(mothur_exec, shQuote(mothur_command)))
     }
     
     bench_expr <- paste(mothur_exec, shQuote(bench_expr))
@@ -189,7 +199,8 @@ out <- out[[bench_col]]
 df <- data.frame(
     object = obj.type, method = obj.fun, var = bench.var,
     rows = row.size, cols = col.size, state = rand.state,
-    value = as.numeric(out), row.names = NULL
+    value = as.numeric(out), sparsity = sparsity, zerows = zero_rows,
+    row.names = NULL
 )
 
 setwd(main_wd)
