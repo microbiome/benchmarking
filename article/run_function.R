@@ -9,7 +9,7 @@ if (!require("BiocManager")) {
 }
 
 pkgs <- c("bench", "mia", "microbiome", "phyloseq", "picante", "philr",
-          "speedyseq", "tidyverse", "TreeSummarizedExperiment")
+          "speedyseq", "TreeSummarizedExperiment")
 
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
@@ -113,10 +113,10 @@ sparsity <- sum(assay(tse) == 0L) / prod(dim(tse))
 # add sample proportion
 
 # Recalculate relative abundance
-#assay(tse) <- apply(assay(tse), 2L, function(x) x / sum(x))
+assay(tse) <- apply(assay(tse), 2L, function(x) x / sum(x))
 
 # Add pseudocount
-assay(tse) <- assay(tse) + 1
+assay(tse) <- assay(tse) + min(assay(tse)) / 2
 
 if( obj.type %in% c("pseq", "spseq") ){
     

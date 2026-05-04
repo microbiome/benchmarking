@@ -1,10 +1,10 @@
 
 obj.types <- c("tse", "pseq", "spseq")#, "qiime", "mothur")
 obj.funs <- c("alpha", "beta", "trans", "agg", "melt")
-bench.vars <- "time" # "memory"
+bench.vars <- c("time", "memory")
 row.sizes <- 10^(1:4)
 col.sizes <- 10^(1:5)
-rand.states <- 0
+rand.states <- seq(3)
 
 df <- expand.grid(
     command = "run_function.R",
