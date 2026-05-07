@@ -16,9 +16,11 @@ RUN conda install -y -c conda-forge -c bioconda \
     r-bench \
     r-picante \
     r-patchwork \
-    bioconductor-mia \
-    bioconductor-philr \
-    bioconductor-treesummarizedexperiment
+    bioconductor-philr=1.37.1 \
+    bioconductor-treesummarizedexperiment=2.15.1
 
-# Install the GitHub package (speedyseq) using remotes
-# RUN R -e "remotes::install_github('mikemc/speedyseq@0057652ff7a4244ccef2b786dca58d901ec2fc62')"
+# Install devel versions of some packages from GitHub
+RUN conda run -n rachis-qiime2-2026.4 bash -c \
+    "R -e \"install.packages('remotes', repos = 'https://cloud.r-project.org/')\" && \
+     R -e \"remotes::install_github('microbiome/mia@exporters')\" && \
+     R -e \"remotes::install_github('mikemc/speedyseq@0057652ff7a4244ccef2b786dca58d901ec2fc62')\""
