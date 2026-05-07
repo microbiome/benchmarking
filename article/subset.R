@@ -55,8 +55,10 @@ for( i in seq_len(nrow(grid_df)) ){
     
     # Recalculate relative abundance
     assay(tse) <- apply(assay(tse), 2L, function(x) x / sum(x))
+    # Find the minimum non-zero value
+    pseudocount <- min(assay(tse)[assay(tse) != 0]) / 2
     # Add pseudocount
-    assay(tse) <- assay(tse) + min(assay(tse)) / 2
+    assay(tse) <- assay(tse) + pseudocount
     
     tse_file <- paste0(out_dir, "tse/", out_name, ".rda")
     

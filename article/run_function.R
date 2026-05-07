@@ -62,7 +62,7 @@ data_dir <- paste0(scratch_dir, "objects/")
 file_name <- paste(row.size, col.size, rand.state, sep = "_")
 
 obj_dir <- ifelse(obj.type == "spseq", "pseq", obj.type)
-file_path <- paste0(data_dir, obj_dir, "/", file_name)
+file_path <- paste0(data_dir, obj_dir, "/", file_name, ".rda")
 
 # Import dataset
 x <- readRDS(file_path)
