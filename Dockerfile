@@ -16,8 +16,8 @@ RUN conda install -y -c conda-forge -c bioconda \
     r-bench \
     r-picante \
     r-patchwork \
-    bioconductor-philr=1.37.1 \
-    bioconductor-treesummarizedexperiment=2.15.1
+    bioconductor-philr \
+    bioconductor-treesummarizedexperiment
 
 # Install devel versions of some packages from GitHub
 RUN conda run -n rachis-qiime2-2026.4 bash -c \
