@@ -19,7 +19,6 @@ RUN conda install -y \
     bioconductor-mia=1.19.8 \
     bioconductor-philr=1.37.1 \
     bioconductor-treesummarizedexperiment=2.15.1 \
-    r-speedyseq=0.5.3.9021 \
     -c conda-forge \
     -c bioconda
 
