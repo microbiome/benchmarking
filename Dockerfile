@@ -12,15 +12,13 @@ RUN wget https://github.com/mothur/mothur/releases/download/v1.48.5/Mothur.linux
     && rm -rf Mothur.linux_x86_64.zip mothur
 
 # Install R packages from the DESCRIPTION file using conda
-RUN conda install -y \
+RUN conda install -y -c conda-forge -c bioconda \
     r-bench \
     r-picante \
     r-patchwork \
-    bioconductor-mia=1.19.8 \
-    bioconductor-philr=1.37.1 \
-    bioconductor-treesummarizedexperiment=2.15.1 \
-    -c conda-forge \
-    -c bioconda
+    bioconductor-mia \
+    bioconductor-philr \
+    bioconductor-treesummarizedexperiment
 
 # Install the GitHub package (speedyseq) using remotes
 # RUN R -e "remotes::install_github('mikemc/speedyseq@0057652ff7a4244ccef2b786dca58d901ec2fc62')"
