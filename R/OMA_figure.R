@@ -15,24 +15,19 @@ temp <- sapply(pkgs, function(pkg) {
     }
 })
 
-# Set sample size
-N <- 10^(1:5)
-
 # Define class names
 classes <- c(tse = "TreeSE", pseq = "phyloseq", spseq = "speedyseq")
 
 # Define method names
 methods <- c(
+    trans = "PhILR transformation",
+    agg = "Family agglomeration",
     alpha = "Faith diversity",
     beta = "UniFrac dissimilarity",
-    melt = "Melting",
-    trans = "PhILR transformation",
-    agg = "Family agglomeration"
+    melt = "Melting"
 )
 
 # Import results
-
-
 df_list <- lapply(
     list.files("./out/", full.names = TRUE),
     read.table, sep = "\t", header = TRUE
@@ -40,15 +35,16 @@ df_list <- lapply(
 
 df <- do.call(rbind, df_list)
 
+# Set sample size
 n_iter <- length(unique(df$state))
 
 # Summarise benchmarking results with mean time and standard deviation
 df <- df |>
     group_by(method, object, rows, cols) |>
     summarise(
-        Time = mean(time), Memory = mean(memory),
-        TimeSD = sd(time), TimeSE = TimeSD / sqrt(n_iter),
-        NoGC = sum(gc == "none"), .groups = "drop"
+        Time = mean(value), #Memory = mean(memory / 1e6),
+        TimeSD = sd(value), TimeSE = TimeSD / sqrt(n_iter),
+        .groups = "drop"
     ) |>
     mutate(
         method = factor(method, levels = names(methods)),
@@ -70,8 +66,8 @@ scientific_10 <- function(y) {
     })
 }
 
-row.breaks <- df$rows[log10(df$rows) %% 1 == 0] |> unique()
-col.breaks <- df$cols[log10(df$cols) %% 1 == 0] |> unique()
+row.breaks <- unique(df$rows[log10(df$rows) %% 1 == 0])
+col.breaks <- unique(df$cols[log10(df$cols) %% 1 == 0])
 
 # Visualise benchmarking results: time
 p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
@@ -88,36 +84,37 @@ p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
     labs(x = "# Samples", y = "Execution time (s)", colour = "Object") +
     theme_bw() +
     theme(
-        axis.title.x = element_blank(),
-        axis.title.y = element_text(size = 15),
-        axis.text.x = element_blank(),
-        axis.text.y = element_text(size = 12),
-        axis.ticks.x = element_blank(),
+        # axis.title.x = element_blank(),
+        # axis.title.y = element_text(size = 15),
+        # axis.text.x = element_blank(),
+        # axis.text.y = element_text(size = 12),
+        # axis.ticks.x = element_blank(),
+        axis.title = element_text(size = 15),
+        axis.text = element_text(size = 12),
         strip.text = element_text(size = 15),
         strip.background = element_blank()
     )
 
 # Visualise benchmarking results: memory
-p2 <- ggplot(df, aes(x = rows, y = Memory / 1e6, colour = object)) +
+p2 <- ggplot(df, aes(x = cols, y = Memory, colour = object)) +
     geom_line() +
     geom_point() +
-    scale_x_log10(breaks = col.breaks, limits = range(df$rows), labels = scientific_10) +
+    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = scientific_10) +
     scale_y_log10(labels = scientific_10) +
     scale_colour_manual(
         labels = classes,
         values = c("black", "darkgrey", "lightgrey")
     ) +
-    facet_grid(cols ~ method,
-        labeller = labeller(method = methods)
-    ) +
+    facet_grid(rows ~ method, labeller = labeller(method = methods)) +
     labs(x = "Sample size (n)", y = "Allocated memory (MB)", colour = "Object") +
     theme_bw() +
     theme(
         axis.title = element_text(size = 15),
         axis.text = element_text(size = 12),
-        strip.text = element_blank()
-    ) +
-    guides(colour = "none")
+        # strip.text = element_blank()
+        strip.background = element_blank(size = 15)
+    )#  +
+    # guides(colour = "none")
 
 # Combine results
 p <- (p1 / p2) +
@@ -131,3 +128,32 @@ p <- (p1 / p2) +
 
 # Save plot to file
 ggsave("article/OMA_figure.png", width = 15, height = 7)
+
+
+
+ggplot(df, aes(x = cols, y = Time, colour = ordered(rows))) +
+    geom_line() +
+    geom_point() +
+    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = scientific_10) +
+    scale_y_log10(labels = scientific_10) +
+    scale_colour_grey(start = 0.8, end = 0.2, labels = function(x) scientific_10(as.numeric(x))) +
+    facet_grid(
+        method ~ object,
+        labeller = labeller(method = methods, object = classes)
+    ) +
+    labs(x = "Sample size (n)", y = "Execution time (s)", colour = "Feature size (m)") +
+    theme_bw()
+
+
+ggplot(df, aes(x = cols, y = Memory, colour = ordered(rows))) +
+    geom_line() +
+    geom_point() +
+    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = scientific_10) +
+    scale_y_log10(labels = scientific_10) +
+    scale_colour_grey(start = 0.8, end = 0.2, labels = function(x) scientific_10(as.numeric(x))) +
+    facet_grid(
+        method ~ object,
+        labeller = labeller(method = methods, object = classes)
+    ) +
+    labs(x = "Sample size (n)", y = "Allocated memory (MB)", colour = "Feature size (m)") +
+    theme_bw()

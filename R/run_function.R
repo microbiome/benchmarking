@@ -31,30 +31,60 @@ key <- paste0(obj.type, "_", obj.fun)
 # Define expression to run
 bench_expr <- switch(
     key,
-    # Estimate faith from TreeSE
+    # Estimate faith with mia
     tse_alpha = quote(mia::getAlpha(x, index = "faith_diversity")),
-    # Estimate unifrac from TreeSE
+    # Estimate unifrac with mia
     tse_beta = quote(mia::getDissimilarity(x, method = "unifrac")),
-    # philr transform TreeSE
+    # philr transform with mia
     tse_trans = quote(mia::transformAssay(x, method = "philr", MARGIN = 1L)),
     # Melt TreeSE
     tse_melt = quote(mia::meltSE(x, add.row = TRUE, add.col = TRUE)),
-    # Agglomerate TreeSE
+    # Agglomerate assay with mia
     tse_agg = quote(mia::agglomerateByRank(x, rank = "Family")),
-    # Estimate faith from phyloseq
+    # Estimate faith with phyloseq
     pseq_alpha = quote(picante::pd(samp = t(otu_table(x)), tree = phy_tree(x))[, 1]),
-    # Estimate unifrac from phyloseq
+    # Estimate unifrac with phyloseq
     pseq_beta = quote(phyloseq::UniFrac(x)),
-    # philr transform phyloseq
+    # philr transform with phyloseq
     pseq_trans = quote(philr::philr(t(otu_table(x)), tree = phy_tree(x))),
     # Melt phyloseq
     pseq_melt = quote(phyloseq::psmelt(x)),
-    # Agglomerate phyloseq
+    # Agglomerate assay with phyloseq
     pseq_agg = quote(phyloseq::tax_glom(x, taxrank = "Family")),
     # Melt speedyseq
     spseq_melt = quote(speedyseq::psmelt(x)),
-    # Agglomerate speedyseq
-    spseq_agg = quote(speedyseq::tax_glom(x, taxrank = "Family"))
+    # Agglomerate assay with speedyseq
+    spseq_agg = quote(speedyseq::tax_glom(x, taxrank = "Family")),
+    # Estimate faith with mothur
+    mothur_alpha = "#phylo.diversity(tree=tree.nwk, count=counts.tsv)",
+    # Estimate unifrac with mothur
+    mothur_beta = "#unifrac.unweighted(tree=tree.nwk, count=counts.tsv, distance=lt)",
+    # Agglomerate with mothur
+    mothur_agg = "#summary.tax(taxonomy=taxonomy.tsv, count=counts.tsv, groups=Family.group)"
+    # Estimate faith with qiime
+    qiime_alpha = paste("
+        qiime diversity-lib faith-pd",
+            "--i-table counts.qza",
+            "--i-phylogeny tree.qza",
+            "--o-vector faith-pd-vector.qza
+    "),
+    # Estimate unifrac from qiime
+    qiime_beta = paste("
+        qiime diversity-lib unweighted-unifrac",
+            "--i-table counts.qza",
+            "--i-phylogeny tree.qza",
+            "--o-distance-matrix unweighted-unifrac-dm.qza
+    "),
+    # Agglomerate qiime
+    qiime_agg = paste("
+        qiime feature-table group",
+            "--i-table counts.qza",
+            "--m-metadata-file Family.tsv",
+            "--m-metadata-column Family",
+            "--p-mode sum",
+            "--p-axis feature",
+            "--o-grouped-table agg_table.qza
+    ")
 )
 
 scratch_dir <- "/scratch/project_2014893/"
