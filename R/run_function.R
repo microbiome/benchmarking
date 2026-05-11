@@ -17,6 +17,10 @@ temp <- sapply(pkgs, function(pkg) {
     }
 })
 
+
+# Store main working directory
+main_wd <- getwd()
+
 # Set benchmarking hyperparameters
 params <- commandArgs(trailingOnly = TRUE)
 obj.type <- as.character(params[1])
@@ -89,13 +93,30 @@ bench_expr <- switch(
 
 scratch_dir <- "/scratch/project_2014893/"
 data_dir <- paste0(scratch_dir, "objects/")
-file_name <- paste(row.size, col.size, rand.state, sep = "_")
 
 obj_dir <- ifelse(obj.type == "spseq", "pseq", obj.type)
-file_path <- paste0(data_dir, obj_dir, "/", file_name, ".rda")
+obj_file <- paste(row.size, col.size, rand.state, sep = "_")
+obj_path <- paste0(data_dir, obj_dir, "/", obj_file)
 
-# Import dataset
-x <- readRDS(file_path)
+if( obj.type %in% c("tse", "pseq", "spseq") ){
+    
+    # Import dataset
+    x <- readRDS(paste0(obj_path, ".rda"))
+    
+}else{
+    
+    setwd(obj_path)
+    
+    if( obj.type == "mothur" ){
+        
+        mothur_exec <- "/appl/soft/bio/mothur/mothur-1.48.2/mothur"
+      
+        bench_expr <- paste(mothur_exec, shQuote(bench_expr))
+    }
+    
+    bench_expr <- call("system", bench_expr)
+}
+
 
 # Build function call
 bench_fun <- eval(parse(text = paste0("bench_", bench.var)))
@@ -113,6 +134,8 @@ df <- data.frame(
     rows = row.size, cols = col.size, state = rand.state,
     row.names = NULL
 )
+
+setwd(main_wd)
 
 file_name <- paste(
     obj.type, obj.fun, bench.var, row.size, col.size, rand.state, sep = "_"
