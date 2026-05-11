@@ -1,10 +1,10 @@
 
 # Add path to custom libraries (only for CSC)
-.libPaths(c("/projappl/project_2014893/project_rpackages_451", .libPaths()))
+.libPaths(c("/opt/conda/envs/rachis-qiime2-2026.4/bin", .libPaths()))
 
 # Import libraries
 if (!require("BiocManager")) {
-    install("BiocManager")
+    install.package("BiocManager")
     library("BiocManager")
 }
 
@@ -64,7 +64,7 @@ bench_expr <- switch(
     # Estimate unifrac with mothur
     mothur_beta = "#unifrac.unweighted(tree=tree.nwk, count=counts.tsv, distance=lt)",
     # Agglomerate with mothur
-    mothur_agg = "#summary.tax(taxonomy=taxonomy.tsv, count=counts.tsv, groups=Family.group)"
+    mothur_agg = "#summary.tax(taxonomy=taxonomy.tsv, count=counts.tsv, groups=Family.group)",
     # Estimate faith with qiime
     qiime_alpha = paste("
         qiime diversity-lib faith-pd",
@@ -108,10 +108,9 @@ if( obj.type %in% c("tse", "pseq", "spseq") ){
     setwd(obj_path)
     
     if( obj.type == "mothur" ){
+
+        bench_expr <- paste("mothur", shQuote(bench_expr))
         
-        mothur_exec <- "/appl/soft/bio/mothur/mothur-1.48.2/mothur"
-      
-        bench_expr <- paste(mothur_exec, shQuote(bench_expr))
     }
     
     bench_expr <- call("system", bench_expr)
