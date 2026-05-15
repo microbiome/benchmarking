@@ -3,7 +3,7 @@
 FROM quay.io/qiime2/qiime2:2026.4
 
 # Install unzip and update package lists
-RUN apt update && apt install -y unzip
+RUN apt update && apt install -y unzip libcairo2-dev
 
 # Download and install Mothur
 RUN wget https://github.com/mothur/mothur/releases/download/v1.48.5/Mothur.linux_x86_64.zip \
