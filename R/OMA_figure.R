@@ -1,13 +1,12 @@
-# Add path to custom libraries (only for CSC)
-.libPaths(c("/projappl/project_2014893/project_rpackages_451", .libPaths()))
 
 # Import libraries
 if (!require("BiocManager")) {
-    install("BiocManager")
+    install.packages("BiocManager")
     library("BiocManager")
 }
 
 pkgs <- c("patchwork", "tidyverse")
+
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
         install(pkg)
@@ -16,7 +15,12 @@ temp <- sapply(pkgs, function(pkg) {
 })
 
 # Define class names
-classes <- c(tse = "TreeSE", pseq = "phyloseq", spseq = "speedyseq")
+classes <- c(
+    tse = "TreeSE",
+    pseq = "phyloseq",
+    spseq = "speedyseq",
+    qiime = "qiime"
+)
 
 # Define method names
 methods <- c(
@@ -78,7 +82,7 @@ p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
     scale_y_log10(labels = scientific_10) +
     scale_colour_manual(
         labels = classes,
-        values = c("black", "darkgrey", "lightgrey")
+        values = c("black", "darkgrey", "lightgrey", "red")
     ) +
     facet_grid(rows ~ method, labeller = labeller(method = methods)) +
     labs(x = "# Samples", y = "Execution time (s)", colour = "Object") +
@@ -112,7 +116,7 @@ p2 <- ggplot(df, aes(x = cols, y = Memory, colour = object)) +
         axis.title = element_text(size = 15),
         axis.text = element_text(size = 12),
         # strip.text = element_blank()
-        strip.background = element_blank(size = 15)
+        strip.background = element_blank()
     )#  +
     # guides(colour = "none")
 

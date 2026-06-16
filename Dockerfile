@@ -16,7 +16,7 @@ RUN conda install -y -c conda-forge -c bioconda \
     r-bench \
     r-picante \
     r-patchwork \
-    biocmanager \
+    r-biocmanager \
     bioconductor-philr \
     bioconductor-treesummarizedexperiment
 
