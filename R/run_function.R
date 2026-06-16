@@ -1,18 +1,15 @@
 
-# Add path to custom libraries (only for CSC)
-.libPaths(c("/opt/conda/envs/rachis-qiime2-2026.4/bin", .libPaths()))
-
 # Import libraries
-if (!require("BiocManager")) {
-    install.package("BiocManager")
-    library("BiocManager")
-}
+# if (!require("BiocManager")) {
+#     install.packages("BiocManager")
+#     library("BiocManager")
+# }
 
 pkgs <- c("bench", "mia", "microbiome", "phyloseq", "picante", "philr", "speedyseq")
 
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
-        install(pkg)
+        # install(pkg)
         library(pkg, character.only = TRUE)
     }
 })
