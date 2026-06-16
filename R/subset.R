@@ -1,6 +1,6 @@
 
 # Add path to custom libraries (only for CSC)
-.libPaths(c("/projappl/project_2014893/project_rpackages_451", .libPaths()))
+.libPaths(c("/opt/conda/envs/rachis-qiime2-2026.4/bin", .libPaths()))
 
 # Import libraries
 if (!require("BiocManager")) {

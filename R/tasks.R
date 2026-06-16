@@ -1,5 +1,5 @@
 
-obj.types <- c("tse", "pseq", "spseq")#, "qiime", "mothur")
+obj.types <- c("tse", "pseq", "spseq", "qiime")#, "mothur")
 obj.funs <- c("alpha", "beta", "trans", "agg", "melt")
 bench.vars <- c("time")#, "memory")
 row.sizes <- 10^(1:2)
