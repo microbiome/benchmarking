@@ -1,15 +1,14 @@
-
 # Import libraries
-# if (!require("BiocManager")) {
-#     install.packages("BiocManager")
-#     library("BiocManager")
-# }
+if (!require("BiocManager")) {
+    install.packages("BiocManager")
+    library("BiocManager")
+}
 
 pkgs <- c("mia", "phyloseq", "TreeSummarizedExperiment")
 
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
-        # install(pkg)
+        install(pkg)
         library(pkg, character.only = TRUE)
     }
 })
@@ -20,8 +19,8 @@ file_name <- paste0(scratch_dir, "metalog_tse.Rds")
 x <- readRDS(file_name)
 
 grid_df <- expand.grid(
-    rows = 10^(1:2),
-    cols = 10^(1:2),
+    rows = 10^(1:3),
+    cols = 10^(1:3),
     seed = 1
 )
 

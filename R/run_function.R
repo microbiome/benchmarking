@@ -1,19 +1,17 @@
-
 # Import libraries
-# if (!require("BiocManager")) {
-#     install.packages("BiocManager")
-#     library("BiocManager")
-# }
+if (!require("BiocManager")) {
+    install.packages("BiocManager")
+    library("BiocManager")
+}
 
 pkgs <- c("bench", "mia", "microbiome", "phyloseq", "picante", "philr", "speedyseq")
 
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
-        # install(pkg)
+        install(pkg)
         library(pkg, character.only = TRUE)
     }
 })
-
 
 # Store main working directory
 main_wd <- getwd()
@@ -61,7 +59,7 @@ bench_expr <- switch(
     # Estimate unifrac with mothur
     mothur_beta = "#unifrac.unweighted(tree=tree.nwk, count=counts.tsv, distance=lt)",
     # Agglomerate with mothur
-    mothur_agg = "#summary.tax(taxonomy=taxonomy.tsv, count=counts.tsv, groups=Family.group)",
+    mothur_agg = "#phylotype(taxonomy=taxonomy.tsv, count=counts.tsv, label=2)",
     # Estimate faith with qiime
     qiime_alpha = paste("
         qiime diversity-lib faith-pd",
