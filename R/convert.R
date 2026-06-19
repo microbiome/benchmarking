@@ -14,13 +14,10 @@ temp <- sapply(pkgs, function(pkg) {
 })
 
 scratch_dir <- "/scratch/project_2014893/"
-read.depth <- 10^7
 
 tse <- readRDS(paste0(scratch_dir, "orig_metalog_tse.Rds"))
 
-assay(tse, "counts") <- round(read.depth * assay(tse, "relative_abundance"))
-
-assay(tse, "relative_abundance") <- NULL
+assayNames(tse) <- "counts"
 
 tse <- agglomerateByRank(tse, rank = "Genus")
 
