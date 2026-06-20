@@ -1,4 +1,3 @@
-
 # Use qiime2 as base image
 FROM quay.io/qiime2/qiime2:2026.4
 

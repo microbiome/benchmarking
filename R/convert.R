@@ -21,5 +21,7 @@ assayNames(tse) <- "counts"
 
 tse <- agglomerateByRank(tse, rank = "Genus")
 
+colData(tse)$collection <- as.factor(colData(tse)$collection)
+
 saveRDS(tse, paste0(scratch_dir, "metalog_tse.Rds"))
 

@@ -25,7 +25,7 @@ grid_df <- expand.grid(
     sparsity = NA
 )
 
-stypes <- c("human", "animal", "environmental", "ocean")
+stypes <- levels(colData(x)$collection)
 
 for( stype in stypes ){
     grid_df[stype] <- NA
@@ -39,7 +39,12 @@ for( i in seq_len(nrow(grid_df)) ){
     col.size <- grid_df[i, "cols"]
     rand.state <- grid_df[i , "seed"]
     # Set output name
-    out_name <- paste(row.size, col.size, rand.state, sep = "_")
+    out_name <- paste(
+        format(row.size, scientific = FALSE),
+        format(col.size, scientific = FALSE),
+        rand.state,
+        sep = "_"
+    )
     # Set seed
     set.seed(rand.state)
     # Select a random subset of features
@@ -47,7 +52,7 @@ for( i in seq_len(nrow(grid_df)) ){
     # Remove samples with only zeros
     tse <- tse[ , colSums(assay(tse)) != 0L]
     # Select a random subset of samples
-    tse <- tse[ , sample(ncol(tse), col.size)]
+    tse <- tse[ , sample(ncol(tse), col.size, replace = TRUE)]
     # Prune tree to match subset
     tse <- TreeSummarizedExperiment::subsetByLeaf(tse, rowLeaf = rownames(tse))
     # Count rows with only zeros
