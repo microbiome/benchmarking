@@ -1,15 +1,14 @@
-
 # Import libraries
-# if (!require("BiocManager")) {
-#     install.packages("BiocManager")
-#     library("BiocManager")
-# }
+if (!require("BiocManager")) {
+    install.packages("BiocManager")
+    library("BiocManager")
+}
 
 pkgs <- c("mia", "phyloseq", "TreeSummarizedExperiment")
 
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
-        # install(pkg)
+        install(pkg)
         library(pkg, character.only = TRUE)
     }
 })
@@ -20,10 +19,17 @@ file_name <- paste0(scratch_dir, "metalog_tse.Rds")
 x <- readRDS(file_name)
 
 grid_df <- expand.grid(
-    rows = 10^(1:2),
-    cols = 10^(1:2),
-    seed = 1
+    rows = 10^(1:4),
+    cols = 10^(1:5),
+    seed = 1,
+    sparsity = NA
 )
+
+stypes <- levels(colData(x)$collection)
+
+for( stype in stypes ){
+    grid_df[stype] <- NA
+}
 
 out_dir <- paste0(scratch_dir, "objects/")
 
@@ -33,7 +39,12 @@ for( i in seq_len(nrow(grid_df)) ){
     col.size <- grid_df[i, "cols"]
     rand.state <- grid_df[i , "seed"]
     # Set output name
-    out_name <- paste(row.size, col.size, rand.state, sep = "_")
+    out_name <- paste(
+        format(row.size, scientific = FALSE),
+        format(col.size, scientific = FALSE),
+        rand.state,
+        sep = "_"
+    )
     # Set seed
     set.seed(rand.state)
     # Select a random subset of features
@@ -41,15 +52,19 @@ for( i in seq_len(nrow(grid_df)) ){
     # Remove samples with only zeros
     tse <- tse[ , colSums(assay(tse)) != 0L]
     # Select a random subset of samples
-    tse <- tse[ , sample(ncol(tse), col.size)]
+    tse <- tse[ , sample(ncol(tse), col.size, replace = TRUE)]
     # Prune tree to match subset
     tse <- TreeSummarizedExperiment::subsetByLeaf(tse, rowLeaf = rownames(tse))
     # Count rows with only zeros
     zero_rows <- sum(apply(assay(tse), 1L, function(row) all(row == 0L)))
     # Compute assay sparsity
-    sparsity <- sum(assay(tse) == 0L) / prod(dim(tse))
-    # add sample proportion
-    
+    grid_df$sparsity[i] <- sum(assay(tse) == 0L) / prod(dim(tse))
+    # Compute sample type proportions
+    stable <- table(colData(tse)$collection)
+    tabsum <- sum(stable)
+    for( stype in stypes ){
+        grid_df[i, stype] <- stable[[stype]] / tabsum
+    }
     # Recalculate relative abundance
     assay(tse) <- apply(assay(tse), 2L, function(x) x / sum(x))
     # Find the minimum non-zero value
@@ -82,11 +97,14 @@ for( i in seq_len(nrow(grid_df)) ){
     
     }
     
-    mothur_dir <- paste0(out_dir, "mothur/", out_name)
-    
-    if( !dir.exists(mothur_dir) ){
-        
-        mia::exportMothur(tse, mothur_dir, group.var = "Family")
-    
-    }
+    # mothur_dir <- paste0(out_dir, "mothur/", out_name)
+    # 
+    # if( !dir.exists(mothur_dir) ){
+    #     
+    #     mia::exportMothur(tse, mothur_dir, group.var = "Family")
+    # 
+    # }
 }
+
+# Save subset metadata
+write.table(grid_df, "metadata.tsv", row.names = FALSE)

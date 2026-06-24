@@ -1,23 +1,27 @@
+# Import libraries
+if (!require("BiocManager")) {
+    install.packages("BiocManager")
+    library("BiocManager")
+}
 
-# Add path to custom libraries (only for CSC)
-.libPaths(c("/projappl/project_2014893/project_rpackages_451", .libPaths()))
+pkgs <- c("mia")
 
-library(mia)
-library(phyloseq)
-library(biomformat)
+temp <- sapply(pkgs, function(pkg) {
+    if (!require(pkg, character.only = TRUE)) {
+        install(pkg)
+        library(pkg, character.only = TRUE)
+    }
+})
 
 scratch_dir <- "/scratch/project_2014893/"
 
 tse <- readRDS(paste0(scratch_dir, "orig_metalog_tse.Rds"))
+
 assayNames(tse) <- "counts"
 
 tse <- agglomerateByRank(tse, rank = "Genus")
+
+colData(tse)$collection <- as.factor(colData(tse)$collection)
+
 saveRDS(tse, paste0(scratch_dir, "metalog_tse.Rds"))
-
-pseq <- convertToPhyloseq(tse)
-saveRDS(pseq, paste0(scratch_dir, "metalog_pseq.Rds"))
-
-biom <- convertToBIOM(tse)
-write_biom(biom, paste0(scratch_dir, "metalog.biom"))
-
 

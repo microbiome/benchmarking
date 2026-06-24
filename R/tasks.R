@@ -1,9 +1,8 @@
-
 obj.types <- c("tse", "pseq", "spseq", "qiime")
 obj.funs <- c("alpha", "beta", "trans", "agg", "melt")
 bench.vars <- c("time")#, "memory")
-row.sizes <- 10^(1:2)
-col.sizes <- 10^(1:2)
+row.sizes <- 10^(1:4)
+col.sizes <- 10^(1:5)
 rand.states <- 1
 
 df <- expand.grid(
