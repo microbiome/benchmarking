@@ -5,6 +5,9 @@ for SUBDIR in */; do
 
     # Change to the subdirectory
     cd "$SUBDIR" || exit
+    
+    # Delete prior results
+    rm -f "faith-pd-vector.qza" "unweighted-unifrac-dm.qza" "agg_table.qza"
 
     # Convert classic BIOM table to HDF5
     if [ ! -f "counts.hdf5" ]; then

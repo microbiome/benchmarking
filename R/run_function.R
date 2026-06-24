@@ -27,6 +27,12 @@ rand.state <- as.integer(params[6])
 
 key <- paste0(obj.type, "_", obj.fun)
 
+qiime_out <- c(
+    alpha = "faith-pd-vector.qza",
+    beta = "unweighted-unifrac-dm.qza",
+    agg = "agg_table.qza"
+)
+
 # Define expression to run
 bench_expr <- switch(
     key,
@@ -65,14 +71,14 @@ bench_expr <- switch(
         qiime diversity-lib faith-pd",
             "--i-table counts.qza",
             "--i-phylogeny tree.qza",
-            "--o-vector faith-pd-vector.qza
+            "--o-vector ", qiime_out[["alpha"]], "
     "),
     # Estimate unifrac from qiime
     qiime_beta = paste("
         qiime diversity-lib unweighted-unifrac",
             "--i-table counts.qza",
             "--i-phylogeny tree.qza",
-            "--o-distance-matrix unweighted-unifrac-dm.qza
+            "--o-distance-matrix ", qiime_out[["beta"]], "
     "),
     # Agglomerate qiime
     qiime_agg = paste("
@@ -82,7 +88,7 @@ bench_expr <- switch(
             "--m-metadata-column Family",
             "--p-mode sum",
             "--p-axis feature",
-            "--o-grouped-table agg_table.qza
+            "--o-grouped-table ", qiime_out[["agg"]], "
     ")
 )
 
@@ -98,15 +104,9 @@ if( obj.type %in% c("tse", "pseq", "spseq") ){
     # Import dataset
     x <- readRDS(paste0(obj_path, ".rda"))
     
-}else{
+}else if( obj.type == "qiime" ){
     
     setwd(obj_path)
-    
-    if( obj.type == "mothur" ){
-
-        bench_expr <- paste("mothur", shQuote(bench_expr))
-        
-    }
     
     bench_expr <- call("system", bench_expr)
 }
@@ -116,6 +116,11 @@ if( obj.type %in% c("tse", "pseq", "spseq") ){
 bench_fun <- eval(parse(text = paste0("bench_", bench.var)))
 # Run benchmark
 out <- bench_fun(eval(bench_expr))
+
+# Ensure qiime was successful
+if( obj.type == "qiime" && !qiime_out[[obj.fun]] %in% list.files(obj_path) ){
+    stop("Error: ", qiime_out[[obj.fun]], "' not found.", call. = FALSE)
+}
 
 bench_col <- switch(bench.var, time = "real", memory = "mem_alloc")
 
