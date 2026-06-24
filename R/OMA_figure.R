@@ -18,7 +18,7 @@ classes <- c(
     tse = "TreeSE",
     pseq = "phyloseq",
     spseq = "speedyseq",
-    qiime = "qiime"
+    qiime = "QIIME 2"
 )
 
 # Define method names
