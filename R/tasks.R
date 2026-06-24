@@ -19,17 +19,19 @@ to_remove <- (df$object == "spseq" & df$method %in% c("alpha", "beta", "trans"))
 
 df <- df[!to_remove, ]
 
-df <- df[order(df$cols * df$rows, df$method, df$object), ]
+df <- df[order(df$object, df$method, df$rows, 1 / df$cols), ]
 
 df$rows <- format(df$rows, scientific = FALSE, trim = TRUE)
 df$cols <- format(df$cols, scientific = FALSE, trim = TRUE)
 
+prior.out <- gsub(".tsv", "", list.files("out"), fixed = TRUE)
+
 lines <- apply(df, 1L, paste, collapse = "_")
 
-prior.out <- gsub(".tsv", "", list.files("out"), fixed = TRUE)
 lines <- lines[!lines %in% prior.out]
 
-lines <- gsub("_", " ", lines, fixed = TRUE) |>
-    paste("run_function.R", lines)
+lines <- gsub("_", " ", lines, fixed = TRUE)
+
+lines <- paste("run_function.R", lines)
 
 writeLines(lines, "tasks.txt")
