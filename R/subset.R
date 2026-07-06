@@ -53,6 +53,8 @@ for( i in seq_len(nrow(grid_df)) ){
     tse <- tse[ , colSums(assay(tse)) != 0L]
     # Select a random subset of samples
     tse <- tse[ , sample(ncol(tse), col.size, replace = TRUE)]
+    # Make sample names unique for repeated samples
+    colnames(tse) <- make.unique(colnames(tse))
     # Prune tree to match subset
     tse <- TreeSummarizedExperiment::subsetByLeaf(tse, rowLeaf = rownames(tse))
     # Count rows with only zeros
@@ -96,14 +98,6 @@ for( i in seq_len(nrow(grid_df)) ){
         mia::exportQIIME2(tse, qiime_dir, group.var = "Family")
     
     }
-    
-    # mothur_dir <- paste0(out_dir, "mothur/", out_name)
-    # 
-    # if( !dir.exists(mothur_dir) ){
-    #     
-    #     mia::exportMothur(tse, mothur_dir, group.var = "Family")
-    # 
-    # }
 }
 
 # Save subset metadata
