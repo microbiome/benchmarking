@@ -32,11 +32,21 @@ methods <- c(
 
 # Import results
 df_list <- lapply(
-    list.files("./out/", full.names = TRUE, recursive = TRUE),
+    list.files("./out", full.names = TRUE, recursive = TRUE),
     read.table, sep = "\t", header = TRUE
 )
 
 df <- do.call(rbind, df_list)
+
+df <- reshape(
+    df,
+    idvar = setdiff(names(df), c("var", "value")),
+    timevar = "var",
+    v.names = "value",
+    direction = "wide"
+)
+
+names(df) <- sub("value.", "", names(df), fixed = TRUE)
 
 # Set sample size
 n_iter <- length(unique(df$state))
@@ -45,8 +55,8 @@ n_iter <- length(unique(df$state))
 df <- df |>
     group_by(method, object, rows, cols) |>
     summarise(
-        Time = mean(value), #Memory = mean(memory / 1e6),
-        TimeSD = sd(value), TimeSE = TimeSD / sqrt(n_iter),
+        Time = mean(time), Memory = mean(memory / 1e6),
+        TimeSD = sd(time), TimeSE = TimeSD / sqrt(n_iter),
         .groups = "drop"
     ) |>
     mutate(

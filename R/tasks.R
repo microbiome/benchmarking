@@ -34,6 +34,7 @@ times <- paste("run_function.R", times, "time", rand.state)
 writeLines(times, "times.txt")
 
 mems <- gsub("_", " ", prior.out, fixed = TRUE)
+mems <- mems[!startsWith(mems, "qiime")]
 mems <- paste("run_function.R", mems, "memory", rand.state)
 
 writeLines(mems, "mems.txt")

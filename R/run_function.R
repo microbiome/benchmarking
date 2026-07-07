@@ -140,11 +140,15 @@ file_name <- paste(
     obj.type, obj.fun, row.size, col.size, sep = "_"
 )
 
-file_name <- paste(
-    bench.var, rand.state, file_name, sep = "/"
+dir_name <- paste(
+    "out", bench.var, rand.state, sep = "/"
 )
+
+if( !dir.exists(dir_name) ) dir.create(dir_name, recursive = TRUE)
 
 write.table(
-    df, file = paste0("out/", file_name, ".tsv"), sep = "\t", row.names = FALSE
+    df,
+    file = paste0(dir_name, "/", file_name, ".tsv"),
+    sep = "\t",
+    row.names = FALSE
 )
-
