@@ -1,17 +1,14 @@
 obj.types <- c("tse", "pseq", "spseq", "qiime")
 obj.funs <- c("alpha", "beta", "trans", "agg", "melt")
-bench.vars <- c("time")#, "memory")
 row.sizes <- 10^(1:4)
 col.sizes <- 10^(1:5)
-rand.states <- 1
+rand.state <- 1
 
 df <- expand.grid(
     object = obj.types,
     method = obj.funs,
-    var = bench.vars,
     rows = row.sizes,
-    cols = col.sizes,
-    seed = rand.states
+    cols = col.sizes
 )
 
 to_remove <- (df$object == "spseq" & df$method %in% c("alpha", "beta", "trans")) |
@@ -24,14 +21,19 @@ df <- df[order(df$object, df$method, df$rows, 1 / df$cols), ]
 df$rows <- format(df$rows, scientific = FALSE, trim = TRUE)
 df$cols <- format(df$cols, scientific = FALSE, trim = TRUE)
 
-prior.out <- gsub(".tsv", "", list.files("out"), fixed = TRUE)
+prior.out <- list.files("out/time/", recursive = TRUE)
+prior.out <- gsub("^[0-9]/(.*)\\.tsv$", "\\1", prior.out)
+prior.out <- gsub("/", "_", prior.out, fixed = TRUE)
 
-lines <- apply(df, 1L, paste, collapse = "_")
+times <- apply(df, 1L, paste, collapse = "_")
+times <- times[!times %in% prior.out]
 
-lines <- lines[!lines %in% prior.out]
+times <- gsub("_", " ", times, fixed = TRUE)
+times <- paste("run_function.R", times, "time", rand.state)
 
-lines <- gsub("_", " ", lines, fixed = TRUE)
+writeLines(times, "times.txt")
 
-lines <- paste("run_function.R", lines)
+mems <- gsub("_", " ", prior.out, fixed = TRUE)
+mems <- paste("run_function.R", mems, "memory", rand.state)
 
-writeLines(lines, "tasks.txt")
+writeLines(mems, "mems.txt")

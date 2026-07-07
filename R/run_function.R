@@ -20,9 +20,9 @@ main_wd <- getwd()
 params <- commandArgs(trailingOnly = TRUE)
 obj.type <- as.character(params[1])
 obj.fun <- as.character(params[2])
-bench.var <- as.character(params[3])
-row.size <- as.integer(params[4])
-col.size <- as.integer(params[5])
+row.size <- as.integer(params[3])
+col.size <- as.integer(params[4])
+bench.var <- as.character(params[5])
 rand.state <- as.integer(params[6])
 
 key <- paste0(obj.type, "_", obj.fun)
@@ -137,9 +137,14 @@ df <- data.frame(
 setwd(main_wd)
 
 file_name <- paste(
-    obj.type, obj.fun, bench.var, row.size, col.size, rand.state, sep = "_"
+    obj.type, obj.fun, row.size, col.size, sep = "_"
+)
+
+file_name <- paste(
+    bench.var, rand.state, file_name, sep = "/"
 )
 
 write.table(
     df, file = paste0("out/", file_name, ".tsv"), sep = "\t", row.names = FALSE
 )
+

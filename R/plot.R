@@ -32,7 +32,7 @@ methods <- c(
 
 # Import results
 df_list <- lapply(
-    list.files("./out/", full.names = TRUE),
+    list.files("./out/", full.names = TRUE, recursive = TRUE),
     read.table, sep = "\t", header = TRUE
 )
 
@@ -77,12 +77,6 @@ col.breaks <- unique(df$cols[log10(df$cols) %% 1 == 0])
 
 df$rows <- scientific_10(df$rows)
 text_col <- get_theme()$axis.text$colour
-
-ggplot(df, aes(x = cols, y = Time)) +
-    geom_point() +
-    scale_x_log10(labels = label_scientific) +
-    scale_y_log10(labels = label_scientific) +
-    facet_grid(rows ~ method, labeller = labeller(rows = label_parsed))
 
 # Visualise benchmarking results: time
 p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
