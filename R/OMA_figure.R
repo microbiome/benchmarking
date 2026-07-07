@@ -57,6 +57,9 @@ df <- df |>
 # Specify plot layouts
 scientific_10 <- function(y) {
     sapply(y, function(z) {
+        if (is.character(z)) {
+            z <- as.numeric(z)
+        }
         if (is.na(z)) {
             return(NA)
         } else if (z == 1) {
@@ -78,12 +81,15 @@ p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
     geom_line() +
     geom_point() +
     scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = scientific_10) +
-    scale_y_log10(labels = scientific_10) +
+    scale_y_log10(labels = scientific_10, sec.axis = sec_axis(~ ., name = "# Features")) +
     scale_colour_manual(
         labels = classes,
         values = c("black", "darkgrey", "lightgrey", "red")
     ) +
-    facet_grid(rows ~ method, labeller = labeller(method = methods)) +
+    facet_grid(
+        rows ~ method,
+        labeller = labeller(rows = scientific_10, method = methods)
+    ) +
     labs(x = "# Samples", y = "Execution time (s)", colour = "Object") +
     theme_bw() +
     theme(
@@ -93,8 +99,11 @@ p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
         # axis.text.y = element_text(size = 12),
         # axis.ticks.x = element_blank(),
         axis.title = element_text(size = 15),
+        axis.text.y.right = element_blank(),
+        axis.ticks.y.right = element_blank(),
         axis.text = element_text(size = 12),
-        strip.text = element_text(size = 15),
+        strip.text.x = element_text(size = 15),
+        strip.text.y = element_text(size = 12, angle = 0),
         strip.background = element_blank()
     )
 
