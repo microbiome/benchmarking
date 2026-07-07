@@ -57,38 +57,47 @@ df <- df |>
 # Specify plot layouts
 scientific_10 <- function(y) {
     sapply(y, function(z) {
-        if (is.character(z)) {
+        if( is.character(z) ){
             z <- as.numeric(z)
         }
-        if (is.na(z)) {
-            return(NA)
-        } else if (z == 1) {
-            return("1")
-        } else if (z == 10) {
-            return("10")
-        } else {
-            return(parse(text = paste0("10^", log10(z))))
+        if( is.na(z) ){
+            NA
+        }else if( z %in% c(1, 10) ){
+            as.character(z)
+        }else{
+            paste0("10^", log10(z))
         }
     })
 }
 
+label_scientific <- function(x) parse(text = scientific_10(x))
+
 row.breaks <- unique(df$rows[log10(df$rows) %% 1 == 0])
 col.breaks <- unique(df$cols[log10(df$cols) %% 1 == 0])
+
+df$rows <- scientific_10(df$rows)
+text_col <- get_theme()$axis.text$colour
+
+ggplot(df, aes(x = cols, y = Time)) +
+    geom_point() +
+    scale_x_log10(labels = label_scientific) +
+    scale_y_log10(labels = label_scientific) +
+    facet_grid(rows ~ method, labeller = labeller(rows = label_parsed))
 
 # Visualise benchmarking results: time
 p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
     geom_errorbar(aes(ymin = Time, ymax = Time), width = 0) +
     geom_line() +
     geom_point() +
-    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = scientific_10) +
-    scale_y_log10(labels = scientific_10, sec.axis = sec_axis(~ ., name = "# Features")) +
+    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = label_scientific) +
+    scale_y_log10(labels = label_scientific, sec.axis = sec_axis(~ ., name = "# Features")) +
     scale_colour_manual(
         labels = classes,
         values = c("black", "darkgrey", "lightgrey", "red")
     ) +
     facet_grid(
         rows ~ method,
-        labeller = labeller(rows = scientific_10, method = methods)
+        labeller = labeller(rows = label_parsed, method = methods)
     ) +
     labs(x = "# Samples", y = "Execution time (s)", colour = "Object") +
     theme_bw() +
@@ -98,12 +107,16 @@ p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
         # axis.text.x = element_blank(),
         # axis.text.y = element_text(size = 12),
         # axis.ticks.x = element_blank(),
+        legend.position = "bottom",
+        legend.text = element_text(size = 12),
+        legend.title = element_text(size = 15),
+        legend.key.size = unit(1.2, "cm"),
         axis.title = element_text(size = 15),
         axis.text.y.right = element_blank(),
         axis.ticks.y.right = element_blank(),
         axis.text = element_text(size = 12),
         strip.text.x = element_text(size = 15),
-        strip.text.y = element_text(size = 12, angle = 0),
+        strip.text.y = element_text(colour = text_col, size = 12, angle = 0),
         strip.background = element_blank()
     )
 
