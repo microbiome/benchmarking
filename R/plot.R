@@ -128,19 +128,26 @@ p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
 p2 <- ggplot(df, aes(x = cols, y = Memory, colour = object)) +
     geom_line() +
     geom_point() +
-    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = scientific_10) +
-    scale_y_log10(labels = scientific_10) +
+    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = label_scientific) +
+    scale_y_log10(labels = label_scientific, sec.axis = sec_axis(~ ., name = "# Features")) +
     scale_colour_manual(
         labels = classes,
-        values = c("black", "darkgrey", "lightgrey")
+        values = c("black", "darkgrey", "lightgrey", "red")
     ) +
-    facet_grid(rows ~ method, labeller = labeller(method = methods)) +
+    facet_grid(rows ~ method, labeller = labeller(rows = label_parsed, method = methods)) +
     labs(x = "Sample size (n)", y = "Allocated memory (MB)", colour = "Object") +
     theme_bw() +
     theme(
+        legend.position = "bottom",
+        legend.text = element_text(size = 12),
+        legend.title = element_text(size = 15),
+        legend.key.size = unit(1.2, "cm"),
         axis.title = element_text(size = 15),
         axis.text = element_text(size = 12),
+        axis.text.y.right = element_blank(),
+        axis.ticks.y.right = element_blank(),
         # strip.text = element_blank()
+        strip.text.y = element_text(colour = text_col, size = 12, angle = 0),
         strip.background = element_blank()
     )#  +
     # guides(colour = "none")

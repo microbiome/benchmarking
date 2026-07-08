@@ -21,7 +21,7 @@ df <- df[order(df$object, df$method, df$rows, 1 / df$cols), ]
 df$rows <- format(df$rows, scientific = FALSE, trim = TRUE)
 df$cols <- format(df$cols, scientific = FALSE, trim = TRUE)
 
-prior.out <- list.files("out/time/", recursive = TRUE)
+prior.out <- list.files(paste0("out/time/", rand.state))
 prior.out <- gsub("^[0-9]/(.*)\\.tsv$", "\\1", prior.out)
 prior.out <- gsub("/", "_", prior.out, fixed = TRUE)
 
