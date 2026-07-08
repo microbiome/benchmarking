@@ -22,8 +22,7 @@ df$rows <- format(df$rows, scientific = FALSE, trim = TRUE)
 df$cols <- format(df$cols, scientific = FALSE, trim = TRUE)
 
 prior.out <- list.files(paste0("out/time/", rand.state))
-prior.out <- gsub("^[0-9]/(.*)\\.tsv$", "\\1", prior.out)
-prior.out <- gsub("/", "_", prior.out, fixed = TRUE)
+prior.out <- gsub(".tsv", "", prior.out, fixed = TRUE)
 
 times <- apply(df, 1L, paste, collapse = "_")
 times <- times[!times %in% prior.out]
