@@ -101,4 +101,8 @@ for( i in seq_len(nrow(grid_df)) ){
 }
 
 # Save subset metadata
-write.table(grid_df, "metadata.tsv", row.names = FALSE)
+write.table(
+    grid_df,
+    paste("metadata", paste(levels(grid_df$seed), collapse = ""), ".tsv"),
+    row.names = FALSE
+)

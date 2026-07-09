@@ -4,7 +4,7 @@ if (!require("BiocManager")) {
     library("BiocManager")
 }
 
-pkgs <- c("patchwork", "tidyverse")
+pkgs <- c("patchwork", "tidyverse", "tools")
 
 temp <- sapply(pkgs, function(pkg) {
     if (!require(pkg, character.only = TRUE)) {
@@ -48,21 +48,24 @@ df <- reshape(
 
 names(df) <- sub("value.", "", names(df), fixed = TRUE)
 
-# Set sample size
-n_iter <- length(unique(df$state))
-
 # Summarise benchmarking results with mean time and standard deviation
 df <- df |>
     group_by(method, object, rows, cols) |>
     summarise(
-        Time = mean(time), Memory = mean(memory / 1e6),
-        TimeSD = sd(time), TimeSE = TimeSD / sqrt(n_iter),
+        Count = n(),
+        Time = mean(time), TimeSD = sd(time),
+        TimeSE = ifelse(Count == 1L, 0, TimeSD / sqrt(Count)),
+        Memory = mean(memory / 1e6), MemorySD = sd(memory / 1e6),
+        MemorySE = ifelse(Count == 1L, 0, MemorySD / sqrt(Count)),
         .groups = "drop"
     ) |>
     mutate(
         method = factor(method, levels = names(methods)),
         object = factor(object, levels = names(classes))
     )
+
+# Store results table
+write.table(df, "benchmark.tsv", sep = "\t", row.names = FALSE)
 
 # Specify plot layouts
 scientific_10 <- function(y) {
@@ -82,114 +85,98 @@ scientific_10 <- function(y) {
 
 label_scientific <- function(x) parse(text = scientific_10(x))
 
-row.breaks <- unique(df$rows[log10(df$rows) %% 1 == 0])
 col.breaks <- unique(df$cols[log10(df$cols) %% 1 == 0])
 
-df$rows <- scientific_10(df$rows)
 text_col <- get_theme()$axis.text$colour
 
-# Visualise benchmarking results: time
-p1 <- ggplot(df, aes(x = cols, y = Time, colour = object)) +
-    geom_errorbar(aes(ymin = Time, ymax = Time), width = 0) +
-    geom_line() +
-    geom_point() +
-    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = label_scientific) +
-    scale_y_log10(labels = label_scientific, sec.axis = sec_axis(~ ., name = "# Features")) +
-    scale_colour_manual(
-        labels = classes,
-        values = c("black", "darkgrey", "lightgrey", "red")
-    ) +
-    facet_grid(
-        rows ~ method,
-        labeller = labeller(rows = label_parsed, method = methods)
-    ) +
-    labs(x = "# Samples", y = "Execution time (s)", colour = "Object") +
-    theme_bw() +
-    theme(
-        # axis.title.x = element_blank(),
-        # axis.title.y = element_text(size = 15),
-        # axis.text.x = element_blank(),
-        # axis.text.y = element_text(size = 12),
-        # axis.ticks.x = element_blank(),
-        legend.position = "bottom",
-        legend.text = element_text(size = 12),
-        legend.title = element_text(size = 15),
-        legend.key.size = unit(1.2, "cm"),
-        axis.title = element_text(size = 15),
-        axis.text.y.right = element_blank(),
-        axis.ticks.y.right = element_blank(),
-        axis.text = element_text(size = 12),
-        strip.text.x = element_text(size = 15),
-        strip.text.y = element_text(colour = text_col, size = 12, angle = 0),
-        strip.background = element_blank()
-    )
+cus_theme <- theme(
+    legend.position = "bottom",
+    legend.text = element_text(size = 12),
+    legend.title = element_text(size = 15),
+    legend.key.size = unit(1.2, "cm"),
+    axis.title = element_text(size = 15),
+    axis.text.y.right = element_blank(),
+    axis.ticks.y.right = element_blank(),
+    axis.text = element_text(size = 12),
+    strip.text.x = element_text(size = 15),
+    strip.text.y = element_text(colour = text_col, size = 12, angle = 0),
+    strip.background = element_blank()
+)
 
-# Visualise benchmarking results: memory
-p2 <- ggplot(df, aes(x = cols, y = Memory, colour = object)) +
-    geom_line() +
-    geom_point() +
-    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = label_scientific) +
-    scale_y_log10(labels = label_scientific, sec.axis = sec_axis(~ ., name = "# Features")) +
-    scale_colour_manual(
-        labels = classes,
-        values = c("black", "darkgrey", "lightgrey", "red")
-    ) +
-    facet_grid(rows ~ method, labeller = labeller(rows = label_parsed, method = methods)) +
-    labs(x = "Sample size (n)", y = "Allocated memory (MB)", colour = "Object") +
-    theme_bw() +
-    theme(
-        legend.position = "bottom",
-        legend.text = element_text(size = 12),
-        legend.title = element_text(size = 15),
-        legend.key.size = unit(1.2, "cm"),
-        axis.title = element_text(size = 15),
-        axis.text = element_text(size = 12),
-        axis.text.y.right = element_blank(),
-        axis.ticks.y.right = element_blank(),
-        # strip.text = element_blank()
-        strip.text.y = element_text(colour = text_col, size = 12, angle = 0),
-        strip.background = element_blank()
-    )#  +
-    # guides(colour = "none")
+# Visualise benchmarking results: time
+plot_bench <- function(df, bench.var){
+    
+    var_name <- toTitleCase(bench.var)
+    df$Mean <- df[[var_name]]
+    df$SE <- df[[paste0(var_name, "SE")]]
+    
+    axis_title <- switch(
+        bench.var,
+        time = "Execution time (s)",
+        memory = "Allocated memory (MB)"
+    )
+    
+    y.breaks <- switch(
+        bench.var,
+        time = 10^seq(-2, 3),
+        memory = 10^seq(-1, 6)
+    )
+    
+    row.breaks <- unique(df$rows[log10(df$rows) %% 1 == 0])
+    df$rows <- scientific_10(df$rows)
+    
+    p <- ggplot(df, aes(x = cols, y = Mean, colour = object)) +
+        geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE), width = 0) +
+        geom_line() +
+        geom_point() +
+        scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = label_scientific) +
+        scale_y_log10(
+            labels = label_scientific,
+            breaks = y.breaks,
+            sec.axis = sec_axis(~ ., name = "# Features")) +
+        scale_colour_manual(
+            labels = classes,
+            values = c("black", "darkgrey", "lightgrey", "red")
+        )
+    
+    grid_by <- ". ~ method"
+    grid_lab <- list(method = methods)
+    
+    if( length(row.breaks) > 1L ){
+        grid_by <- sub(".", "rows", grid_by, fixed = TRUE)
+        grid_lab[["rows"]] <- label_parsed
+    }
+    
+    p <- p +
+        facet_grid(
+            as.formula(grid_by),
+            labeller = do.call(labeller, grid_lab)
+        )
+    
+    p <- p +
+        labs(x = "# Samples", y = axis_title, colour = "Object") +
+        theme_bw() +
+        cus_theme
+    
+    return(p)
+}
+
+px1 <- plot_bench(subset(df, rows == 1000), "time")
+px2 <- plot_bench(subset(df, rows == 1000), "memory")
+
+# Combine results
+p <- (px1 / px2) +
+    plot_layout(guides = "collect") &
+    cus_theme
+
+# Visualise benchmarking results
+p1 <- plot_bench(df, "time")
+p2 <- plot_bench(df, "memory")
 
 # Combine results
 p <- (p1 / p2) +
     plot_layout(guides = "collect") &
-    theme(
-        legend.position = "bottom",
-        legend.text = element_text(size = 12),
-        legend.title = element_text(size = 15),
-        legend.key.size = unit(1.2, "cm")
-    )
+    cus_theme
 
 # Save plot to file
-ggsave("article/OMA_figure.png", width = 15, height = 7)
-
-
-
-ggplot(df, aes(x = cols, y = Time, colour = ordered(rows))) +
-    geom_line() +
-    geom_point() +
-    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = scientific_10) +
-    scale_y_log10(labels = scientific_10) +
-    scale_colour_grey(start = 0.8, end = 0.2, labels = function(x) scientific_10(as.numeric(x))) +
-    facet_grid(
-        method ~ object,
-        labeller = labeller(method = methods, object = classes)
-    ) +
-    labs(x = "Sample size (n)", y = "Execution time (s)", colour = "Feature size (m)") +
-    theme_bw()
-
-
-ggplot(df, aes(x = cols, y = Memory, colour = ordered(rows))) +
-    geom_line() +
-    geom_point() +
-    scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = scientific_10) +
-    scale_y_log10(labels = scientific_10) +
-    scale_colour_grey(start = 0.8, end = 0.2, labels = function(x) scientific_10(as.numeric(x))) +
-    facet_grid(
-        method ~ object,
-        labeller = labeller(method = methods, object = classes)
-    ) +
-    labs(x = "Sample size (n)", y = "Allocated memory (MB)", colour = "Feature size (m)") +
-    theme_bw()
+ggsave("OMA_figure.png", width = 230, height = 300, units = "mm")
