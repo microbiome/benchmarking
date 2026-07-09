@@ -118,9 +118,12 @@ plot_bench <- function(df, bench.var){
     
     y.breaks <- switch(
         bench.var,
-        time = 10^seq(-2, 3),
-        memory = 10^seq(-1, 6)
+        time = 10^seq(-1, 3),
+        memory = 10^seq(0, 4)
     )
+    
+    y.lims <- range(y.breaks)
+    y.lims <- c(min(y.lims[1], min(df$Mean)), max(y.lims[2], max(df$Mean)))
     
     row.breaks <- unique(df$rows[log10(df$rows) %% 1 == 0])
     df$rows <- scientific_10(df$rows)
@@ -133,6 +136,7 @@ plot_bench <- function(df, bench.var){
         scale_y_log10(
             labels = label_scientific,
             breaks = y.breaks,
+            limits = y.lims,
             sec.axis = sec_axis(~ ., name = "# Features")) +
         scale_colour_manual(
             labels = classes,
@@ -162,7 +166,7 @@ plot_bench <- function(df, bench.var){
 }
 
 px1 <- plot_bench(subset(df, rows == 1000), "time")
-px2 <- plot_bench(subset(df, rows == 1000), "memory")
+px2 <- plot_bench(subset(df, rows == 1000 & Memory <= 1e3 * 16), "memory")
 
 # Combine results
 p <- (px1 / px2) +
@@ -171,7 +175,7 @@ p <- (px1 / px2) +
 
 # Visualise benchmarking results
 p1 <- plot_bench(df, "time")
-p2 <- plot_bench(df, "memory")
+p2 <- plot_bench(subset(df, Memory <= 1e3 * 16), "memory")
 
 # Combine results
 p <- (p1 / p2) +
