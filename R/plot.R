@@ -32,7 +32,7 @@ methods <- c(
 
 # Import results
 df_list <- lapply(
-    list.files("./out", full.names = TRUE, recursive = TRUE),
+    list.files("out", full.names = TRUE, recursive = TRUE),
     read.table, sep = "\t", header = TRUE
 )
 
@@ -65,7 +65,7 @@ df <- df |>
     )
 
 # Store results table
-write.table(df, "benchmark.tsv", sep = "\t", row.names = FALSE)
+write.table(df, "inst/extdata/benchmark.tsv", sep = "\t", row.names = FALSE)
 
 # Specify plot layouts
 scientific_10 <- function(y) {
@@ -165,14 +165,6 @@ plot_bench <- function(df, bench.var){
     return(p)
 }
 
-px1 <- plot_bench(subset(df, rows == 1000), "time")
-px2 <- plot_bench(subset(df, rows == 1000 & Memory <= 1e3 * 16), "memory")
-
-# Combine results
-p <- (px1 / px2) +
-    plot_layout(guides = "collect") &
-    cus_theme
-
 # Visualise benchmarking results
 p1 <- plot_bench(df, "time")
 p2 <- plot_bench(subset(df, Memory <= 1e3 * 16), "memory")
@@ -183,4 +175,4 @@ p <- (p1 / p2) +
     cus_theme
 
 # Save plot to file
-ggsave("OMA_figure.png", width = 230, height = 300, units = "mm")
+ggsave("inst/assets/benchmark.png", width = 230, height = 300, units = "mm")

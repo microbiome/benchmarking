@@ -1,17 +1,18 @@
 
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+# Import libraries
+pkgs <- c("dplyr", "ggplot2", "tidyr")
+
+temp <- sapply(pkgs, function(pkg) {
+    if (!require(pkg, character.only = TRUE)) {
+        install.packages(pkg)
+        library(pkg, character.only = TRUE)
+    }
+})
 
 sample_levels <- c("human", "environment", "animal", "ocean")
 
 # Import results
-df_list <- lapply(
-    list.files("./metadata", full.names = TRUE),
-    read.table, sep = " ", header = TRUE
-)
-
-df <- do.call(rbind, df_list)
+df <- read.table("inst/extdata/metadata.tsv", sep = "\t", header = TRUE)
 
 df <- df |>
     rename(environment = environmental) |>
@@ -40,12 +41,6 @@ scientific_10 <- function(y) {
 
 df$rows <- scientific_10(df$rows)
 df$cols <- scientific_10(df$cols)
-
-sparsity_df <- df |>
-    mutate(sparsity = as.factor(sparsity)) |>
-    group_by(seed, rows, cols) |>
-    summarise(sparsity = unique(sparsity)) |>
-    mutate(sparsity = as.numeric(sparsity))
 
 text_col <- get_theme()$axis.text$colour
 
@@ -81,5 +76,5 @@ p <- ggplot(df, aes(x = Value, y = seed, fill = Name)) +
     )
 
 # Save plot to file
-ggsave("sup_figure.png", width = 250, height = 200, units = "mm")
+ggsave("inst/assets/composition.png", width = 250, height = 200, units = "mm")
 

@@ -12,3 +12,4 @@ experiments/.benchmark.Rmd.swp
 .RData
 .Rproj.user
 .vscode
+out/
