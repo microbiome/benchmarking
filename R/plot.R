@@ -16,9 +16,9 @@ temp <- sapply(pkgs, function(pkg) {
 # Define class names
 classes <- c(
     tse = "TreeSE",
+    qiime = "QIIME 2",
     pseq = "phyloseq",
-    spseq = "speedyseq",
-    qiime = "QIIME 2"
+    spseq = "speedyseq"
 )
 
 # Define method names
@@ -144,7 +144,7 @@ plot_bench <- function(df, bench.var, error.var = "SE"){
             sec.axis = sec_axis(~ ., name = "# Features")) +
         scale_colour_manual(
             labels = classes,
-            values = c("black", "darkgrey", "lightgrey", "red"),
+            values = c("black", "darkblue", "firebrick", "tomato"),
             drop = FALSE
         )
     
