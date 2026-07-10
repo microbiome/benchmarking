@@ -52,11 +52,12 @@ names(df) <- sub("value.", "", names(df), fixed = TRUE)
 df <- df |>
     group_by(method, object, rows, cols) |>
     summarise(
-        Count = n(),
-        Time = mean(time), TimeSD = sd(time),
+        Count = n(), tVal = ifelse(Count == 1L, 0, qt(0.975, Count - 1)),
+        Time = mean(time), Memory = mean(memory / 1e6),
+        TimeSD = sd(time), MemorySD = sd(memory / 1e6),
         TimeSE = ifelse(Count == 1L, 0, TimeSD / sqrt(Count)),
-        Memory = mean(memory / 1e6), MemorySD = sd(memory / 1e6),
         MemorySE = ifelse(Count == 1L, 0, MemorySD / sqrt(Count)),
+        TimeCI = tVal * TimeSE, MemoryCI = tVal * MemorySE,
         .groups = "drop"
     ) |>
     mutate(
@@ -104,11 +105,11 @@ cus_theme <- theme(
 )
 
 # Visualise benchmarking results: time
-plot_bench <- function(df, bench.var){
+plot_bench <- function(df, bench.var, error.var = "SE"){
     
     var_name <- toTitleCase(bench.var)
     df$Mean <- df[[var_name]]
-    df$SE <- df[[paste0(var_name, "SE")]]
+    df$Err <- df[[paste0(var_name, error.var)]]
     
     axis_title <- switch(
         bench.var,
@@ -129,9 +130,12 @@ plot_bench <- function(df, bench.var){
     df$rows <- scientific_10(df$rows)
     
     p <- ggplot(df, aes(x = cols, y = Mean, colour = object)) +
-        geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE), width = 0) +
-        geom_line() +
-        geom_point() +
+        geom_errorbar(
+            aes(ymin = Mean - Err, ymax = Mean + Err),
+            width = 0, show.legend = TRUE
+        ) +
+        geom_line(show.legend = TRUE) +
+        geom_point(show.legend = TRUE) +
         scale_x_log10(breaks = col.breaks, limits = range(df$cols), labels = label_scientific) +
         scale_y_log10(
             labels = label_scientific,
@@ -140,7 +144,8 @@ plot_bench <- function(df, bench.var){
             sec.axis = sec_axis(~ ., name = "# Features")) +
         scale_colour_manual(
             labels = classes,
-            values = c("black", "darkgrey", "lightgrey", "red")
+            values = c("black", "darkgrey", "lightgrey", "red"),
+            drop = FALSE
         )
     
     grid_by <- ". ~ method"
@@ -166,8 +171,8 @@ plot_bench <- function(df, bench.var){
 }
 
 # Visualise benchmarking results
-p1 <- plot_bench(df, "time")
-p2 <- plot_bench(subset(df, Memory <= 1e3 * 16), "memory")
+p1 <- plot_bench(df, "time", "CI")
+p2 <- plot_bench(subset(df, Memory <= 1e3 * 16), "memory", "CI")
 
 # Combine results
 p <- (p1 / p2) +
@@ -175,4 +180,4 @@ p <- (p1 / p2) +
     cus_theme
 
 # Save plot to file
-ggsave("inst/assets/benchmark.png", width = 230, height = 300, units = "mm")
+ggsave("inst/assets/benchmark.png", width = 350, height = 350, units = "mm")
