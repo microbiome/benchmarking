@@ -15,8 +15,8 @@ extensive benchmark between TreeSE/mia, QIIME 2, phyloseq and speedyseq.
 Comparisons include five routine operations: melting, agglomeration, assay
 transformation, alpha and beta diversity estimation. Each operation is applied
 to random subsets of samples and features from the Metalog database. Performance
-is measured in terms of execution time (s) and allocated memory (MB) using the
-bench package.
+is measured in terms of execution time (s) and allocated memory (MB) over ten
+replicates using the bench package.
 
 ## Results
 
@@ -30,13 +30,21 @@ Sample composition:
 
 ## Reproducibility
 
-1. Create Apptainer 
+0. Create Apptainer with [build.sh](inst/scripts/build.sh)
+1. Create feature/sample subsets with [preprocess.sh](inst/scripts/preprocess.sh)
+2. Benchmark execution time with [array.sh](inst/scripts/array.sh)
+3. Benchmark allocated memory with [array.sh](inst/scripts/array.sh)
+
+Currently, it is required to manually adjust some parameters between the steps.
+Technical details are further provided in the corresponding scripts.
 
 ## System requirements
 
 Each operation was run on a single node of the CSC Puhti supercomputer cluster
 with 4 CPUs and 16 GB RAM. However, larger resources are required to preprocess
-the Metalog dataset into sample/feature subsets, especially for QIIME 2.
+the Metalog dataset into feature/sample subsets, especially for QIIME 2. While
+the original benchmark was parallelised using SLURM array jobs, it is possible
+to perform single operations locally with [single.sh](inst/scripts/single.sh).
 
 ## Legacy
 

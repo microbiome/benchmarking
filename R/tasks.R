@@ -1,3 +1,4 @@
+# This script currently accepts one random state at a time
 obj.types <- c("tse", "pseq", "spseq", "qiime")
 obj.funs <- c("alpha", "beta", "trans", "agg", "melt")
 row.sizes <- 10^(1:4)

@@ -21,7 +21,7 @@ x <- readRDS(file_name)
 grid_df <- expand.grid(
     rows = 10^(1:4),
     cols = 10^(1:5),
-    seed = 1,
+    seed = seq(0, 9),
     sparsity = NA
 )
 
@@ -101,8 +101,4 @@ for( i in seq_len(nrow(grid_df)) ){
 }
 
 # Save subset metadata
-write.table(
-    grid_df,
-    paste0("metadata", paste(levels(grid_df$seed), collapse = ""), ".tsv"),
-    row.names = FALSE
-)
+write.table(grid_df, "inst/extdata/metadata.tsv", row.names = FALSE)
