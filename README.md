@@ -32,8 +32,8 @@ Sample composition:
 
 0. Create Apptainer with [build.sh](inst/scripts/build.sh)
 1. Create feature/sample subsets with [preprocess.sh](inst/scripts/preprocess.sh)
-2. Benchmark execution time with [array.sh](inst/scripts/array.sh)
-3. Benchmark allocated memory with [array.sh](inst/scripts/array.sh)
+2. Run benchmark with [array.sh](inst/scripts/array.sh)
+4. Visualise results with [plot.R](R/plot.R) and [composition.R](R/composition.R)
 
 Currently, it is required to manually adjust some parameters between the steps.
 Technical details are further provided in the corresponding scripts.
