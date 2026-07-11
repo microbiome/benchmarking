@@ -1,0 +1,6 @@
+Bootstrap: docker
+From: ghcr.io/microbiome/miabench:main
+
+%post
+  apt update
+  apt install -y unzip

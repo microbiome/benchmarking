@@ -54,6 +54,7 @@ p <- ggplot(df, aes(x = Value, y = seed, fill = Name)) +
     scale_x_continuous(
         breaks = seq(0, 1, by = 1 / 4),
         labels = seq(0, 100, by = 25),
+        #expand = 0,
         sec.axis = sec_axis(~ ., name = "# Samples")) +
     scale_fill_discrete(
         palette = c("#CC7A5C", "#009E73", "#8B4513", "#0072B2"),
@@ -64,7 +65,7 @@ p <- ggplot(df, aes(x = Value, y = seed, fill = Name)) +
     theme(
         legend.text = element_text(size = 12),
         legend.title = element_text(size = 15),
-        legend.key.size = unit(1.2, "cm"),
+        legend.key.size = unit(0.8, "cm"),
         axis.title = element_text(size = 15),
         axis.text.x.top = element_blank(),
         axis.ticks.x.top = element_blank(),
@@ -72,9 +73,10 @@ p <- ggplot(df, aes(x = Value, y = seed, fill = Name)) +
         axis.ticks.y.left = element_blank(),
         strip.text = element_text(size = 12),
         strip.text.y.left = element_text(angle = 0),
-        strip.background = element_blank()
+        strip.background = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank()
     )
 
 # Save plot to file
 ggsave("inst/assets/composition.png", width = 250, height = 200, units = "mm")
-
