@@ -58,5 +58,18 @@ repository, and detailed information is provided in the related README.
 
 ## License
 
-This work is part of [miaverse](https://microbiome.github.io). The code and
+This work is part of [mia](https://microbiome.github.io). The scripts and
 results in this repository are openly accessible under an Artistic License 2.0.
+
+## References
+
+- Bolyen, Evan, et al. "Reproducible, interactive, scalable and extensible
+  microbiome data science using QIIME 2." Nature biotechnology 37.8 (2019):
+  852-857.
+- Borman, Tuomas, et al. "Orchestrating Microbiome Analysis with Bioconductor."
+  bioRxiv (2025): 2025-10.
+- Kuhn, Michael, et al. "Metalog: curated and harmonised contextual data for
+  global metagenomics samples." Nucleic Acids Research 54.D1 (2026): D826-D834.
+- McMurdie, Paul J., and Susan Holmes. "phyloseq: an R package for reproducible
+  interactive analysis and graphics of microbiome census data." PloS one 8.4
+  (2013): e61217.
