@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/410233750.svg)](https://doi.org/10.5281/zenodo.21310341)
+
 # Benchmarking alternative frameworks for microbiome data science
 
 ## Intro
