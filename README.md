@@ -1,62 +1,54 @@
-# Computational efficiency of some microbiome data science techniques in R
+# Benchmarking alternative frameworks for microbiome data science
 
-## Overview 
+## Intro
 
-[TreeSummarizedExperiment](https://www.bioconductor.org/packages/release/bioc/html/mia.html)
-(TreeSE) and
-[phyloseq](https://www.bioconductor.org/packages/release/bioc/html/phyloseq.html)
-(pseq) objects are alternative containers for microbiome data. Here we
-evaluate their computational efficiency in terms of varying sample and
-feature set sizes.
+The mia ecosystem of packages in R/Bioconductor is an extensive framework for
+modern microbiome data science based on the TreeSummarizedExperiment (TreeSE)
+data container. In parallel, alternative frameworks with similar objectives have
+also been developed by others, including phyloseq, QIIME 2 and Mothur. While
+most frameworks support most routine tasks for microbiome analysis, they might
+differ in terms of performance and efficiency. In this repository, we provide an
+extensive benchmark between TreeSE/mia, QIIME 2, phyloseq and speedyseq.
 
-## Analysis method
+## Methods
 
-Multiple data sets, either in the form of a TreeSE or a phyloseq object, were
-processed through a few common [analytical
-routines](https://github.com/microbiome/benchmarking/tree/main/experiments):
+Comparisons include five routine operations: melting, agglomeration, assay
+transformation, alpha and beta diversity estimation. Each operation is applied
+to random subsets of samples and features from the Metalog database. Performance
+is measured in terms of execution time (s) and allocated memory (MB) using the
+bench package.
 
-The data sets were splitted by taxonomic ranks to get variations in
-feature counts, while keeping the data set and sample sizes
-constant. The execution times were measured and recorded for the
-different methods and sample/feature count combinations.
- 
-## Benchmarking results 
+## Results
 
-Standard data sets:
+Benchmark:
+* [Benchmark results](inst/extdata/benchmark.tsv)
+* [Benchmarking script](inst/assets/benchmark.png)
 
-* [Melting](reports/melt.md)
-* [CLR transformation](reports/transform.md) 
-* [Agglomeration to Phylum level](reports/agglomerate.md)
-* [Alpha diversity estimation (Shannon)](reports/alpha.md)
-* [Beta diversity estimation (Bray-Curtis / MDS)](reports/beta.md)
+Sample composition:
+* [Dataset compositions](inst/extdata/composition.tsv)
+* [Figures](inst/assets/composition.png)
 
-Big data set:
+## Reproducibility
 
-* [Melting](reports/melt_bigdata.md)
-* [CLR transformation](reports/transform_bigdata.md) 
-* [Agglomeration to Phylum level](reports/agglomerate_bigdata.md)
-* [Alpha diversity estimation (Shannon)](reports/alpha_bigdata.md)
+1. Create Apptainer 
 
-## Benchmarking for OMA
+## System requirements
 
-The article subdirectory contains the benchmarking script for the OMA
-publication and results as tables and figures.
+Each operation was run on a single node of the CSC Puhti supercomputer cluster
+with 4 CPUs and 16 GB RAM. However, larger resources are required to preprocess
+the Metalog dataset into sample/feature subsets, especially for QIIME 2.
 
-* [Benchmarking script](article/OMA_figure.R)
-* [Raw output](article/benchmark_rawdata.csv)
-* [Summarised results](article/benchmark_results.csv)
-* [Figure](article/OMA_figure.png)
+## Legacy
 
-## How to run this analysis locally
+The current benchmark was conceived after several iterations in a continuously
+developing framework, using the most extensive microbiome data resource to date.
 
-To reproduce the analyses, start R from within your local copy of this repository and run:
-
-```
-source("main.R")
-```
+The initial version of the benchmark, which compared only mia and phyloseq based
+on multiple smaller datasets of variable size, is available in the
+[legacy branch](https://github.com/microbiome/benchmarking/tree/legacy/) of this
+repository, and detailed information is provided in the related README.
 
 ## License
 
 This work is part of [miaverse](https://microbiome.github.io). The code and
-results in this repository are open source with [Artistic License
-2.0](LICENSE.md).
+results in this repository are openly accessible under an Artistic License 2.0.

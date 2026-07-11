@@ -1,16 +1,38 @@
 Package: benchmarking
-Version: 0.0.3
+Version: 0.1.0
+Authors@R: 
+    c(person(given = "Giulio", family = "Benedetti", role = c("aut", "cre"),
+          email = "giulio.benedetti@utu.fi",
+          comment = c(ORCID = "0000-0002-8732-7692")),
+    person(given = "Leo", family = "Lahti", role = c("aut"),
+          email = "leo.lahti@iki.fi",
+          comment = c(ORCID = "0000-0001-5537-637X")))
+Title: Benchmarking alternative frameworks for microbiome data science
+Description:
+    This repository hosts an extensive performance benchmark between three
+    major frameworks for microbiome data science (mia, phyloseq and QIIME 2).
+    The benchmark includes five common operations performed in microbiome data
+    analysis, for which performance is measured in terms of execution time and
+    allocated memory.
+biocViews:
+    Software, DataImport, Metagenomics, Microbiome, Visualization
+License: Artistic-2.0
+Encoding: UTF-8
+Depends:
+    R (== 4.5.2)
 Imports:
-    bench,
-    ggplot2 (== 4.0.2),
-    mia (== 1.19.8),
+    bench (== 1.1.4),
+    ggplot2 (== 4.0.3),
+    mia (== 1.21.3),
     microbiome (== 1.32.0),
-    patchwork,
-    picante,
+    patchwork (== 1.3.2),
+    picante (== 1.8.2),
     phyloseq (== 1.54.0),
-    philr (== 1.37.1),
+    philr (== 1.36.0),
     tidyverse (== 2.0.0),
     speedyseq (== 0.5.3.9021),
-    TreeSummarizedExperiment (== 2.15.1)
+    TreeSummarizedExperiment (== 2.18.0)
 Remotes:
     mikemc/speedyseq@0057652ff7a4244ccef2b786dca58d901ec2fc62
+URL: https://github.com/microbiome/benchmarking
+BugReports: https://github.com/microbiome/benchmarking/issues
