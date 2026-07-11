@@ -21,12 +21,12 @@ replicates using the bench package.
 ## Results
 
 Benchmark:
-* [Benchmark results](inst/extdata/benchmark.tsv)
-* [Benchmarking script](inst/assets/benchmark.png)
+* [Table](inst/extdata/benchmark.tsv)
+* [Figure](inst/assets/benchmark.png)
 
 Sample composition:
-* [Dataset compositions](inst/extdata/composition.tsv)
-* [Figures](inst/assets/composition.png)
+* [Table](inst/extdata/composition.tsv)
+* [Figure](inst/assets/composition.png)
 
 ## Reproducibility
 
